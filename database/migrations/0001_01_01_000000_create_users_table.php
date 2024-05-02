@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('username')->nullable()->comment('Apelido do usuário');
+            $table->string('email')->unique()->comment('E-mail do usuário');
+            $table->timestamp('email_verified_at')->nullable()->comment('Data e hora da verificação de e-mail');
+            $table->string('password')->comment('Senha do usuário');
+            $table->boolean('is_active')->default(true)->comment('Indica se o usuário está ativo');
+            //
+            $table->string('avatar_url')->nullable()->comment('URL do avatar do usuário');
+            $table->string('provider_id')->nullable()->comment('ID do provedor de autenticação externo');
+            //
+            $table->nullableMorphs('profile');
             $table->rememberToken();
             $table->timestamps();
         });

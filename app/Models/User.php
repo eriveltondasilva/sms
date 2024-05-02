@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -14,32 +15,20 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'username',
+        'avatar_url',
+        'provider_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -47,4 +36,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //# SCOPES
+    public function scopeUpdatedWithinDay(Builder $query)
+    {
+        return $query->where('updated_at', '>=', now()->subDay())->exists();
+    }
+
+
 }
