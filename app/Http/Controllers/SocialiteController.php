@@ -20,8 +20,8 @@ class SocialiteController extends Controller
         $user = User::where('email', $providerUser->getEmail())->firstOrFail();
 
         $user->update([
-            'avatar_url' => $providerUser->getAvatar(),
-            'provider_id' => $providerUser->getId(),
+            'avatar_url'    => $providerUser->getAvatar(),
+            'provider_id'   => $providerUser->getId(),
             'provider_name' => $provider->value,
         ]);
 
