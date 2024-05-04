@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-
-// use Illuminate\Http\Request;
-
 class DashboardController extends Controller
 {
     public function __invoke()
     {
-        return Inertia::render('Dashboard');
+        $user = auth()->user();
+
+        if ($user->hasRole('admin')) {
+            return to_route('admin.dashboard');
+        }
+
+        if ($user->hasRole('teacher')) {
+            return to_route('teacher.dashboard');
+        }
+
+        if ($user->hasRole('student')) {
+            return to_route('student.dashboard');
+        }
+
+        $message = 'Alguma coisa deu errado. Você não tem permissão para acessar esta página.';
+
+        return inertia('Dashboard')->with('message', $message);
     }
 }
