@@ -1,45 +1,52 @@
-import GuestLayout from '@/Layouts/GuestLayout';
-import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, Link, useForm } from '@inertiajs/react';
+import GuestLayout from '@/Layouts/GuestLayout'
+import { Link, useForm } from '@inertiajs/react'
 
-export default function VerifyEmail({ status }) {
-    const { post, processing } = useForm({});
+import Button from '@/Components/Button'
 
-    const submit = (e) => {
-        e.preventDefault();
+import { titles } from './data'
 
-        post(route('verification.send'));
-    };
+// ==============================================
+export default function PageVerifyEmail({ status }) {
+  const { post, processing } = useForm({})
 
-    return (
-        <GuestLayout>
-            <Head title="Email Verification" />
+  const submit = (e) => {
+    e.preventDefault()
+    post(route('verification.send'))
+  }
 
-            <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-                Thanks for signing up! Before getting started, could you verify your email address by clicking on the
-                link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-            </div>
+  return (
+    <>
+      <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
+        Obrigado por inscrever-se! Antes de começar, você poderia verificar seu
+        endereço de e-mail clicando no link que acabamos de enviar para você? Se
+        você não recebeu o e-mail, teremos prazer em lhe enviar outro.
+      </div>
 
-            {status === 'verification-link-sent' && (
-                <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                    A new verification link has been sent to the email address you provided during registration.
-                </div>
-            )}
+      {status === 'verification-link-sent' && (
+        <div className='mb-4 text-sm font-medium text-green-600 dark:text-green-400'>
+          Um novo link de verificação foi enviado para o endereço de e-mail que
+          você fornecido durante o registro.
+        </div>
+      )}
 
-            <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>Resend Verification Email</PrimaryButton>
+      <form onSubmit={submit}>
+        <div className='mt-4 flex items-center justify-between'>
+          <Button disabled={processing}>Reenviar email de verificação</Button>
 
-                    <Link
-                        href={route('logout')}
-                        method="post"
-                        as="button"
-                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                    >
-                        Log Out
-                    </Link>
-                </div>
-            </form>
-        </GuestLayout>
-    );
+          <Link
+            href={route('logout')}
+            method='post'
+            as='button'
+            className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
+            Sair
+          </Link>
+        </div>
+      </form>
+    </>
+  )
 }
+
+// ==============================================
+PageVerifyEmail.layout = (page) => (
+  <GuestLayout title={titles.verifyEmail} children={page} />
+)

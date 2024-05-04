@@ -1,103 +1,134 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
+import { Transition } from '@headlessui/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
+import { Button } from 'flowbite-react'
+import { Save } from 'lucide-react'
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
-    const user = usePage().props.auth.user;
+import Input from '@/Components/Input'
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name,
-        email: user.email,
-    });
+// ============================================================================
+export default function UpdateProfileInformation({
+  mustVerifyEmail,
+  status,
+  className = '',
+}) {
+  const user = usePage().props.auth.user || {}
 
-    const submit = (e) => {
-        e.preventDefault();
+  const { data, setData, patch, errors, processing, recentlySuccessful } =
+    useForm({
+      username: user.username,
+      email: user.email,
+    })
 
-        patch(route('profile.update'));
-    };
+  // ----------------------------------------------
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    patch(route('profile.update'))
+  }
 
-    return (
-        <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Profile Information</h2>
+  const handleChange = (e) => {
+    setData(e.target.name, e.target.value)
+  }
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
-                </p>
-            </header>
+  return (
+    <section className={className}>
+      <Header />
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
+      <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
+        <div>
+          <Input.Text
+            id='username'
+            type='text'
+            label='Nome de usuário'
+            className='mt-1 block w-full'
+            value={data.username}
+            onChange={handleChange}
+            autoComplete='username'
+            autoFocus
+            required
+          />
 
-                    <TextInput
-                        id="name"
-                        className="mt-1 block w-full"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                        isFocused
-                        autoComplete="name"
-                    />
+          <Input.Error message={errors.username} />
+        </div>
 
-                    <InputError className="mt-2" message={errors.name} />
-                </div>
+        <div>
+          <Input.Text
+            id='email'
+            type='email'
+            label='Seu email'
+            className='mt-1 block w-full'
+            value={data.email}
+            onChange={handleChange}
+            required
+            autoComplete='username'
+          />
 
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+          <Input.Error message={errors.email} />
+        </div>
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        className="mt-1 block w-full"
-                        value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                        autoComplete="username"
-                    />
+        {mustVerifyEmail && user.email_verified_at === null && (
+          <div>
+            <p className='mt-2 text-sm text-gray-800 dark:text-gray-200'>
+              Seu email ainda não foi verificado.
+              <Link
+                href={route('verification.send')}
+                method='post'
+                as='button'
+                className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
+                Clique aqui para enviar um novo link de verificação.
+              </Link>
+            </p>
 
-                    <InputError className="mt-2" message={errors.email} />
-                </div>
+            {status === 'verification-link-sent' && (
+              <div className='mt-2 text-sm font-medium text-green-600 dark:text-green-400'>
+                Um novo link de verificação foi enviado para seu email.
+              </div>
+            )}
+          </div>
+        )}
 
-                {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
-                        <p className="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                            Your email address is unverified.
-                            <Link
-                                href={route('verification.send')}
-                                method="post"
-                                as="button"
-                                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                            >
-                                Click here to re-send the verification email.
-                            </Link>
-                        </p>
+        <Footer
+          processing={processing}
+          recentlySuccessful={recentlySuccessful}
+        />
+      </form>
+    </section>
+  )
+}
 
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                                A new verification link has been sent to your email address.
-                            </div>
-                        )}
-                    </div>
-                )}
+// ----------------------------------------------
+function Header() {
+  return (
+    <header>
+      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+        Informação do Perfil
+      </h2>
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+        Atualize sua informação do perfil e endereço de email.
+      </p>
+    </header>
+  )
+}
 
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
-                    </Transition>
-                </div>
-            </form>
-        </section>
-    );
+// ----------------------------------------------
+function Footer({ processing, recentlySuccessful }) {
+  return (
+    <footer className='flex items-center gap-4'>
+      {/* Botão de salvar */}
+
+      <Button type='submit' color='blue' disabled={processing}>
+        <Save className='mr-2 h-5 w-5' />
+        Salvar
+      </Button>
+
+      <Transition
+        show={recentlySuccessful}
+        enter='transition ease-in-out'
+        enterFrom='opacity-0'
+        leave='transition ease-in-out'
+        leaveTo='opacity-0'>
+        <p className='text-sm text-gray-600 dark:text-gray-400'>Salvo.</p>
+      </Transition>
+    </footer>
+  )
 }

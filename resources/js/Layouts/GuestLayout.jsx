@@ -1,18 +1,36 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react'
+import { twJoin } from 'tailwind-merge'
 
-export default function Guest({ children }) {
-    return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+// ==============================================
+export default function Guest({ title = '', children }) {
+  return (
+    <>
+      <Head title={title} />
+      <div
+        className={twJoin(
+          'flex flex-col items-center justify-center',
+          'min-h-screen',
+          'bg-gray-100 dark:bg-gray-900'
+        )}>
+        {/* TODO: adicionar logo */}
+        {/* <div>
+        <Link href='/'>
+          <AppLogo className='h-20 w-20 fill-current text-gray-500' />
+        </Link>
+      </div> */}
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {children}
-            </div>
-        </div>
-    );
+        <main
+          className={twJoin(
+            'w-full px-8 py-6 sm:max-w-md',
+            'overflow-hidden shadow-md sm:rounded-lg',
+            'bg-white dark:bg-gray-800'
+          )}>
+          <h1 className='text-center text-2xl font-bold text-gray-800 dark:text-white'>
+            {title}
+          </h1>
+          {children}
+        </main>
+      </div>
+    </>
+  )
 }

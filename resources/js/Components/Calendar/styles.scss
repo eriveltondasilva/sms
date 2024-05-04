@@ -1,0 +1,14 @@
+.dark {
+  .fc-popover,
+  .fc-list-day {
+    --fc-page-bg-color: #1e293b;
+  }
+
+  .fc-list-event:hover {
+    color: #1e293b;
+  }
+}
+
+.fc-popover, .fc-list {
+  border-radius: 6px;
+}
