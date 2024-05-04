@@ -4,27 +4,52 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Enums\RoleEnum;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\{Group, Teacher, User};
 
-class TeacherSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::find(3);
+        $users = [
+            [
+                'username' => 'erivelton',
+                'email'    => 'eriveltondasilva13@gmail.com',
+                'role'     => RoleEnum::ADMIN,
+            ],
+            [
+                'username' => 'admin',
+                'email'    => 'admin@example.com',
+                'role'     => RoleEnum::ADMIN,
+            ],
+            [
+                'username' => 'teacher',
+                'email'    => 'teacher@example.com',
+                'role'     => RoleEnum::TEACHER,
+            ],
+            [
+                'username' => 'student',
+                'email'    => 'student@example.com',
+                'role'     => RoleEnum::STUDENT,
+            ],
+            [
+                'username' => 'user',
+                'email'    => 'user@example.com',
+                'role'     => RoleEnum::USER,
+            ],
+        ];
 
-        $teacher = Teacher::factory()->create();
-        $teacher->user()->save($user);
+        foreach ($users as $userData) {
+            $user = User::factory()->create([
+                'username' => $userData['username'],
+                'email'    => $userData['email']
+            ]);
+            $user->assignRole($userData['role']);
+        }
 
-        $teachers = Teacher::factory()->count(10)->create();
-        Teacher::factory()->count(5)->create(['is_active' => false]);
-
-        $group1 = Group::find(1);
-        $group2 = Group::find(2);
-
-        $group1->teachers()->attach($teacher);
-        $group2->teachers()->attach($teacher);
-        $group1->teachers()->attach($teachers);
-
+        User::factory()->count(10)->create()->each(function ($user) {
+            $user->assignRole(RoleEnum::DEFAULT);
+        });
     }
 }

@@ -3,16 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\GenderEnum;
 
 class StudentFactory extends Factory
 {
     public function definition(): array
     {
-        $gender = fake()->randomElement([GenderEnum::MALE, GenderEnum::FEMALE]);
+        $gender = fake()->randomElement(['M', 'F']);
 
-        $firstName = $gender === GenderEnum::MALE ? fake()->firstNameMale() : fake()->firstNameFemale();
-        $fullName = $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
+        $firstName = $gender === 'M' ? fake()->firstNameMale() : fake()->firstNameFemale();
+        $fullName  = $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
 
         $email = strtolower($firstName) . '@' . fake()->safeEmailDomain();
 

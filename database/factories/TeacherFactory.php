@@ -9,11 +9,11 @@ class TeacherFactory extends Factory
 {
     public function definition(): array
     {
-        $gender = fake()->randomElement(GenderEnum::values());
+        $gender = fake()->randomElement(['M', 'F']);
 
-        $title = $gender === GenderEnum::MALE ? fake()->titleMale() : fake()->titleFemale();
+        $title     = $gender === 'M' ? fake()->titleMale() : fake()->titleFemale();
         $firstName = $gender === GenderEnum::MALE ? fake()->firstNameMale() : fake()->firstNameFemale();
-        $fullName = $title . ' ' . $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
+        $fullName  = $title . ' ' . $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
 
         $email = strtolower($firstName) . '@' . fake()->safeEmailDomain();
 
