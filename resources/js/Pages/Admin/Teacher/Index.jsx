@@ -90,7 +90,7 @@ function TeacherTable({ teachers = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0 text-center'>ID</Table.HeaderCell>
+        <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>

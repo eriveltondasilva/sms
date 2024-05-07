@@ -100,7 +100,7 @@ function StudentTable({ group = {}, students = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell className='w-0'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Matrícula</Table.HeaderCell>
         <Table.HeaderCell>Gênero</Table.HeaderCell>
@@ -111,7 +111,7 @@ function StudentTable({ group = {}, students = [] }) {
       <Table.Body>
         {students.map((student, index) => (
           <Table.Row key={student.id}>
-            <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
+            <Table.RowCell className='font-bold'>{formatId(++index)}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
@@ -119,7 +119,7 @@ function StudentTable({ group = {}, students = [] }) {
               )}>
               {student.name}
             </Table.RowCell>
-            <Table.RowCell>{formatId(student.id)}</Table.RowCell>
+            <Table.RowCell>{formatId(student.id, {pad: 4})}</Table.RowCell>
             <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>

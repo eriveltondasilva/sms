@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\{
     AcademicYearController,
     CalendarController,
     DashboardController,
-    GroupActionsController,
     GroupController,
     GroupStudentController,
     GroupTeacherController,
@@ -30,20 +29,21 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');
         Route::get('/{academicYear}/editar', 'edit')->name('edit');
-        //* ACTIONS
+        //* actions
         Route::post('/', 'store')->name('store');
         Route::put('/{academicYear}', 'update')->name('update');
         Route::put('/{academicYear}/atualizar-status', 'updateStatus')->name('update-status');
     });
 
     //* GROUP ROUTES
-    Route::prefix('turmas')->name('groups.')->group(function () {
-        Route::get('/', [GroupController::class, 'index'])->name('index');
-        Route::get('/cadastrar', [GroupController::class, 'create'])->name('create');
-        Route::get('/{group}/editar', [GroupController::class, 'edit'])->name('edit');
-
-        Route::post('/', [GroupActionsController::class, 'store'])->name('store');
-        Route::put('/{group}', [GroupActionsController::class, 'update'])->name('update');
+    Route::controller(GroupController::class)
+    ->prefix('turmas')->name('groups.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/cadastrar', 'create')->name('create');
+        Route::get('/{group}/editar', 'edit')->name('edit');
+        //* actions
+        Route::post('/', 'store')->name('store');
+        Route::put('/{group}', 'update')->name('update');
     });
 
     //* GROUP/STUDENT ROUTES
@@ -51,7 +51,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     ->prefix('turmas/{group}/alunos')->name('groups.students.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/adicionar', 'create')->name('create');
-        //* ACTIONS
+        //* actions
         Route::post('/{student}', 'store')->name('store');
         Route::delete('/{student}', 'destroy')->name('destroy');
     });
@@ -61,7 +61,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     ->prefix('turmas/{group}/professores')->name('groups.teachers.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/adicionar', 'create')->name('create');
-        //* ACTIONS
+        //* actions
         Route::post('/{teacher}', 'store')->name('store');
         Route::delete('/{teacher}', 'destroy')->name('destroy');
     });
@@ -73,7 +73,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/cadastrar', 'create')->name('create');
         Route::get('/{student}', 'show')->name('show');
         Route::get('/{student}/editar', 'edit')->name('edit');
-        //* ACTIONS
+        //* actions
         Route::post('/', 'store')->name('store');
         Route::put('/{student}', 'update')->name('update');
     });
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     ->prefix('disciplinas/{subject}/professores')->name('subjects.teachers.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/adicionar', 'create')->name('create');
-        //* ACTIONS
+        //* actions
         Route::post('/{teacher}', 'store')->name('store');
         Route::delete('/{teacher}', 'destroy')->name('destroy');
     });
@@ -101,7 +101,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/cadastrar', 'create')->name('create');
         Route::get('/{teacher}', 'show')->name('show');
         Route::get('/{teacher}/editar', 'edit')->name('edit');
-        //* ACTIONS
+        //* actions
         Route::post('/', 'store')->name('store');
         Route::put('/{teacher}', 'update')->name('update');
     });
@@ -112,7 +112,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/adicionar', 'create')->name('create');
         Route::get('/{user}', 'show')->name('show');
         Route::get('/{user}/editar', 'edit')->name('edit');
-        //* ACTIONS
+        //* actions
         Route::post('/', 'store')->name('store');
         Route::put('/{user}', 'update')->name('update');
         Route::delete('/{user}', 'destroy')->name('destroy');

@@ -12,6 +12,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
+import formatId from '@/Utils/formatId'
 
 // ==============================================
 export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
@@ -53,7 +54,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell className='w-0'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>Email</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
@@ -63,7 +64,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
       <Table.Body>
         {teachers.map((teacher, index) => (
           <Table.Row key={teacher.id}>
-            <Table.RowCell className='font-bold'>{++index}</Table.RowCell>
+            <Table.RowCell className='font-bold'>{formatId(++index)}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',

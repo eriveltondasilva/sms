@@ -76,7 +76,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
     <Table>
       {/* Table Header */}
       <Table.Header>
-        <Table.HeaderCell className='w-0'></Table.HeaderCell>
+        <Table.HeaderCell className='w-0'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell>CPF</Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
@@ -86,7 +86,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
       <Table.Body>
         {teachers.map((teacher, index) => (
           <Table.Row key={teacher.id}>
-            <Table.RowCell className='font-medium'>{++index}</Table.RowCell>
+            <Table.RowCell className='font-medium'>{formatId(++index)}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
@@ -94,7 +94,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
               )}>
               {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{teacher.cpf}</Table.RowCell>
+            <Table.RowCell>{formatId(teacher.id, { pad: 4 })}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
