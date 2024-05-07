@@ -19,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth' => $this->getAuthUserData($request),
+            'auth'  => $this->getAuthUserData($request),
             'flash' => $this->getFlashData($request),
         ];
     }
@@ -30,12 +30,12 @@ class HandleInertiaRequests extends Middleware
 
         if ($user) {
             $userData = $user->only('id', 'username', 'email', 'avatar_url');
-            $role = $user->roles->first();
+            $role     = $user->roles->first();
 
             $activeYear = AcademicYear::IsActive()->year;
 
             return [
-                'user' => $userData + ['role' => $role],
+                'user'       => $userData + ['role' => $role],
                 'activeYear' => $activeYear,
             ];
         }
@@ -45,6 +45,6 @@ class HandleInertiaRequests extends Middleware
 
     private function getFlashData(Request $request): array
     {
-        return $request->session()->only(['message', 'id']);
+        return $request->session()->only(['status', 'message']);
     }
 }

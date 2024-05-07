@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     AcademicYearController,
     CalendarController,
     DashboardController,
+    GroupActionsController,
     GroupController,
     GroupStudentController,
     GroupTeacherController,
@@ -36,14 +37,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     });
 
     //* GROUP ROUTES
-    Route::controller(GroupController::class)
-    ->prefix('turmas')->name('groups.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{group}/editar', 'edit')->name('edit');
-        //* ACTIONS
-        Route::post('/', 'store')->name('store');
-        Route::put('/{group}', 'update')->name('update');
+    Route::prefix('turmas')->name('groups.')->group(function () {
+        Route::get('/', [GroupController::class, 'index'])->name('index');
+        Route::get('/cadastrar', [GroupController::class, 'create'])->name('create');
+        Route::get('/{group}/editar', [GroupController::class, 'edit'])->name('edit');
+
+        Route::post('/', [GroupActionsController::class, 'store'])->name('store');
+        Route::put('/{group}', [GroupActionsController::class, 'update'])->name('update');
     });
 
     //* GROUP/STUDENT ROUTES

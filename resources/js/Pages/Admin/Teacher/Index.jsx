@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import Input from '@/Components/Input'
 import Pagination from '@/Components/Pagination'
-import Searchbar from '@/Components/Searchbar'
+import SearchFilter from '@/Components/SearchFilter'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
@@ -44,9 +44,9 @@ export default function PageTeacherIndex({ teachers = [] }) {
         {/* TODO: implementar PDF */}
       </Title>
 
-      {/* Teacher Searchbar */}
-      <Searchbar onSubmit={handleSubmit}>
-        <Searchbar.Left>
+      {/* Teacher SearchFilter */}
+      <SearchFilter onSubmit={handleSubmit}>
+        <SearchFilter.Left>
           <Input.Text
             id='search'
             type='search'
@@ -69,8 +69,8 @@ export default function PageTeacherIndex({ teachers = [] }) {
               <Undo2 className='h-5 w-5' />
             </Button>
           </Button.Group>
-        </Searchbar.Left>
-      </Searchbar>
+        </SearchFilter.Left>
+      </SearchFilter>
 
       {/* Teacher NotFound */}
       {!hasTeachers && <TeacherNotFound />}

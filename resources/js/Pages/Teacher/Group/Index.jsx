@@ -5,7 +5,7 @@ import { twJoin } from 'tailwind-merge'
 
 import Input from '@/Components/Input'
 import NotFound from '@/Components/NotFound'
-import Searchbar from '@/Components/Searchbar'
+import SearchFilter from '@/Components/SearchFilter'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
@@ -33,8 +33,8 @@ export default function PageGroupIndex({ data }) {
       </Title>
 
       {/* Selecionar Turma */}
-      <Searchbar onSubmit={handleSearch}>
-        <Searchbar.Left>
+      <SearchFilter onSubmit={handleSearch}>
+        <SearchFilter.Left>
           <Input.Select
             id='search'
             className='mb-0'
@@ -44,8 +44,8 @@ export default function PageGroupIndex({ data }) {
           <Button type='submit' color='blue' disabled={isLoading}>
             Selecionar
           </Button>
-        </Searchbar.Left>
-      </Searchbar>
+        </SearchFilter.Left>
+      </SearchFilter>
 
       <br />
 

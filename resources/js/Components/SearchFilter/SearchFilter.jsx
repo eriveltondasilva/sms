@@ -1,7 +1,7 @@
 import { twJoin } from 'tailwind-merge'
 
 // ====================================
-export function SearchbarRoot({ onSubmit, children }) {
+export function SearchFilterRoot({ onSubmit, children }) {
   return (
     <form onSubmit={onSubmit}>
       <div
@@ -16,7 +16,7 @@ export function SearchbarRoot({ onSubmit, children }) {
 }
 
 // ====================================
-export function SearchbarLeft({ children }) {
+export function SearchFilterLeft({ children }) {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
       {children}
@@ -25,7 +25,7 @@ export function SearchbarLeft({ children }) {
 }
 
 // ====================================
-export function SearchbarRight({ children }) {
+export function SearchFilterRight({ children }) {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
       {children}

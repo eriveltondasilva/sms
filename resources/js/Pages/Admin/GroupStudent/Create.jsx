@@ -6,7 +6,7 @@ import { twJoin } from 'tailwind-merge'
 import Alert from '@/Components/Alert'
 import Input from '@/Components/Input'
 import Pagination from '@/Components/Pagination'
-import Searchbar from '@/Components/Searchbar'
+import SearchFilter from '@/Components/SearchFilter'
 import Table from '@/Components/Table'
 import Title from '@/Components/Title'
 
@@ -54,8 +54,8 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
       </Title>
 
       {/* Barra de pesquisa */}
-      <Searchbar onSubmit={handleSearchStudent}>
-        <Searchbar.Left>
+      <SearchFilter onSubmit={handleSearchStudent}>
+        <SearchFilter.Left>
           <Input.Text
             id='search'
             type='search'
@@ -67,8 +67,8 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
           <Button type='submit' color='blue' disabled={isLoading}>
             <Search className='h-5 w-5' />
           </Button>
-        </Searchbar.Left>
-      </Searchbar>
+        </SearchFilter.Left>
+      </SearchFilter>
 
       {/* Verificar se o aluno não foi encontrado */}
       {!hasStudents && <StudentNotFound />}
