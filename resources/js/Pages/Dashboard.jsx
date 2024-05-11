@@ -7,15 +7,17 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function DashboardPage() {
+export default function Dashboard() {
   const { message } = usePage().props.flash
 
   return <>{message && <Alert>{message}</Alert>}</>
 }
 
 // ====================================
-DashboardPage.layout = (page) => (
-  <AuthLayout title={titles.dashboard} breadcrumb={breadcrumbs.dashboard}>
-    {page}
-  </AuthLayout>
+Dashboard.layout = (page) => (
+  <AuthLayout
+    title={titles.dashboard}
+    breadcrumb={breadcrumbs.dashboard}
+    children={page}
+  />
 )

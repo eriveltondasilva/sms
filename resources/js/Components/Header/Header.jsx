@@ -31,8 +31,9 @@ export function HeaderLeft({ role = '' }) {
           'flex self-center whitespace-nowrap',
           'text-xl font-semibold dark:text-white'
         )}>
-        <span className='hidden lg:flex'>Bem-vindo(a),&nbsp;</span>
-        <span>{role || 'Usuário'}</span>
+        <span className='hidden lg:flex'>
+          Bem-vindo(a), {role || 'Usuário'}
+        </span>
       </div>
     </Navbar.Brand>
   )
@@ -42,7 +43,7 @@ export function HeaderLeft({ role = '' }) {
 export function HeaderRight({ activeYear = '', children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>
-      <div className='text-sm font-medium text-gray-600 dark:text-gray-400 '>
+      <div className='text-sm font-medium text-gray-600 dark:text-gray-400'>
         Ano Letivo: {activeYear || '0000'}
       </div>
 

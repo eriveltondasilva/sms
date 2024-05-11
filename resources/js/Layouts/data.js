@@ -35,7 +35,7 @@ const TeacherSidebarItems = [
   ],
   [
     { title: 'Turmas', icon: UsersRound, route: 'teacher.groups.index' },
-    { title: 'Notas', icon: Album, route: 'test' },
+    { title: 'Notas', icon: Album, route: 'teacher.grades.index' },
   ]
 ]
 

@@ -1,6 +1,6 @@
 // prettier-ignore
 export const titles = {
-  index : 'Selecionar Turma',
+  index: 'Notas',
 }
 
 // ------------------------------------

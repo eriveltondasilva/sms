@@ -2,13 +2,15 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 // ====================================
-export default function ExemplePage() {
+export default function Exemple() {
   return null
 }
 
 // -----------------------------------
-ExemplePage.layout = (page) => (
-  <AuthLayout title={titles.dashboard} breadcrumb={breadcrumbs.dashboard}>
-    {page}
-  </AuthLayout>
+Exemple.layout = (page) => (
+  <AuthLayout
+    title={titles.dashboard}
+    breadcrumb={breadcrumbs.dashboard}
+    children={page}
+  />
 )

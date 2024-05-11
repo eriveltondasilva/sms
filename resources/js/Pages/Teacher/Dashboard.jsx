@@ -9,7 +9,7 @@ import { breadcrumbs, titles } from './data'
 let statistics = []
 
 // ====================================
-export default function DashboardPage({ data }) {
+export default function Dashboard({ data }) {
   const { activeYear, studentsCount, groupsCount } = data || {}
   const { message } = usePage().props
 
@@ -38,11 +38,11 @@ export default function DashboardPage({ data }) {
     },
   ]
 
-  return <></>
+  return null
 }
 
 // ====================================
-DashboardPage.layout = (page) => (
+Dashboard.layout = (page) => (
   <AuthLayout
     title={titles.dashboard}
     breadcrumb={breadcrumbs.dashboard}
