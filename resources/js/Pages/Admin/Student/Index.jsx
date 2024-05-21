@@ -37,8 +37,12 @@ export default function PageStudentIndex({ students = [] }) {
       <Title>
         <Title.Left title={titles.index} />
         <Title.Right>
-          <Button as={Link} href={route('admin.students.create')} color='blue'>
-            <Plus className='mr-2 h-5 w-5' />
+          <Button
+            as={Link}
+            href={route('admin.students.create')}
+            color='blue'
+            size='sm'>
+            <Plus className='mr-1 h-5 w-5' />
             Cadastrar Aluno
           </Button>
         </Title.Right>
@@ -55,12 +59,10 @@ export default function PageStudentIndex({ students = [] }) {
             placeholder='Nome ou ID do aluno...'
             defaultValue={search}
             onChange={handleChange}
-            autoFocus
           />
           <Button.Group>
             <Button type='submit' color='blue' disabled={isLoading || !search}>
               <Search className='mr-2 h-5 w-5' />
-              Pesquisar
             </Button>
             <Button
               as={Link}
@@ -93,7 +95,9 @@ function StudentTable({ students = [] }) {
       <Table.Header>
         <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>Gênero</Table.HeaderCell>
+        <Table.HeaderCell className='hidden sm:table-cell'>
+          Gênero
+        </Table.HeaderCell>
         <Table.HeaderCell></Table.HeaderCell>
       </Table.Header>
 
@@ -107,7 +111,9 @@ function StudentTable({ students = [] }) {
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
               {student.name}
             </Table.RowCell>
-            <Table.RowCell>{getGenderName(student.gender)}</Table.RowCell>
+            <Table.RowCell className='hidden sm:table-cell'>
+              {getGenderName(student.gender)}
+            </Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button

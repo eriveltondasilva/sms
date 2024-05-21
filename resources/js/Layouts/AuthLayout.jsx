@@ -21,6 +21,13 @@ export default function AuthLayout({
   const { user, activeYear } = usePage().props.auth || {}
   const userRole = user.role.name || 'user'
 
+  const hasCards = statistics.length > 0
+  const hasBreadcrumb = breadcrumb.length > 0
+
+
+
+  console.log('statistics cards: %o', statistics)
+
   const sidebarItemsMap = {
     admin: SidebarItems.Admin,
     teacher: SidebarItems.Teacher,
@@ -58,10 +65,10 @@ export default function AuthLayout({
 
         <section className='space-y-2'>
           {/* #breadcrumb */}
-          {breadcrumb.length > 0 && <LayoutBreadcrumb items={breadcrumb} />}
+          {hasBreadcrumb && <LayoutBreadcrumb items={breadcrumb} />}
 
           {/* #statistic cards */}
-          {statistics.length > 0 && <LayoutStatisticCards items={statistics} />}
+          {hasCards && <LayoutStatisticCards items={statistics} />}
         </section>
 
         {/* #main */}

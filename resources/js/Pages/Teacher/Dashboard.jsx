@@ -1,21 +1,14 @@
-import { usePage } from '@inertiajs/react'
 import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
-import { toast } from 'react-hot-toast'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-let statistics = []
-
 // ====================================
 export default function Dashboard({ data }) {
   const { activeYear, studentsCount, groupsCount } = data || {}
-  const { message } = usePage().props
 
-  if (!!message) toast.success(message, { id: 'dashboard-toast' })
-
-  statistics = [
+  const statistics = [
     {
       title: 'Alunos',
       icon: <UsersRound />,
@@ -34,19 +27,16 @@ export default function Dashboard({ data }) {
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: activeYear.year,
+      value: activeYear?.year,
     },
   ]
 
-  return null
+  return (
+    <AuthLayout
+      title={titles.dashboard}
+      breadcrumb={breadcrumbs.dashboard}
+      statistics={statistics}>
+      teste
+    </AuthLayout>
+  )
 }
-
-// ====================================
-Dashboard.layout = (page) => (
-  <AuthLayout
-    title={titles.dashboard}
-    breadcrumb={breadcrumbs.dashboard}
-    statistics={statistics}
-    children={page}
-  />
-)

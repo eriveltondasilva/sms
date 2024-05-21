@@ -6,13 +6,11 @@ import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-let statistics = []
-
 // =====================================
-export default function DashboardPage({ data, message }) {
+export default function Dashboard({ data, message }) {
   const { studentsCount, teachersCount, groupsCount, activeYear } = data || {}
 
-  statistics = [
+  const statistics = [
     {
       title: 'Alunos',
       icon: <UsersRound />,
@@ -35,15 +33,12 @@ export default function DashboardPage({ data, message }) {
     },
   ]
 
-  return <>{message && <Alert>{message}</Alert>}</>
+  return (
+    <AuthLayout
+      title={titles.dashboard}
+      breadcrumb={breadcrumbs.dashboard}
+      statistics={statistics}>
+      {message && <Alert>{message}</Alert>}
+    </AuthLayout>
+  )
 }
-
-// ====================================
-DashboardPage.layout = (page) => (
-  <AuthLayout
-    title={titles.dashboard}
-    breadcrumb={breadcrumbs.dashboard}
-    statistics={statistics}
-    children={page}
-  />
-)

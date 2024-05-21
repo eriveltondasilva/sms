@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{AcademicYear};
+use App\Models\AcademicYear;
 
 // use Illuminate\Http\Request;
 

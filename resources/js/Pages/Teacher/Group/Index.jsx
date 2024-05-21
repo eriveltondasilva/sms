@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, PencilLine } from 'lucide-react'
+import { Eye, PencilLine, Search } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Input from '@/Components/Input'
@@ -32,6 +32,8 @@ export default function PageGroupIndex({ data }) {
       {/* Título */}
       <Title>
         <Title.Left title={pageTitle} />
+
+        <Title.Right></Title.Right>
       </Title>
 
       {/* Selecionar Turma */}
@@ -41,10 +43,10 @@ export default function PageGroupIndex({ data }) {
             id='search'
             className='mb-0'
             defaultValue={selectedGroup?.id}
-            values={[{ id: '', name: 'selecionar turma...' }, ...teacherGroups]}
+            values={['', ...teacherGroups]}
           />
           <Button type='submit' color='blue' disabled={isLoading}>
-            Selecionar
+            <Search className='h-5 w-5' />
           </Button>
         </SearchFilter.Left>
       </SearchFilter>
@@ -68,14 +70,18 @@ export default function PageGroupIndex({ data }) {
 function StudentTable({ selectedGroup, students = [] }) {
   return (
     <>
-      <h3 className='mb-3 text-lg'>Turma selecionada: {selectedGroup?.name}</h3>
+      <h3 className='mb-3 text-lg'>
+        # Turma selecionada: {selectedGroup?.name}
+      </h3>
 
       <Table>
         {/* Table Header */}
         <Table.Header>
           <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
           <Table.HeaderCell>Nome</Table.HeaderCell>
-          <Table.HeaderCell>Matrícula</Table.HeaderCell>
+          <Table.HeaderCell className='hidden sm:table-cell'>
+            Matrícula
+          </Table.HeaderCell>
           <Table.HeaderCell></Table.HeaderCell>
         </Table.Header>
 
@@ -93,7 +99,9 @@ function StudentTable({ selectedGroup, students = [] }) {
                 )}>
                 {student.name}
               </Table.RowCell>
-              <Table.RowCell>#{formatId(student.id, { pad: 3 })}</Table.RowCell>
+              <Table.RowCell className='hidden sm:table-cell'>
+                #{formatId(student.id, { pad: 3 })}
+              </Table.RowCell>
               <Table.RowCell className='flex justify-end'>
                 <Button.Group>
                   <Button
