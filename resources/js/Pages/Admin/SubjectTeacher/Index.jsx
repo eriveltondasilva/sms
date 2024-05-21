@@ -86,7 +86,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
       <Table.Body>
         {teachers.map((teacher, index) => (
           <Table.Row key={teacher.id}>
-            <Table.RowCell className='font-medium'>{formatId(++index)}</Table.RowCell>
+            <Table.RowCell className='font-medium'>{formatId(index + 1)}</Table.RowCell>
             <Table.RowCell
               className={twJoin(
                 'whitespace-nowrap font-medium',
