@@ -24,8 +24,6 @@ export default function AuthLayout({
   const hasCards = statistics.length > 0
   const hasBreadcrumb = breadcrumb.length > 0
 
-
-
   console.log('statistics cards: %o', statistics)
 
   const sidebarItemsMap = {

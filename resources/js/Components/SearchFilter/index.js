@@ -1,4 +1,8 @@
-import { SearchFilterLeft, SearchFilterRight, SearchFilterRoot } from './SearchFilter'
+import {
+  SearchFilterLeft,
+  SearchFilterRight,
+  SearchFilterRoot,
+} from './SearchFilter'
 
 // -----------------------------------
 const SearchFilter = SearchFilterRoot
