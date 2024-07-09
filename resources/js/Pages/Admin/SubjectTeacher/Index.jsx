@@ -27,7 +27,10 @@ export default function PageSubjectTeacherIndex({
     <>
       {/* Mensagem */}
       {message && (
-        <Alert color='failure' className='mb-4'>
+        <Alert
+          color='failure'
+          className='mb-4'
+        >
           {message}
         </Alert>
       )}
@@ -39,7 +42,8 @@ export default function PageSubjectTeacherIndex({
           <Button
             as={Link}
             href={route('admin.subjects.teachers.create', { subject })}
-            color='blue'>
+            color='blue'
+          >
             <Plus className='mr-2 h-5 w-5' />
             Adicionar professor
           </Button>
@@ -93,7 +97,8 @@ function TableTeacher({ subject = {}, teachers = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}>
+              )}
+            >
               {teacher.name}
             </Table.RowCell>
             <Table.RowCell>{formatId(teacher.id, { pad: 4 })}</Table.RowCell>
@@ -103,7 +108,8 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                   as={Link}
                   href={route('admin.teachers.show', { teacher })}
                   color='blue'
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Visualizar Professor(a)'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
@@ -113,7 +119,8 @@ function TableTeacher({ subject = {}, teachers = [] }) {
                   color='failure'
                   onClick={() => handleDeleteAction({ subject, teacher })}
                   disabled={isLoading}
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Remover Professor(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
                   </Tooltip>

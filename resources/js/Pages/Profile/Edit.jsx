@@ -31,7 +31,10 @@ export default function ProfileEditPage({ mustVerifyEmail, status }) {
 
 // ------------------------------------
 ProfileEditPage.layout = (page) => (
-  <AuthLayout title={titles.profile} breadcrumb={breadcrumbs.profile}>
+  <AuthLayout
+    title={titles.profile}
+    breadcrumb={breadcrumbs.profile}
+  >
     {page}
   </AuthLayout>
 )

@@ -20,7 +20,11 @@ export default function Button({
   )
 
   return (
-    <Component disabled={disabled} className={buttonClasses} {...props}>
+    <Component
+      disabled={disabled}
+      className={buttonClasses}
+      {...props}
+    >
       {children}
     </Component>
   )

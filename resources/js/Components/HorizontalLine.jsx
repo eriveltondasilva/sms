@@ -13,7 +13,8 @@ export default function HorizontalLine({ text = '' }) {
         className={twJoin(
           'absolute left-1/2 -translate-x-1/2 px-3 font-medium',
           'text-gray-900 dark:bg-gray-800 dark:text-white'
-        )}>
+        )}
+      >
         {text}
       </span>
     </div>

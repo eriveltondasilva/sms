@@ -21,7 +21,7 @@ Route::get('/painel', DashboardController::class)
 
 
 Route::middleware('auth')->controller(ProfileController::class)
-->prefix('/perfil')->name('profile.')->group(function () {
+->prefix('/profile')->name('profile.')->group(function () {
     Route::get('/', 'edit')->name('edit');
     //* actions
     Route::patch('/', 'update')->name('update');

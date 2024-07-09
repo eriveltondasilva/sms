@@ -25,7 +25,10 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
     <>
       {/* Mensagem flash */}
       {message && (
-        <Alert color='failure' className='mb-4'>
+        <Alert
+          color='failure'
+          className='mb-4'
+        >
           {message}
         </Alert>
       )}
@@ -37,7 +40,8 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
           <Button
             as={Link}
             href={route('admin.groups.teachers.create', { group })}
-            color='blue'>
+            color='blue'
+          >
             <Plus className='mr-2 h-5 w-5' />
             Adicionar professor
           </Button>
@@ -91,7 +95,8 @@ function TeacherTable({ group = {}, teachers = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}>
+              )}
+            >
               {teacher.name}
             </Table.RowCell>
             <Table.RowCell>{teacher.email}</Table.RowCell>
@@ -101,7 +106,8 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   as={Link}
                   href={route('admin.teachers.show', { teacher })}
                   color='blue'
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Visualizar Professor(a)'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
@@ -111,7 +117,8 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   color='failure'
                   onClick={() => handleDeleteAction({ group, teacher })}
                   disabled={isLoading}
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Remover Professor(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
                   </Tooltip>

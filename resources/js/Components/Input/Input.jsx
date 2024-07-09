@@ -15,10 +15,20 @@ export function InputText({
   return (
     <section className={twMerge(inputClassName, className)}>
       {/* # texto do label */}
-      {label && <Label htmlFor={id} value={label} />}
+      {label && (
+        <Label
+          htmlFor={id}
+          value={label}
+        />
+      )}
 
       {/* # input text */}
-      <TextInput id={id} name={id} type={type} {...props} />
+      <TextInput
+        id={id}
+        name={id}
+        type={type}
+        {...props}
+      />
 
       {/* # erro */}
       {error && <InputError message={error} />}
@@ -37,10 +47,19 @@ export function InputTextarea({
   return (
     <section className={twMerge(inputClassName, className)}>
       {/* # texto do label */}
-      {label && <Label htmlFor={id} value={label} />}
+      {label && (
+        <Label
+          htmlFor={id}
+          value={label}
+        />
+      )}
 
       {/* # input textarea */}
-      <Textarea id={id} name={id} {...props} />
+      <Textarea
+        id={id}
+        name={id}
+        {...props}
+      />
 
       {/* # erro */}
       {error && <InputError message={error} />}
@@ -60,12 +79,24 @@ export function InputSelect({
   return (
     <section className={twMerge(inputClassName, className)}>
       {/* # texto do label */}
-      {label && <Label htmlFor={id} value={label} />}
+      {label && (
+        <Label
+          htmlFor={id}
+          value={label}
+        />
+      )}
 
       {/* # input select */}
-      <Select id={id} name={id} {...props}>
+      <Select
+        id={id}
+        name={id}
+        {...props}
+      >
         {values.map((value, index) => (
-          <option key={index} value={value.id ?? value}>
+          <option
+            key={index}
+            value={value.id ?? value}
+          >
             {value.name ?? value}
           </option>
         ))}
@@ -93,7 +124,10 @@ export function InputRadio({
 
       {/* # input radio */}
       {values.map((item, index) => (
-        <div key={index} className='flex items-center gap-2'>
+        <div
+          key={index}
+          className='flex items-center gap-2'
+        >
           <Radio
             id={item.id}
             name={id}
@@ -101,7 +135,10 @@ export function InputRadio({
             defaultChecked={item.value === defaultChecked}
             disabled={readOnly}
           />
-          <Label htmlFor={item.id} value={item.label} />
+          <Label
+            htmlFor={item.id}
+            value={item.label}
+          />
         </div>
       ))}
 

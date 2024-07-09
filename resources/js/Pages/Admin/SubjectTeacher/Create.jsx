@@ -28,7 +28,10 @@ export default function PageSubjectTeacherCreate({
     <>
       {/* Mensagem flash */}
       {message && (
-        <Alert color='success' className='mb-4'>
+        <Alert
+          color='success'
+          className='mb-4'
+        >
           {message}
         </Alert>
       )}
@@ -77,7 +80,8 @@ function TeacherTable({ subject = {}, teachers = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}>
+              )}
+            >
               {teacher.name}
             </Table.RowCell>
             <Table.RowCell>{teacher.cpf}</Table.RowCell>
@@ -87,7 +91,8 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   as={Link}
                   href={route('admin.teachers.show', { teacher })}
                   color='green'
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Visualizar Professor'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
@@ -97,7 +102,8 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   color='blue'
                   onClick={() => handleStoreAction({ subject, teacher })}
                   disabled={isLoading}
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Adicionar Professor'>
                     <Plus className='mx-1 h-4 w-4' />
                   </Tooltip>

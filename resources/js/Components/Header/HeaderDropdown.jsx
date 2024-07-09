@@ -8,13 +8,21 @@ export function HeaderDropdown({ avatar_url = '', children }) {
   const image_url =
     'https://flowbite.com/docs/images/people/profile-picture-5.jpg'
   const DropdownAvatar = (
-    <Avatar alt='User settings' img={avatar_url || image_url} rounded />
+    <Avatar
+      alt='User settings'
+      img={avatar_url || image_url}
+      rounded
+    />
   )
 
   return (
     <>
       {/* Trigger */}
-      <Dropdown inline label={DropdownAvatar} className='w-48'>
+      <Dropdown
+        inline
+        label={DropdownAvatar}
+        className='w-48'
+      >
         {children}
       </Dropdown>
     </>
@@ -30,7 +38,8 @@ export function HeaderDropdownHeader({ role, email }) {
       </span>
       <span
         className='block truncate text-sm text-gray-400'
-        title={email || 'Email'}>
+        title={email || 'Email'}
+      >
         {email || 'exemplo@email.com'}
       </span>
     </Dropdown.Header>
@@ -53,7 +62,11 @@ export function HeaderDropdownItem() {
 
   return (
     <>
-      <Dropdown.Item as={Link} href={route('profile.edit')} icon={UserRoundCog}>
+      <Dropdown.Item
+        as={Link}
+        href={route('profile.edit')}
+        icon={UserRoundCog}
+      >
         Perfil
       </Dropdown.Item>
       <Dropdown.Item
@@ -61,7 +74,8 @@ export function HeaderDropdownItem() {
         method='POST'
         disabled={isLoading}
         onClick={handleLogout}
-        icon={LogOut}>
+        icon={LogOut}
+      >
         Sair
       </Dropdown.Item>
     </>

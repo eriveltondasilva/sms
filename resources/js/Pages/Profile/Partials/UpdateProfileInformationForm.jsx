@@ -33,7 +33,10 @@ export default function UpdateProfileInformation({
     <section className={className}>
       <Header />
 
-      <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
+      <form
+        onSubmit={handleSubmit}
+        className='mt-6 space-y-6'
+      >
         <div>
           <Input.Text
             id='username'
@@ -73,7 +76,8 @@ export default function UpdateProfileInformation({
                 href={route('verification.send')}
                 method='post'
                 as='button'
-                className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
+                className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'
+              >
                 Clique aqui para enviar um novo link de verificação.
               </Link>
             </p>
@@ -116,7 +120,11 @@ function Footer({ processing, recentlySuccessful }) {
     <footer className='flex items-center gap-4'>
       {/* Botão de salvar */}
 
-      <Button type='submit' color='blue' disabled={processing}>
+      <Button
+        type='submit'
+        color='blue'
+        disabled={processing}
+      >
         <Save className='mr-2 h-5 w-5' />
         Salvar
       </Button>
@@ -126,7 +134,8 @@ function Footer({ processing, recentlySuccessful }) {
         enter='transition ease-in-out'
         enterFrom='opacity-0'
         leave='transition ease-in-out'
-        leaveTo='opacity-0'>
+        leaveTo='opacity-0'
+      >
         <p className='text-sm text-gray-600 dark:text-gray-400'>Salvo.</p>
       </Transition>
     </footer>

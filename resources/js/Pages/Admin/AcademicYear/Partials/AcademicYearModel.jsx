@@ -19,12 +19,19 @@ export default function AcademicYearModel({
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
 
   return (
-    <Modal show={isShowed} onClose={handleToggleModal}>
-      <form onSubmit={handleSubmit} className='p-6'>
+    <Modal
+      show={isShowed}
+      onClose={handleToggleModal}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className='p-6'
+      >
         <h2
           className={twJoin(
             'text-lg font-medium text-gray-900 dark:text-gray-100'
-          )}>
+          )}
+        >
           Título
         </h2>
         <p className={twJoin('mt-1 text-sm text-gray-600 dark:text-gray-400')}>
@@ -35,7 +42,8 @@ export default function AcademicYearModel({
           <Button
             color='light'
             onClick={handleToggleModal}
-            disabled={isLoading}>
+            disabled={isLoading}
+          >
             <X className='mr-2 h-5 w-5' />
             cancelar
           </Button>
@@ -45,7 +53,8 @@ export default function AcademicYearModel({
               type='submit'
               color='failure'
               onClick={handleToggleModal}
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               <AlertCircle className='mr-2 h-5 w-5' />
               confirmar
             </Button>

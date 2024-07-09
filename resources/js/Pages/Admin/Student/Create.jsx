@@ -25,7 +25,8 @@ export default function PageStudentCreate() {
           <div>{message}</div>
           <Link
             href={route('admin.students.show', { student: studentId })}
-            className='font-medium underline'>
+            className='font-medium underline'
+          >
             Clique aqui para vê-lo.
           </Link>
         </Alert>

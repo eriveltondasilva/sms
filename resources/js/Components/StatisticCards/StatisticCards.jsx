@@ -17,7 +17,8 @@ export function StatisticCardsItem({ children }) {
         'space-x-2 rounded-lg px-2 py-3 shadow-md',
         'bg-gray-50 text-gray-800',
         'dark:bg-gray-800 dark:text-gray-100'
-      )}>
+      )}
+    >
       {children}
     </div>
   )

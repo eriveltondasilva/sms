@@ -12,9 +12,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prettier": "prettier --write ./resources/js/**/*.{js,jsx}",
-    "lint": "eslint ./resources/js/**/*.{js,jsx} --fix",
-    "format": "npm run prettier && npm run lint"
+    "prettier": "prettier ./resources/js/**/*.{js,jsx} --check",
+    "prettier:fix": "prettier ./resources/js/**/*.{js,jsx} --write --cache"
   },
   "devDependencies": {
     "@headlessui/react": "^1.4.2",

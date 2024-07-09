@@ -22,7 +22,10 @@ export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
   const pageTitle = `${titles.edit} - ${teacher.name}`
 
   return (
-    <Form onSubmit={handleSubmit} autoComplete='false'>
+    <Form
+      onSubmit={handleSubmit}
+      autoComplete='false'
+    >
       {/* flash message */}
       {message && <Alert color='success'>{message}</Alert>}
 

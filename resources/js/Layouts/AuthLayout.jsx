@@ -39,7 +39,10 @@ export default function AuthLayout({
 
       {/* #sidebar */}
       <Sidebar>
-        <Sidebar.Logo img={schoolImg} imgAlt='Escola Viver'>
+        <Sidebar.Logo
+          img={schoolImg}
+          imgAlt='Escola Viver'
+        >
           Escola Viver
         </Sidebar.Logo>
         <Sidebar.TriggerClose />
@@ -91,7 +94,8 @@ function LayoutMain({ children }) {
         'border-yellow-300',
         'bg-gray-50 text-gray-900',
         'dark:bg-gray-800 dark:text-gray-200'
-      )}>
+      )}
+    >
       {children}
     </main>
   )
@@ -101,7 +105,10 @@ function LayoutBreadcrumb({ items }) {
   return (
     <Breadcrumb>
       {items.map((item, index) => (
-        <Breadcrumb.Item key={index} item={item} />
+        <Breadcrumb.Item
+          key={index}
+          item={item}
+        />
       ))}
     </Breadcrumb>
   )
@@ -113,7 +120,10 @@ function LayoutStatisticCards({ items }) {
       {items.map((item, index) => (
         <StatisticCards.Item key={index}>
           <StatisticCards.Icon icon={item.icon} />
-          <StatisticCards.Body title={item.title} value={item.value} />
+          <StatisticCards.Body
+            title={item.title}
+            value={item.value}
+          />
         </StatisticCards.Item>
       ))}
     </StatisticCards>
@@ -128,7 +138,8 @@ function Wrapper({ children }) {
         'grid grid-rows-[auto_auto_1fr_auto]',
         'min-h-dvh max-w-full',
         'gap-y-3 px-4 py-2 md:ml-64'
-      )}>
+      )}
+    >
       {children}
     </div>
   )

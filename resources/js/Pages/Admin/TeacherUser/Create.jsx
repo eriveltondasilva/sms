@@ -17,7 +17,10 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
   const pageTitle = `${titles.create} - ${teacher.name}`
 
   return (
-    <Form onSubmit={handleSubmit} autoComplete='false'>
+    <Form
+      onSubmit={handleSubmit}
+      autoComplete='false'
+    >
       {/* header teacher */}
       <Form.Header>
         <Form.HeaderTitle title={pageTitle} />

@@ -25,7 +25,8 @@ export default function PageGroupCreate() {
             <div>{message}</div>
             <Link
               href={route('admin.groups.edit', { group: groupId })}
-              className='font-medium underline'>
+              className='font-medium underline'
+            >
               Clique aqui para vê-lo.
             </Link>
           </Alert>

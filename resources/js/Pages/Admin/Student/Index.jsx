@@ -41,7 +41,8 @@ export default function PageStudentIndex({ students = [] }) {
             as={Link}
             href={route('admin.students.create')}
             color='blue'
-            size='sm'>
+            size='sm'
+          >
             <Plus className='mr-1 h-5 w-5' />
             Cadastrar Aluno
           </Button>
@@ -61,14 +62,19 @@ export default function PageStudentIndex({ students = [] }) {
             onChange={handleChange}
           />
           <Button.Group>
-            <Button type='submit' color='blue' disabled={isLoading || !search}>
+            <Button
+              type='submit'
+              color='blue'
+              disabled={isLoading || !search}
+            >
               <Search className='mr-2 h-5 w-5' />
             </Button>
             <Button
               as={Link}
               href={route('admin.students.index')}
               color='light'
-              disabled={isLoading}>
+              disabled={isLoading}
+            >
               <Undo2 className='h-5 w-5' />
             </Button>
           </Button.Group>
@@ -121,7 +127,8 @@ function StudentTable({ students = [] }) {
                   href={route('admin.students.show', { student })}
                   color='blue'
                   title='Visualizar aluno'
-                  size='xs'>
+                  size='xs'
+                >
                   <Eye className='h-4 w-4' />
                 </Button>
                 <Button
@@ -129,7 +136,8 @@ function StudentTable({ students = [] }) {
                   href={route('admin.students.edit', { student })}
                   color='green'
                   title='Editar aluno'
-                  size='xs'>
+                  size='xs'
+                >
                   <PencilLine className='mx-1 h-4 w-4' />
                 </Button>
               </Button.Group>
@@ -147,7 +155,11 @@ function StudentPagination({ students = {} }) {
 
   return (
     <Pagination>
-      <Pagination.Left to={to} from={from} total={total} />
+      <Pagination.Left
+        to={to}
+        from={from}
+        total={total}
+      />
       <Pagination.Right>
         <Pagination.Previous href={prev_page_url} />
         <Pagination.Next href={next_page_url} />

@@ -12,7 +12,8 @@ export function FormRoot({ className = '', onSubmit = () => {}, children }) {
       className={twMerge(
         'mx-2 flex max-w-lg flex-col gap-4 sm:mx-10 md:mx-20',
         className
-      )}>
+      )}
+    >
       {children}
     </form>
   )
@@ -53,7 +54,8 @@ export function FormFooterButtonSubmit({ disabled = false }) {
       disabled={disabled}
       color='blue'
       className='uppercase'
-      fullSized>
+      fullSized
+    >
       <Save className='mr-2 h-5 w-5' />
       {submitButtonText}
     </Button>
@@ -71,7 +73,8 @@ export function FormFooterButtonReset({ disabled = false }) {
       disabled={disabled}
       color='light'
       className='uppercase'
-      fullSized>
+      fullSized
+    >
       <Trash2 className='mr-2 h-5 w-5' />
       {resetButtonText}
     </Button>

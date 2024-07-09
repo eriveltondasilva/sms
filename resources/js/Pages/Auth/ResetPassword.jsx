@@ -76,7 +76,10 @@ export default function PageResetPassword({ token, email }) {
       </div>
 
       <footer className='mt-4 flex items-center justify-end'>
-        <Button type='submit' disabled={processing}>
+        <Button
+          type='submit'
+          disabled={processing}
+        >
           Resetar sua senha
         </Button>
       </footer>
@@ -85,5 +88,8 @@ export default function PageResetPassword({ token, email }) {
 }
 
 PageResetPassword.layout = (page) => (
-  <GuestLayout title={titles.resetPassword} children={page} />
+  <GuestLayout
+    title={titles.resetPassword}
+    children={page}
+  />
 )
