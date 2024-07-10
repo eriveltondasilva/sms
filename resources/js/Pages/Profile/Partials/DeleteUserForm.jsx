@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
 import Input from '@/Components/Input'
-import Modal from '@/Components/Modal'
+import Modal from '@/Components/Modal/ModalOld'
 
 export default function DeleteUserForm({ className = '' }) {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
@@ -21,7 +21,6 @@ export default function DeleteUserForm({ className = '' }) {
     password: '',
   })
 
-  // ----------------------------------------------
   function confirmUserDeletion() {
     setConfirmingUserDeletion(true)
   }

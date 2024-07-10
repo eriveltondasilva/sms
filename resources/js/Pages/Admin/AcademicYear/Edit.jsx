@@ -13,12 +13,9 @@ import AcademicYearFormData from './Partials/AcademicYearFormData'
 import AcademicYearModel from './Partials/AcademicYearModel'
 import { breadcrumbs, titles } from './data'
 
-// ====================================
 export default function PageAcademicYearEdit({ academicYear = {} }) {
   const { message } = usePage().props.flash || {}
-
-  const [isShowed, setIsShowed] = useState(false)
-  const handleToggleModal = () => setIsShowed(!isShowed)
+  const [showModel, setShowModel] = useState(false)
 
   const formOptions = {
     method: 'PUT',
@@ -27,6 +24,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
   }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
+  const handleToggleModal = () => {}
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -61,7 +59,10 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
         </div>
 
         {/* Academic year form data */}
-        <AcademicYearFormData {...{ data: academicYear, errors }} />
+        <AcademicYearFormData
+          data={academicYear}
+          errors={errors}
+        />
 
         {/* Form footer */}
         <Form.Footer className='flex flex-col'>
@@ -69,7 +70,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
           <Button
             color='failure'
             disabled={academicYear.is_active}
-            onClick={handleToggleModal}
+            onClick={() => setShowModel(true)}
             className='uppercase'
             fullSized
           >
@@ -78,7 +79,11 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
           </Button>
         </Form.Footer>
       </Form>
-      <AcademicYearModel {...{ academicYear, isShowed, handleToggleModal }} />
+      <AcademicYearModel
+        academicYear={academicYear}
+        show={showModel}
+        onClose={setShowModel}
+      />
     </>
   )
 }

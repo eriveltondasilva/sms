@@ -1,5 +1,6 @@
 import colors from 'tailwindcss/colors'
 import defaultTheme from 'tailwindcss/defaultTheme'
+
 import forms from '@tailwindcss/forms'
 
 import flowbite from 'flowbite-react/tailwind'

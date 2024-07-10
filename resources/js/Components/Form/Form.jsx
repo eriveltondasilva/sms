@@ -1,4 +1,4 @@
-import { Button } from 'flowbite-react'
+import { Button, Spinner } from 'flowbite-react'
 import { Save, Trash2 } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
@@ -47,6 +47,11 @@ export function FormFooter({ children }) {
 export function FormFooterButtonSubmit({ disabled = false }) {
   const isCreate = route().current('*.create')
   const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
+  const BtnIcon = disabled ? (
+    <Spinner className='mr-2 size-5' />
+  ) : (
+    <Save className='mr-2 size-5' />
+  )
 
   return (
     <Button
@@ -56,7 +61,7 @@ export function FormFooterButtonSubmit({ disabled = false }) {
       className='uppercase'
       fullSized
     >
-      <Save className='mr-2 h-5 w-5' />
+      {BtnIcon}
       {submitButtonText}
     </Button>
   )

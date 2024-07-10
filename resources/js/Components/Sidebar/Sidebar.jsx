@@ -11,7 +11,7 @@ export function SidebarRoot({ children }) {
       aria-label='sidebar'
       className={twJoin(
         'fixed h-screen w-64',
-        'left-0 top-0 z-40 ',
+        'left-0 top-0 z-40',
         '-translate-x-full transition-transform md:translate-x-0'
       )}
     >
@@ -74,7 +74,7 @@ export function SidebarTriggerOpen() {
           'mx-2 p-2',
           'inline-flex items-center md:hidden',
           'rounded-lg text-sm focus:outline-none focus:ring-2',
-          'text-gray-500 hover:bg-gray-100 focus:ring-gray-200 ',
+          'text-gray-500 hover:bg-gray-100 focus:ring-gray-200',
           'dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
         )}
       >

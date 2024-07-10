@@ -5,7 +5,6 @@ import { twJoin } from 'tailwind-merge'
 export default function Modal({
   children,
   show = false,
-  maxWidth = 'lg',
   closeable = true,
   onClose = () => {},
 }) {
@@ -14,14 +13,6 @@ export default function Modal({
       onClose()
     }
   }
-
-  const maxWidthClass = {
-    sm: 'sm:max-w-sm',
-    md: 'sm:max-w-md',
-    lg: 'sm:max-w-lg',
-    xl: 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl',
-  }[maxWidth]
 
   return (
     <Transition
@@ -32,7 +23,11 @@ export default function Modal({
       <Dialog
         as='div'
         id='modal'
-        className='fixed inset-0 z-50 flex transform items-center overflow-y-auto px-4 py-6 transition-all sm:px-0'
+        className={twJoin(
+          'z-50 px-4 py-6 sm:px-0',
+          'transform transition-all',
+          'fixed inset-0 flex items-center overflow-y-auto'
+        )}
         onClose={close}
       >
         <Transition.Child
@@ -58,10 +53,10 @@ export default function Modal({
         >
           <Dialog.Panel
             className={twJoin(
-              'mb-6 sm:mx-auto sm:w-full',
-              'transform overflow-hidden rounded-lg shadow-xl transition-all',
-              'bg-white dark:bg-gray-800',
-              maxWidthClass
+              'mb-6 sm:mx-auto sm:w-full sm:max-w-lg',
+              'overflow-hidden rounded-lg shadow-xl',
+              'transform transition-all',
+              'bg-white dark:bg-gray-800'
             )}
           >
             {children}
