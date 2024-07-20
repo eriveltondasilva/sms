@@ -21,8 +21,7 @@ export function HeaderDropdown({ avatar_url = '', children }) {
       <Dropdown
         inline
         label={DropdownAvatar}
-        className='w-48'
-      >
+        className='w-48'>
         {children}
       </Dropdown>
     </>
@@ -38,8 +37,7 @@ export function HeaderDropdownHeader({ role, email }) {
       </span>
       <span
         className='block truncate text-sm text-gray-400'
-        title={email || 'Email'}
-      >
+        title={email || 'Email'}>
         {email || 'exemplo@email.com'}
       </span>
     </Dropdown.Header>
@@ -65,8 +63,7 @@ export function HeaderDropdownItem() {
       <Dropdown.Item
         as={Link}
         href={route('profile.edit')}
-        icon={UserRoundCog}
-      >
+        icon={UserRoundCog}>
         Perfil
       </Dropdown.Item>
       <Dropdown.Item
@@ -74,8 +71,7 @@ export function HeaderDropdownItem() {
         method='POST'
         disabled={isLoading}
         onClick={handleLogout}
-        icon={LogOut}
-      >
+        icon={LogOut}>
         Sair
       </Dropdown.Item>
     </>

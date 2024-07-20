@@ -88,8 +88,7 @@ export default function PageLogin({ status, canResetPassword }) {
           {canResetPassword && (
             <Link
               href={route('password.request')}
-              className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'
-            >
+              className='rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800'>
               Esqueceu sua senha?
             </Link>
           )}
@@ -99,8 +98,7 @@ export default function PageLogin({ status, canResetPassword }) {
         <footer className='mt-6 flex flex-col gap-2'>
           <Button
             type='submit'
-            disabled={processing}
-          >
+            disabled={processing}>
             Entrar com Email
           </Button>
 

@@ -37,8 +37,7 @@ export default function Dashboard({ data, message }) {
     <AuthLayout
       title={titles.dashboard}
       breadcrumb={breadcrumbs.dashboard}
-      statistics={statistics}
-    >
+      statistics={statistics}>
       {message && <Alert>{message}</Alert>}
     </AuthLayout>
   )

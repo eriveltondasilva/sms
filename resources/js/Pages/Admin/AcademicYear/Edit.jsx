@@ -38,8 +38,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
             href={route('admin.academic-years.create')}
             color='blue'
             size='xs'
-            as={Link}
-          >
+            as={Link}>
             <Plus className='h-4 w-4' />
           </Button>
         </Form.Header>
@@ -52,8 +51,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
           <Badge
             color={academicYear.is_active ? 'success' : 'gray'}
             className='text-lg'
-            size='sm'
-          >
+            size='sm'>
             {academicYear.is_active ? 'Ativo' : 'Inativo'}
           </Badge>
         </div>
@@ -72,8 +70,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
             disabled={academicYear.is_active}
             onClick={() => setShowModel(true)}
             className='uppercase'
-            fullSized
-          >
+            fullSized>
             <AlertCircle className='mr-2 h-5 w-5' />
             Ativar ano letivo
           </Button>

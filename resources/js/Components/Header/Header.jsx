@@ -12,8 +12,7 @@ export function HeaderRoot({ children }) {
         'sticky top-0 z-30 rounded-lg',
         'shadow-md sm:relative',
         'bg-slate-50 dark:text-white'
-      )}
-    >
+      )}>
       {children}
     </Navbar>
   )
@@ -31,8 +30,7 @@ export function HeaderLeft({ role = '' }) {
         className={twJoin(
           'flex self-center whitespace-nowrap',
           'text-xl font-semibold dark:text-white'
-        )}
-      >
+        )}>
         <span className='hidden lg:flex'>
           Bem-vindo(a), {role || 'Usuário'}
         </span>

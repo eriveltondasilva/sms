@@ -56,8 +56,8 @@ const UserSidebarItems = [
 
 // ===============================================
 export default {
-  Admin: AdminSidebarItems,
-  Teacher: TeacherSidebarItems,
-  Student: StudentSidebarItems,
-  User: UserSidebarItems,
+  admin: AdminSidebarItems,
+  teacher: TeacherSidebarItems,
+  student: StudentSidebarItems,
+  user: UserSidebarItems,
 }

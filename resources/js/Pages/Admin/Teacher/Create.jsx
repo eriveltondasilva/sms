@@ -26,8 +26,7 @@ export default function PageTeacherCreate() {
             <div>{message}</div>
             <Link
               href={route('admin.teachers.show', { teacher: teacherId })}
-              className='font-medium underline'
-            >
+              className='font-medium underline'>
               Clique aqui para vê-lo.
             </Link>
           </Alert>

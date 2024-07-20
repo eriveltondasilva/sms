@@ -16,7 +16,6 @@ export default function Indicator({ type = 'secondary' }) {
         'absolute right-4 top-6',
         'flex h-6 w-6 rounded-full drop-shadow',
         colorsMap
-      )}
-    ></span>
+      )}></span>
   )
 }

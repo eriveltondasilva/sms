@@ -27,8 +27,7 @@ export default function PageAcademicYearCreate() {
               href={route('admin.academic-years.edit', {
                 academicYear: academicYearId,
               })}
-              className='font-medium underline'
-            >
+              className='font-medium underline'>
               Clique aqui para vê-lo.
             </Link>
           </Alert>

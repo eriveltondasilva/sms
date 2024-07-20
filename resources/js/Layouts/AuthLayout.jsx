@@ -5,13 +5,40 @@ import Breadcrumb from '@/Components/Breadcrumb'
 import Footer from '@/Components/Footer'
 import Header from '@/Components/Header'
 import Sidebar from '@/Components/Sidebar'
-import StatisticCards from '@/Components/StatisticCards'
+import { StatCards } from '@/Components/StatCards'
 
 import schoolImg from '/resources/images/school.png'
 
 import SidebarItems from './data'
 
-// ============================================================================
+function LayoutMain({ children }) {
+  return (
+    <main
+      className={twJoin(
+        'px-4 py-8 sm:px-8',
+        'rounded-lg border-t-4 shadow-md',
+        'border-yellow-300',
+        'bg-gray-50 text-gray-900',
+        'dark:bg-gray-800 dark:text-gray-200'
+      )}>
+      {children}
+    </main>
+  )
+}
+
+function Wrapper({ children }) {
+  return (
+    <div
+      className={twJoin(
+        'grid grid-rows-[auto_auto_1fr_auto]',
+        'min-h-dvh max-w-full',
+        'gap-y-3 px-4 py-2 md:ml-64'
+      )}>
+      {children}
+    </div>
+  )
+}
+
 export default function AuthLayout({
   title = '',
   breadcrumb = [],
@@ -19,19 +46,12 @@ export default function AuthLayout({
   children,
 }) {
   const { user, activeYear } = usePage().props.auth || {}
-  const userRole = user.role.name || 'user'
+  const userRole = user?.role?.name || 'user'
 
   const hasCards = statistics.length > 0
   const hasBreadcrumb = breadcrumb.length > 0
 
-  console.log('statistics cards: %o', statistics)
-
-  const sidebarItemsMap = {
-    admin: SidebarItems.Admin,
-    teacher: SidebarItems.Teacher,
-    student: SidebarItems.Student,
-    user: SidebarItems.User,
-  }[userRole]
+  const sidebarItemsMap = SidebarItems[userRole] || SidebarItems.user
 
   return (
     <>
@@ -41,8 +61,7 @@ export default function AuthLayout({
       <Sidebar>
         <Sidebar.Logo
           img={schoolImg}
-          imgAlt='Escola Viver'
-        >
+          imgAlt='Escola Viver'>
           Escola Viver
         </Sidebar.Logo>
         <Sidebar.TriggerClose />
@@ -66,10 +85,31 @@ export default function AuthLayout({
 
         <section className='space-y-2'>
           {/* #breadcrumb */}
-          {hasBreadcrumb && <LayoutBreadcrumb items={breadcrumb} />}
+          {hasBreadcrumb && (
+            <Breadcrumb>
+              {breadcrumb.map((item, index) => (
+                <Breadcrumb.Item
+                  key={index}
+                  item={item}
+                />
+              ))}
+            </Breadcrumb>
+          )}
 
           {/* #statistic cards */}
-          {hasCards && <LayoutStatisticCards items={statistics} />}
+          {hasCards && (
+            <StatCards>
+              {statistics.map((item, index) => (
+                <StatCards.Item key={index}>
+                  <StatCards.Icon>{item.icon}</StatCards.Icon>
+                  <StatCards.Body
+                    title={item.title}
+                    value={item.value}
+                  />
+                </StatCards.Item>
+              ))}
+            </StatCards>
+          )}
         </section>
 
         {/* #main */}
@@ -82,65 +122,5 @@ export default function AuthLayout({
         </Footer>
       </Wrapper>
     </>
-  )
-}
-
-function LayoutMain({ children }) {
-  return (
-    <main
-      className={twJoin(
-        'px-4 py-8 sm:px-8',
-        'rounded-lg border-t-4 shadow-md',
-        'border-yellow-300',
-        'bg-gray-50 text-gray-900',
-        'dark:bg-gray-800 dark:text-gray-200'
-      )}
-    >
-      {children}
-    </main>
-  )
-}
-
-function LayoutBreadcrumb({ items }) {
-  return (
-    <Breadcrumb>
-      {items.map((item, index) => (
-        <Breadcrumb.Item
-          key={index}
-          item={item}
-        />
-      ))}
-    </Breadcrumb>
-  )
-}
-
-function LayoutStatisticCards({ items }) {
-  return (
-    <StatisticCards>
-      {items.map((item, index) => (
-        <StatisticCards.Item key={index}>
-          <StatisticCards.Icon icon={item.icon} />
-          <StatisticCards.Body
-            title={item.title}
-            value={item.value}
-          />
-        </StatisticCards.Item>
-      ))}
-    </StatisticCards>
-  )
-}
-
-// -----------------------------------
-function Wrapper({ children }) {
-  return (
-    <div
-      className={twJoin(
-        'grid grid-rows-[auto_auto_1fr_auto]',
-        'min-h-dvh max-w-full',
-        'gap-y-3 px-4 py-2 md:ml-64'
-      )}
-    >
-      {children}
-    </div>
   )
 }

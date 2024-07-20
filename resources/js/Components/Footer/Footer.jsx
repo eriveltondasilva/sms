@@ -6,8 +6,7 @@ export function FooterRoot({ children }) {
   return (
     <Footer
       className='shadow-md'
-      container
-    >
+      container>
       {children}
     </Footer>
   )

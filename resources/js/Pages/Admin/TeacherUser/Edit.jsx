@@ -24,8 +24,7 @@ export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
   return (
     <Form
       onSubmit={handleSubmit}
-      autoComplete='false'
-    >
+      autoComplete='false'>
       {/* flash message */}
       {message && <Alert color='success'>{message}</Alert>}
 

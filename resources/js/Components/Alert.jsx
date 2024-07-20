@@ -26,8 +26,7 @@ export default function Alert({ icon = '', time = 0, children, ...props }) {
         <FlowbiteAlert
           icon={icon || Check}
           onDismiss={handleDismiss}
-          {...props}
-        >
+          {...props}>
           {children}
         </FlowbiteAlert>
       )}
