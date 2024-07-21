@@ -1,5 +1,5 @@
-import Input from '@/Components/Input'
-import formatId from '@/Utils/formatId'
+import { Input } from '@/Components/Input'
+import { formatId } from '@/Utils/formatId'
 
 // ==============================================
 export default function StudentFormData({

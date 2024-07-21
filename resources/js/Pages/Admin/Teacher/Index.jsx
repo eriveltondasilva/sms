@@ -3,16 +3,16 @@ import { Button } from 'flowbite-react'
 import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
-import Input from '@/Components/Input'
-import Pagination from '@/Components/Pagination'
-import SearchFilter from '@/Components/SearchFilter'
-import Table from '@/Components/Table'
-import Title from '@/Components/Title'
+import { Input } from '@/Components/Input'
+import { Pagination } from '@/Components/Pagination'
+import { SearchFilter } from '@/Components/SearchFilter'
+import { Table } from '@/Components/Table'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import useFormHandler from '@/Hooks/useFormHandler'
-import formatId from '@/Utils/formatId'
+import { formatId } from '@/Utils/formatId'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'

@@ -2,7 +2,7 @@ import { useForm } from '@inertiajs/react'
 import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 
 import GuestLayout from '@/Layouts/GuestLayout'
 

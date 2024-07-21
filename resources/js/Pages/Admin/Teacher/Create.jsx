@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -34,7 +34,7 @@ export default function PageTeacherCreate() {
 
         {/* header teacher */}
         <Form.Header>
-          <Form.HeaderTitle title={titles.create} />
+          <Form.Title title={titles.create} />
         </Form.Header>
 
         {/* form */}
@@ -45,8 +45,8 @@ export default function PageTeacherCreate() {
 
         {/* footer teacher */}
         <Form.Footer>
-          <Form.FooterButtonReset disabled={isLoading} />
-          <Form.FooterButtonSubmit disabled={isLoading} />
+          <Form.ButtonReset disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
     </>

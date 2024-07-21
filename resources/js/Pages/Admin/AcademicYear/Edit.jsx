@@ -3,8 +3,8 @@ import { Badge, Button } from 'flowbite-react'
 import { AlertCircle, Plus } from 'lucide-react'
 import { useState } from 'react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -33,7 +33,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
 
         {/* Form header */}
         <Form.Header>
-          <Form.HeaderTitle title={titles.edit} />
+          <Form.Title title={titles.edit} />
           <Button
             href={route('admin.academic-years.create')}
             color='blue'
@@ -64,7 +64,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
 
         {/* Form footer */}
         <Form.Footer className='flex flex-col'>
-          <Form.FooterButtonSubmit disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
           <Button
             color='failure'
             disabled={academicYear.is_active}
@@ -85,7 +85,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
   )
 }
 
-// ==============================================
+//
 PageAcademicYearEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

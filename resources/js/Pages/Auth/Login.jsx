@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 import Button from '@/Components/Button'
 import Checkbox from '@/Components/Checkbox'
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 
 import GuestLayout from '@/Layouts/GuestLayout'
 

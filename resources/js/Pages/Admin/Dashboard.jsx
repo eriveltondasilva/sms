@@ -1,7 +1,7 @@
 // import Calendar from '@/Components/Calendar'
 import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
 
-import Alert from '@/Components/Alert'
+import { Alert } from '@/Components/Alert'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'

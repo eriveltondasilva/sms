@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -9,7 +9,6 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
-// ===============================================
 export default function PageGroupCreate() {
   const { message, groupId } = usePage().props.flash || {}
 
@@ -33,7 +32,7 @@ export default function PageGroupCreate() {
 
         {/* header teacher */}
         <Form.Header>
-          <Form.HeaderTitle title={titles.create} />
+          <Form.Title title={titles.create} />
         </Form.Header>
 
         {/* form */}
@@ -41,14 +40,14 @@ export default function PageGroupCreate() {
 
         {/* footer teacher */}
         <Form.Footer>
-          <Form.FooterButtonSubmit disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
     </section>
   )
 }
 
-// ==============================================
+//
 PageGroupCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

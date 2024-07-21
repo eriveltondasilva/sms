@@ -1,4 +1,4 @@
-import Form from '@/Components/Form'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -22,7 +22,7 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
       autoComplete='false'>
       {/* header teacher */}
       <Form.Header>
-        <Form.HeaderTitle title={pageTitle} />
+        <Form.Title title={pageTitle} />
       </Form.Header>
 
       {/* form data */}
@@ -30,8 +30,8 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
 
       {/* footer teacher */}
       <Form.Footer>
-        <Form.FooterButtonReset disabled={isLoading} />
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonReset disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )

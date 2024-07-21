@@ -3,21 +3,21 @@ import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import Alert from '@/Components/Alert'
-import Table from '@/Components/Table'
-import Title from '@/Components/Title'
+import { Alert } from '@/Components/Alert'
+import { Table } from '@/Components/Table'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 
-import formatId from '@/Utils/formatId'
-import getGenderName from '@/Utils/getGenderName'
+import { formatId } from '@/Utils/formatId'
+import { getGenderName } from '@/Utils/getGenderName'
 
 import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageGroupStudentIndex({ group = {}, students = [] }) {
   const { message } = usePage().props.flash || {}
 
@@ -61,7 +61,6 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
   )
 }
 
-// ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
   const message = 'Tem certeza que deseja remover o aluno(a)?'
 
@@ -132,7 +131,7 @@ function StudentTable({ group = {}, students = [] }) {
   )
 }
 
-// ==============================================
+//
 PageGroupStudentIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

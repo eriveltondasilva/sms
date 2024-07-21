@@ -1,10 +1,10 @@
 import { Head, usePage } from '@inertiajs/react'
 import { twJoin } from 'tailwind-merge'
 
-import Breadcrumb from '@/Components/Breadcrumb'
-import Footer from '@/Components/Footer'
+import { Breadcrumb } from '@/Components/Breadcrumb'
+import { Footer } from '@/Components/Footer'
 import Header from '@/Components/Header'
-import Sidebar from '@/Components/Sidebar'
+import { Sidebar } from '@/Components/Sidebar'
 import { StatCards } from '@/Components/StatCards'
 
 import schoolImg from '/resources/images/school.png'

@@ -4,7 +4,7 @@ import { Lock, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 import Modal from '@/Components/Modal/ModalOld'
 
 export default function DeleteUserForm({ className = '' }) {

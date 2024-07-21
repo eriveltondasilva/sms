@@ -3,8 +3,8 @@ import { twMerge } from 'tailwind-merge'
 
 const inputClassName = 'mb-6 space-y-2'
 
-// ===============================================
-export function InputText({
+//
+function InputText({
   id = '',
   label = '',
   error = '',
@@ -14,7 +14,6 @@ export function InputText({
 }) {
   return (
     <section className={twMerge(inputClassName, className)}>
-      {/* # texto do label */}
       {label && (
         <Label
           htmlFor={id}
@@ -22,7 +21,6 @@ export function InputText({
         />
       )}
 
-      {/* # input text */}
       <TextInput
         id={id}
         name={id}
@@ -30,14 +28,12 @@ export function InputText({
         {...props}
       />
 
-      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
-// -----------------------------------------------
-export function InputTextarea({
+function InputTextarea({
   id = '',
   label = '',
   error = '',
@@ -46,7 +42,6 @@ export function InputTextarea({
 }) {
   return (
     <section className={twMerge(inputClassName, className)}>
-      {/* # texto do label */}
       {label && (
         <Label
           htmlFor={id}
@@ -54,21 +49,18 @@ export function InputTextarea({
         />
       )}
 
-      {/* # input textarea */}
       <Textarea
         id={id}
         name={id}
         {...props}
       />
 
-      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
-// -----------------------------------------------
-export function InputSelect({
+function InputSelect({
   id = '',
   label = '',
   error = '',
@@ -78,7 +70,6 @@ export function InputSelect({
 }) {
   return (
     <section className={twMerge(inputClassName, className)}>
-      {/* # texto do label */}
       {label && (
         <Label
           htmlFor={id}
@@ -86,7 +77,6 @@ export function InputSelect({
         />
       )}
 
-      {/* # input select */}
       <Select
         id={id}
         name={id}
@@ -100,14 +90,12 @@ export function InputSelect({
         ))}
       </Select>
 
-      {/* # erro */}
       {error && <InputError message={error} />}
     </section>
   )
 }
 
-// -----------------------------------------------
-export function InputRadio({
+function InputRadio({
   id = '',
   label = '',
   error = '',
@@ -117,10 +105,8 @@ export function InputRadio({
 }) {
   return (
     <fieldset className='mb-6 flex max-w-md flex-col gap-4'>
-      {/* # texto do label */}
       {label && <Label value={label} />}
 
-      {/* # input radio */}
       {values.map((item, index) => (
         <div
           key={index}
@@ -139,13 +125,20 @@ export function InputRadio({
         </div>
       ))}
 
-      {/* # erro */}
       {error && <InputError message={error} />}
     </fieldset>
   )
 }
 
-// ==============================================
-export function InputError({ message = '' }) {
+function InputError({ message = '' }) {
   return <p className='text-sm text-red-600 dark:text-red-400'>{message}</p>
 }
+
+//
+export const Input = Object.assign(InputText, {
+  Text: InputText,
+  Textarea: InputTextarea,
+  Select: InputSelect,
+  Error: InputError,
+  Radio: InputRadio,
+})

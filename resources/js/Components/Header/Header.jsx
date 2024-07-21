@@ -1,8 +1,9 @@
 import { DarkThemeToggle, Navbar } from 'flowbite-react'
 import { twJoin } from 'tailwind-merge'
-import Sidebar from '../Sidebar'
 
-// ====================================
+import { Sidebar } from '../Sidebar'
+
+//
 export function HeaderRoot({ children }) {
   return (
     <Navbar
@@ -18,7 +19,6 @@ export function HeaderRoot({ children }) {
   )
 }
 
-// ====================================
 export function HeaderLeft({ role = '' }) {
   return (
     <Navbar.Brand>
@@ -39,7 +39,6 @@ export function HeaderLeft({ role = '' }) {
   )
 }
 
-// ====================================
 export function HeaderRight({ activeYear = '', children }) {
   return (
     <div className='mr-2 flex items-center space-x-2'>

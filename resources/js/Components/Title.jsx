@@ -1,17 +1,18 @@
-import HorizontalLine from '../HorizontalLine'
+import { HR } from 'flowbite-react'
 
-export function TitleRoot({ children }) {
+//
+function TitleRoot({ children }) {
   return (
     <div className='relative overflow-hidden'>
       <div className='flex-row items-center justify-between space-y-3 py-2 sm:flex sm:space-x-4 sm:space-y-0'>
         {children}
       </div>
-      <HorizontalLine />
+      <HR />
     </div>
   )
 }
 
-export function TitleLeft({ title = '', subtitle = '' }) {
+function TitleLeft({ title = '', subtitle = '' }) {
   return (
     <div>
       <h2 className='mr-3 text-xl font-semibold dark:text-white'>{title}</h2>
@@ -24,6 +25,12 @@ export function TitleLeft({ title = '', subtitle = '' }) {
   )
 }
 
-export function TitleRight({ children }) {
+function TitleRight({ children }) {
   return <div className='flex'>{children}</div>
 }
+
+//
+export const Title = Object.assign(TitleRoot, {
+  Left: TitleLeft,
+  Right: TitleRight,
+})

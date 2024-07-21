@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Plus } from 'lucide-react'
 
-import Form from '@/Components/Form'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -25,7 +25,7 @@ export default function PageTeacherEdit({ teacher = {} }) {
     <Form onSubmit={handleSubmit}>
       {/* header teacher */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.edit} />
+        <Form.Title title={titles.edit} />
         <Button
           color='red'
           size='xs'
@@ -45,8 +45,8 @@ export default function PageTeacherEdit({ teacher = {} }) {
 
       {/* footer teacher */}
       <Form.Footer>
-        <Form.FooterButtonReset disabled={isLoading} />
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonReset disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )

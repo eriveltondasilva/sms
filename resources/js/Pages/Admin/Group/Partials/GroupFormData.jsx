@@ -1,4 +1,4 @@
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 import { usePage } from '@inertiajs/react'
 
 // ==============================================

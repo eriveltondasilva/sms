@@ -3,7 +3,7 @@ import { Link, useForm, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Save } from 'lucide-react'
 
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 
 // ============================================================================
 export default function UpdateProfileInformation({

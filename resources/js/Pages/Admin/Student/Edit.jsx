@@ -1,4 +1,4 @@
-import Form from '@/Components/Form'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -19,7 +19,7 @@ export default function PageStudentEdit({ student = {} }) {
     <Form onSubmit={handleSubmit}>
       {/* header student */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.edit} />
+        <Form.Title title={titles.edit} />
       </Form.Header>
 
       {/* form student */}
@@ -27,8 +27,8 @@ export default function PageStudentEdit({ student = {} }) {
 
       {/* footer student */}
       <Form.Footer>
-        <Form.FooterButtonReset disabled={isLoading} />
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonReset disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )

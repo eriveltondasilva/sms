@@ -3,8 +3,8 @@ import { Sidebar as FlowbiteSidebar } from 'flowbite-react'
 import { Menu, X } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-// ===============================================
-export function SidebarRoot({ children }) {
+//
+function SidebarRoot({ children }) {
   return (
     <aside
       id='sidebar'
@@ -23,8 +23,7 @@ export function SidebarRoot({ children }) {
   )
 }
 
-// -----------------------------------------------
-export function SidebarLogo({ img = '', imgAlt = '', children }) {
+function SidebarLogo({ img = '', imgAlt = '', children }) {
   return (
     <FlowbiteSidebar.Logo
       img={img}
@@ -34,8 +33,7 @@ export function SidebarLogo({ img = '', imgAlt = '', children }) {
   )
 }
 
-// -----------------------------------------------
-export function SidebarTriggerClose() {
+function SidebarTriggerClose() {
   return (
     <div className='relative sm:hidden'>
       <button
@@ -57,8 +55,7 @@ export function SidebarTriggerClose() {
   )
 }
 
-// -----------------------------------------------
-export function SidebarTriggerOpen() {
+function SidebarTriggerOpen() {
   return (
     <div>
       <button
@@ -79,8 +76,7 @@ export function SidebarTriggerOpen() {
   )
 }
 
-// -----------------------------------------------
-export function SidebarMenu({ items }) {
+function SidebarMenu({ items }) {
   if (!items.length > 0) return null
 
   return (
@@ -102,3 +98,11 @@ export function SidebarMenu({ items }) {
     </FlowbiteSidebar.Items>
   )
 }
+
+//
+export const Sidebar = Object.assign(SidebarRoot, {
+  Logo: SidebarLogo,
+  TriggerClose: SidebarTriggerClose,
+  TriggerOpen: SidebarTriggerOpen,
+  Menu: SidebarMenu,
+})

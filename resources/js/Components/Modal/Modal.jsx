@@ -1,7 +1,8 @@
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { twJoin } from 'tailwind-merge'
 
-export default function Modal({ show, onClose, children }) {
+//
+export function Modal({ show, onClose, children }) {
   console.log('teste')
   return (
     <Dialog

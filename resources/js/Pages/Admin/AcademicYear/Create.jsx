@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -35,7 +35,7 @@ export default function PageAcademicYearCreate() {
 
         {/* header teacher */}
         <Form.Header>
-          <Form.HeaderTitle title={titles.create} />
+          <Form.Title title={titles.create} />
         </Form.Header>
 
         {/* Academic year form data */}
@@ -43,14 +43,14 @@ export default function PageAcademicYearCreate() {
 
         {/* Form footer */}
         <Form.Footer>
-          <Form.FooterButtonSubmit disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
     </section>
   )
 }
 
-// ==============================================
+//
 PageAcademicYearCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

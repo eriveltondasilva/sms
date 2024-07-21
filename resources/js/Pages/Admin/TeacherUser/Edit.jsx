@@ -1,7 +1,7 @@
 import { usePage } from '@inertiajs/react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -9,6 +9,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
 
+//
 export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
   const { message } = usePage().props.flash || {}
 
@@ -30,21 +31,21 @@ export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
 
       {/* header teacher */}
       <Form.Header>
-        <Form.HeaderTitle title={pageTitle} />
+        <Form.Title title={pageTitle} />
       </Form.Header>
 
       <UserFormData {...{ data: user, errors }} />
 
       {/* footer teacher */}
       <Form.Footer>
-        <Form.FooterButtonReset disabled={isLoading} />
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonReset disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )
 }
 
-// ------------------------------------
+//
 PageTeacherUserEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

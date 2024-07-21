@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
 
-import Title from '@/Components/Title'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 

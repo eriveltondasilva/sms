@@ -1,6 +1,6 @@
 import { twJoin } from 'tailwind-merge'
 
-// ====================================
+//
 export default function Indicator({ type = 'secondary' }) {
   const colorsMap = {
     warning: 'bg-yellow-500',

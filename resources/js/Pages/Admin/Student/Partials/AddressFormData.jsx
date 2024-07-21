@@ -1,4 +1,4 @@
-import Input from '@/Components/Input'
+import { Input } from '@/Components/Input'
 
 // ==============================================
 export default function StudentFormData({

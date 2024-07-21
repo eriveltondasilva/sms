@@ -3,17 +3,17 @@ import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Search } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import Alert from '@/Components/Alert'
-import Input from '@/Components/Input'
-import Pagination from '@/Components/Pagination'
-import SearchFilter from '@/Components/SearchFilter'
-import Table from '@/Components/Table'
-import Title from '@/Components/Title'
+import { Alert } from '@/Components/Alert'
+import { Input } from '@/Components/Input'
+import { Pagination } from '@/Components/Pagination'
+import { SearchFilter } from '@/Components/SearchFilter'
+import { Table } from '@/Components/Table'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import formatId from '@/Utils/formatId'
-import getGenderName from '@/Utils/getGenderName'
+import { formatId } from '@/Utils/formatId'
+import { getGenderName } from '@/Utils/getGenderName'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 import useFormHandler from '@/Hooks/useFormHandler'
@@ -21,7 +21,6 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
 export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   const { message } = usePage().props.flash || {}
   const searchId = route().params.search || ''
@@ -87,7 +86,6 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   )
 }
 
-// ----------------------------------------------
 function StudentTable({ group = {}, students = [] }) {
   const message = 'Tem certeza que deseja adicionar o aluno(a)?'
 
@@ -158,7 +156,6 @@ function StudentTable({ group = {}, students = [] }) {
   )
 }
 
-// ----------------------------------------------
 function StudentPagination({ students = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = students
 
@@ -177,7 +174,7 @@ function StudentPagination({ students = {} }) {
   )
 }
 
-// ==============================================
+//
 PageGroupStudentCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

@@ -2,8 +2,8 @@ import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { PencilLine, Plus } from 'lucide-react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
@@ -12,7 +12,7 @@ import TeacherFormData from './Partials/TeacherFormData'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
+//
 export default function PageTeacherShow({ teacher = {} }) {
   const { message } = usePage().props.flash || {}
 
@@ -23,7 +23,7 @@ export default function PageTeacherShow({ teacher = {} }) {
 
       {/* header teacher */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.show} />
+        <Form.Title title={titles.show} />
         <Button.Group>
           <Button
             title='Editar professor'
@@ -59,7 +59,7 @@ export default function PageTeacherShow({ teacher = {} }) {
   )
 }
 
-// ------------------------------------
+//
 PageTeacherShow.layout = (page) => (
   <AuthLayout
     title={titles.show}

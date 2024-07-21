@@ -1,7 +1,6 @@
 import { twJoin } from 'tailwind-merge'
-import { COLOR_VARIANTS, DEFAULT_VARIANTS, SIZE_VARIANTS } from './data'
+import { COLOR_VARIANTS, DEFAULT_VARIANTS, SIZE_VARIANTS } from './styles'
 
-// ==============================================
 export default function Button({
   as: Component = 'button',
   variant = 'primary',

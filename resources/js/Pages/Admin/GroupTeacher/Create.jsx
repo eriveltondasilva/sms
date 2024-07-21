@@ -3,18 +3,18 @@ import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import Alert from '@/Components/Alert'
-import Table from '@/Components/Table'
-import Title from '@/Components/Title'
+import { Alert } from '@/Components/Alert'
+import { Table } from '@/Components/Table'
+import { Title } from '@/Components/Title'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
-import formatId from '@/Utils/formatId'
+import { formatId } from '@/Utils/formatId'
 
-// ==============================================
+//
 export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
   const { message } = usePage().props.flash || {}
 
@@ -46,7 +46,6 @@ export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
   )
 }
 
-// ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
   const actionOptions = { method: 'POST', route: 'admin.groups.teachers.store' }
   const { isLoading, handleAction: handleStoreAction } =
@@ -107,7 +106,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
   )
 }
 
-// ==============================================
+//
 PageGroupTeacherCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

@@ -3,18 +3,18 @@ import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import Alert from '@/Components/Alert'
-import Table from '@/Components/Table'
-import Title from '@/Components/Title'
+import { Alert } from '@/Components/Alert'
+import { Table } from '@/Components/Table'
+import { Title } from '@/Components/Title'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
-import formatId from '@/Utils/formatId'
+import { formatId } from '@/Utils/formatId'
 
-// ==============================================
+//
 export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
   const { message } = usePage().props.flash || {}
 
@@ -58,7 +58,6 @@ export default function PageGroupTeacherIndex({ group = {}, teachers = [] }) {
   )
 }
 
-// ----------------------------------------------
 function TeacherTable({ group = {}, teachers = [] }) {
   const message = 'Tem certeza que deseja remover professor(a)?'
 
@@ -127,7 +126,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
   )
 }
 
-// ==============================================
+//
 PageGroupTeacherIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

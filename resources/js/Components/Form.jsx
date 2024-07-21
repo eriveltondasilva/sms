@@ -1,11 +1,9 @@
-import { Button, Spinner } from 'flowbite-react'
+import { Button, HR, Spinner } from 'flowbite-react'
 import { Save, Trash2 } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
-import HorizontalLine from '../HorizontalLine'
-
-// ===========================================================================
-export function FormRoot({ className = '', onSubmit = () => {}, children }) {
+//
+function FormRoot({ className = '', onSubmit = () => {}, children }) {
   return (
     <form
       onSubmit={onSubmit}
@@ -18,32 +16,28 @@ export function FormRoot({ className = '', onSubmit = () => {}, children }) {
   )
 }
 
-// ------------------------------------
-export function FormHeader({ className = '', children }) {
+function FormHeader({ className = '', children }) {
   return (
     <header className='mb-4 space-y-4'>
       <div className={twMerge('flex justify-between', className)}>
         {children}
       </div>
-      <HorizontalLine />
+      <HR />
     </header>
   )
 }
 
-// ------------------------------------
-export function FormHeaderTitle({ title = '', className = '' }) {
+function FormTitle({ title = '', className = '' }) {
   return (
     <h2 className={twMerge('text-xl font-semibold', className)}>{title}</h2>
   )
 }
 
-// ------------------------------------
-export function FormFooter({ children }) {
+function FormFooter({ children }) {
   return <footer className='flex flex-col gap-4 sm:flex-row'>{children}</footer>
 }
 
-// ------------------------------------
-export function FormFooterButtonSubmit({ disabled = false }) {
+function FormButtonSubmit({ disabled = false }) {
   const isCreate = route().current('*.create')
   const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
   const BtnIcon = disabled ? (
@@ -65,8 +59,7 @@ export function FormFooterButtonSubmit({ disabled = false }) {
   )
 }
 
-// ------------------------------------
-export function FormFooterButtonReset({ disabled = false }) {
+function FormButtonReset({ disabled = false }) {
   const isCreate = route().current('*.create')
   const resetButtonText = isCreate ? 'Limpar' : 'Redefinir'
 
@@ -82,3 +75,12 @@ export function FormFooterButtonReset({ disabled = false }) {
     </Button>
   )
 }
+
+//
+export const Form = Object.assign(FormRoot, {
+  Header: FormHeader,
+  Title: FormTitle,
+  Footer: FormFooter,
+  ButtonSubmit: FormButtonSubmit,
+  ButtonReset: FormButtonReset,
+})

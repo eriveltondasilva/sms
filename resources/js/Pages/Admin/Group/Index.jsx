@@ -2,7 +2,7 @@ import { Link, usePage } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
 import { PencilLine, Plus } from 'lucide-react'
 
-import Title from '@/Components/Title'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 

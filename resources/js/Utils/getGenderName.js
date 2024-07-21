@@ -1,4 +1,4 @@
-export default function getGenderName(gender) {
+export function getGenderName(gender) {
   try {
     if (gender !== 'M' && gender !== 'F') throw new Error('Gênero inválido')
 

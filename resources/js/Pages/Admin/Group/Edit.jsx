@@ -2,8 +2,8 @@ import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Plus } from 'lucide-react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -11,7 +11,6 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
 export default function PageGroupEdit({ group = {} }) {
   const { message } = usePage().props.flash || {}
 
@@ -29,7 +28,7 @@ export default function PageGroupEdit({ group = {} }) {
 
       {/* Form header */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.edit} />
+        <Form.Title title={titles.edit} />
         <Button
           href={route('admin.groups.create')}
           color='blue'
@@ -45,13 +44,13 @@ export default function PageGroupEdit({ group = {} }) {
 
       {/*  */}
       <Form.Footer>
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )
 }
 
-// ==============================================
+//
 PageGroupEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

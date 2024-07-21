@@ -4,10 +4,10 @@ import { Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import Indicator from '@/Components/Indicator'
-import Title from '@/Components/Title'
+import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
-import formatDate from '@/Utils/formatDate'
+import { formatDate } from '@/Utils/formatDate'
 
 import AcademicYearNotFound from './Partials/AcademicYearNotFound'
 import { breadcrumbs, titles } from './data'

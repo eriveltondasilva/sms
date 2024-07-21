@@ -2,7 +2,7 @@ import { Button, Modal } from 'flowbite-react'
 import { AlertCircle, TriangleAlert, X } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-import Form from '@/Components/Form'
+import { Form } from '@/Components/Form'
 import useFormHandler from '@/Hooks/useFormHandler'
 
 export default function AcademicYearModel({

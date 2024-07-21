@@ -1,4 +1,4 @@
-export default function formatDate(dateString = '', dateStyle = 'short') {
+export function formatDate(dateString = '', dateStyle = 'short') {
   try {
     const date = new Date(dateString)
 

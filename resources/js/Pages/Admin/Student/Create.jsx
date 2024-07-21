@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react'
 
-import Alert from '@/Components/Alert'
-import Form from '@/Components/Form'
+import { Alert } from '@/Components/Alert'
+import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
@@ -10,7 +10,7 @@ import StudentFormData from './Partials/StudentFormData'
 
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageStudentCreate() {
   const { message, studentId } = usePage().props.flash || {}
 
@@ -33,7 +33,7 @@ export default function PageStudentCreate() {
 
       {/* header student */}
       <Form.Header>
-        <Form.HeaderTitle title={titles.create} />
+        <Form.Title title={titles.create} />
       </Form.Header>
 
       {/* form */}
@@ -41,14 +41,14 @@ export default function PageStudentCreate() {
 
       {/* footer student */}
       <Form.Footer>
-        <Form.FooterButtonReset disabled={isLoading} />
-        <Form.FooterButtonSubmit disabled={isLoading} />
+        <Form.ButtonReset disabled={isLoading} />
+        <Form.ButtonSubmit disabled={isLoading} />
       </Form.Footer>
     </Form>
   )
 }
 
-// ----------------------------------------------
+//
 PageStudentCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}
