@@ -48,7 +48,8 @@ export default function PageGroupIndex({ data }) {
           <Button
             type='submit'
             color='blue'
-            disabled={isLoading}>
+            disabled={isLoading}
+          >
             <Search className='h-5 w-5' />
           </Button>
         </SearchFilter.Left>
@@ -99,7 +100,8 @@ function StudentTable({ selectedGroup, students = [] }) {
                 className={twJoin(
                   'whitespace-nowrap font-medium',
                   'text-gray-900 dark:text-white'
-                )}>
+                )}
+              >
                 {student.name}
               </Table.RowCell>
               <Table.RowCell className='hidden sm:table-cell'>
@@ -112,7 +114,8 @@ function StudentTable({ selectedGroup, students = [] }) {
                     href={route('test')}
                     color='blue'
                     title='Visualizar professor'
-                    size='xs'>
+                    size='xs'
+                  >
                     <Eye className='h-4 w-4' />
                   </Button>
                   <Button
@@ -120,7 +123,8 @@ function StudentTable({ selectedGroup, students = [] }) {
                     href={route('test')}
                     color='green'
                     title='Editar professor'
-                    size='xs'>
+                    size='xs'
+                  >
                     <PencilLine className='mx-1 h-4 w-4' />
                   </Button>
                 </Button.Group>

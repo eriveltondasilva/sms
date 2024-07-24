@@ -44,7 +44,8 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
       {message && (
         <Alert
           color='success'
-          className='mb-4'>
+          className='mb-4'
+        >
           {message}
         </Alert>
       )}
@@ -68,7 +69,8 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
           <Button
             type='submit'
             color='blue'
-            disabled={isLoading}>
+            disabled={isLoading}
+          >
             <Search className='h-5 w-5' />
           </Button>
         </SearchFilter.Left>
@@ -121,7 +123,8 @@ function StudentTable({ group = {}, students = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}>
+              )}
+            >
               {student.name}
             </Table.RowCell>
             <Table.RowCell>{formatId(student.id, { pad: 4 })}</Table.RowCell>
@@ -132,7 +135,8 @@ function StudentTable({ group = {}, students = [] }) {
                   as={Link}
                   href={route('admin.students.show', { student })}
                   color='green'
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Visualizar Aluno'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
@@ -142,7 +146,8 @@ function StudentTable({ group = {}, students = [] }) {
                   color='blue'
                   onClick={() => handleStoreAction({ group, student })}
                   disabled={isLoading}
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Adicionar Aluno'>
                     <Plus className='mx-1 h-4 w-4' />
                   </Tooltip>

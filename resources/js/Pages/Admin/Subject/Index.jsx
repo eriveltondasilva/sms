@@ -38,11 +38,13 @@ function CardSubject({ subjects = [] }) {
       {subjects.map((subject) => (
         <Card
           key={subject.id}
-          className='max-w-sm'>
+          className='max-w-sm'
+        >
           <header className=''>
             <h5
               className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'
-              title={subject.name}>
+              title={subject.name}
+            >
               {subject.abbr}
             </h5>
           </header>
@@ -57,7 +59,8 @@ function CardSubject({ subjects = [] }) {
               href={route('admin.subjects.teachers.index', { subject })}
               color='warning'
               className='uppercase'
-              fullSized>
+              fullSized
+            >
               Professores
             </Button>
           </footer>

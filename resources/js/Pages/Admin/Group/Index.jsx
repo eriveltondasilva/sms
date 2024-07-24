@@ -26,7 +26,8 @@ export default function PageGroupIndex({ groups = [] }) {
           <Button
             as={Link}
             href={route('admin.groups.create')}
-            color='blue'>
+            color='blue'
+          >
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Turma
           </Button>
@@ -51,7 +52,8 @@ function GroupCard({ groups = [] }) {
       {groups.map((group) => (
         <Card
           key={group.id}
-          className='max-w-sm'>
+          className='max-w-sm'
+        >
           <header className='flex justify-between'>
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
               {group.name}
@@ -62,7 +64,8 @@ function GroupCard({ groups = [] }) {
                 href={route('admin.groups.edit', { group })}
                 color='green'
                 size='xs'
-                as={Link}>
+                as={Link}
+              >
                 <PencilLine className='h-4 w-4' />
               </Button>
             </Tooltip>
@@ -80,7 +83,8 @@ function GroupCard({ groups = [] }) {
               color='blue'
               size='sm'
               className='uppercase'
-              fullSized>
+              fullSized
+            >
               Alunos
             </Button>
             <Button
@@ -89,7 +93,8 @@ function GroupCard({ groups = [] }) {
               color='warning'
               size='sm'
               className='uppercase'
-              fullSized>
+              fullSized
+            >
               Professores
             </Button>
           </footer>

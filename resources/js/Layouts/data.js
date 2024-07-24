@@ -9,7 +9,6 @@ import {
   UsersRound,
 } from 'lucide-react'
 
-// ===============================================
 // prettier-ignore
 const AdminSidebarItems = [
   [
@@ -50,11 +49,11 @@ const StudentSidebarItems = [
 // prettier-ignore
 const UserSidebarItems = [
   [
-    // { title: 'Painel', icon: Home, route: null },
+    //
   ]
 ]
 
-// ===============================================
+//
 export default {
   admin: AdminSidebarItems,
   teacher: TeacherSidebarItems,

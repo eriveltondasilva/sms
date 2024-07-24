@@ -1,82 +1,25 @@
 import { Link } from '@inertiajs/react'
 import { Sidebar as FlowbiteSidebar } from 'flowbite-react'
-import { Menu, X } from 'lucide-react'
-import { twJoin } from 'tailwind-merge'
+import { twMerge } from 'tailwind-merge'
 
 //
-function SidebarRoot({ children }) {
+function SidebarRoot({ className, isCollapsed, children }) {
   return (
     <aside
       id='sidebar'
       aria-label='sidebar'
-      className={twJoin(
-        'fixed h-screen w-64',
-        'left-0 top-0 z-40',
-        '-translate-x-full transition-transform md:translate-x-0'
-      )}>
-      <FlowbiteSidebar
-        className='shadow-md'
-        aria-label='sidebar'>
-        {children}
-      </FlowbiteSidebar>
+      className={twMerge('max-h-dvh', className)}
+    >
+      <FlowbiteSidebar collapsed={isCollapsed}>{children}</FlowbiteSidebar>
     </aside>
   )
 }
 
-function SidebarLogo({ img = '', imgAlt = '', children }) {
-  return (
-    <FlowbiteSidebar.Logo
-      img={img}
-      imgAlt={imgAlt}>
-      {children}
-    </FlowbiteSidebar.Logo>
-  )
+function SidebarLogo({ children, ...props }) {
+  return <FlowbiteSidebar.Logo {...props}>{children}</FlowbiteSidebar.Logo>
 }
 
-function SidebarTriggerClose() {
-  return (
-    <div className='relative sm:hidden'>
-      <button
-        type='button'
-        aria-controls='sidebar'
-        data-drawer-hide='sidebar'
-        data-drawer-target='sidebar'
-        className={twJoin(
-          'absolute -top-1 right-0',
-          'inline-flex items-center',
-          'rounded-lg p-1.5 text-sm',
-          'bg-transparent text-gray-400',
-          'hover:bg-gray-200 hover:text-gray-900',
-          'dark:hover:bg-gray-600 dark:hover:text-white'
-        )}>
-        <X />
-      </button>
-    </div>
-  )
-}
-
-function SidebarTriggerOpen() {
-  return (
-    <div>
-      <button
-        type='button'
-        aria-controls='sidebar'
-        data-drawer-show='sidebar'
-        data-drawer-target='sidebar'
-        className={twJoin(
-          'mx-2 p-2',
-          'inline-flex items-center md:hidden',
-          'rounded-lg text-sm focus:outline-none focus:ring-2',
-          'text-gray-500 hover:bg-gray-100 focus:ring-gray-200',
-          'dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-        )}>
-        <Menu />
-      </button>
-    </div>
-  )
-}
-
-function SidebarMenu({ items }) {
+function SidebarMenu({ items = [], onClose = () => {} }) {
   if (!items.length > 0) return null
 
   return (
@@ -89,7 +32,9 @@ function SidebarMenu({ items }) {
               icon={item.icon}
               as={Link}
               href={route(item.route)}
-              active={route().current(item.route)}>
+              active={route().current(item.route)}
+              onClick={onClose}
+            >
               {item.title}
             </FlowbiteSidebar.Item>
           ))}
@@ -102,7 +47,5 @@ function SidebarMenu({ items }) {
 //
 export const Sidebar = Object.assign(SidebarRoot, {
   Logo: SidebarLogo,
-  TriggerClose: SidebarTriggerClose,
-  TriggerOpen: SidebarTriggerOpen,
   Menu: SidebarMenu,
 })

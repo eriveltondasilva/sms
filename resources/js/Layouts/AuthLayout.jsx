@@ -1,126 +1,141 @@
 import { Head, usePage } from '@inertiajs/react'
+import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
+import { Drawer } from 'flowbite-react'
 
 import { Breadcrumb } from '@/Components/Breadcrumb'
 import { Footer } from '@/Components/Footer'
-import Header from '@/Components/Header'
+import { Header } from '@/Components/Header'
 import { Sidebar } from '@/Components/Sidebar'
 import { StatCards } from '@/Components/StatCards'
 
-import schoolImg from '/resources/images/school.png'
+import { useSidebarCollapsed } from '@/Hooks/useSidebarCollapsed'
 
 import SidebarItems from './data'
 
-function LayoutMain({ children }) {
-  return (
-    <main
-      className={twJoin(
-        'px-4 py-8 sm:px-8',
-        'rounded-lg border-t-4 shadow-md',
-        'border-yellow-300',
-        'bg-gray-50 text-gray-900',
-        'dark:bg-gray-800 dark:text-gray-200'
-      )}>
-      {children}
-    </main>
-  )
-}
+import schoolImg from '../../images/school.png'
 
-function Wrapper({ children }) {
-  return (
-    <div
-      className={twJoin(
-        'grid grid-rows-[auto_auto_1fr_auto]',
-        'min-h-dvh max-w-full',
-        'gap-y-3 px-4 py-2 md:ml-64'
-      )}>
-      {children}
-    </div>
-  )
-}
-
+//
 export default function AuthLayout({
   title = '',
   breadcrumb = [],
   statistics = [],
   children,
 }) {
-  const { user, activeYear } = usePage().props.auth || {}
-  const userRole = user?.role?.name || 'user'
+  const { user = {}, activeYear } = usePage()?.props?.auth || {}
+  const { isCollapsed, handleCollapse } = useSidebarCollapsed()
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const sidebarItems = SidebarItems[user?.role || 'user']
 
   const hasCards = statistics.length > 0
   const hasBreadcrumb = breadcrumb.length > 0
 
-  const sidebarItemsMap = SidebarItems[userRole] || SidebarItems.user
-
   return (
-    <>
+    <div className='relative'>
       <Head title={title} />
 
-      {/* #sidebar */}
-      <Sidebar>
+      {/* # SIDEBAR */}
+      <Sidebar
+        isCollapsed={isCollapsed}
+        className='fixed left-0 top-0 z-20 hidden h-dvh md:block'
+      >
         <Sidebar.Logo
           img={schoolImg}
-          imgAlt='Escola Viver'>
+          imgAlt='Escola Viver'
+        >
           Escola Viver
         </Sidebar.Logo>
-        <Sidebar.TriggerClose />
-        <Sidebar.Menu items={sidebarItemsMap} />
+        <Sidebar.Menu items={sidebarItems} />
       </Sidebar>
 
-      <Wrapper>
-        {/* #header */}
+      {/* # MOBILE SIDEBAR */}
+      <Drawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <Drawer.Items>
+          <Sidebar>
+            <Sidebar.Logo
+              img={schoolImg}
+              imgAlt='Escola Viver'
+            >
+              Escola Viver
+            </Sidebar.Logo>
+            <Sidebar.Menu
+              items={sidebarItems}
+              onClose={() => setIsOpen(false)}
+            />
+          </Sidebar>
+        </Drawer.Items>
+      </Drawer>
+
+      <section
+        className={twJoin(
+          'flex min-h-dvh max-w-full flex-col',
+          'space-y-2 px-4 py-2',
+          isCollapsed ? 'md:ml-16' : 'md:ml-64'
+        )}
+      >
+        {/* # HEADER */}
         <Header>
-          <Header.Left role={user.role.display_name || 'user'} />
+          <Header.Left
+            username={user?.username}
+            onCollapseSidebar={handleCollapse}
+            onOpenSidebar={() => setIsOpen(true)}
+          />
           <Header.Right activeYear={activeYear}>
-            <Header.Dropdown avatar_url={user.avatar_url}>
-              <Header.DropdownHeader
-                role={user.role.display_name || 'user'}
-                email={user.email || 'exemplo@email.com'}
-              />
-              <Header.DropdownItem />
-            </Header.Dropdown>
+            <Header.Dropdown user={user} />
           </Header.Right>
         </Header>
 
-        <section className='space-y-2'>
-          {/* #breadcrumb */}
-          {hasBreadcrumb && (
-            <Breadcrumb>
-              {breadcrumb.map((item, index) => (
-                <Breadcrumb.Item
-                  key={index}
-                  item={item}
+        {/* # BREADCRUMB */}
+        {hasBreadcrumb && (
+          <Breadcrumb>
+            {breadcrumb.map((item, index) => (
+              <Breadcrumb.Item
+                key={index}
+                item={item}
+              />
+            ))}
+          </Breadcrumb>
+        )}
+
+        {/* # STATISTIC CARDS */}
+        {hasCards && (
+          <StatCards>
+            {statistics.map((item, index) => (
+              <StatCards.Item key={index}>
+                <StatCards.Icon>{item.icon}</StatCards.Icon>
+                <StatCards.Body
+                  title={item.title}
+                  value={item.value}
                 />
-              ))}
-            </Breadcrumb>
+              </StatCards.Item>
+            ))}
+          </StatCards>
+        )}
+
+        {/* # MAIN */}
+        <main
+          className={twJoin(
+            'flex-1 px-4 py-8 sm:px-8',
+            'rounded-lg border-t-4 shadow-md',
+            'border-yellow-300',
+            'bg-gray-50 text-gray-900',
+            'dark:bg-gray-800 dark:text-gray-200'
           )}
+        >
+          {children}
+        </main>
 
-          {/* #statistic cards */}
-          {hasCards && (
-            <StatCards>
-              {statistics.map((item, index) => (
-                <StatCards.Item key={index}>
-                  <StatCards.Icon>{item.icon}</StatCards.Icon>
-                  <StatCards.Body
-                    title={item.title}
-                    value={item.value}
-                  />
-                </StatCards.Item>
-              ))}
-            </StatCards>
-          )}
-        </section>
-
-        {/* #main */}
-        <LayoutMain>{children}</LayoutMain>
-
-        {/* #footer */}
+        {/* # FOOTER */}
         <Footer>
           <Footer.Left />
           <Footer.Right />
         </Footer>
-      </Wrapper>
-    </>
+      </section>
+    </div>
   )
 }

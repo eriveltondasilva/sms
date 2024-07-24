@@ -34,7 +34,8 @@ export default function PageGroupEdit({ group = {} }) {
           color='blue'
           size='xs'
           title='Cadastrar novo turma'
-          as={Link}>
+          as={Link}
+        >
           <Plus className='h-4 w-4' />
         </Button>
       </Form.Header>

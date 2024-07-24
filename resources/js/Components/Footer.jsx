@@ -12,7 +12,8 @@ function FooterRoot({ children }) {
   return (
     <FlowbiteFooter
       className='shadow-md'
-      container>
+      container
+    >
       {children}
     </FlowbiteFooter>
   )

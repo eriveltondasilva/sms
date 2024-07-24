@@ -30,7 +30,8 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
       {message && (
         <Alert
           color='failure'
-          className='mb-4'>
+          className='mb-4'
+        >
           {message}
         </Alert>
       )}
@@ -42,7 +43,8 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
           <Button
             as={Link}
             href={route('admin.groups.students.create', { group })}
-            color='blue'>
+            color='blue'
+          >
             <Plus className='mr-2 h-5 w-5' />
             Adicionar alunos
           </Button>
@@ -96,7 +98,8 @@ function StudentTable({ group = {}, students = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}>
+              )}
+            >
               {student.name}
             </Table.RowCell>
             <Table.RowCell>{formatId(student.id, { pad: 4 })}</Table.RowCell>
@@ -107,7 +110,8 @@ function StudentTable({ group = {}, students = [] }) {
                   as={Link}
                   href={route('admin.students.show', { student })}
                   color='blue'
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Visualizar Aluno(a)'>
                     <Eye className='h-4 w-4' />
                   </Tooltip>
@@ -117,7 +121,8 @@ function StudentTable({ group = {}, students = [] }) {
                   color='failure'
                   onClick={() => handleDeleteAction({ group, student })}
                   disabled={isLoading}
-                  size='xs'>
+                  size='xs'
+                >
                   <Tooltip content='Remover Aluno(a)'>
                     <Trash2 className='mx-1 h-4 w-4' />
                   </Tooltip>

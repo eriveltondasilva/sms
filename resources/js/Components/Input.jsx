@@ -80,11 +80,13 @@ function InputSelect({
       <Select
         id={id}
         name={id}
-        {...props}>
+        {...props}
+      >
         {values.map((value, index) => (
           <option
             key={index}
-            value={value.id ?? value}>
+            value={value.id ?? value}
+          >
             {value.name ?? value}
           </option>
         ))}
@@ -110,7 +112,8 @@ function InputRadio({
       {values.map((item, index) => (
         <div
           key={index}
-          className='flex items-center gap-2'>
+          className='flex items-center gap-2'
+        >
           <Radio
             id={item.id}
             name={id}

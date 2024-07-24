@@ -7,6 +7,7 @@ import Indicator from '@/Components/Indicator'
 import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
+
 import { formatDate } from '@/Utils/formatDate'
 
 import AcademicYearNotFound from './Partials/AcademicYearNotFound'
@@ -25,7 +26,8 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
           <Button
             as={Link}
             href={route('admin.academic-years.create')}
-            color='blue'>
+            color='blue'
+          >
             <Plus className='mr-2 h-5 w-5' />
             Cadastrar Ano Letivo
           </Button>
@@ -50,14 +52,16 @@ function AcademicYearCard({ academicYears = [] }) {
       {academicYears.map((academicYear) => (
         <Card
           key={academicYear.id}
-          className='relative max-w-sm'>
+          className='relative max-w-sm'
+        >
           <Indicator type={academicYear.is_active ? 'success' : 'secondary'} />
 
           <h5
             className={twJoin(
               'text-2xl font-bold tracking-tight',
               'text-gray-900 dark:text-white'
-            )}>
+            )}
+          >
             {academicYear.year}
           </h5>
 
@@ -75,7 +79,8 @@ function AcademicYearCard({ academicYears = [] }) {
               href={route('admin.academic-years.edit', { academicYear })}
               color='blue'
               className='uppercase'
-              fullSized>
+              fullSized
+            >
               Ano Letivo
             </Button>
           </footer>

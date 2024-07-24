@@ -30,7 +30,8 @@ export default function PageTeacherShow({ teacher = {} }) {
             href={route('admin.teachers.edit', { teacher })}
             color='blue'
             size='xs'
-            as={Link}>
+            as={Link}
+          >
             <PencilLine className='h-4 w-4' />
           </Button>
           <Button
@@ -38,7 +39,8 @@ export default function PageTeacherShow({ teacher = {} }) {
             href={route('admin.teachers.create')}
             color='green'
             size='xs'
-            as={Link}>
+            as={Link}
+          >
             <Plus className='mx-1 h-4 w-4' />
           </Button>
         </Button.Group>

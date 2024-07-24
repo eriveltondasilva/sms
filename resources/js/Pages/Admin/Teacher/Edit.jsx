@@ -31,7 +31,8 @@ export default function PageTeacherEdit({ teacher = {} }) {
           size='xs'
           className='uppercase'
           as={Link}
-          href={route('admin.teachers.users.create', { teacher })}>
+          href={route('admin.teachers.users.create', { teacher })}
+        >
           <Plus className='mr-1 h-4 w-4' />
           usuário
         </Button>

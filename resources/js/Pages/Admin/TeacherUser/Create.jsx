@@ -19,7 +19,8 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
   return (
     <Form
       onSubmit={handleSubmit}
-      autoComplete='false'>
+      autoComplete='false'
+    >
       {/* header teacher */}
       <Form.Header>
         <Form.Title title={pageTitle} />

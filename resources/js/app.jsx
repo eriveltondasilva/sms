@@ -1,3 +1,4 @@
+import 'flowbite'
 import '../sass/global.scss'
 import './bootstrap'
 
@@ -6,7 +7,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot } from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
 
-import 'flowbite'
 import { Flowbite } from 'flowbite-react'
 import { customTheme } from './flowbiteTheme'
 
