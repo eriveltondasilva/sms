@@ -1,7 +1,7 @@
 import { Head, usePage } from '@inertiajs/react'
+import { Drawer } from 'flowbite-react'
 import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
-import { Drawer } from 'flowbite-react'
 
 import { Breadcrumb } from '@/Components/Breadcrumb'
 import { Footer } from '@/Components/Footer'
@@ -32,14 +32,18 @@ export default function AuthLayout({
   const hasCards = statistics.length > 0
   const hasBreadcrumb = breadcrumb.length > 0
 
+  const handleClose = () => setIsOpen(false)
+
   return (
     <div className='relative'>
       <Head title={title} />
 
       {/* # SIDEBAR */}
       <Sidebar
-        isCollapsed={isCollapsed}
-        className='fixed left-0 top-0 z-20 hidden h-dvh md:block'
+        id='sidebar'
+        aria-label='Barra Lateral'
+        collapsed={isCollapsed}
+        className='hidden md:block'
       >
         <Sidebar.Logo
           img={schoolImg}
@@ -53,10 +57,13 @@ export default function AuthLayout({
       {/* # MOBILE SIDEBAR */}
       <Drawer
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={handleClose}
       >
         <Drawer.Items>
-          <Sidebar>
+          <Sidebar
+            id='sidebar-mobile'
+            aria-label='Barra Lateral No Celular'
+          >
             <Sidebar.Logo
               img={schoolImg}
               imgAlt='Escola Viver'
@@ -65,8 +72,9 @@ export default function AuthLayout({
             </Sidebar.Logo>
             <Sidebar.Menu
               items={sidebarItems}
-              onClose={() => setIsOpen(false)}
+              onClose={handleClose}
             />
+            <Sidebar.TriggerClose onClick={handleClose} />
           </Sidebar>
         </Drawer.Items>
       </Drawer>

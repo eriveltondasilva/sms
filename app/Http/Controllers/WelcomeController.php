@@ -12,12 +12,12 @@ class WelcomeController extends Controller
 {
     public function __invoke()
     {
-        $canLogin       = Route::has('login');
-        $canRegister    = Route::has('register');
+        // $canLogin       = Route::has('login');
+        // $canRegister    = Route::has('register');
         $laravelVersion = Application::VERSION;
         $phpVersion     = PHP_VERSION;
 
-        $data = compact('canLogin', 'canRegister', 'laravelVersion', 'phpVersion');
+        $data = compact('laravelVersion', 'phpVersion');
 
         return Inertia::render('Welcome', compact('data'));
     }

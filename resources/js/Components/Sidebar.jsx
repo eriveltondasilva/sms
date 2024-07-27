@@ -1,22 +1,31 @@
 import { Link } from '@inertiajs/react'
 import { Sidebar as FlowbiteSidebar } from 'flowbite-react'
+import { X } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
 //
-function SidebarRoot({ className, isCollapsed, children }) {
+function SidebarRoot({ className, children, ...props }) {
   return (
-    <aside
-      id='sidebar'
-      aria-label='sidebar'
-      className={twMerge('max-h-dvh', className)}
+    <FlowbiteSidebar
+      className={twMerge('fixed z-20 h-dvh', className)}
+      as='aside'
+      {...props}
     >
-      <FlowbiteSidebar collapsed={isCollapsed}>{children}</FlowbiteSidebar>
-    </aside>
+      {children}
+    </FlowbiteSidebar>
   )
 }
 
-function SidebarLogo({ children, ...props }) {
-  return <FlowbiteSidebar.Logo {...props}>{children}</FlowbiteSidebar.Logo>
+function SidebarTriggerClose({ onClick = () => {} }) {
+  return (
+    <button
+      type='button'
+      className='absolute -right-6 top-1 p-2 text-white'
+      onClick={onClick}
+    >
+      <X className='size-8' />
+    </button>
+  )
 }
 
 function SidebarMenu({ items = [], onClose = () => {} }) {
@@ -46,6 +55,7 @@ function SidebarMenu({ items = [], onClose = () => {} }) {
 
 //
 export const Sidebar = Object.assign(SidebarRoot, {
-  Logo: SidebarLogo,
+  Logo: FlowbiteSidebar.Logo,
   Menu: SidebarMenu,
+  TriggerClose: SidebarTriggerClose,
 })
