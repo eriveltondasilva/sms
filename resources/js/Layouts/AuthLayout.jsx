@@ -7,7 +7,6 @@ import { Breadcrumb } from '@/Components/Breadcrumb'
 import { Footer } from '@/Components/Footer'
 import { Header } from '@/Components/Header'
 import { Sidebar } from '@/Components/Sidebar'
-import { StatCards } from '@/Components/StatCards'
 
 import { useSidebarCollapsed } from '@/Hooks/useSidebarCollapsed'
 
@@ -19,20 +18,17 @@ import schoolImg from '../../images/school.png'
 export default function AuthLayout({
   title = '',
   breadcrumb = [],
-  statistics = [],
+  stats = null,
   children,
 }) {
-  const { user = {}, activeYear } = usePage()?.props?.auth || {}
+  const { user, activeYear } = usePage()?.props?.auth || {}
   const { isCollapsed, handleCollapse } = useSidebarCollapsed()
 
   const [isOpen, setIsOpen] = useState(false)
 
   const sidebarItems = SidebarItems[user?.role || 'user']
 
-  const hasCards = statistics.length > 0
   const hasBreadcrumb = breadcrumb.length > 0
-
-  const handleClose = () => setIsOpen(false)
 
   return (
     <div className='relative'>
@@ -57,7 +53,7 @@ export default function AuthLayout({
       {/* # MOBILE SIDEBAR */}
       <Drawer
         open={isOpen}
-        onClose={handleClose}
+        onClose={() => setIsOpen(false)}
       >
         <Drawer.Items>
           <Sidebar
@@ -72,9 +68,9 @@ export default function AuthLayout({
             </Sidebar.Logo>
             <Sidebar.Menu
               items={sidebarItems}
-              onClose={handleClose}
+              onClose={() => setIsOpen(false)}
             />
-            <Sidebar.TriggerClose onClick={handleClose} />
+            <Sidebar.TriggerClose onClick={() => setIsOpen(false)} />
           </Sidebar>
         </Drawer.Items>
       </Drawer>
@@ -111,19 +107,7 @@ export default function AuthLayout({
         )}
 
         {/* # STATISTIC CARDS */}
-        {hasCards && (
-          <StatCards>
-            {statistics.map((item, index) => (
-              <StatCards.Item key={index}>
-                <StatCards.Icon>{item.icon}</StatCards.Icon>
-                <StatCards.Body
-                  title={item.title}
-                  value={item.value}
-                />
-              </StatCards.Item>
-            ))}
-          </StatCards>
-        )}
+        {stats}
 
         {/* # MAIN */}
         <main

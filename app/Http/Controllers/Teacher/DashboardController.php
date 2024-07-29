@@ -12,11 +12,13 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $activeYear = AcademicYear::select('id', 'year')->isActive();
+        $academicYear = AcademicYear::select('id', 'year')->isActive();
+        $activeYear = $academicYear->year;
+
         $teacher = Auth::user()->profile;
 
         $groups = $teacher->groups()
-            ->where('academic_year_id', $activeYear->id)
+            ->where('academic_year_id', $academicYear->id)
             ->withCount('students')
             ->get();
 

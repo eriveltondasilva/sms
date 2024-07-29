@@ -1,43 +1,63 @@
-import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
+import { usePage } from '@inertiajs/react'
+import { BookCopy, Calendar, UsersRound } from 'lucide-react'
 
+import { StatCard } from '@/Components/StatCard'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
-// ====================================
-export default function Dashboard({ data }) {
-  const { activeYear, studentsCount, groupsCount } = data || {}
+//
+export default function Dashboard() {
+  return <></>
+}
 
-  const statistics = [
+function DashboardStats() {
+  const { data } = usePage()?.props || {}
+
+  console.log(data)
+
+  const stats = [
     {
       title: 'Alunos',
       icon: <UsersRound />,
-      value: studentsCount,
-    },
-    {
-      title: 'Turmas',
-      icon: <Users />,
-      value: groupsCount,
+      value: data?.studentsCount,
     },
     {
       title: 'Turmas',
       icon: <BookCopy />,
-      value: groupsCount,
+      value: data?.groupsCount,
     },
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: activeYear?.year,
+      value: data?.activeYear,
     },
   ]
 
+  if (!data) {
+    return null
+  }
+
   return (
-    <AuthLayout
-      title={titles.dashboard}
-      breadcrumb={breadcrumbs.dashboard}
-      statistics={statistics}
-    >
-      teste
-    </AuthLayout>
+    <ul className='grid gap-4 md:grid-cols-3'>
+      {stats.map((stat) => (
+        <StatCard key={stat.title}>
+          <StatCard.Icon icon={stat.icon} />
+          <StatCard.Content>
+            <StatCard.Title title={stat.title} />
+            <StatCard.Value value={stat.value} />
+          </StatCard.Content>
+        </StatCard>
+      ))}
+    </ul>
   )
 }
+
+Dashboard.layout = (page) => (
+  <AuthLayout
+    title={titles.dashboard}
+    breadcrumb={breadcrumbs.dashboard}
+    stats={<DashboardStats />}
+    children={page}
+  />
+)
