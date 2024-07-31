@@ -1,6 +1,6 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { PencilLine, Plus } from 'lucide-react'
+import { Check, PencilLine, Plus } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
@@ -13,13 +13,19 @@ import TeacherFormData from './Partials/TeacherFormData'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageTeacherShow({ teacher = {} }) {
-  const { message } = usePage().props.flash || {}
-
+export default function PageTeacherShow({ teacher = {}, flash }) {
   return (
     <Form>
       {/* message */}
-      {message && <Alert color='success'>{message}</Alert>}
+      {!!flash.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
+          {flash.message}
+        </Alert>
+      )}
 
       {/* header teacher */}
       <Form.Header>

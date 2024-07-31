@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { PencilLine, Plus } from 'lucide-react'
 
@@ -11,13 +11,18 @@ import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageStudentShow({ student = {} }) {
-  const { message } = usePage().props.flash || {}
-
+export default function PageStudentShow({ student = {}, flash = {} }) {
   return (
     <Form>
       {/* flash message */}
-      {message && <Alert color='success'>{message}</Alert>}
+      {!!flash.message && (
+        <Alert
+          color='success'
+          onDismiss
+        >
+          {flash.message}
+        </Alert>
+      )}
 
       {/* header student */}
       <Form.Header>
@@ -30,7 +35,7 @@ export default function PageStudentShow({ student = {} }) {
             size='xs'
             as={Link}
           >
-            <PencilLine className='h-4 w-4' />
+            <PencilLine className='size-4' />
           </Button>
           <Button
             title='Cadastrar novo aluno'
@@ -39,7 +44,7 @@ export default function PageStudentShow({ student = {} }) {
             size='xs'
             as={Link}
           >
-            <Plus className='mx-1 h-4 w-4' />
+            <Plus className='mx-1 size-4' />
           </Button>
         </Button.Group>
       </Form.Header>

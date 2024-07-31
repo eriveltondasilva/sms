@@ -14,8 +14,6 @@ export default function Dashboard() {
 function DashboardStats() {
   const { data } = usePage()?.props || {}
 
-  console.log(usePage().props)
-
   const stats = [
     {
       title: 'Alunos',

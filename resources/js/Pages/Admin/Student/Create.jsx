@@ -1,5 +1,3 @@
-import { Link } from '@inertiajs/react'
-
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
@@ -18,15 +16,10 @@ export default function PageStudentCreate({ flash }) {
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {!!flash?.message && (
+      {!!flash.message && (
         <Alert>
-          <div>{flash?.message}</div>
-          <Link
-            href={flash.link}
-            className='font-semibold underline hover:text-blue-500'
-          >
-            Clique aqui para vê-lo.
-          </Link>
+          <div>{flash.message}</div>
+          <Alert.Link href={flash.link}>Clique aqui para vê-lo.</Alert.Link>
         </Alert>
       )}
 
@@ -36,7 +29,7 @@ export default function PageStudentCreate({ flash }) {
       </Form.Header>
 
       {/* form */}
-      <StudentFormData {...{ errors }} />
+      <StudentFormData errors={errors} />
 
       {/* footer student */}
       <Form.Footer>

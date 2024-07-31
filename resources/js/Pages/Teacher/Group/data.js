@@ -3,7 +3,7 @@ export const titles = {
   index : 'Selecionar Turma',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'teacher.dashboard' },
   { title: titles.index, route: 'teacher.groups.index' },

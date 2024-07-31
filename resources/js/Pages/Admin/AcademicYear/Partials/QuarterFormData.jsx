@@ -1,9 +1,7 @@
 import { Input } from '@/Components/Input'
 
-// ===============================================
+//
 export default function QuarterFormData({ data = {}, errors = {} }) {
-  const isCreateRoute = route().current('*.create')
-
   return (
     <section>
       <Input.Text

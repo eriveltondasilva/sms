@@ -13,7 +13,7 @@ import { formatDate } from '@/Utils/formatDate'
 import AcademicYearNotFound from './Partials/AcademicYearNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageAcademicYearIndex({ academicYears = [] }) {
   const hasAcademicYears = academicYears.length > 0
 
@@ -28,7 +28,7 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
             href={route('admin.academic-years.create')}
             color='blue'
           >
-            <Plus className='mr-2 h-5 w-5' />
+            <Plus className='mr-2 size-5' />
             Cadastrar Ano Letivo
           </Button>
         </Title.Right>
@@ -40,12 +40,11 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
       {!hasAcademicYears && <AcademicYearNotFound />}
 
       {/* Exibe os cards dos anos letivos */}
-      {hasAcademicYears && <AcademicYearCard {...{ academicYears }} />}
+      {hasAcademicYears && <AcademicYearCard academicYears={academicYears} />}
     </>
   )
 }
 
-// ----------------------------------------------
 function AcademicYearCard({ academicYears = [] }) {
   return (
     <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -90,7 +89,7 @@ function AcademicYearCard({ academicYears = [] }) {
   )
 }
 
-// ==============================================
+//
 PageAcademicYearIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

@@ -15,11 +15,9 @@ import { formatId } from '@/Utils/formatId'
 
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageGroupIndex({ data }) {
   const { activeYear, teacherGroups, selectedGroup } = data || {}
-
-  console.log(data)
 
   const pageTitle = `${titles.index} - ${activeYear}`
   const hasGroup = selectedGroup?.students?.length > 0
@@ -63,14 +61,15 @@ export default function PageGroupIndex({ data }) {
       {/* Exibe os cards das turmas */}
       {hasGroup && (
         <StudentTable
-          {...{ selectedGroup, students: selectedGroup.students }}
+          selectedGroup={selectedGroup}
+          students={selectedGroup.students}
         />
       )}
     </>
   )
 }
 
-// -----------------------------------------------
+//
 function StudentTable({ selectedGroup, students = [] }) {
   return (
     <>
@@ -141,7 +140,7 @@ function NotFoundGroup() {
   return <NotFound icon>Nenhum turma selecionada...</NotFound>
 }
 
-// ==============================================
+//
 PageGroupIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

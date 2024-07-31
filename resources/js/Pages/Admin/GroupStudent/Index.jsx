@@ -1,6 +1,6 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
-import { Eye, Plus, Trash2 } from 'lucide-react'
+import { Check, Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
@@ -18,8 +18,8 @@ import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageGroupStudentIndex({ group = {}, students = [] }) {
-  const { message } = usePage().props.flash || {}
+export default function PageGroupStudentIndex({ data, flash }) {
+  const { group = {}, students = [] } = data
 
   const pageTitle = `${titles.index} - ${group.name}`
   const hasStudents = students.length > 0
@@ -27,12 +27,13 @@ export default function PageGroupStudentIndex({ group = {}, students = [] }) {
   return (
     <>
       {/* Mensagem flash */}
-      {message && (
+      {!!flash.message && (
         <Alert
           color='failure'
-          className='mb-4'
+          icon={Check}
+          onDismiss
         >
-          {message}
+          {flash.message}
         </Alert>
       )}
 

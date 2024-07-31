@@ -1,7 +1,7 @@
 import { Input } from '@/Components/Input'
 import { usePage } from '@inertiajs/react'
 
-// ==============================================
+//
 export default function GroupFormData({ data = {}, errors = {} }) {
   const { activeYear } = usePage().props.auth || {}
 
@@ -21,7 +21,7 @@ export default function GroupFormData({ data = {}, errors = {} }) {
       <Input.Select
         id='name'
         label='Turma'
-        defaultValue={data.name || nameSelectValues.at(0)}
+        defaultValue={data.name || nameSelectValues[0]}
         disabled={!!data.name}
         error={errors.name}
         values={nameSelectValues}

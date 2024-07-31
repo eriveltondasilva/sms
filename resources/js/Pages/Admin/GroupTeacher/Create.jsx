@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
@@ -10,13 +10,13 @@ import { Title } from '@/Components/Title'
 import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import { formatId } from '@/Utils/formatId'
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
-import { formatId } from '@/Utils/formatId'
 
 //
-export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
-  const { message } = usePage().props.flash || {}
+export default function PageGroupTeacherCreate({ data, flash }) {
+  const { group = {}, teachers = [] } = data
 
   const pageTitle = `${titles.create} - ${group.name}`
   const hasTeachers = teachers.length > 0
@@ -24,12 +24,12 @@ export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
   return (
     <>
       {/* Mensagem */}
-      {message && (
+      {!!flash.message && (
         <Alert
           color='success'
-          className='mb-4'
+          onDismiss
         >
-          {message}
+          {flash.message}
         </Alert>
       )}
 
@@ -42,7 +42,12 @@ export default function PageGroupTeacherCreate({ group = {}, teachers = [] }) {
       {!hasTeachers && <TeacherNotFound />}
 
       {/* Formulário do professor */}
-      {hasTeachers && <TeacherTable {...{ group, teachers }} />}
+      {hasTeachers && (
+        <TeacherTable
+          group={group}
+          teachers={teachers}
+        />
+      )}
     </>
   )
 }

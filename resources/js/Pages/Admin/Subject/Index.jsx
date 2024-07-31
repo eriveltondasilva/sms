@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
 
 import { Title } from '@/Components/Title'
@@ -8,12 +8,10 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import SubjectNotFound from './Partials/SubjectNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ===============================================
-export default function PageSubjectIndex({ subjects }) {
-  const { activeYear } = usePage().props.auth
-
+//
+export default function PageSubjectIndex({ subjects, auth }) {
   const hasSubjects = subjects.length > 0
-  const pageTitle = `${titles.index} - Ano Letivo: ${activeYear}`
+  const pageTitle = `${titles.index} - Ano Letivo: ${auth.activeYear}`
 
   return (
     <>
@@ -27,7 +25,7 @@ export default function PageSubjectIndex({ subjects }) {
       {!hasSubjects && <SubjectNotFound />}
 
       {/* Exibe os cards das turmas */}
-      {hasSubjects && <CardSubject {...{ subjects }} />}
+      {hasSubjects && <CardSubject subjects={subjects} />}
     </>
   )
 }

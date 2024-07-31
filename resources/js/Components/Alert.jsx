@@ -1,18 +1,17 @@
-import { Check } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Link } from '@inertiajs/react'
+import { useState } from 'react'
 
 import { Alert as FlowbiteAlert } from 'flowbite-react'
 
 //
-export function Alert({ icon = '', time = 0, children, ...props }) {
+function AlertRoot({ onDismiss, children, ...props }) {
   const [isShowed, setIsShowed] = useState(true)
 
   return (
     <>
       {isShowed && (
         <FlowbiteAlert
-          icon={icon || Check}
-          onDismiss={() => setIsShowed(false)}
+          onDismiss={onDismiss && (() => setIsShowed(false))}
           {...props}
         >
           {children}
@@ -21,3 +20,18 @@ export function Alert({ icon = '', time = 0, children, ...props }) {
     </>
   )
 }
+
+function AlertLink({ children, ...props }) {
+  return (
+    <Link
+      className='font-semibold underline hover:text-blue-600'
+      {...props}
+    >
+      {children}
+    </Link>
+  )
+}
+
+export const Alert = Object.assign(AlertRoot, {
+  Link: AlertLink,
+})

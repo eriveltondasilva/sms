@@ -13,7 +13,7 @@ const baseBreadcrumb = [
 
 // prettier-ignore
 export const breadcrumbs = {
-  index : [baseBreadcrumb.at(0), { title: titles.index }],
+  index : [baseBreadcrumb[0], { title: titles.index }],
   create: [...baseBreadcrumb, { title: titles.create }],
   edit  : [...baseBreadcrumb, { title: titles.edit }],
 }

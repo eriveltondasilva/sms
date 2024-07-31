@@ -1,17 +1,16 @@
-import { usePage } from '@inertiajs/react'
-
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import { Check } from 'lucide-react'
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
-  const { message } = usePage().props.flash || {}
+export default function PageTeacherUserEdit({ data, flash }) {
+  const { teacher = {}, user = {} } = data
 
   const formOptions = {
     method: 'PUT',
@@ -28,14 +27,25 @@ export default function PageTeacherUserEdit({ teacher = {}, user = {} }) {
       autoComplete='false'
     >
       {/* flash message */}
-      {message && <Alert color='success'>{message}</Alert>}
+      {!!flash.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
+          {flash.message}
+        </Alert>
+      )}
 
       {/* header teacher */}
       <Form.Header>
         <Form.Title title={pageTitle} />
       </Form.Header>
 
-      <UserFormData {...{ data: user, errors }} />
+      <UserFormData
+        data={user}
+        errors={errors}
+      />
 
       {/* footer teacher */}
       <Form.Footer>

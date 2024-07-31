@@ -1,19 +1,16 @@
-import { Link, usePage } from '@inertiajs/react'
-
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
 import useFormHandler from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
+import { Check } from 'lucide-react'
 import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
 import { breadcrumbs, titles } from './data'
 
-// ===============================================
-export default function PageTeacherCreate() {
-  const { message, teacherId } = usePage().props.flash || {}
-
+//
+export default function PageTeacherCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.teachers.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
@@ -21,15 +18,14 @@ export default function PageTeacherCreate() {
     <>
       <Form onSubmit={handleSubmit}>
         {/* flash message */}
-        {message && (
-          <Alert color='success'>
-            <div>{message}</div>
-            <Link
-              href={route('admin.teachers.show', { teacher: teacherId })}
-              className='font-medium underline'
-            >
-              Clique aqui para vê-lo.
-            </Link>
+        {!!flash.message && (
+          <Alert
+            color='success'
+            icon={Check}
+            onDismiss
+          >
+            <div>{flash.message}</div>
+            <Alert.Link href={flash.link}>Clique aqui para vê-lo.</Alert.Link>
           </Alert>
         )}
 
@@ -39,10 +35,10 @@ export default function PageTeacherCreate() {
         </Form.Header>
 
         {/* form */}
-        <TeacherFormData {...{ errors }} />
+        <TeacherFormData errors={errors} />
 
         {/* address teacher */}
-        <AddressFormData {...{ errors }} />
+        <AddressFormData errors={errors} />
 
         {/* footer teacher */}
         <Form.Footer>
@@ -54,7 +50,7 @@ export default function PageTeacherCreate() {
   )
 }
 
-// ------------------------------------
+//
 PageTeacherCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

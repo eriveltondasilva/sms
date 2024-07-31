@@ -2,17 +2,23 @@
 import { usePage } from '@inertiajs/react'
 import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
 
+import { Alert } from '@/Components/Alert'
 import { StatCard } from '@/Components/StatCard'
+
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 
 //
-export default function Dashboard({ message }) {
-  console.log(usePage().props)
+export default function Dashboard() {
   return (
     <>
-      {/* {message && <Alert>{message}</Alert>} */}
+      <Alert
+        color='failure'
+        className='mb-4'
+      >
+        olá, eu sou administrador!
+      </Alert>
       <div>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias
         blanditiis minima quia qui earum enim harum nostrum iste ipsum pariatur

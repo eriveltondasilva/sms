@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Plus } from 'lucide-react'
+import { Check, Plus } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
@@ -11,9 +11,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
-export default function PageGroupEdit({ group = {} }) {
-  const { message } = usePage().props.flash || {}
-
+export default function PageGroupEdit({ group = {}, flash = {} }) {
   const formOptions = {
     method: 'PUT',
     route: 'admin.groups.update',
@@ -24,7 +22,15 @@ export default function PageGroupEdit({ group = {} }) {
   return (
     <Form onSubmit={handleSubmit}>
       {/* Mensagem flash */}
-      {message && <Alert color='success'>{message}</Alert>}
+      {!!flash.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
+          {flash.message}
+        </Alert>
+      )}
 
       {/* Form header */}
       <Form.Header>

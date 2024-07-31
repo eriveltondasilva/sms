@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Check } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
@@ -9,9 +9,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
-export default function PageGroupCreate() {
-  const { message, groupId } = usePage().props.flash || {}
-
+export default function PageGroupCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.groups.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
@@ -19,15 +17,14 @@ export default function PageGroupCreate() {
     <section>
       <Form onSubmit={handleSubmit}>
         {/* Mensagem flash */}
-        {message && (
-          <Alert color='success'>
-            <div>{message}</div>
-            <Link
-              href={route('admin.groups.edit', { group: groupId })}
-              className='font-medium underline'
-            >
-              Clique aqui para vê-lo.
-            </Link>
+        {!!flash.message && (
+          <Alert
+            color='success'
+            icon={Check}
+            onDismiss
+          >
+            <div>{flash.message}</div>
+            <Alert.Link href={flash.link}>Clique aqui para vê-la.</Alert.Link>
           </Alert>
         )}
 
@@ -37,7 +34,7 @@ export default function PageGroupCreate() {
         </Form.Header>
 
         {/* form */}
-        <GroupFormData {...{ errors }} />
+        <GroupFormData errors={errors} />
 
         {/* footer teacher */}
         <Form.Footer>

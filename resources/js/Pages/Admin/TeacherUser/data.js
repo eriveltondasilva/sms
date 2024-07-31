@@ -4,7 +4,7 @@ export const titles = {
   edit  : 'Editar usuário',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
   { title: 'Listar professores', route: 'admin.teachers.index' },

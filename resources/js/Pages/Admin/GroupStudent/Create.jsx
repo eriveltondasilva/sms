@@ -1,6 +1,6 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
-import { Eye, Plus, Search } from 'lucide-react'
+import { Check, Eye, Plus, Search } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
@@ -21,8 +21,8 @@ import useFormHandler from '@/Hooks/useFormHandler'
 import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
-export default function PageGroupStudentCreate({ group = {}, students = [] }) {
-  const { message } = usePage().props.flash || {}
+export default function PageGroupStudentCreate({ data, flash }) {
+  const { group = {}, students = [] } = data
   const searchId = route().params.search || ''
 
   const pageTitle = `${titles.create} - ${group.name}`
@@ -41,12 +41,13 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
   return (
     <>
       {/* Mensagem flash */}
-      {message && (
+      {!!flash.message && (
         <Alert
           color='success'
-          className='mb-4'
+          icon={Check}
+          onDismiss
         >
-          {message}
+          {flash.message}
         </Alert>
       )}
 
@@ -71,7 +72,7 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
             color='blue'
             disabled={isLoading}
           >
-            <Search className='h-5 w-5' />
+            <Search className='size-5' />
           </Button>
         </SearchFilter.Left>
       </SearchFilter>
@@ -80,10 +81,15 @@ export default function PageGroupStudentCreate({ group = {}, students = [] }) {
       {!hasStudents && <StudentNotFound />}
 
       {/* Formulário do aluno */}
-      {hasStudents && <StudentTable {...{ group, students: students.data }} />}
+      {hasStudents && (
+        <StudentTable
+          group={group}
+          students={students.data}
+        />
+      )}
 
       {/* Pagination */}
-      {hasPagination && <StudentPagination {...{ students }} />}
+      {hasPagination && <StudentPagination students={students} />}
     </>
   )
 }

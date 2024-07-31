@@ -6,7 +6,7 @@ export const titles = {
   show  : 'Visualizar ano letivo',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
   { title: titles.index, route: 'admin.academic-years.index' },

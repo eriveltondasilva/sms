@@ -6,6 +6,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
 
+//
 export default function PageTeacherUserCreate({ teacher = {} }) {
   const formOptions = {
     method: 'POST',
@@ -27,7 +28,7 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
       </Form.Header>
 
       {/* form data */}
-      <UserFormData {...{ errors }} />
+      <UserFormData errors={errors} />
 
       {/* footer teacher */}
       <Form.Footer>
@@ -38,7 +39,7 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
   )
 }
 
-// ------------------------------------
+//
 PageTeacherUserCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

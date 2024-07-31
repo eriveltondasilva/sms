@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Check } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
@@ -9,10 +9,8 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import AcademicYearFormData from './Partials/AcademicYearFormData'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
-export default function PageAcademicYearCreate() {
-  const { message, academicYearId } = usePage().props.flash || {}
-
+//
+export default function PageAcademicYearCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.academic-years.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
@@ -20,17 +18,14 @@ export default function PageAcademicYearCreate() {
     <section>
       <Form onSubmit={handleSubmit}>
         {/* Mensagem flash */}
-        {message && (
-          <Alert color='success'>
-            <div>{message}</div>
-            <Link
-              href={route('admin.academic-years.edit', {
-                academicYear: academicYearId,
-              })}
-              className='font-medium underline'
-            >
-              Clique aqui para vê-lo.
-            </Link>
+        {!!flash.message && (
+          <Alert
+            icon={Check}
+            color='success'
+            onDismiss
+          >
+            <div>{flash.message}</div>
+            <Alert.Link href={flash.link}>Clique aqui para vê-lo.</Alert.Link>
           </Alert>
         )}
 
@@ -40,7 +35,7 @@ export default function PageAcademicYearCreate() {
         </Form.Header>
 
         {/* Academic year form data */}
-        <AcademicYearFormData {...{ errors }} />
+        <AcademicYearFormData errors={errors} />
 
         {/* Form footer */}
         <Form.Footer>

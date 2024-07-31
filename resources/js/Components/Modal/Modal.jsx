@@ -3,7 +3,6 @@ import { twJoin } from 'tailwind-merge'
 
 //
 export function Modal({ show, onClose, children }) {
-  console.log('teste')
   return (
     <Dialog
       open={show}

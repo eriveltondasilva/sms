@@ -1,6 +1,6 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Badge, Button } from 'flowbite-react'
-import { AlertCircle, Plus } from 'lucide-react'
+import { AlertCircle, Check, Plus } from 'lucide-react'
 import { useState } from 'react'
 
 import { Alert } from '@/Components/Alert'
@@ -13,8 +13,8 @@ import AcademicYearFormData from './Partials/AcademicYearFormData'
 import AcademicYearModel from './Partials/AcademicYearModel'
 import { breadcrumbs, titles } from './data'
 
-export default function PageAcademicYearEdit({ academicYear = {} }) {
-  const { message } = usePage().props.flash || {}
+//
+export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
   const [showModel, setShowModel] = useState(false)
 
   const formOptions = {
@@ -24,12 +24,19 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
   }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
-  const handleToggleModal = () => {}
   return (
     <>
       <Form onSubmit={handleSubmit}>
         {/* flash message */}
-        {message && <Alert color='success'>{message}</Alert>}
+        {!!flash.message && (
+          <Alert
+            color='success'
+            icon={Check}
+            onDismiss
+          >
+            {flash.message}
+          </Alert>
+        )}
 
         {/* Form header */}
         <Form.Header>
@@ -40,7 +47,7 @@ export default function PageAcademicYearEdit({ academicYear = {} }) {
             size='xs'
             as={Link}
           >
-            <Plus className='h-4 w-4' />
+            <Plus className='size-4' />
           </Button>
         </Form.Header>
 

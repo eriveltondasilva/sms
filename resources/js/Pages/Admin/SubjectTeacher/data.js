@@ -4,7 +4,7 @@ export const titles = {
   create: 'Adicionar professor',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
   { title: 'Listar disciplinas', route: 'admin.subjects.index' },

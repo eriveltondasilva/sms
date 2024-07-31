@@ -17,15 +17,13 @@ import { formatId } from '@/Utils/formatId'
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ===============================================
+//
 export default function PageTeacherIndex({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
   const hasTeachers = teachers.data.length > 0
   const hasPagination = teachers.total > teachers.data.length
-
-  const handleChange = (e) => setSearch(e.target.value)
 
   const formOptions = { method: 'GET', route: 'admin.teachers.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
@@ -42,7 +40,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
             color='blue'
             size='sm'
           >
-            <Plus className='mr-1 h-5 w-5' />
+            <Plus className='mr-1 size-5' />
             Cadastrar Professor
           </Button>
         </Title.Right>
@@ -58,7 +56,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
             className='mb-0'
             placeholder='Nome ou ID do professor...'
             defaultValue={search}
-            onChange={handleChange}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <Button.Group>
             <Button
@@ -66,7 +64,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
               color='blue'
               disabled={isLoading || !search}
             >
-              <Search className='mr-2 h-5 w-5' />
+              <Search className='mr-2 size-5' />
             </Button>
             <Button
               as={Link}
@@ -74,7 +72,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
               color='light'
               disabled={isLoading}
             >
-              <Undo2 className='h-5 w-5' />
+              <Undo2 className='size-5' />
             </Button>
           </Button.Group>
         </SearchFilter.Left>
@@ -87,12 +85,11 @@ export default function PageTeacherIndex({ teachers = [] }) {
       {hasTeachers && <TeacherTable teachers={teachers.data} />}
 
       {/* Pagination */}
-      {hasPagination && <TeacherPagination {...{ teachers }} />}
+      {hasPagination && <TeacherPagination teachers={teachers} />}
     </>
   )
 }
 
-// -----------------------------------------------
 function TeacherTable({ teachers = [] }) {
   return (
     <Table>
@@ -148,7 +145,6 @@ function TeacherTable({ teachers = [] }) {
   )
 }
 
-// -----------------------------------------------
 function TeacherPagination({ teachers = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = teachers
 
@@ -167,7 +163,7 @@ function TeacherPagination({ teachers = {} }) {
   )
 }
 
-// ===============================================
+//
 PageTeacherIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

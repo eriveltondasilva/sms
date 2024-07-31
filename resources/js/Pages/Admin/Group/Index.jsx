@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
 import { PencilLine, Plus } from 'lucide-react'
 
@@ -9,11 +9,9 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import GroupNotFound from './Partials/GroupNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
-export default function PageGroupIndex({ groups = [] }) {
-  const { activeYear } = usePage().props.auth || ''
-
-  const pageTitle = `${titles.index} - ${activeYear}`
+//
+export default function PageGroupIndex({ groups = [], auth = {} }) {
+  const pageTitle = `${titles.index} - ${auth.activeYear}`
   const hasGroups = groups.length > 0
 
   return (
@@ -40,12 +38,11 @@ export default function PageGroupIndex({ groups = [] }) {
       {!hasGroups && <GroupNotFound />}
 
       {/* Exibe os cards das turmas */}
-      {hasGroups && <GroupCard {...{ groups }} />}
+      {hasGroups && <GroupCard groups={groups} />}
     </>
   )
 }
 
-// ----------------------------------------------
 function GroupCard({ groups = [] }) {
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -104,7 +101,7 @@ function GroupCard({ groups = [] }) {
   )
 }
 
-// ==============================================
+//
 PageGroupIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

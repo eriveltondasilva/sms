@@ -1,15 +1,19 @@
 // import Calendar from '@/Components/Calendar'
-import { usePage } from '@inertiajs/react'
-
-import { Alert } from '@/Components/Alert'
 import AuthLayout from '@/Layouts/AuthLayout'
+import { Alert } from '@/Components/Alert'
 
 import { breadcrumbs, titles } from './data'
 
+//
 export default function Dashboard() {
-  const { message } = usePage().props.flash
-
-  return <>{message && <Alert>{message}</Alert>}</>
+  return (
+    <Alert
+      color='danger'
+      icon=''
+    >
+      Alguma coisa deu errado. Você não tem permissão para acessar esta página.
+    </Alert>
+  )
 }
 
 //

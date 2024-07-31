@@ -6,7 +6,7 @@ export const titles = {
   show  : 'Visualizar aluno',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
   { title: titles.index, route: 'admin.students.index' },

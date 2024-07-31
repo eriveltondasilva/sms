@@ -18,15 +18,13 @@ import { getGenderName } from '@/Utils/getGenderName'
 import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageStudentIndex({ students = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
-
-  const handleChange = (e) => setSearch(e.target.value)
 
   const formOptions = { method: 'GET', route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
@@ -43,7 +41,7 @@ export default function PageStudentIndex({ students = [] }) {
             color='blue'
             size='sm'
           >
-            <Plus className='mr-1 h-5 w-5' />
+            <Plus className='mr-1 size-5' />
             Cadastrar Aluno
           </Button>
         </Title.Right>
@@ -59,7 +57,7 @@ export default function PageStudentIndex({ students = [] }) {
             className='mb-0'
             placeholder='Nome ou ID do aluno...'
             defaultValue={search}
-            onChange={handleChange}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <Button.Group>
             <Button
@@ -67,7 +65,7 @@ export default function PageStudentIndex({ students = [] }) {
               color='blue'
               disabled={isLoading || !search}
             >
-              <Search className='mr-2 h-5 w-5' />
+              <Search className='mr-2 size-5' />
             </Button>
             <Button
               as={Link}
@@ -75,7 +73,7 @@ export default function PageStudentIndex({ students = [] }) {
               color='light'
               disabled={isLoading}
             >
-              <Undo2 className='h-5 w-5' />
+              <Undo2 className='size-5' />
             </Button>
           </Button.Group>
         </SearchFilter.Left>
@@ -88,12 +86,11 @@ export default function PageStudentIndex({ students = [] }) {
       {hasStudents && <StudentTable students={students.data} />}
 
       {/* Student Pagination */}
-      {hasPagination && <StudentPagination {...{ students }} />}
+      {hasPagination && <StudentPagination students={students} />}
     </>
   )
 }
 
-// ----------------------------------------------
 function StudentTable({ students = [] }) {
   return (
     <Table>
@@ -129,7 +126,7 @@ function StudentTable({ students = [] }) {
                   title='Visualizar aluno'
                   size='xs'
                 >
-                  <Eye className='h-4 w-4' />
+                  <Eye className='size-4' />
                 </Button>
                 <Button
                   as={Link}
@@ -138,7 +135,7 @@ function StudentTable({ students = [] }) {
                   title='Editar aluno'
                   size='xs'
                 >
-                  <PencilLine className='mx-1 h-4 w-4' />
+                  <PencilLine className='mx-1 size-4' />
                 </Button>
               </Button.Group>
             </Table.RowCell>
@@ -149,7 +146,6 @@ function StudentTable({ students = [] }) {
   )
 }
 
-// ----------------------------------------------
 function StudentPagination({ students = {} }) {
   const { total, from, to, next_page_url, prev_page_url } = students
 
@@ -168,7 +164,7 @@ function StudentPagination({ students = {} }) {
   )
 }
 
-// ==============================================
+//
 PageStudentIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

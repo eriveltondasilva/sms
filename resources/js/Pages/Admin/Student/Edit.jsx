@@ -6,7 +6,7 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageStudentEdit({ student = {} }) {
   const formOptions = {
     method: 'PUT',
@@ -23,7 +23,10 @@ export default function PageStudentEdit({ student = {} }) {
       </Form.Header>
 
       {/* form student */}
-      <StudentFormData {...{ data: student, errors }} />
+      <StudentFormData
+        errors={errors}
+        data={student}
+      />
 
       {/* footer student */}
       <Form.Footer>
@@ -34,7 +37,7 @@ export default function PageStudentEdit({ student = {} }) {
   )
 }
 
-// ==============================================
+//
 PageStudentEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

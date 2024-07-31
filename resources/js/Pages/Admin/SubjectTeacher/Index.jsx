@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button, Tooltip } from 'flowbite-react'
 import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
@@ -14,24 +14,21 @@ import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageSubjectTeacherIndex({
-  subject = {},
-  teachers = [],
-}) {
-  const { message } = usePage().props.flash || {}
+export default function PageSubjectTeacherIndex({ data, flash }) {
+  const { subject = {}, teachers = [] } = data
 
   const pageTitle = `${titles.index} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem */}
-      {message && (
+      {/* Mensagem flash*/}
+      {!!flash.message && (
         <Alert
           color='failure'
-          className='mb-4'
+          onDismiss
         >
-          {message}
+          {flash.message}
         </Alert>
       )}
 
@@ -57,7 +54,12 @@ export default function PageSubjectTeacherIndex({
       {!hasTeachers && <TeacherNotFound />}
 
       {/* Tabela de professores */}
-      {hasTeachers && <TableTeacher {...{ subject, teachers }} />}
+      {hasTeachers && (
+        <TableTeacher
+          subject={subject}
+          teachers={teachers}
+        />
+      )}
     </>
   )
 }

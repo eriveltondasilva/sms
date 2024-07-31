@@ -43,7 +43,7 @@ class GroupController extends Controller
         $validatedData['academic_year_id'] = $activeYearId;
         $group = Group::create($validatedData);
 
-        $groupUrl = route('admin.groups.show', $group->id);
+        $groupUrl = route('admin.groups.edit', $group->id);
 
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 

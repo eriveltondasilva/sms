@@ -4,7 +4,7 @@ export const titles = {
   create: 'Adicionar aluno',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
   { title: 'Listar turmas', route: 'admin.groups.index' },

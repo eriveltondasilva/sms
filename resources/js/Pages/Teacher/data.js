@@ -4,7 +4,7 @@ export const titles = {
   calendar : 'Calendário',
 }
 
-// ------------------------------------
+// prettier-ignore
 const baseBreadcrumb = [{ title: titles.dashboard, route: 'teacher.dashboard' }]
 
 // prettier-ignore

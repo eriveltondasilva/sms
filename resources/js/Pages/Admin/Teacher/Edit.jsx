@@ -12,7 +12,7 @@ import TeacherFormData from './Partials/TeacherFormData'
 
 import { breadcrumbs, titles } from './data'
 
-// ==============================================
+//
 export default function PageTeacherEdit({ teacher = {} }) {
   const formOptions = {
     method: 'PUT',
@@ -33,16 +33,22 @@ export default function PageTeacherEdit({ teacher = {} }) {
           as={Link}
           href={route('admin.teachers.users.create', { teacher })}
         >
-          <Plus className='mr-1 h-4 w-4' />
+          <Plus className='mr-1 size-4' />
           usuário
         </Button>
       </Form.Header>
 
       {/* form */}
-      <TeacherFormData {...{ data: teacher, errors }} />
+      <TeacherFormData
+        data={teacher}
+        errors={errors}
+      />
 
       {/* address teacher */}
-      <AddressFormData {...{ data: teacher, errors }} />
+      <AddressFormData
+        data={teacher}
+        errors={errors}
+      />
 
       {/* footer teacher */}
       <Form.Footer>
@@ -53,7 +59,7 @@ export default function PageTeacherEdit({ teacher = {} }) {
   )
 }
 
-// ==============================================
+//
 PageTeacherEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}
