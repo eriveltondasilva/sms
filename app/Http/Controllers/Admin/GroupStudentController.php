@@ -17,41 +17,40 @@ class GroupStudentController extends Controller
             ->orderBy('students.name')
             ->get();
 
-        return inertia('Admin/GroupStudent/Index', compact('group', 'students'));
+        $data = compact('group', 'students');
+
+        return inertia('Admin/GroupStudent/Index', compact('data'));
     }
 
     public function create(Request $request, Group $group)
     {
         $searchTerm = $request->query('search', '');
-
         $activeYear = AcademicYear::isActive();
 
-        $students = Student::select('id', 'name', 'gender')
+        $studentsQuery = Student::select('id', 'name', 'gender')
             ->whereDoesntHave('groups', function (Builder $query) use ($activeYear) {
                 $query->where('academic_year_id', $activeYear->id);
             })
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
+                $query
+                    ->where('id', $searchTerm)
+                    ->orWhere('name', 'like', "%{$searchTerm}%");
             })
             ->orderBy('name');
 
-        $students = $students->paginate(20);
+        $students = $studentsQuery->paginate(20);
+        $data = compact('group', 'students');
 
-        return inertia('Admin/GroupStudent/Create', compact('group', 'students'));
+        return inertia('Admin/GroupStudent/Create', compact('data'));
     }
 
     //# Actions
-
     public function store(Group $group, Student $student)
     {
         $group->students()->attach($student);
         $group->load('students');
 
-        $message = sprintf(
-            'Aluno(a) %s adicionado(a) à turma do %s.',
-            $student->name,
-            $group->name
-        );
+        $message = sprintf('Aluno(a) %s adicionado(a) à turma do %s.', $student->name, $group->name);
 
         return back()->with('message', $message);
     }
@@ -61,11 +60,7 @@ class GroupStudentController extends Controller
         $group->students()->detach($student);
         $group->load('students');
 
-        $message = sprintf(
-            'Aluno(a) %s removido(a) da turma do %s.',
-            $student->name,
-            $group->name
-        );
+        $message = sprintf('Aluno(a) %s removido(a) da turma do %s.', $student->name, $group->name);
 
         return back()->with('message', $message);
     }

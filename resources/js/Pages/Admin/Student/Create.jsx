@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
@@ -11,21 +11,19 @@ import StudentFormData from './Partials/StudentFormData'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageStudentCreate() {
-  const { message, studentId } = usePage().props.flash || {}
-
+export default function PageStudentCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.students.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
     <Form onSubmit={handleSubmit}>
       {/* flash message */}
-      {message && (
-        <Alert color='success'>
-          <div>{message}</div>
+      {!!flash?.message && (
+        <Alert>
+          <div>{flash?.message}</div>
           <Link
-            href={route('admin.students.show', { student: studentId })}
-            className='font-medium underline'
+            href={flash.link}
+            className='font-semibold underline hover:text-blue-500'
           >
             Clique aqui para vê-lo.
           </Link>

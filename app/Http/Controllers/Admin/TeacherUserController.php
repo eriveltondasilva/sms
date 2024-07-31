@@ -16,7 +16,9 @@ class TeacherUserController extends Controller
         $user = $teacher->user;
 
         if ($user->exists()) {
-            return to_route('admin.teachers.users.edit', compact('teacher', 'user'));
+            $data = compact('teacher', 'user');
+
+            return to_route('admin.teachers.users.edit', compact('data'));
         }
 
         return inertia('Admin/TeacherUser/Create', compact('teacher'));
@@ -24,11 +26,12 @@ class TeacherUserController extends Controller
 
     public function edit(Teacher $teacher, User $user)
     {
-        return inertia('Admin/TeacherUser/Edit', compact('teacher', 'user'));
+        $data = compact('teacher', 'user');
+
+        return inertia('Admin/TeacherUser/Edit', compact('data'));
     }
 
-    //# ACTIONS
-
+    // # ACTIONS
     public function store(Request $request, Teacher $teacher)
     {
         $validatedData = $request->validate([

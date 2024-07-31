@@ -9,6 +9,7 @@ import { breadcrumbs, titles } from './data'
 
 //
 export default function Dashboard({ message }) {
+  console.log(usePage().props)
   return (
     <>
       {/* {message && <Alert>{message}</Alert>} */}

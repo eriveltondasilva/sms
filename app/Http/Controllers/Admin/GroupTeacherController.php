@@ -16,7 +16,9 @@ class GroupTeacherController extends Controller
             ->orderBy('teachers.name')
             ->get();
 
-        return inertia('Admin/GroupTeacher/Index', compact('group', 'teachers'));
+        $data = compact('group', 'teachers');
+
+        return inertia('Admin/GroupTeacher/Index', compact('data'));
     }
 
     public function create(Group $group)
@@ -28,21 +30,18 @@ class GroupTeacherController extends Controller
             ->orderBy('name')
             ->get();
 
-        return inertia('Admin/GroupTeacher/Create', compact('group', 'teachers'));
+        $data = compact('group', 'teachers');
+
+        return inertia('Admin/GroupTeacher/Create', compact('data'));
     }
 
-    //# Actions
-
+    // # Actions
     public function store(Group $group, Teacher $teacher)
     {
         $group->teachers()->attach($teacher);
         $group->load('teachers');
 
-        $message = sprintf(
-            'Professor(a) %s adicionado(a) à turma do %s.',
-            $teacher->name,
-            $group->name
-        );
+        $message = sprintf('Professor(a) %s adicionado(a) à turma do %s.', $teacher->name, $group->name);
 
         return back()->with('message', $message);
     }
@@ -52,11 +51,7 @@ class GroupTeacherController extends Controller
         $group->teachers()->detach($teacher);
         $group->load('teachers');
 
-        $message = sprintf(
-            'Professor(a) %s removido(a) da turma do %s.',
-            $teacher->name,
-            $group->name
-        );
+        $message = sprintf('Professor(a) %s removido(a) da turma do %s.', $teacher->name, $group->name);
 
         return back()->with('message', $message);
     }

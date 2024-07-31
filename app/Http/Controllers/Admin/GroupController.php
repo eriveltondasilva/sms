@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear,Group};
 use App\Http\Requests\GroupRequest;
+use App\Models\{AcademicYear,Group};
 use Illuminate\Database\Eloquent\Builder;
 
 class GroupController extends Controller
@@ -30,8 +30,7 @@ class GroupController extends Controller
         return inertia('Admin/Group/Edit', compact('group'));
     }
 
-    //# ACTIONS
-
+    // # ACTIONS
     public function store(GroupRequest $request)
     {
         $activeYearId = AcademicYear::isActive()->id;
@@ -44,15 +43,16 @@ class GroupController extends Controller
         $validatedData['academic_year_id'] = $activeYearId;
         $group = Group::create($validatedData);
 
+        $groupUrl = route('admin.groups.show', $group->id);
+
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 
-        return back()->with('message', $message)->with('groupId', $group->id);
+        return back()->with(['message' => $message, 'link' => $groupUrl]);
     }
 
     public function update(GroupRequest $request, Group $group)
     {
-        $validatedData = $request->validated();
-        $group->update($validatedData);
+        $group->update($request->validated());
 
         $message = sprintf('Turma do %s atualizada com sucesso!', $group->name);
 

@@ -26,27 +26,27 @@ class HandleInertiaRequests extends Middleware
 
     private function getAuthUserData(Request $request): array
     {
-        $user =  $request->user();
+        $user = $request->user();
 
         if (!$user) {
-            return ['user' => null];
+            return [
+                'activeYear' => null,
+                'user'       => null,
+            ];
         }
 
-        $user->load('roles');
-
-        $userData = $user->only('id', 'username', 'email', 'avatar_url');
-        $role     = $user->roles->pluck('name')->first() ?? 'user';
-
+        $userData   = $user->only(['id', 'username', 'email', 'avatar_url']);
+        $role       = $user->getRoleNames()[0];
         $activeYear = AcademicYear::IsActive()->year;
 
         return [
-            'user'       => array_merge($userData, ['role' => $role]),
             'activeYear' => $activeYear,
+            'user'       => [...$userData, 'role' => $role],
         ];
     }
 
     private function getFlashData(Request $request): array
     {
-        return $request->session()->only(['status', 'message']);
+        return $request->session()->only(['message', 'link']);
     }
 }
