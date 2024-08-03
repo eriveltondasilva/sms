@@ -43,7 +43,12 @@ class User extends Authenticatable
     //# SCOPES
     public function scopeIsActive(Build $query)
     {
-        return $query->where('is_active', true);
+        return $query->where('is_active', 1);
+    }
+
+    public function scopeIsNotActive(Builder $query)
+    {
+        return $query->where('is_active', 0);
     }
 
     public function scopeUpdatedWithinDay(Builder $query)
@@ -52,7 +57,7 @@ class User extends Authenticatable
     }
 
 
-    //# RELATIONS
+    // # RELATIONS
     public function profile(): MorphTo
     {
         return $this->morphTo();
