@@ -1,7 +1,7 @@
 import { router, usePage } from '@inertiajs/react'
 import { useState } from 'react'
 
-// ===============================================
+//
 export default function useFormHandler({
   route: url = '',
   method = '',
@@ -11,21 +11,24 @@ export default function useFormHandler({
   const [isLoading, setIsLoading] = useState(false)
   const { errors } = usePage().props || {}
 
-  const handleSubmit = async (e) => {
+  const validateInputs = () => {
+    if (!url) throw new Error('URL não informada.')
+    if (!method) throw new Error('Método não informado.')
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     try {
-      if (!url) throw new Error('url não informada.')
-
-      if (!method) throw new Error('method não informada.')
+      validateInputs()
 
       const formData = new FormData(e.target)
       const data = Object.fromEntries(formData.entries())
 
-      await router.visit(route(url, params), {
+      router.visit(route(url, params), {
         data,
-        method: method.toLowerCase(),
-        onStart: () => setIsLoading(true),
+        method: method.toLowerCase() || 'get',
+        onBefore: () => setIsLoading(true),
         onFinish: () => setIsLoading(false),
         ...options,
       })

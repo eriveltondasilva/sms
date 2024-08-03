@@ -1,7 +1,7 @@
 import { router } from '@inertiajs/react'
 import { useState } from 'react'
 
-// ===============================================
+//
 export default function useActionHandler({
   route: url = '',
   method = '',
@@ -9,15 +9,18 @@ export default function useActionHandler({
 }) {
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleAction = async (params = {}) => {
+  const validateInputs = () => {
+    if (!url) throw new Error('URL não informada.')
+    if (!method) throw new Error('Método não informado.')
+  }
+
+  const handleAction = (params = {}) => {
     try {
-      if (!url) throw new Error('url não informada.')
+      validateInputs()
 
-      if (!method) throw new Error('method não informada.')
-
-      await router.visit(route(url, params), {
-        method: method.toLowerCase(),
-        onStart: () => setIsLoading(true),
+      router.visit(route(url, params), {
+        method: method.toLowerCase() || 'get',
+        onBefore: () => setIsLoading(true),
         onFinish: () => setIsLoading(false),
         ...options,
       })
