@@ -65,9 +65,7 @@ class TeacherUserController extends Controller
             $rules['password'] = ['required', 'confirmed', Password::defaults()];
         }
 
-        $validatedData = $request->validate($rules);
-        $user->update($validatedData);
-
+        $user->update($request->validate($rules));
         $message = 'Usuário atualizado com sucesso';
 
         return back()->with('message', $message);

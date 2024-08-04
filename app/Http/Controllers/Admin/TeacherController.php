@@ -13,12 +13,9 @@ class TeacherController extends Controller
     {
         $searchTerm = $request->query('search', '');
 
-        $teachers = Teacher::query()
-            ->select('id', 'name', 'email')
+        $teachers = Teacher::select('id', 'name', 'email')
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
-                $query
-                    ->where('id', $searchTerm)
-                    ->orWhere('name', 'like', "%{$searchTerm}%");
+                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderByDesc('id')
             ->paginate(10);

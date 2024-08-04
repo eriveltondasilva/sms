@@ -78,7 +78,7 @@ export default function AuthLayout({
       <section
         className={twJoin(
           'flex min-h-dvh max-w-full flex-col',
-          'space-y-2 px-4 py-2',
+          'space-y-2 px-2 py-2 sm:px-4',
           isCollapsed ? 'md:ml-16' : 'md:ml-64'
         )}
       >

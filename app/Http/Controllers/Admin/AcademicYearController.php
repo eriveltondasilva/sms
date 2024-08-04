@@ -10,10 +10,7 @@ class AcademicYearController extends Controller
 {
     public function index()
     {
-        $academicYears = AcademicYear::latest('year')
-            ->take(8)
-            ->withCount('groups')
-            ->get();
+        $academicYears = AcademicYear::latest('year')->take(8)->withCount('groups')->get();
 
         return inertia('Admin/AcademicYear/Index', compact('academicYears'));
     }
@@ -47,6 +44,7 @@ class AcademicYearController extends Controller
 
         $academicYear = AcademicYear::create($request->validated());
         $academicYear->groups()->createMany($quarters);
+
         $academicYearUrl = route('admin.academic-years.edit', $academicYear->id);
         $message = sprintf('Ano letivo de %d criado com sucesso!', $academicYear->year);
 
@@ -56,7 +54,6 @@ class AcademicYearController extends Controller
     public function update(AcademicYearRequest $request, AcademicYear $academicYear)
     {
         $academicYear->update($request->validated());
-
         $message = sprintf('O ano letivo %d foi atualizado com sucesso!', $academicYear->year);
 
         return back()->with('message', $message);

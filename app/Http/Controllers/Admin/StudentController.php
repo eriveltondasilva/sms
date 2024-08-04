@@ -12,12 +12,10 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $searchTerm = $request->query('search', '');
-        
+
         $students = Student::select('id', 'name', 'gender')
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
-                $query
-                    ->where('id', $searchTerm)
-                    ->orWhere('name', 'like', "%{$searchTerm}%");
+                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderByDesc('id')
             ->paginate(20);

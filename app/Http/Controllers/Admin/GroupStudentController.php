@@ -32,9 +32,7 @@ class GroupStudentController extends Controller
                 $query->where('academic_year_id', $activeYear->id);
             })
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
-                $query
-                    ->where('id', $searchTerm)
-                    ->orWhere('name', 'like', "%{$searchTerm}%");
+                $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
             })
             ->orderBy('name');
 

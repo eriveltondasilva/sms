@@ -44,7 +44,6 @@ class GroupController extends Controller
         $group = Group::create($validatedData);
 
         $groupUrl = route('admin.groups.edit', $group->id);
-
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 
         return back()->with(['message' => $message, 'link' => $groupUrl]);
@@ -53,7 +52,6 @@ class GroupController extends Controller
     public function update(GroupRequest $request, Group $group)
     {
         $group->update($request->validated());
-
         $message = sprintf('Turma do %s atualizada com sucesso!', $group->name);
 
         return back()->with('message', $message);

@@ -10,15 +10,11 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function Dashboard() {
+export default function Dashboard({ flash }) {
   return (
     <>
-      <Alert
-        color='failure'
-        className='mb-4'
-      >
-        olá, eu sou administrador!
-      </Alert>
+      {flash?.message && <Alert className='mb-4'>{flash?.message}</Alert>}
+
       <div>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias
         blanditiis minima quia qui earum enim harum nostrum iste ipsum pariatur
@@ -67,8 +63,9 @@ function DashboardStats() {
     return null
   }
 
+  // grid grid-cols-2 gap-4 lg:grid-cols-4
   return (
-    <ul className='grid grid-cols-2 gap-4 lg:grid-cols-4'>
+    <ul className='grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4'>
       {stats.map((stat) => (
         <StatCard key={stat.title}>
           <StatCard.Icon icon={stat.icon} />
