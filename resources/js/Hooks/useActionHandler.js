@@ -2,7 +2,7 @@ import { router } from '@inertiajs/react'
 import { useState } from 'react'
 
 //
-export default function useActionHandler({
+export function useActionHandler({
   route: url = '',
   method = '',
   options = {},

@@ -9,7 +9,7 @@ import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useActionHandler from '@/Hooks/useActionHandler'
+import { useActionHandler } from '@/Hooks/useActionHandler'
 
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'

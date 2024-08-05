@@ -11,7 +11,7 @@ import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'
 
@@ -26,7 +26,7 @@ export default function PageStudentIndex({ students = [] }) {
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
 
-  const formOptions = { method: 'GET', route: 'admin.students.index' }
+  const formOptions = { route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
 
   return (

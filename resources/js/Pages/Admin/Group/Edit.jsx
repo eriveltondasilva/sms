@@ -1,11 +1,11 @@
-import { Link, usePage } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
 import { Check, Plus } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'

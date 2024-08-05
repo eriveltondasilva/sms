@@ -9,7 +9,7 @@ import { SearchFilter } from '@/Components/SearchFilter'
 import { Table } from '@/Components/Table'
 import { Title } from '@/Components/Title'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 import { formatId } from '@/Utils/formatId'
 
@@ -22,7 +22,7 @@ export default function PageGroupIndex({ data }) {
   const pageTitle = `${titles.index} - ${activeYear}`
   const hasGroup = selectedGroup?.students?.length > 0
 
-  const formOptions = { method: 'GET', route: 'teacher.groups.index' }
+  const formOptions = { route: 'teacher.groups.index' }
   const { handleSubmit: handleSearch, isLoading } = useFormHandler(formOptions)
 
   return (

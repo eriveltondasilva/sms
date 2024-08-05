@@ -1,6 +1,6 @@
 import { Form } from '@/Components/Form'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'

@@ -2,7 +2,7 @@ import { router, usePage } from '@inertiajs/react'
 import { useState } from 'react'
 
 //
-export default function useFormHandler({
+export function useFormHandler({
   route: url = '',
   method = '',
   params = {},

@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'

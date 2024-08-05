@@ -15,8 +15,8 @@ import AuthLayout from '@/Layouts/AuthLayout'
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'
 
-import useActionHandler from '@/Hooks/useActionHandler'
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useActionHandler } from '@/Hooks/useActionHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 
 import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
@@ -31,11 +31,10 @@ export default function PageGroupStudentCreate({ data, flash }) {
   const hasPagination = students.total > students.data.length
 
   const formOptions = {
-    method: 'GET',
     route: 'admin.groups.students.create',
     params: { group },
   }
-  const { isLoading, handleSubmit: handleSearchStudent } =
+  const { handleSubmit: handleSearchStudent, isLoading } =
     useFormHandler(formOptions)
 
   return (

@@ -7,7 +7,7 @@ import { Alert } from '@/Components/Alert'
 import { Table } from '@/Components/Table'
 import { Title } from '@/Components/Title'
 
-import useActionHandler from '@/Hooks/useActionHandler'
+import { useActionHandler } from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
 import { formatId } from '@/Utils/formatId'
 

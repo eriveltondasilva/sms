@@ -11,7 +11,7 @@ import { Title } from '@/Components/Title'
 
 import AuthLayout from '@/Layouts/AuthLayout'
 
-import useFormHandler from '@/Hooks/useFormHandler'
+import { useFormHandler } from '@/Hooks/useFormHandler'
 import { formatId } from '@/Utils/formatId'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
@@ -25,7 +25,7 @@ export default function PageTeacherIndex({ teachers = [] }) {
   const hasTeachers = teachers.data.length > 0
   const hasPagination = teachers.total > teachers.data.length
 
-  const formOptions = { method: 'GET', route: 'admin.teachers.index' }
+  const formOptions = { route: 'admin.teachers.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
 
   return (
