@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear, Group, Student};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+
+use App\Models\{AcademicYear, Group, Student};
 
 class GroupStudentController extends Controller
 {
@@ -15,6 +16,7 @@ class GroupStudentController extends Controller
             ->students()
             ->select('students.id', 'students.name', 'students.gender')
             ->orderBy('students.name')
+            ->toBase()
             ->get();
 
         $data = compact('group', 'students');
@@ -27,16 +29,17 @@ class GroupStudentController extends Controller
         $searchTerm = $request->query('search', '');
         $activeYear = AcademicYear::isActive();
 
-        $studentsQuery = Student::select('id', 'name', 'gender')
+        $students = Student::select('id', 'name', 'gender')
             ->whereDoesntHave('groups', function (Builder $query) use ($activeYear) {
                 $query->where('academic_year_id', $activeYear->id);
             })
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhere('name', 'like', "%{$searchTerm}%");
+                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
-            ->orderBy('name');
+            ->orderBy('name')
+            ->toBase()
+            ->paginate(20);
 
-        $students = $studentsQuery->paginate(20);
         $data = compact('group', 'students');
 
         return inertia('Admin/GroupStudent/Create', compact('data'));

@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+
 use App\Http\Requests\GroupRequest;
 use App\Models\{AcademicYear,Group};
-use Illuminate\Database\Eloquent\Builder;
 
 class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::whereHas('academicYear', function (Builder $query) {
-            $query->where('is_active', true);
-        })
+        $groups = Group::query()
+            ->whereHas('academicYear', function (Builder $query) {
+                $query->where('is_active', true);
+            })
             ->withCount('students', 'teachers')
+            ->toBase()
             ->get();
 
         return inertia('Admin/Group/Index', compact('groups'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\AcademicYearRequest;
 use App\Models\AcademicYear;
 
@@ -10,7 +11,12 @@ class AcademicYearController extends Controller
 {
     public function index()
     {
-        $academicYears = AcademicYear::latest('year')->take(8)->withCount('groups')->get();
+        $academicYears = AcademicYear::query()
+            ->latest('year')
+            ->take(8)
+            ->withCount('groups')
+            ->toBase()
+            ->get();
 
         return inertia('Admin/AcademicYear/Index', compact('academicYears'));
     }

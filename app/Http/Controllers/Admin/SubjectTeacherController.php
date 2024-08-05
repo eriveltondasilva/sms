@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear, Subject, Teacher};
 use Illuminate\Database\Eloquent\Builder;
+
+use App\Models\{AcademicYear, Subject, Teacher};
 
 class SubjectTeacherController extends Controller
 {
@@ -14,6 +15,7 @@ class SubjectTeacherController extends Controller
             ->teachers()
             ->select('teachers.id', 'teachers.name', 'teachers.cpf')
             ->orderBy('teachers.name')
+            ->toBase()
             ->get();
 
         $data = compact('subject', 'teachers');
@@ -23,12 +25,12 @@ class SubjectTeacherController extends Controller
 
     public function create(Subject $subject)
     {
-        $teachers = Teacher::query()
-            ->select('id', 'name', 'cpf')
+        $teachers = Teacher::select('id', 'name', 'cpf')
             ->whereDoesntHave('subjects', function (Builder $query) use ($subject) {
                 $query->where('subject_id', $subject->id);
             })
             ->orderBy('name')
+            ->toBase()
             ->get();
 
         $data = compact('subject', 'teachers');

@@ -3,37 +3,33 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear, Group};
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\AcademicYear;
 
 class GroupController extends Controller
 {
     public function index(Request $request)
     {
-        $groupId        = $request->query('search', '');
-        $activeYear     = AcademicYear::isActive();
+        $groupId = $request->query('search', '');
+
+        $academicYear = AcademicYear::isActive();
+        $activeYear = $academicYear->year;
+
         $teacherProfile = Auth::user()->profile;
 
-        $teacherGroups = $teacherProfile->groups()->select('groups.id', 'groups.name')->get();
+        $teacherGroups = $teacherProfile->groups()
+            ->where('academic_year_id', $academicYear->id)
+            ->select('groups.id', 'groups.name')
+            ->get();
 
-        $selectedGroup = Group::query()
-            ->with(['students' => function ($query) {
-                $query
-                    ->orderBy('students.name')
-                    ->select('students.id', 'students.name');
-            }])
-            ->whereHas('teachers', function (Builder $query) use ($teacherProfile) {
-                $query->where('teachers.id', $teacherProfile->id);
-            })
-            ->find($groupId);
+        $selectedGroup = $teacherGroups->where('id', $groupId)->first();
+        $selectedGroup?->load(['students' => function ($query) {
+            $query->orderBy('name')->select('students.id', 'students.name', 'students.gender');
+        }]);
 
-        $data = [
-            'activeYear'    => $activeYear->year,
-            'selectedGroup' => $selectedGroup,
-            'teacherGroups' => $teacherGroups,
-        ];
+        $data = compact('activeYear', 'selectedGroup', 'teacherGroups');
 
         return inertia('Teacher/Group/Index', compact('data'));
     }

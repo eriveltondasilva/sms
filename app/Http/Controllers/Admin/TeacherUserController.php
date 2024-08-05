@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
-use App\Models\{Teacher, User};
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+
+use App\Enums\RoleEnum;
+use App\Models\{Teacher, User};
 
 class TeacherUserController extends Controller
 {

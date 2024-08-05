@@ -74,7 +74,8 @@ function StudentTable({ selectedGroup, students = [] }) {
   return (
     <>
       <h3 className='mb-3 text-lg'>
-        # Turma selecionada: {selectedGroup?.name}
+        # Turma selecionada: {selectedGroup?.name} (
+        {selectedGroup?.academic_year_id})
       </h3>
 
       <Table>

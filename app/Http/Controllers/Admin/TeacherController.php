@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+
 use App\Http\Requests\PersonRequest;
 use App\Models\Teacher;
-use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -18,6 +20,7 @@ class TeacherController extends Controller
                 $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderByDesc('id')
+            ->toBase()
             ->paginate(10);
 
         return inertia('Admin/Teacher/Index', compact('teachers'));

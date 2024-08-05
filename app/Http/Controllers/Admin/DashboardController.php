@@ -9,17 +9,13 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $activeYear    = AcademicYear::select('id', 'year')->isActive();
-        $groupsCount   = $activeYear->groups()->count();
+        $academicYear  = AcademicYear::isActive();
+        $groupsCount   = $academicYear->groups()->count();
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
+        $activeYear    = $academicYear->year;
 
-        $data = [
-            'activeYear'    => $activeYear->year,
-            'groupsCount'   => $groupsCount,
-            'studentsCount' => $studentsCount,
-            'teachersCount' => $teachersCount,
-        ];
+        $data = compact('activeYear', 'groupsCount', 'studentsCount', 'teachersCount');
 
         return inertia('Admin/Dashboard', compact('data'));
     }

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Group, Teacher};
 use Illuminate\Database\Eloquent\Builder;
+
+use App\Models\{Group, Teacher};
 
 class GroupTeacherController extends Controller
 {
@@ -14,6 +15,7 @@ class GroupTeacherController extends Controller
             ->teachers()
             ->select('teachers.id', 'teachers.name', 'teachers.email')
             ->orderBy('teachers.name')
+            ->toBase()
             ->get();
 
         $data = compact('group', 'teachers');
@@ -28,6 +30,7 @@ class GroupTeacherController extends Controller
                 $query->where('group_id', $group->id);
             })
             ->orderBy('name')
+            ->toBase()
             ->get();
 
         $data = compact('group', 'teachers');

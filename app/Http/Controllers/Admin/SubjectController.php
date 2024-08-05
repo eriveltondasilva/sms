@@ -10,7 +10,7 @@ class SubjectController extends Controller
     public function index()
     {
         // TODO: restringir as disciplinas para o ano corrente
-        $subjects = Subject::select('id', 'name', 'abbr')->withCount('teachers')->get();
+        $subjects = Subject::withCount('teachers')->toBase()->get();
 
         return inertia('Admin/Subject/Index', compact('subjects'));
     }

@@ -9,6 +9,7 @@ import { Title } from '@/Components/Title'
 
 import useActionHandler from '@/Hooks/useActionHandler'
 import AuthLayout from '@/Layouts/AuthLayout'
+import { formatId } from '@/Utils/formatId'
 
 import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
@@ -102,7 +103,7 @@ function TableTeacher({ subject = {}, teachers = [] }) {
             >
               {teacher.name}
             </Table.RowCell>
-            <Table.RowCell>{formatId(teacher.id, { pad: 4 })}</Table.RowCell>
+            <Table.RowCell>{teacher.cpf}</Table.RowCell>
             <Table.RowCell className='flex justify-end'>
               <Button.Group>
                 <Button
