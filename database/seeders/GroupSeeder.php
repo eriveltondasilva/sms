@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\AcademicYear;
 use Illuminate\Database\Seeder;
 
@@ -11,8 +9,6 @@ class GroupSeeder extends Seeder
 {
     public function run(): void
     {
-        $academicYear = AcademicYear::IsActive();
-
         $groups = [
             [
                 'name'      => '6° Ano',
@@ -36,6 +32,7 @@ class GroupSeeder extends Seeder
             ],
         ];
 
+        $academicYear = AcademicYear::IsActive();
         $academicYear->groups()->createMany($groups);
     }
 }

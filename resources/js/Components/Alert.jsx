@@ -24,7 +24,7 @@ function AlertRoot({ onDismiss, children, ...props }) {
 function AlertLink({ children, ...props }) {
   return (
     <Link
-      className='font-semibold underline hover:text-blue-600'
+      className='font-medium text-blue-600 underline hover:no-underline dark:text-blue-500'
       {...props}
     >
       {children}

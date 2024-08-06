@@ -1,10 +1,16 @@
 import { HR } from 'flowbite-react'
+import { twJoin } from 'tailwind-merge'
 
 //
 function TitleRoot({ children }) {
   return (
     <div className='relative overflow-hidden'>
-      <div className='flex-row items-center justify-between space-y-3 py-2 sm:flex sm:space-x-4 sm:space-y-0'>
+      <div
+        className={twJoin(
+          'flex-row items-center justify-between',
+          'space-y-3 py-2 sm:flex sm:space-x-4 sm:space-y-0'
+        )}
+      >
         {children}
       </div>
       <HR />

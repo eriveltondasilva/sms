@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Enums\GenderEnum;
 
 class TeacherFactory extends Factory
 {
@@ -12,10 +11,9 @@ class TeacherFactory extends Factory
         $gender = fake()->randomElement(['M', 'F']);
 
         $title     = $gender === 'M' ? fake()->titleMale() : fake()->titleFemale();
-        $firstName = $gender === GenderEnum::MALE ? fake()->firstNameMale() : fake()->firstNameFemale();
+        $firstName = $gender === 'M' ? fake()->firstNameMale() : fake()->firstNameFemale();
         $fullName  = $title . ' ' . $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
-
-        $email = strtolower($firstName) . '@' . fake()->safeEmailDomain();
+        $email     = strtolower($firstName) . '@' . fake()->safeEmailDomain();
 
         return [
             'name'      => $fullName,
