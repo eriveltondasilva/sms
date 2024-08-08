@@ -9,8 +9,7 @@ function StatCardRoot({ children }) {
         'space-x-2 px-2 py-1.5 sm:space-x-4 sm:px-4 sm:py-3',
         'bg-gray-50 text-gray-800',
         'dark:bg-gray-800 dark:text-gray-100'
-      )}
-    >
+      )}>
       {children}
     </li>
   )
@@ -22,8 +21,7 @@ function StatCardIcon({ icon }) {
       className={twJoin(
         'flex justify-end rounded-full p-3.5',
         'bg-gray-200 dark:bg-gray-900'
-      )}
-    >
+      )}>
       {icon}
     </div>
   )

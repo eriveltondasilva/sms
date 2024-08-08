@@ -1,9 +1,8 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
 
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import SubjectNotFound from './Partials/SubjectNotFound'
 import { breadcrumbs, titles } from './data'
@@ -11,15 +10,13 @@ import { breadcrumbs, titles } from './data'
 //
 export default function PageSubjectIndex({ subjects, auth }) {
   const hasSubjects = subjects.length > 0
-  const pageTitle = `${titles.index} - Ano Letivo: ${auth.activeYear}`
+  const title = `${titles.index} - Ano Letivo: ${auth.activeYear}`
 
   return (
     <>
-      <Title>
-        <Title.Left title={pageTitle} />
-      </Title>
-
-      <br />
+      <PageHeader>
+        <PageHeader.Title title={title} />
+      </PageHeader>
 
       {/* Exibe mensagem se não houver grupos */}
       {!hasSubjects && <SubjectNotFound />}
@@ -36,13 +33,11 @@ function CardSubject({ subjects = [] }) {
       {subjects.map((subject) => (
         <Card
           key={subject.id}
-          className='max-w-sm'
-        >
+          className='max-w-sm'>
           <header className=''>
             <h5
               className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'
-              title={subject.name}
-            >
+              title={subject.name}>
               {subject.abbr}
             </h5>
           </header>
@@ -57,8 +52,7 @@ function CardSubject({ subjects = [] }) {
               href={route('admin.subjects.teachers.index', { subject })}
               color='warning'
               className='uppercase'
-              fullSized
-            >
+              fullSized>
               Professores
             </Button>
           </footer>

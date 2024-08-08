@@ -1,23 +1,21 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
+import { Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import { Input } from '@/Components/Input'
+import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
 import { SearchFilter } from '@/Components/SearchFilter'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
 import { formatId } from '@/Utils/formatId'
 
-import TeacherNotFound from './Partials/TeacherNotFound'
 import { breadcrumbs, titles } from './data'
+import TeacherNotFound from './Partials/TeacherNotFound'
 
-//
 export default function PageTeacherIndex({ teachers = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
@@ -30,24 +28,14 @@ export default function PageTeacherIndex({ teachers = [] }) {
 
   return (
     <>
-      {/* Título */}
-      <Title>
-        <Title.Left title={titles.index} />
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.teachers.create')}
-            color='blue'
-            size='sm'
-          >
-            <Plus className='mr-1 size-5' />
-            Cadastrar Professor
-          </Button>
-        </Title.Right>
+      <PageHeader>
+        <PageHeader.Title title={titles.index} />
+        <PageHeader.Button href={route('admin.teachers.create')}>
+          Novo Professor
+        </PageHeader.Button>
         {/* TODO: implementar PDF */}
-      </Title>
+      </PageHeader>
 
-      {/* Teacher SearchFilter */}
       <SearchFilter onSubmit={handleSubmit}>
         <SearchFilter.Left>
           <Input.Text
@@ -62,16 +50,14 @@ export default function PageTeacherIndex({ teachers = [] }) {
             <Button
               type='submit'
               color='blue'
-              disabled={isLoading || !search}
-            >
+              disabled={isLoading || !search}>
               <Search className='mr-2 size-5' />
             </Button>
             <Button
               as={Link}
               href={route('admin.teachers.index')}
               color='light'
-              disabled={isLoading}
-            >
+              disabled={isLoading}>
               <Undo2 className='size-5' />
             </Button>
           </Button.Group>
@@ -93,17 +79,15 @@ export default function PageTeacherIndex({ teachers = [] }) {
 function TeacherTable({ teachers = [] }) {
   return (
     <Table>
-      {/* Table Header */}
       <Table.Header>
         <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell className='hidden sm:table-cell'>
           Email
         </Table.HeaderCell>
-        <Table.HeaderCell></Table.HeaderCell>
+        <Table.HeaderCell className='flex justify-end'>Ação</Table.HeaderCell>
       </Table.Header>
 
-      {/* Table Body */}
       <Table.Body>
         {teachers.map((teacher) => (
           <Table.Row key={teacher.id}>
@@ -117,26 +101,9 @@ function TeacherTable({ teachers = [] }) {
               {teacher.email}
             </Table.RowCell>
             <Table.RowCell className='flex justify-end'>
-              <Button.Group>
-                <Button
-                  as={Link}
-                  href={route('admin.teachers.show', { teacher })}
-                  color='blue'
-                  title='Visualizar professor'
-                  size='xs'
-                >
-                  <Eye className='h-4 w-4' />
-                </Button>
-                <Button
-                  as={Link}
-                  href={route('admin.teachers.edit', { teacher })}
-                  color='green'
-                  title='Editar professor'
-                  size='xs'
-                >
-                  <PencilLine className='mx-1 h-4 w-4' />
-                </Button>
-              </Button.Group>
+              <Table.Link href={route('admin.teachers.show', { teacher })}>
+                ver
+              </Table.Link>
             </Table.RowCell>
           </Table.Row>
         ))}

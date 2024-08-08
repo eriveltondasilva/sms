@@ -4,8 +4,9 @@ import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
+import { PageHeader } from '@/Components/PageHeader'
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
@@ -14,38 +15,32 @@ export default function PageGroupCreate({ flash }) {
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
-    <section>
+    <>
+      {!!flash.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss>
+          {flash.message}
+          <Alert.Link href={flash.link}>Clique aqui para vê-la.</Alert.Link>
+        </Alert>
+      )}
+
+      <PageHeader>
+        <PageHeader.Title title={titles.create} />
+      </PageHeader>
+
       <Form onSubmit={handleSubmit}>
-        {/* Mensagem flash */}
-        {!!flash.message && (
-          <Alert
-            color='success'
-            icon={Check}
-            onDismiss
-          >
-            <div>{flash.message}</div>
-            <Alert.Link href={flash.link}>Clique aqui para vê-la.</Alert.Link>
-          </Alert>
-        )}
-
-        {/* header teacher */}
-        <Form.Header>
-          <Form.Title title={titles.create} />
-        </Form.Header>
-
-        {/* form */}
         <GroupFormData errors={errors} />
 
-        {/* footer teacher */}
         <Form.Footer>
           <Form.ButtonSubmit disabled={isLoading} />
         </Form.Footer>
       </Form>
-    </section>
+    </>
   )
 }
 
-//
 PageGroupCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

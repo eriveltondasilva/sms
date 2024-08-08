@@ -6,10 +6,9 @@ function SearchFilterRoot({ onSubmit, children }) {
     <form onSubmit={onSubmit}>
       <div
         className={twJoin(
-          'flex flex-col items-center justify-between',
-          'space-y-3 py-6 md:flex-row md:space-x-4 md:space-y-0'
-        )}
-      >
+          'flex flex-col items-center justify-between md:flex-row',
+          'space-y-3 pb-4 md:space-x-4 md:space-y-0'
+        )}>
         {children}
       </div>
     </form>

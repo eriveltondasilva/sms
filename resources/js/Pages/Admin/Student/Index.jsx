@@ -1,24 +1,22 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Eye, PencilLine, Plus, Search, Undo2 } from 'lucide-react'
+import { Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import { Input } from '@/Components/Input'
+import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
 import { SearchFilter } from '@/Components/SearchFilter'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'
 
-import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
+import StudentNotFound from './Partials/StudentNotFound'
 
-//
 export default function PageStudentIndex({ students = [] }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
@@ -31,22 +29,14 @@ export default function PageStudentIndex({ students = [] }) {
 
   return (
     <>
-      {/* Título */}
-      <Title>
-        <Title.Left title={titles.index} />
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.students.create')}
-            color='blue'
-            size='sm'
-          >
-            <Plus className='mr-1 size-5' />
-            Cadastrar Aluno
-          </Button>
-        </Title.Right>
+      <PageHeader>
+        <PageHeader.Title title={titles.index} />
+        <PageHeader.Button href={route('admin.students.create')}>
+          <Plus className='mr-1 size-5' />
+          Novo Aluno
+        </PageHeader.Button>
         {/* TODO: implementar PDF */}
-      </Title>
+      </PageHeader>
 
       {/* Student SearchFilter */}
       <SearchFilter onSubmit={handleSubmit}>
@@ -63,16 +53,14 @@ export default function PageStudentIndex({ students = [] }) {
             <Button
               type='submit'
               color='blue'
-              disabled={isLoading || !search}
-            >
+              disabled={isLoading || !search}>
               <Search className='mr-2 size-5' />
             </Button>
             <Button
               as={Link}
               href={route('admin.students.index')}
               color='light'
-              disabled={isLoading}
-            >
+              disabled={isLoading}>
               <Undo2 className='size-5' />
             </Button>
           </Button.Group>
@@ -94,21 +82,19 @@ export default function PageStudentIndex({ students = [] }) {
 function StudentTable({ students = [] }) {
   return (
     <Table>
-      {/* Table Header */}
       <Table.Header>
         <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
         <Table.HeaderCell>Nome</Table.HeaderCell>
         <Table.HeaderCell className='hidden sm:table-cell'>
           Gênero
         </Table.HeaderCell>
-        <Table.HeaderCell></Table.HeaderCell>
+        <Table.HeaderCell className='flex justify-end'>Ação</Table.HeaderCell>
       </Table.Header>
 
-      {/* Table Body */}
       <Table.Body>
         {students.map((student) => (
           <Table.Row key={student.id}>
-            <Table.RowCell className='font-bold'>
+            <Table.RowCell className='w-0 font-bold'>
               {formatId(student.id)}
             </Table.RowCell>
             <Table.RowCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
@@ -118,26 +104,9 @@ function StudentTable({ students = [] }) {
               {getGenderName(student.gender)}
             </Table.RowCell>
             <Table.RowCell className='flex justify-end'>
-              <Button.Group>
-                <Button
-                  as={Link}
-                  href={route('admin.students.show', { student })}
-                  color='blue'
-                  title='Visualizar aluno'
-                  size='xs'
-                >
-                  <Eye className='size-4' />
-                </Button>
-                <Button
-                  as={Link}
-                  href={route('admin.students.edit', { student })}
-                  color='green'
-                  title='Editar aluno'
-                  size='xs'
-                >
-                  <PencilLine className='mx-1 size-4' />
-                </Button>
-              </Button.Group>
+              <Table.Link href={route('admin.students.show', { student })}>
+                Ver
+              </Table.Link>
             </Table.RowCell>
           </Table.Row>
         ))}
@@ -164,7 +133,6 @@ function StudentPagination({ students = {} }) {
   )
 }
 
-//
 PageStudentIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}

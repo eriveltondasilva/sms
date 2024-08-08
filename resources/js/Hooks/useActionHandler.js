@@ -11,7 +11,6 @@ export function useActionHandler({
 
   const validateInputs = () => {
     if (!url) throw new Error('URL não informada.')
-    if (!method) throw new Error('Método não informado.')
   }
 
   const handleAction = (params = {}) => {

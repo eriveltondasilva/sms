@@ -16,7 +16,7 @@ class TeacherUserController extends Controller
     {
         $user = $teacher->user;
 
-        if ($user->exists()) {
+        if ($user) {
             $data = compact('teacher', 'user');
 
             return to_route('admin.teachers.users.edit', compact('data'));

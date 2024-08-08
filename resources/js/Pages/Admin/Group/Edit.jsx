@@ -1,12 +1,11 @@
-import { Link } from '@inertiajs/react'
-import { Button } from 'flowbite-react'
-import { Check, Plus } from 'lucide-react'
+import { Check } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
 
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
@@ -20,40 +19,31 @@ export default function PageGroupEdit({ group = {}, flash = {} }) {
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {/* Mensagem flash */}
+    <>
       {!!flash.message && (
         <Alert
           color='success'
           icon={Check}
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* Form header */}
-      <Form.Header>
-        <Form.Title title={titles.edit} />
-        <Button
-          href={route('admin.groups.create')}
-          color='blue'
-          size='xs'
-          title='Cadastrar novo turma'
-          as={Link}
-        >
-          <Plus className='h-4 w-4' />
-        </Button>
-      </Form.Header>
+      <PageHeader>
+        <PageHeader.Title title={titles.edit} />
+      </PageHeader>
 
-      {/* Formulário */}
-      <GroupFormData {...{ data: group, errors }} />
+      <Form onSubmit={handleSubmit}>
+        <GroupFormData
+          data={group}
+          errors={errors}
+        />
 
-      {/*  */}
-      <Form.Footer>
-        <Form.ButtonSubmit disabled={isLoading} />
-      </Form.Footer>
-    </Form>
+        <Form.Footer>
+          <Form.ButtonSubmit disabled={isLoading} />
+        </Form.Footer>
+      </Form>
+    </>
   )
 }
 

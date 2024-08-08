@@ -17,8 +17,7 @@ function HeaderRoot({ children }) {
         'sticky top-0 z-10 rounded-lg',
         'shadow-lg sm:relative',
         'bg-slate-50 dark:text-white'
-      )}
-    >
+      )}>
       {children}
     </Navbar>
   )
@@ -33,22 +32,19 @@ function HeaderLeft({
     <Navbar.Brand>
       <button
         className='mr-2 hidden p-2 md:block'
-        onClick={onCollapseSidebar}
-      >
+        onClick={onCollapseSidebar}>
         <Menu />
       </button>
       <button
         className='mr-2 p-2 md:hidden'
-        onClick={onOpenSidebar}
-      >
+        onClick={onOpenSidebar}>
         <Menu />
       </button>
       <div
         className={twJoin(
           'flex self-center whitespace-nowrap',
           'text-xl font-semibold dark:text-white'
-        )}
-      >
+        )}>
         <span className='hidden lg:flex'>Bem-vindo(a), {username}</span>
       </div>
     </Navbar.Brand>
@@ -94,24 +90,21 @@ function HeaderDropdown({ user = {} }) {
           rounded
         />
       }
-      className='w-48'
-    >
+      className='w-48'>
       <Dropdown.Header as='dl'>
         <dt className='block truncate text-sm font-semibold uppercase'>
           {getRoleName(user?.role)}
         </dt>
         <dd
           className='block truncate text-sm text-gray-400'
-          title={user?.email || 'Email'}
-        >
+          title={user?.email || 'Email'}>
           {user?.email || 'exemplo@email.com'}
         </dd>
       </Dropdown.Header>
       <Dropdown.Item
         as={Link}
         href={route('profile.edit')}
-        icon={UserRoundCog}
-      >
+        icon={UserRoundCog}>
         Perfil
       </Dropdown.Item>
       <Dropdown.Item
@@ -119,8 +112,7 @@ function HeaderDropdown({ user = {} }) {
         method='post'
         disabled={isLoading}
         onClick={handleLogout}
-        icon={LogOut}
-      >
+        icon={LogOut}>
         Sair
       </Dropdown.Item>
     </Dropdown>

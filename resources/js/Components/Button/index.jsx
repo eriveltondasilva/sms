@@ -22,8 +22,7 @@ export default function Button({
     <Component
       disabled={disabled}
       className={buttonClasses}
-      {...props}
-    >
+      {...props}>
       {children}
     </Component>
   )

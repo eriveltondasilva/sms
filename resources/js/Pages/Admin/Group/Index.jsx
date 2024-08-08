@@ -2,37 +2,25 @@ import { Link } from '@inertiajs/react'
 import { Button, Card, Tooltip } from 'flowbite-react'
 import { PencilLine, Plus } from 'lucide-react'
 
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import GroupNotFound from './Partials/GroupNotFound'
 import { breadcrumbs, titles } from './data'
 
-//
 export default function PageGroupIndex({ groups = [], auth = {} }) {
-  const pageTitle = `${titles.index} - ${auth.activeYear}`
+  const title = `${titles.index} - ${auth.activeYear}`
   const hasGroups = groups.length > 0
 
   return (
     <>
-      {/* Título */}
-      <Title>
-        <Title.Left title={pageTitle} />
-
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.groups.create')}
-            color='blue'
-          >
-            <Plus className='mr-2 h-5 w-5' />
-            Cadastrar Turma
-          </Button>
-        </Title.Right>
-      </Title>
-
-      <br />
+      <PageHeader>
+        <PageHeader.Title title={title} />
+        <PageHeader.Button href={route('admin.groups.create')}>
+          <Plus className='mr-1 size-5' />
+          Nova Turma
+        </PageHeader.Button>
+      </PageHeader>
 
       {/* Exibe mensagem se não houver grupos */}
       {!hasGroups && <GroupNotFound />}
@@ -49,8 +37,7 @@ function GroupCard({ groups = [] }) {
       {groups.map((group) => (
         <Card
           key={group.id}
-          className='max-w-sm'
-        >
+          className='max-w-sm'>
           <header className='flex justify-between'>
             <h5 className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
               {group.name}
@@ -61,9 +48,8 @@ function GroupCard({ groups = [] }) {
                 href={route('admin.groups.edit', { group })}
                 color='green'
                 size='xs'
-                as={Link}
-              >
-                <PencilLine className='h-4 w-4' />
+                as={Link}>
+                <PencilLine className='size-4' />
               </Button>
             </Tooltip>
           </header>
@@ -80,8 +66,7 @@ function GroupCard({ groups = [] }) {
               color='blue'
               size='sm'
               className='uppercase'
-              fullSized
-            >
+              fullSized>
               Alunos
             </Button>
             <Button
@@ -90,8 +75,7 @@ function GroupCard({ groups = [] }) {
               color='warning'
               size='sm'
               className='uppercase'
-              fullSized
-            >
+              fullSized>
               Professores
             </Button>
           </footer>

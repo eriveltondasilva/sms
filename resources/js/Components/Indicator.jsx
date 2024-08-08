@@ -1,7 +1,6 @@
 import { twJoin } from 'tailwind-merge'
 
-//
-export default function Indicator({ type = 'secondary' }) {
+export function Indicator({ type = 'secondary' }) {
   const colorsMap = {
     warning: 'bg-yellow-500',
     danger: 'bg-red-500',
@@ -14,9 +13,8 @@ export default function Indicator({ type = 'secondary' }) {
     <span
       className={twJoin(
         'absolute right-4 top-6',
-        'flex h-6 w-6 rounded-full drop-shadow',
+        'flex size-6 rounded-full drop-shadow',
         colorsMap
-      )}
-    ></span>
+      )}></span>
   )
 }

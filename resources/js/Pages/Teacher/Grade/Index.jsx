@@ -1,4 +1,4 @@
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 import { breadcrumbs, titles } from './data'
 
 //

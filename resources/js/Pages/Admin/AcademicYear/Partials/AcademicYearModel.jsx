@@ -25,8 +25,7 @@ export default function AcademicYearModel({
     <Modal
       size='sm'
       show={show}
-      onClose={handleClose}
-    >
+      onClose={handleClose}>
       <Modal.Body>
         <div className='text-center'>
           <h3 className='mb-5 flex text-lg font-normal text-gray-500 dark:text-gray-400'>
@@ -38,8 +37,7 @@ export default function AcademicYearModel({
               type='button'
               color='failure'
               onClick={handleConfirm}
-              disabled={isLoading}
-            >
+              disabled={isLoading}>
               <AlertCircle className='mr-2 size-5' />
               Confirmar
             </Button>
@@ -47,8 +45,7 @@ export default function AcademicYearModel({
               type='button'
               color='gray'
               onClick={handleClose}
-              disabled={isLoading}
-            >
+              disabled={isLoading}>
               <X className='mr-2 size-5' />
               Cancelar
             </Button>

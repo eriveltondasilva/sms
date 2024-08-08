@@ -4,50 +4,43 @@ import { Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
+import { PageHeader } from '@/Components/PageHeader'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useActionHandler } from '@/Hooks/useActionHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
-
 import { formatId } from '@/Utils/formatId'
-import TeacherNotFound from './Partials/TeacherNotFound'
+
 import { breadcrumbs, titles } from './data'
+import TeacherNotFound from './Partials/TeacherNotFound'
 
 //
 export default function PageGroupTeacherIndex({ data, flash }) {
   const { group = {}, teachers = [] } = data
 
-  const pageTitle = `${titles.index} - ${group.name}`
+  const title = `${titles.index} - ${group.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
       {!!flash.message && (
         <Alert
           color='failure'
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* Título */}
-      <Title>
-        <Title.Left title={pageTitle} />
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.groups.teachers.create', { group })}
-            color='blue'
-          >
-            <Plus className='mr-2 h-5 w-5' />
-            Adicionar professor
-          </Button>
-        </Title.Right>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+        <PageHeader.Button
+          href={route('admin.groups.teachers.create', { group })}>
+          <Plus className='mr-1 size-5' />
+          Adicionar professor
+        </PageHeader.Button>
+
         {/* TODO: implementar PDF */}
-      </Title>
+      </PageHeader>
 
       <br />
 
@@ -94,8 +87,7 @@ function TeacherTable({ group = {}, teachers = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}
-            >
+              )}>
               {teacher.name}
             </Table.RowCell>
             <Table.RowCell>{teacher.email}</Table.RowCell>
@@ -105,10 +97,9 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   as={Link}
                   href={route('admin.teachers.show', { teacher })}
                   color='blue'
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Visualizar Professor(a)'>
-                    <Eye className='h-4 w-4' />
+                    <Eye className='size-4' />
                   </Tooltip>
                 </Button>
                 <Button
@@ -116,10 +107,9 @@ function TeacherTable({ group = {}, teachers = [] }) {
                   color='failure'
                   onClick={() => handleDeleteAction({ group, teacher })}
                   disabled={isLoading}
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Remover Professor(a)'>
-                    <Trash2 className='mx-1 h-4 w-4' />
+                    <Trash2 className='mx-1 size-4' />
                   </Tooltip>
                 </Button>
               </Button.Group>

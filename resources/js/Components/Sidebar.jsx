@@ -9,8 +9,7 @@ function SidebarRoot({ className, children, ...props }) {
     <FlowbiteSidebar
       className={twMerge('fixed z-20 h-dvh', className)}
       as='aside'
-      {...props}
-    >
+      {...props}>
       {children}
     </FlowbiteSidebar>
   )
@@ -21,8 +20,7 @@ function SidebarTriggerClose({ onClick = () => {} }) {
     <button
       type='button'
       className='absolute -right-6 top-1 p-2 text-white'
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <X className='size-8' />
     </button>
   )
@@ -42,8 +40,7 @@ function SidebarMenu({ items = [], onClose = () => {} }) {
               as={Link}
               href={route(item.route)}
               active={route().current(item.route)}
-              onClick={onClose}
-            >
+              onClick={onClose}>
               {item.title}
             </FlowbiteSidebar.Item>
           ))}

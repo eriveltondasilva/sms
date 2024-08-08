@@ -4,39 +4,36 @@ import { Eye, Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
+import { PageHeader } from '@/Components/PageHeader'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useActionHandler } from '@/Hooks/useActionHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
-
 import { formatId } from '@/Utils/formatId'
-import TeacherNotFound from './Partials/TeacherNotFound'
+
 import { breadcrumbs, titles } from './data'
+import TeacherNotFound from './Partials/TeacherNotFound'
 
 //
 export default function PageSubjectTeacherCreate({ data, flash }) {
   const { subject = {}, teachers = [] } = data
 
-  const pageTitle = `${titles.create} - ${subject.name}`
+  const title = `${titles.create} - ${subject.name}`
   const hasTeachers = teachers.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
       {!!flash.message && (
         <Alert
           color='success'
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* Título */}
-      <Title>
-        <Title.Left title={pageTitle} />
-      </Title>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+      </PageHeader>
 
       {/* Verificar se o professor não foi encontrado */}
       {!hasTeachers && <TeacherNotFound />}
@@ -81,8 +78,7 @@ function TeacherTable({ subject = {}, teachers = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}
-            >
+              )}>
               {teacher.name}
             </Table.RowCell>
             <Table.RowCell>{teacher.cpf}</Table.RowCell>
@@ -92,10 +88,9 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   as={Link}
                   href={route('admin.teachers.show', { teacher })}
                   color='green'
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Visualizar Professor'>
-                    <Eye className='h-4 w-4' />
+                    <Eye className='size-4' />
                   </Tooltip>
                 </Button>
                 <Button
@@ -103,10 +98,9 @@ function TeacherTable({ subject = {}, teachers = [] }) {
                   color='blue'
                   onClick={() => handleStoreAction({ subject, teacher })}
                   disabled={isLoading}
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Adicionar Professor'>
-                    <Plus className='mx-1 h-4 w-4' />
+                    <Plus className='mx-1 size-4' />
                   </Tooltip>
                 </Button>
               </Button.Group>

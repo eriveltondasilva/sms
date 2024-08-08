@@ -12,8 +12,7 @@ function AlertRoot({ onDismiss, children, ...props }) {
       {isShowed && (
         <FlowbiteAlert
           onDismiss={onDismiss && (() => setIsShowed(false))}
-          {...props}
-        >
+          {...props}>
           {children}
         </FlowbiteAlert>
       )}
@@ -25,8 +24,7 @@ function AlertLink({ children, ...props }) {
   return (
     <Link
       className='font-medium text-blue-600 underline hover:no-underline dark:text-blue-500'
-      {...props}
-    >
+      {...props}>
       {children}
     </Link>
   )

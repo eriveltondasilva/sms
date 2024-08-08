@@ -1,12 +1,12 @@
 import { Form } from '@/Components/Form'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
+import { PageHeader } from '@/Components/PageHeader'
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
 
-//
 export default function PageTeacherUserCreate({ teacher = {} }) {
   const formOptions = {
     method: 'POST',
@@ -15,31 +15,26 @@ export default function PageTeacherUserCreate({ teacher = {} }) {
   }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
-  const pageTitle = `${titles.create} - ${teacher.name}`
+  const title = `${titles.create} - ${teacher.name}`
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      autoComplete='false'
-    >
-      {/* header teacher */}
-      <Form.Header>
-        <Form.Title title={pageTitle} />
-      </Form.Header>
+    <>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+      </PageHeader>
 
-      {/* form data */}
-      <UserFormData errors={errors} />
+      <Form onSubmit={handleSubmit}>
+        <UserFormData errors={errors} />
 
-      {/* footer teacher */}
-      <Form.Footer>
-        <Form.ButtonReset disabled={isLoading} />
-        <Form.ButtonSubmit disabled={isLoading} />
-      </Form.Footer>
-    </Form>
+        <Form.Footer>
+          <Form.ButtonReset disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
+        </Form.Footer>
+      </Form>
+    </>
   )
 }
 
-//
 PageTeacherUserCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}

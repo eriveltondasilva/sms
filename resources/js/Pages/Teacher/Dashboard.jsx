@@ -2,7 +2,7 @@ import { usePage } from '@inertiajs/react'
 import { BookCopy, Calendar, UsersRound } from 'lucide-react'
 
 import { StatCard } from '@/Components/StatCard'
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 

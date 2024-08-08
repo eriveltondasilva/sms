@@ -5,12 +5,11 @@ import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
 import { Input } from '@/Components/Input'
+import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
 import { SearchFilter } from '@/Components/SearchFilter'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'
@@ -18,14 +17,14 @@ import { getGenderName } from '@/Utils/getGenderName'
 import { useActionHandler } from '@/Hooks/useActionHandler'
 import { useFormHandler } from '@/Hooks/useFormHandler'
 
-import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
+import StudentNotFound from './Partials/StudentNotFound'
 
 export default function PageGroupStudentCreate({ data, flash }) {
   const { group = {}, students = [] } = data
   const searchId = route().params.search || ''
 
-  const pageTitle = `${titles.create} - ${group.name}`
+  const title = `${titles.create} - ${group.name}`
 
   const hasStudents = students.data.length > 0
   const hasPagination = students.total > students.data.length
@@ -39,21 +38,18 @@ export default function PageGroupStudentCreate({ data, flash }) {
 
   return (
     <>
-      {/* Mensagem flash */}
       {!!flash.message && (
         <Alert
           color='success'
           icon={Check}
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* Título */}
-      <Title>
-        <Title.Left title={pageTitle} />
-      </Title>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+      </PageHeader>
 
       {/* Barra de pesquisa */}
       <SearchFilter onSubmit={handleSearchStudent}>
@@ -69,8 +65,7 @@ export default function PageGroupStudentCreate({ data, flash }) {
           <Button
             type='submit'
             color='blue'
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
             <Search className='size-5' />
           </Button>
         </SearchFilter.Left>
@@ -128,8 +123,7 @@ function StudentTable({ group = {}, students = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}
-            >
+              )}>
               {student.name}
             </Table.RowCell>
             <Table.RowCell>{formatId(student.id, { pad: 4 })}</Table.RowCell>
@@ -140,10 +134,9 @@ function StudentTable({ group = {}, students = [] }) {
                   as={Link}
                   href={route('admin.students.show', { student })}
                   color='green'
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Visualizar Aluno'>
-                    <Eye className='h-4 w-4' />
+                    <Eye className='size-4' />
                   </Tooltip>
                 </Button>
                 <Button
@@ -151,10 +144,9 @@ function StudentTable({ group = {}, students = [] }) {
                   color='blue'
                   onClick={() => handleStoreAction({ group, student })}
                   disabled={isLoading}
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Adicionar Aluno'>
-                    <Plus className='mx-1 h-4 w-4' />
+                    <Plus className='mx-1 size-4' />
                   </Tooltip>
                 </Button>
               </Button.Group>

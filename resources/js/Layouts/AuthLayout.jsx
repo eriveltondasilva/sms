@@ -14,8 +14,7 @@ import SidebarItems from './data'
 
 import schoolImg from '../../images/school.png'
 
-//
-export default function AuthLayout({
+export function AuthLayout({
   title = '',
   breadcrumb = [],
   stats = null,
@@ -39,12 +38,10 @@ export default function AuthLayout({
         id='sidebar'
         aria-label='Barra Lateral'
         collapsed={isCollapsed}
-        className='hidden md:block'
-      >
+        className='hidden md:block'>
         <Sidebar.Logo
           img={schoolImg}
-          imgAlt='Escola Viver'
-        >
+          imgAlt='Escola Viver'>
           Escola Viver
         </Sidebar.Logo>
         <Sidebar.Menu items={sidebarItems} />
@@ -53,17 +50,14 @@ export default function AuthLayout({
       {/* # MOBILE SIDEBAR */}
       <Drawer
         open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+        onClose={() => setIsOpen(false)}>
         <Drawer.Items>
           <Sidebar
             id='sidebar-mobile'
-            aria-label='Barra Lateral No Celular'
-          >
+            aria-label='Barra Lateral No Celular'>
             <Sidebar.Logo
               img={schoolImg}
-              imgAlt='Escola Viver'
-            >
+              imgAlt='Escola Viver'>
               Escola Viver
             </Sidebar.Logo>
             <Sidebar.Menu
@@ -80,8 +74,7 @@ export default function AuthLayout({
           'flex min-h-dvh max-w-full flex-col',
           'space-y-2 px-2 py-2 sm:px-4',
           isCollapsed ? 'md:ml-16' : 'md:ml-64'
-        )}
-      >
+        )}>
         {/* # HEADER */}
         <Header>
           <Header.Left
@@ -117,8 +110,7 @@ export default function AuthLayout({
             'border-yellow-300',
             'bg-gray-50 text-gray-900',
             'dark:bg-gray-800 dark:text-gray-200'
-          )}
-        >
+          )}>
           {children}
         </main>
 

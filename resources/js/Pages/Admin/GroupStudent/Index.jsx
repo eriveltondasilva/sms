@@ -4,54 +4,44 @@ import { Check, Eye, Plus, Trash2 } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
 import { Alert } from '@/Components/Alert'
+import { PageHeader } from '@/Components/PageHeader'
 import { Table } from '@/Components/Table'
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useActionHandler } from '@/Hooks/useActionHandler'
-
 import { formatId } from '@/Utils/formatId'
 import { getGenderName } from '@/Utils/getGenderName'
 
-import StudentNotFound from './Partials/StudentNotFound'
 import { breadcrumbs, titles } from './data'
+import StudentNotFound from './Partials/StudentNotFound'
 
 //
 export default function PageGroupStudentIndex({ data, flash }) {
   const { group = {}, students = [] } = data
 
-  const pageTitle = `${titles.index} - ${group.name}`
+  const title = `${titles.index} - ${group.name}`
   const hasStudents = students.length > 0
 
   return (
     <>
-      {/* Mensagem flash */}
       {!!flash.message && (
         <Alert
           color='failure'
           icon={Check}
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* Título */}
-      <Title>
-        <Title.Left title={pageTitle} />
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.groups.students.create', { group })}
-            color='blue'
-          >
-            <Plus className='mr-2 h-5 w-5' />
-            Adicionar alunos
-          </Button>
-        </Title.Right>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+        <PageHeader.Button
+          href={route('admin.groups.students.create', { group })}>
+          <Plus className='mr-1 size-5' />
+          Adicionar alunos
+        </PageHeader.Button>
         {/* TODO: implementar PDF */}
-      </Title>
+      </PageHeader>
 
       <br />
 
@@ -99,8 +89,7 @@ function StudentTable({ group = {}, students = [] }) {
               className={twJoin(
                 'whitespace-nowrap font-medium',
                 'text-gray-900 dark:text-white'
-              )}
-            >
+              )}>
               {student.name}
             </Table.RowCell>
             <Table.RowCell>{formatId(student.id, { pad: 4 })}</Table.RowCell>
@@ -111,10 +100,9 @@ function StudentTable({ group = {}, students = [] }) {
                   as={Link}
                   href={route('admin.students.show', { student })}
                   color='blue'
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Visualizar Aluno(a)'>
-                    <Eye className='h-4 w-4' />
+                    <Eye className='size-4' />
                   </Tooltip>
                 </Button>
                 <Button
@@ -122,10 +110,9 @@ function StudentTable({ group = {}, students = [] }) {
                   color='failure'
                   onClick={() => handleDeleteAction({ group, student })}
                   disabled={isLoading}
-                  size='xs'
-                >
+                  size='xs'>
                   <Tooltip content='Remover Aluno(a)'>
-                    <Trash2 className='mx-1 h-4 w-4' />
+                    <Trash2 className='mx-1 size-4' />
                   </Tooltip>
                 </Button>
               </Button.Group>

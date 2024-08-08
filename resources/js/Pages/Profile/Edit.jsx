@@ -1,4 +1,4 @@
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import UpdatePasswordForm from './Partials/UpdatePasswordForm'
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm'
@@ -33,8 +33,7 @@ export default function ProfileEditPage({ mustVerifyEmail, status }) {
 ProfileEditPage.layout = (page) => (
   <AuthLayout
     title={titles.profile}
-    breadcrumb={breadcrumbs.profile}
-  >
+    breadcrumb={breadcrumbs.profile}>
     {page}
   </AuthLayout>
 )

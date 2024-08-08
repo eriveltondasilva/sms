@@ -33,8 +33,7 @@ export default function UpdatePasswordForm({ className = '' }) {
 
       <form
         onSubmit={handleSubmit}
-        className='mt-6 space-y-6'
-      >
+        className='mt-6 space-y-6'>
         <div>
           <Input.Text
             id='current_password'
@@ -109,9 +108,8 @@ function Footer({ processing, recentlySuccessful }) {
       <Button
         type='submit'
         color='blue'
-        disabled={processing}
-      >
-        <Save className='mr-2 h-5 w-5' />
+        disabled={processing}>
+        <Save className='mr-2 size-5' />
         Salvar
       </Button>
 
@@ -120,8 +118,7 @@ function Footer({ processing, recentlySuccessful }) {
         enter='transition ease-in-out'
         enterFrom='opacity-0'
         leave='transition ease-in-out'
-        leaveTo='opacity-0'
-      >
+        leaveTo='opacity-0'>
         <p className='text-sm text-gray-600 dark:text-gray-400'>Saved.</p>
       </Transition>
     </footer>

@@ -1,12 +1,11 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { Plus } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
+import { Plus } from 'lucide-react'
 
-import Indicator from '@/Components/Indicator'
-import { Title } from '@/Components/Title'
-
-import AuthLayout from '@/Layouts/AuthLayout'
+import { Indicator } from '@/Components/Indicator'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { formatDate } from '@/Utils/formatDate'
 
@@ -19,20 +18,13 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
 
   return (
     <>
-      {/* título */}
-      <Title>
-        <Title.Left title={titles.index} />
-        <Title.Right>
-          <Button
-            as={Link}
-            href={route('admin.academic-years.create')}
-            color='blue'
-          >
-            <Plus className='mr-2 size-5' />
-            Cadastrar Ano Letivo
-          </Button>
-        </Title.Right>
-      </Title>
+      <PageHeader>
+        <PageHeader.Title title={titles.index} />
+        <PageHeader.Button href={route('admin.academic-years.create')}>
+          <Plus className='mr-1 size-5' />
+          Novo Ano Letivo
+        </PageHeader.Button>
+      </PageHeader>
 
       <br />
 
@@ -51,16 +43,14 @@ function AcademicYearCard({ academicYears = [] }) {
       {academicYears.map((academicYear) => (
         <Card
           key={academicYear.id}
-          className='relative max-w-sm'
-        >
+          className='relative max-w-sm'>
           <Indicator type={academicYear.is_active ? 'success' : 'secondary'} />
 
           <h5
             className={twJoin(
               'text-2xl font-bold tracking-tight',
               'text-gray-900 dark:text-white'
-            )}
-          >
+            )}>
             {academicYear.year}
           </h5>
 
@@ -78,8 +68,7 @@ function AcademicYearCard({ academicYears = [] }) {
               href={route('admin.academic-years.edit', { academicYear })}
               color='blue'
               className='uppercase'
-              fullSized
-            >
+              fullSized>
               Ano Letivo
             </Button>
           </footer>

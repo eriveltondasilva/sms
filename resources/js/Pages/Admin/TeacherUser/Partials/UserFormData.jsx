@@ -5,6 +5,7 @@ export default function UserFormData({ data = {}, errors = {} }) {
 
   return (
     <section className='mb-4'>
+      {/* USERNAME DO USUÁRIO */}
       <Input.Text
         id='username'
         type='text'
@@ -39,7 +40,6 @@ export default function UserFormData({ data = {}, errors = {} }) {
       />
 
       {/* CONFIRMAÇÃO DE SENHA */}
-
       <Input.Text
         id='password_confirmation'
         type='text'

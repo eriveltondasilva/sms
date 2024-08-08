@@ -5,7 +5,7 @@ import { BookCopy, Calendar, Users, UsersRound } from 'lucide-react'
 import { Alert } from '@/Components/Alert'
 import { StatCard } from '@/Components/StatCard'
 
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { breadcrumbs, titles } from './data'
 

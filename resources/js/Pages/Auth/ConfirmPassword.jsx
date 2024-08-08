@@ -53,8 +53,7 @@ export default function PageConfirmPassword() {
         <footer className='mt-4 flex items-center justify-end'>
           <Button
             type='submit'
-            disabled={processing}
-          >
+            disabled={processing}>
             Confirmar
           </Button>
         </footer>

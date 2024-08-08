@@ -1,13 +1,13 @@
-import { Link } from '@inertiajs/react'
 import { Badge, Button } from 'flowbite-react'
-import { AlertCircle, Check, Plus } from 'lucide-react'
+import { AlertCircle, Check } from 'lucide-react'
 import { useState } from 'react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
+import { PageHeader } from '@/Components/PageHeader'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import AcademicYearFormData from './Partials/AcademicYearFormData'
 import AcademicYearModel from './Partials/AcademicYearModel'
@@ -26,32 +26,20 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
 
   return (
     <>
+      {!!flash.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss>
+          {flash.message}
+        </Alert>
+      )}
+
+      <PageHeader>
+        <PageHeader.Title title={titles.edit} />
+      </PageHeader>
+
       <Form onSubmit={handleSubmit}>
-        {/* flash message */}
-        {!!flash.message && (
-          <Alert
-            color='success'
-            icon={Check}
-            onDismiss
-          >
-            {flash.message}
-          </Alert>
-        )}
-
-        {/* Form header */}
-        <Form.Header>
-          <Form.Title title={titles.edit} />
-          <Button
-            href={route('admin.academic-years.create')}
-            color='blue'
-            size='xs'
-            as={Link}
-          >
-            <Plus className='size-4' />
-          </Button>
-        </Form.Header>
-
-        {/* Academic year status */}
         <div className='text-sm font-medium text-gray-900 dark:text-white'>
           Status do Ano Letivo
         </div>
@@ -59,8 +47,7 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
           <Badge
             color={academicYear.is_active ? 'success' : 'gray'}
             className='text-lg'
-            size='sm'
-          >
+            size='sm'>
             {academicYear.is_active ? 'Ativo' : 'Inativo'}
           </Badge>
         </div>
@@ -79,9 +66,8 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
             disabled={academicYear.is_active}
             onClick={() => setShowModel(true)}
             className='uppercase'
-            fullSized
-          >
-            <AlertCircle className='mr-2 h-5 w-5' />
+            fullSized>
+            <AlertCircle className='mr-2 size-5' />
             Ativar ano letivo
           </Button>
         </Form.Footer>
@@ -95,7 +81,6 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
   )
 }
 
-//
 PageAcademicYearEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

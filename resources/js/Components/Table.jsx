@@ -1,20 +1,12 @@
+import { Link } from '@inertiajs/react'
 import { Table as FlowbiteTable } from 'flowbite-react'
 
-//
 function TableRoot({ children }) {
   return (
     <div className='overflow-x-auto shadow-md'>
-      <FlowbiteTable hoverable>{children}</FlowbiteTable>
+      <FlowbiteTable>{children}</FlowbiteTable>
     </div>
   )
-}
-
-function TableHeader({ children }) {
-  return <FlowbiteTable.Head>{children}</FlowbiteTable.Head>
-}
-
-function TableHeaderCell({ children, ...props }) {
-  return <FlowbiteTable.HeadCell {...props}>{children}</FlowbiteTable.HeadCell>
 }
 
 function TableBody({ children }) {
@@ -31,15 +23,21 @@ function TableRow({ children }) {
   )
 }
 
-function TableRowCell({ children, ...props }) {
-  return <FlowbiteTable.Cell {...props}>{children}</FlowbiteTable.Cell>
+function TableLink({ children, ...props }) {
+  return (
+    <Link
+      className='font-semibold text-blue-600 underline hover:no-underline dark:text-blue-500'
+      {...props}>
+      {children}
+    </Link>
+  )
 }
 
-//
 export const Table = Object.assign(TableRoot, {
-  Header: TableHeader,
-  HeaderCell: TableHeaderCell,
   Body: TableBody,
+  Link: TableLink,
   Row: TableRow,
-  RowCell: TableRowCell,
+  Header: FlowbiteTable.Head,
+  HeaderCell: FlowbiteTable.HeadCell,
+  RowCell: FlowbiteTable.Cell,
 })

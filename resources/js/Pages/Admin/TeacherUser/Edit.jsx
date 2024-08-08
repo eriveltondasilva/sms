@@ -2,13 +2,14 @@ import { Check } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
+
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
 
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
 
-//
 export default function PageTeacherUserEdit({ data, flash }) {
   const { teacher = {}, user = {} } = data
 
@@ -19,44 +20,38 @@ export default function PageTeacherUserEdit({ data, flash }) {
   }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
-  const pageTitle = `${titles.edit} - ${teacher.name}`
+  const title = `${titles.edit} - ${teacher.name}`
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      autoComplete='false'
-    >
-      {/* flash message */}
+    <>
       {!!flash.message && (
         <Alert
           color='success'
           icon={Check}
-          onDismiss
-        >
+          onDismiss>
           {flash.message}
         </Alert>
       )}
 
-      {/* header teacher */}
-      <Form.Header>
-        <Form.Title title={pageTitle} />
-      </Form.Header>
+      <PageHeader>
+        <PageHeader.Title title={title} />
+      </PageHeader>
 
-      <UserFormData
-        data={user}
-        errors={errors}
-      />
+      <Form onSubmit={handleSubmit}>
+        <UserFormData
+          data={user}
+          errors={errors}
+        />
 
-      {/* footer teacher */}
-      <Form.Footer>
-        <Form.ButtonReset disabled={isLoading} />
-        <Form.ButtonSubmit disabled={isLoading} />
-      </Form.Footer>
-    </Form>
+        <Form.Footer>
+          <Form.ButtonReset disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
+        </Form.Footer>
+      </Form>
+    </>
   )
 }
 
-//
 PageTeacherUserEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}

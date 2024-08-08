@@ -1,21 +1,19 @@
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
+import { PageHeader } from '@/Components/PageHeader'
+import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import AuthLayout from '@/Layouts/AuthLayout'
 
 import StudentFormData from './Partials/StudentFormData'
-
 import { breadcrumbs, titles } from './data'
 
-//
 export default function PageStudentCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.students.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {/* flash message */}
+    <>
       {!!flash.message && (
         <Alert>
           <div>{flash.message}</div>
@@ -23,20 +21,19 @@ export default function PageStudentCreate({ flash }) {
         </Alert>
       )}
 
-      {/* header student */}
-      <Form.Header>
-        <Form.Title title={titles.create} />
-      </Form.Header>
+      <PageHeader>
+        <PageHeader.Title title={titles.create} />
+      </PageHeader>
 
-      {/* form */}
-      <StudentFormData errors={errors} />
+      <Form onSubmit={handleSubmit}>
+        <StudentFormData errors={errors} />
 
-      {/* footer student */}
-      <Form.Footer>
-        <Form.ButtonReset disabled={isLoading} />
-        <Form.ButtonSubmit disabled={isLoading} />
-      </Form.Footer>
-    </Form>
+        <Form.Footer>
+          <Form.ButtonReset disabled={isLoading} />
+          <Form.ButtonSubmit disabled={isLoading} />
+        </Form.Footer>
+      </Form>
+    </>
   )
 }
 
