@@ -37,14 +37,4 @@ class PersonRequest extends FormRequest
 
         return $rule;
     }
-
-    public function messages(): array
-    {
-        $messages = [
-            'name.required' => 'O campo nome é obrigatório',
-            'email.email'   => 'O campo email deve ser um email válido',
-        ];
-
-        return $messages;
-    }
 }

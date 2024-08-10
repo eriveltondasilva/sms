@@ -43,7 +43,8 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         $credentials  = $this->only('email', 'password');
-        $inactiveUser = User::where('email', $credentials['email'])->isNotActive()->first('is_active');
+        $inactiveUser = User::where('email', $credentials['email'])->isNotActive()->exists();
+        ds($inactiveUser);
 
         if ($inactiveUser) {
             RateLimiter::hit($this->throttleKey());
