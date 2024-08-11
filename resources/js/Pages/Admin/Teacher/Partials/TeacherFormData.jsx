@@ -59,7 +59,7 @@ export default function TeacherFormData({
         label='Gênero do Professor'
         values={genderRadioValues}
         error={errors.gender}
-        defaultChecked={data.gender}
+        defaultChecked={data.gender || 'M'}
         readOnly={readOnly}
       />
 

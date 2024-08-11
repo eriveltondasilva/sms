@@ -13,27 +13,39 @@ class TeacherRequest extends FormRequest
 
     public function rules(): array
     {
-        return match ($this->method()) {
-            'POST', 'PUT' => $this->store(),
-            default  => [],
-        };
-    }
+        $id = $this->route('teacher')->id ?? '';
 
-    private function store(): array
-    {
         return [
             'name'     => 'required|string|max:100',
-            'email'    => 'nullable|email|max:100',
-            'rg'       => 'nullable|string|max:20',
-            'cpf'      => 'required|string|max:20',
+            'email'    => 'nullable|email|max:100|unique:teachers,email,' . $id,
+            'rg'       => 'nullable|string|max:20|unique:teachers,rg,' . $id,
+            'cpf'      => 'nullable|string|max:20|unique:teachers,cpf,' . $id,
             'gender'   => 'required|in:M,F',
-            'phone'    => 'nullable|string|max:10',
+            'phone'    => 'nullable|string|max:16',
             'birthday' => 'nullable|date|before:today',
             //
             'address_street'   => 'nullable|string|max:100',
             'address_city'     => 'nullable|string|max:100',
             'address_state'    => 'nullable|string|max:100',
             'address_zip_code' => 'nullable|string|max:100',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name'     => 'nome',
+            'email'    => 'e-mail',
+            'rg'       => 'rg',
+            'cpf'      => 'cpf',
+            'gender'   => 'gênero',
+            'phone'    => 'celular',
+            'birthday' => 'data de nascimento',
+            //
+            'address_street'   => 'rua',
+            'address_city'     => 'cidade',
+            'address_state'    => 'estado',
+            'address_zip_code' => 'cep',
         ];
     }
 }

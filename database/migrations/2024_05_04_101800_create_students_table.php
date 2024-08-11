@@ -11,9 +11,9 @@ return new class () extends Migration {
             $table->id();
             $table->string('name')->comment('Nome do aluno');
             $table->enum('gender', ['F', 'M'])->nullable()->default('M')->comment('Gênero do aluno');
-            $table->string('email')->nullable()->comment('E-mail do aluno');
-            $table->string('rg')->nullable()->comment('RG do aluno');
-            $table->string('cpf')->nullable()->comment('CPF do aluno');
+            $table->string('email')->unique()->nullable()->comment('E-mail do aluno');
+            $table->string('rg')->unique()->nullable()->comment('RG do aluno');
+            $table->string('cpf')->unique()->nullable()->comment('CPF do aluno');
             $table->date('birthday')->nullable()->comment('Data de nascimento do aluno');
             $table->string('birthplace')->nullable()->comment('Local de nascimento do aluno');
             $table->string('phone')->nullable()->comment('Telefone do aluno');
@@ -28,6 +28,7 @@ return new class () extends Migration {
             $table->text('note')->nullable()->comment('Observações sobre o aluno');
             //
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

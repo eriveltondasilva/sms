@@ -43,10 +43,10 @@ class TeacherUserController extends Controller
 
         $user = $teacher->user()->create($validatedData);
         $user->assignRole(RoleEnum::TEACHER);
-
         $message = 'Usuário criado com sucesso';
 
-        return to_route('admin.teachers.show', $teacher)->with('message', $message);
+        return to_route('admin.teachers.show', $teacher)
+            ->withFlash(compact('message'));
     }
 
     public function update(Request $request, Teacher $teacher, User $user)
@@ -69,7 +69,8 @@ class TeacherUserController extends Controller
         $user->update($request->validate($rules));
         $message = 'Usuário atualizado com sucesso';
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     public function destroy(User $user, Teacher $teacher)

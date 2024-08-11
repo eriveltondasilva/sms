@@ -45,17 +45,18 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $student = Student::create($request->validated());
-        $studentUrl = route('admin.students.show', $student->id);
+        $link = route('admin.students.show', $student->id);
+        $message = 'Cadastro do aluno criado com sucesso!';
 
-        return back()
-            ->with(['message' => 'Cadastro do aluno criado com sucesso!', 'link' => $studentUrl]);
+        return back()->withFlash(compact('message', 'link'));
     }
 
     public function update(StudentRequest $request, Student $student)
     {
         $student->update($request->validated());
+        $message = 'Aluno atualizado com sucesso!';
 
         return to_route('admin.students.show', $student)
-            ->withMessage('Aluno atualizado com sucesso!');
+            ->withFlash(compact('message'));
     }
 }

@@ -67,7 +67,7 @@ export default function StudentFormData({
         label='Gênero do Aluno'
         values={genderRadioValues}
         error={errors.gender}
-        defaultChecked={data.gender}
+        defaultChecked={data.gender || 'M'}
         readOnly={readOnly}
       />
 

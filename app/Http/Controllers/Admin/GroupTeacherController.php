@@ -43,19 +43,19 @@ class GroupTeacherController extends Controller
     {
         $group->teachers()->attach($teacher);
         $group->load('teachers');
-
         $message = sprintf('Professor(a) %s adicionado(a) à turma do %s.', $teacher->name, $group->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     public function destroy(Group $group, Teacher $teacher)
     {
         $group->teachers()->detach($teacher);
         $group->load('teachers');
-
         $message = sprintf('Professor(a) %s removido(a) da turma do %s.', $teacher->name, $group->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 }

@@ -20,34 +20,30 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'auth'  => $this->getAuthUserData($request),
-            'flash' => $this->getFlashData($request),
+            'auth'  => fn () => $this->getAuthUserData($request),
+            'flash' => fn () => $this->getFlashData($request),
         ];
     }
 
     private function getAuthUserData(Request $request): array
     {
-        $user = $request->user();
+        $userData = $request->user();
 
-        if (!$user) {
+        if (!$userData) {
             return [
                 'activeYear' => null,
                 'user'       => null,
             ];
         }
 
-        $userData   = $user->only(['id', 'username', 'email', 'avatar_url']);
-        $role       = $user->getRoleNames()[0];
-        $activeYear = SchoolYear::isActive();
+        $user       = $userData->only(['id', 'username', 'email', 'avatar_url', 'role']);
+        $activeYear = SchoolYear::select('id', 'year')->isActive();
 
-        return [
-            'activeYear' => $activeYear,
-            'user'       => [...$userData, 'role' => $role],
-        ];
+        return compact('user', 'activeYear');
     }
 
-    private function getFlashData(Request $request): array
+    private function getFlashData(Request $request)
     {
-        return $request->session()->only(['message', 'link']);
+        return $request->session()->get('flash') ?? [];
     }
 }

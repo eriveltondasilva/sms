@@ -23,7 +23,6 @@ class TeacherFactory extends Factory
             'gender'    => $gender,
             'birthday'  => fake()->date(),
             'phone'     => fake()->cellphoneNumber(),
-            'is_active' => true,
             //
             'address_street'   => fake()->streetAddress(),
             'address_city'     => fake()->city(),

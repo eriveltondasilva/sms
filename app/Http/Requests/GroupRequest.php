@@ -53,6 +53,9 @@ class GroupRequest extends FormRequest
     {
         return [
             'name' => 'nome da turma',
+            'school_year_id' => 'ano letivo',
+            'classroom' => 'sala de aula',
+            'shift' => 'turno',
         ];
     }
 }

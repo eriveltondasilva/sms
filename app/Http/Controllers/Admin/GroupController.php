@@ -37,11 +37,11 @@ class GroupController extends Controller
     public function store(GroupRequest $request)
     {
         $group = Group::create($request->validated());
-
-        $groupUrl = route('admin.groups.edit', $group->id);
+        $link  = route('admin.groups.edit', $group->id);
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 
-        return back()->with(['message' => $message, 'link' => $groupUrl]);
+        return back()
+            ->withFlash(compact('message', 'link'));
     }
 
     public function update(GroupRequest $request, Group $group)
@@ -49,7 +49,8 @@ class GroupController extends Controller
         $group->update($request->validated());
         $message = sprintf('Turma do %s atualizada com sucesso!', $group->name);
 
-        return back()->withMessage($message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     // public function destroy(Group $group)

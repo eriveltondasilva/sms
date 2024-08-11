@@ -42,22 +42,21 @@ class SubjectTeacherController extends Controller
     public function store(Subject $subject, Teacher $teacher)
     {
         $schoolYearId = SchoolYear::isActive()->id;
-
         $subject->teachers()->attach($teacher, ['school_year_id' => $schoolYearId]);
         $subject->load('teachers');
-
         $message = sprintf('Professor(a) %s adicionado(a) à disciplina de %s.', $teacher->name, $subject->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     public function destroy(Subject $subject, Teacher $teacher)
     {
         $subject->teachers()->detach($teacher);
         $subject->load('teachers');
-
         $message = sprintf('Professor(a) %s removido(a) da disciplina de %s.', $teacher->name, $subject->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 }

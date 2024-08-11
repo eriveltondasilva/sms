@@ -45,10 +45,11 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
         $teacher = Teacher::create($request->validated());
-        $teacherUrl = route('admin.teachers.show', $teacher->id);
+        $link    = route('admin.teachers.show', $teacher->id);
+        $message = 'Cadastro do professor criado com sucesso!';
 
         return back()
-            ->with(['message' => 'Cadastro do professor criado com sucesso!', 'link' => $teacherUrl]);
+            ->withFlash(compact('message', 'link'));
     }
 
     public function update(TeacherRequest $request, Teacher $teacher)

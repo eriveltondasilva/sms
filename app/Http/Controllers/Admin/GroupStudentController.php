@@ -50,19 +50,19 @@ class GroupStudentController extends Controller
     {
         $group->students()->attach($student);
         $group->load('students');
-
         $message = sprintf('Aluno(a) %s adicionado(a) à turma do %s.', $student->name, $group->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     public function destroy(Group $group, Student $student)
     {
         $group->students()->detach($student);
-        $group->load('students');
-
+        $group->
         $message = sprintf('Aluno(a) %s removido(a) da turma do %s.', $student->name, $group->name);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 }

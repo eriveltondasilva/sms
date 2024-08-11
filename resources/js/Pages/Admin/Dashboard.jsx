@@ -63,7 +63,6 @@ function DashboardStats() {
     return null
   }
 
-  // grid grid-cols-2 gap-4 lg:grid-cols-4
   return (
     <ul className='grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4'>
       {stats.map((stat) => (

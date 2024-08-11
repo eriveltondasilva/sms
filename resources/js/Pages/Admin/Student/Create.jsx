@@ -1,3 +1,5 @@
+import { usePage } from '@inertiajs/react'
+
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
 import { PageHeader } from '@/Components/PageHeader'
@@ -11,6 +13,8 @@ import { breadcrumbs, titles } from './data'
 export default function PageStudentCreate({ flash }) {
   const formOptions = { method: 'POST', route: 'admin.students.store' }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
+
+  console.log(usePage()?.props)
 
   return (
     <>

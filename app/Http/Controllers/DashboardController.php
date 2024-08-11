@@ -9,15 +9,18 @@ class DashboardController extends Controller
         $user = auth()->user();
 
         if ($user->hasRole('admin')) {
-            return to_route('admin.dashboard')->with('message', "Seja bem-vindo, administrador!");
+            return to_route('admin.dashboard')
+                ->withFlash(['message' => 'Seja bem-vindo, administrador!']);
         }
 
         if ($user->hasRole('teacher')) {
-            return to_route('teacher.dashboard')->with('message', 'Seja bem-vindo, professor!');
+            return to_route('teacher.dashboard')
+                ->withFlash(['message' => 'Seja bem-vindo, professor!']);
         }
 
         if ($user->hasRole('student')) {
-            return to_route('student.dashboard')->with('message', 'Seja bem-vindo, estudante!');
+            return to_route('student.dashboard')
+                ->withFlash(['message' => 'Seja bem-vindo, estudante!']);
         }
 
         return inertia('Dashboard');

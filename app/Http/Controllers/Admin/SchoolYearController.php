@@ -51,10 +51,11 @@ class SchoolYearController extends Controller
         $schoolYear = SchoolYear::create($request->validated());
         $schoolYear->groups()->createMany($quarters);
 
-        $schoolYearUrl = route('admin.school-years.edit', $schoolYear->id);
+        $link = route('admin.school-years.edit', $schoolYear->id);
         $message = sprintf('Ano letivo de %d criado com sucesso!', $schoolYear->year);
 
-        return back()->with(['message' => $message, 'link' => $schoolYearUrl]);
+        return back()
+            ->withFlash(compact('message', 'link'));
     }
 
     public function update(SchoolYearRequest $request, SchoolYear $schoolYear)
@@ -62,7 +63,8 @@ class SchoolYearController extends Controller
         $schoolYear->update($request->validated());
         $message = sprintf('O ano letivo %d foi atualizado com sucesso!', $schoolYear->year);
 
-        return back()->with('message', $message);
+        return back()
+            ->withFlash(compact('message'));
     }
 
     public function updateStatus(SchoolYear $schoolYear)
@@ -70,14 +72,15 @@ class SchoolYearController extends Controller
         if ($schoolYear->is_active) {
             $message = sprintf('O ano letivo %d já foi ativado.', $schoolYear->year);
 
-            return back()->with('message', $message);
+            return back()
+                ->withFlash(compact('message'));
         }
 
         SchoolYear::where('is_active', true)->update(['is_active' => false]);
         $schoolYear->update(['is_active' => true]);
-
         $message = sprintf('O ano letivo %d foi ativado com sucesso!', $schoolYear->year);
 
-        return to_route('admin.school-years.index')->with('message', $message);
+        return to_route('admin.school-years.index')
+            ->withFlash(compact('message'));
     }
 }

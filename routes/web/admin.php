@@ -19,10 +19,10 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth', 'role:admin'])
 ->prefix('/admin')->name('admin.')->group(function () {
     //* DASHBOARD ROUTES
-    Route::get('/painel', DashboardController::class)->name('dashboard');
+    Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');
 
     //* CALENDAR
-    Route::get('/calendario', CalendarController::class)->name('calendar');
+    Route::get('/calendário', [CalendarController::class, 'index'])->name('calendar');
 
     //* SCHOOL YEAR ROUTES
     Route::controller(SchoolYearController::class)
@@ -109,7 +109,7 @@ Route::middleware(['auth', 'role:admin'])
 
     //* TEACHER/USER ROUTES
     Route::controller(TeacherUserController::class)
-    ->prefix('/professores/{teacher}/usuarios')->name('teachers.users.')->group(function () {
+    ->prefix('/professores/{teacher}/usuários')->name('teachers.users.')->group(function () {
         Route::get('/adicionar', 'create')->name('create');
         Route::get('/{user}', 'show')->name('show');
         Route::get('/{user}/editar', 'edit')->name('edit');

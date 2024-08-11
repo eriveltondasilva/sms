@@ -7,7 +7,7 @@ use App\Models\{SchoolYear, Student, Teacher};
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $schoolYear  = SchoolYear::isActive();
         $groupsCount   = $schoolYear->groups()->count();
