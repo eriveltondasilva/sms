@@ -18,11 +18,11 @@ return new class () extends Migration {
         });
 
         Schema::table('quarters', function (Blueprint $table) {
-            $table->foreign('academic_year_id')->references('id')->on('academic_years')->constrained();
+            $table->foreign('school_year_id')->references('id')->on('school_years')->constrained();
         });
 
         Schema::table('groups', function (Blueprint $table) {
-            $table->foreign('academic_year_id')->references('id')->on('academic_years')->constrained();
+            $table->foreign('school_year_id')->references('id')->on('school_years')->constrained();
         });
 
         //
@@ -40,7 +40,7 @@ return new class () extends Migration {
         Schema::table('subject_teacher', function (Blueprint $table) {
             $table->foreign('subject_id')->references('id')->on('subjects')->constrained();
             $table->foreign('teacher_id')->references('id')->on('teachers')->constrained();
-            $table->foreign('academic_year_id')->references('id')->on('academic_years')->constrained();
+            $table->foreign('school_year_id')->references('id')->on('school_years')->constrained();
         });
     }
 

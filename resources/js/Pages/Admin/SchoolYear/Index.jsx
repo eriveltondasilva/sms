@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react'
 import { Button, Card } from 'flowbite-react'
-import { twJoin } from 'tailwind-merge'
 import { Plus } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 import { Indicator } from '@/Components/Indicator'
 import { PageHeader } from '@/Components/PageHeader'
@@ -9,18 +9,18 @@ import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { formatDate } from '@/Utils/formatDate'
 
-import AcademicYearNotFound from './Partials/AcademicYearNotFound'
+import SchoolYearNotFound from './Partials/SchoolYearNotFound'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageAcademicYearIndex({ academicYears = [] }) {
-  const hasAcademicYears = academicYears.length > 0
+export default function PageSchoolYearIndex({ schoolYears = [] }) {
+  const hasSchoolYears = schoolYears.length > 0
 
   return (
     <>
       <PageHeader>
         <PageHeader.Title title={titles.index} />
-        <PageHeader.Button href={route('admin.academic-years.create')}>
+        <PageHeader.Button href={route('admin.school-years.create')}>
           <Plus className='mr-1 size-5' />
           Novo Ano Letivo
         </PageHeader.Button>
@@ -29,43 +29,43 @@ export default function PageAcademicYearIndex({ academicYears = [] }) {
       <br />
 
       {/* Exibe mensagem se não houver anos letivos */}
-      {!hasAcademicYears && <AcademicYearNotFound />}
+      {!hasSchoolYears && <SchoolYearNotFound />}
 
       {/* Exibe os cards dos anos letivos */}
-      {hasAcademicYears && <AcademicYearCard academicYears={academicYears} />}
+      {hasSchoolYears && <SchoolYearCard schoolYears={schoolYears} />}
     </>
   )
 }
 
-function AcademicYearCard({ academicYears = [] }) {
+function SchoolYearCard({ schoolYears = [] }) {
   return (
     <section className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {academicYears.map((academicYear) => (
+      {schoolYears.map((schoolYear) => (
         <Card
-          key={academicYear.id}
+          key={schoolYear.id}
           className='relative max-w-sm'>
-          <Indicator type={academicYear.is_active ? 'success' : 'secondary'} />
+          <Indicator type={schoolYear.is_active ? 'success' : 'secondary'} />
 
           <h5
             className={twJoin(
               'text-2xl font-bold tracking-tight',
               'text-gray-900 dark:text-white'
             )}>
-            {academicYear.year}
+            {schoolYear.year}
           </h5>
 
           <ul className='font-normal text-gray-700 dark:text-gray-400'>
-            <li>Início: {formatDate(academicYear.start_date)}</li>
-            <li>Fim: {formatDate(academicYear.end_date)}</li>
+            <li>Início: {formatDate(schoolYear.start_date)}</li>
+            <li>Fim: {formatDate(schoolYear.end_date)}</li>
             <li className='mt-2 font-semibold'>
-              Turmas: {academicYear.groups_count}
+              Turmas: {schoolYear.groups_count}
             </li>
           </ul>
 
           <footer>
             <Button
               as={Link}
-              href={route('admin.academic-years.edit', { academicYear })}
+              href={route('admin.school-years.edit', { schoolYear })}
               color='blue'
               className='uppercase'
               fullSized>
@@ -79,7 +79,7 @@ function AcademicYearCard({ academicYears = [] }) {
 }
 
 //
-PageAcademicYearIndex.layout = (page) => (
+PageSchoolYearIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}
     breadcrumb={breadcrumbs.index}

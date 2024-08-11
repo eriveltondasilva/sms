@@ -51,11 +51,11 @@ function HeaderLeft({
   )
 }
 
-function HeaderRight({ activeYear = '0000', children }) {
+function HeaderRight({ activeYear, children }) {
   return (
     <div className='flex items-center space-x-2'>
       <div className='text-sm font-medium text-gray-600 dark:text-gray-400'>
-        Ano Letivo: {activeYear}
+        Ano Letivo: {activeYear || '0000'}
       </div>
 
       {/* Botão tema escuro */}

@@ -4,6 +4,17 @@ import { twMerge } from 'tailwind-merge'
 const inputClassName = 'mb-6 space-y-2'
 
 //
+function InputHidden({ id, ...props }) {
+  return (
+    <input
+      id={id}
+      name={id}
+      type='hidden'
+      {...props}
+    />
+  )
+}
+
 function InputText({
   id = '',
   label = '',
@@ -136,6 +147,7 @@ function InputError({ message = '' }) {
 
 //
 export const Input = Object.assign(InputText, {
+  Hidden: InputHidden,
   Text: InputText,
   Textarea: InputTextarea,
   Select: InputSelect,

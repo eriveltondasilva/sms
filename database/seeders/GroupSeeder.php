@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcademicYear;
+use App\Models\SchoolYear;
 use Illuminate\Database\Seeder;
 
 class GroupSeeder extends Seeder
@@ -32,7 +32,7 @@ class GroupSeeder extends Seeder
             ],
         ];
 
-        $academicYear = AcademicYear::IsActive();
-        $academicYear->groups()->createMany($groups);
+        $schoolYear = SchoolYear::isActive();
+        $schoolYear->groups()->createMany($groups);
     }
 }

@@ -1,7 +1,7 @@
 import { NotFound } from '@/Components/NotFound'
 import { XCircle } from 'lucide-react'
 
-export default function AcademicYearNotFound() {
+export default function SchoolYearNotFound() {
   return (
     <NotFound>
       <XCircle />

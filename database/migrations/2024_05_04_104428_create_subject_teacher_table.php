@@ -12,7 +12,7 @@ return new class () extends Migration {
             //
             $table->unsignedBigInteger('subject_id')->comment('ID da disciplina');
             $table->unsignedBigInteger('teacher_id')->comment('ID da professor');
-            $table->unsignedBigInteger('academic_year_id')->nullable()->comment('ID do ano acadêmico');
+            $table->unsignedBigInteger('school_year_id')->nullable()->comment('ID do ano acadêmico');
             //
             $table->timestamps();
         });

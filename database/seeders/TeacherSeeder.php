@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\{
-    AcademicYear,
+    SchoolYear,
     Group,
     Subject,
     Teacher,
@@ -31,9 +31,9 @@ class TeacherSeeder extends Seeder
         $group2->teachers()->attach($teacher);
 
         // #SEEDER: Subject/Teacher
-        $activeYearId = AcademicYear::isActive()->id;
+        $activeYearId = SchoolYear::isActive()->id;
 
         $subjects = Subject::all();
-        $subjects->each(fn ($subject) => $subject->teachers()->attach([3, rand(1, 10), rand(1, 10)], ['academic_year_id' => $activeYearId]));
+        $subjects->each(fn ($subject) => $subject->teachers()->attach([3, rand(1, 10), rand(1, 10)], ['school_year_id' => $activeYearId]));
     }
 }

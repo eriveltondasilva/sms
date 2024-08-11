@@ -4,20 +4,20 @@ import { AlertCircle, TriangleAlert, X } from 'lucide-react'
 import { useActionHandler } from '@/Hooks/useActionHandler'
 
 //
-export default function AcademicYearModel({
+export default function SchoolYearModel({
   show = false,
-  academicYear = {},
+  schoolYear = {},
   onClose = () => {},
 }) {
   const formOptions = {
     method: 'PUT',
-    route: 'admin.academic-years.update-status',
+    route: 'admin.school-years.update-status',
   }
   const { handleAction, isLoading } = useActionHandler(formOptions)
 
   const handleClose = () => onClose(false)
   const handleConfirm = () => {
-    handleAction({ academicYear })
+    handleAction({ schoolYear })
     handleClose()
   }
 

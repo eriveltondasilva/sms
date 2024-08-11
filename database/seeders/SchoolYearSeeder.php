@@ -2,14 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcademicYear;
+use App\Models\SchoolYear;
 use Illuminate\Database\Seeder;
 
-class AcademicYearSeeder extends Seeder
+class SchoolYearSeeder extends Seeder
 {
     public function run(): void
     {
-        $academicYears = [
+        $schoolYears = [
             [
                 'year'       => '2020',
                 'start_date' => '2020-01-01',
@@ -42,6 +42,6 @@ class AcademicYearSeeder extends Seeder
             ],
         ];
 
-        AcademicYear::insert($academicYears);
+        SchoolYear::insert($schoolYears);
     }
 }

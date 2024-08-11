@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-use App\Models\{AcademicYear, Group, Student};
+use App\Models\{SchoolYear, Group, Student};
 
 class GroupStudentController extends Controller
 {
@@ -27,11 +27,11 @@ class GroupStudentController extends Controller
     public function create(Request $request, Group $group)
     {
         $searchTerm = $request->query('search', '');
-        $activeYear = AcademicYear::isActive();
+        $activeYear = SchoolYear::isActive();
 
         $students = Student::select('id', 'name', 'gender')
             ->whereDoesntHave('groups', function (Builder $query) use ($activeYear) {
-                $query->where('academic_year_id', $activeYear->id);
+                $query->where('school_year_id', $activeYear->id);
             })
             ->when($searchTerm, function (Builder $query) use ($searchTerm) {
                 $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcademicYear;
+use App\Models\SchoolYear;
 use Illuminate\Database\Seeder;
 
 class QuarterSeeder extends Seeder
@@ -16,6 +16,6 @@ class QuarterSeeder extends Seeder
             ['name' => '4° Trimestre'],
         ];
 
-        AcademicYear::all()->each(fn ($year) => $year->quarters()->createMany($quarters));
+        SchoolYear::all()->each(fn ($year) => $year->quarters()->createMany($quarters));
     }
 }

@@ -9,18 +9,18 @@ import { PageHeader } from '@/Components/PageHeader'
 import { useFormHandler } from '@/Hooks/useFormHandler'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
-import AcademicYearFormData from './Partials/AcademicYearFormData'
-import AcademicYearModel from './Partials/AcademicYearModel'
+import SchoolYearFormData from './Partials/SchoolYearFormData'
+import SchoolYearModel from './Partials/SchoolYearModel'
 import { breadcrumbs, titles } from './data'
 
 //
-export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
+export default function PageSchoolYearEdit({ schoolYear = {}, flash }) {
   const [showModel, setShowModel] = useState(false)
 
   const formOptions = {
     method: 'PUT',
-    route: 'admin.academic-years.update',
-    params: { academicYear: academicYear.id },
+    route: 'admin.school-years.update',
+    params: { schoolYear: schoolYear.id },
   }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
@@ -45,16 +45,16 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
         </div>
         <div className='flex'>
           <Badge
-            color={academicYear.is_active ? 'success' : 'gray'}
+            color={schoolYear.is_active ? 'success' : 'gray'}
             className='text-lg'
             size='sm'>
-            {academicYear.is_active ? 'Ativo' : 'Inativo'}
+            {schoolYear.is_active ? 'Ativo' : 'Inativo'}
           </Badge>
         </div>
 
         {/* Academic year form data */}
-        <AcademicYearFormData
-          data={academicYear}
+        <SchoolYearFormData
+          data={schoolYear}
           errors={errors}
         />
 
@@ -63,7 +63,7 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
           <Form.ButtonSubmit disabled={isLoading} />
           <Button
             color='failure'
-            disabled={academicYear.is_active}
+            disabled={schoolYear.is_active}
             onClick={() => setShowModel(true)}
             className='uppercase'
             fullSized>
@@ -72,8 +72,8 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
           </Button>
         </Form.Footer>
       </Form>
-      <AcademicYearModel
-        academicYear={academicYear}
+      <SchoolYearModel
+        schoolYear={schoolYear}
         show={showModel}
         onClose={setShowModel}
       />
@@ -81,7 +81,7 @@ export default function PageAcademicYearEdit({ academicYear = {}, flash }) {
   )
 }
 
-PageAcademicYearEdit.layout = (page) => (
+PageSchoolYearEdit.layout = (page) => (
   <AuthLayout
     title={titles.edit}
     breadcrumb={breadcrumbs.edit}

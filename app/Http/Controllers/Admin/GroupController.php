@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 
 use App\Http\Requests\GroupRequest;
-use App\Models\{AcademicYear,Group};
+use App\Models\Group;
 
 class GroupController extends Controller
 {
     public function index()
     {
         $groups = Group::query()
-            ->whereHas('academicYear', function (Builder $query) {
+            ->whereHas('schoolYear', function (Builder $query) {
                 $query->where('is_active', true);
             })
             ->withCount('students', 'teachers')
@@ -36,15 +36,7 @@ class GroupController extends Controller
     // # ACTIONS
     public function store(GroupRequest $request)
     {
-        $activeYearId = AcademicYear::isActive()->id;
-
-        if (!$activeYearId) {
-            return back()->with('message', 'Ano letivo atual não configurado!');
-        }
-
-        $validatedData = $request->validated();
-        $validatedData['academic_year_id'] = $activeYearId;
-        $group = Group::create($validatedData);
+        $group = Group::create($request->validated());
 
         $groupUrl = route('admin.groups.edit', $group->id);
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
@@ -57,6 +49,14 @@ class GroupController extends Controller
         $group->update($request->validated());
         $message = sprintf('Turma do %s atualizada com sucesso!', $group->name);
 
-        return back()->with('message', $message);
+        return back()->withMessage($message);
     }
+
+    // public function destroy(Group $group)
+    // {
+    //     $group->delete();
+    //     $message = sprintf('Turma do %s excluída com sucesso!', $group->name);
+
+    //     return back()->with('message', $message);
+    // }
 }

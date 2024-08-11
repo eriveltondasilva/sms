@@ -10,11 +10,17 @@ export default function GroupFormData({ data = {}, errors = {} }) {
 
   return (
     <section>
+      <Input.Hidden
+        id='school_year_id'
+        value={activeYear.id}
+      />
+
       <Input.Text
-        id='academicYear'
+        id='school_year_display'
         type='text'
         label='Ano Letivo'
-        value={activeYear}
+        error={errors.school_year_id}
+        defaultValue={activeYear.year}
         disabled
       />
 

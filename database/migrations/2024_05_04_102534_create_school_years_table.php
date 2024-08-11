@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('academic_years', function (Blueprint $table) {
+        Schema::create('school_years', function (Blueprint $table) {
             $table->id();
             $table->integer('year')->unique()->comment('ID do ano acadêmico');
             $table->date('start_date')->nullable()->comment('Data de início do ano acadêmico');
@@ -20,6 +20,6 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('academic_years');
+        Schema::dropIfExists('school_years');
     }
 };

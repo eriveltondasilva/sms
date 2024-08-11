@@ -55,7 +55,7 @@ function DashboardStats() {
     {
       title: 'Ano Letivo',
       icon: <Calendar />,
-      value: data?.activeYear,
+      value: data?.activeYear.year,
     },
   ]
 

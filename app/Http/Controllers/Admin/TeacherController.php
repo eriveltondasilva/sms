@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\PersonRequest;
+use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 
 class TeacherController extends Controller
@@ -42,18 +42,20 @@ class TeacherController extends Controller
     }
 
     // # ACTIONS
-    public function store(PersonRequest $request)
+    public function store(TeacherRequest $request)
     {
         $teacher = Teacher::create($request->validated());
         $teacherUrl = route('admin.teachers.show', $teacher->id);
 
-        return back()->with(['message' => 'Cadastro do professor criado com sucesso!', 'link' => $teacherUrl]);
+        return back()
+            ->with(['message' => 'Cadastro do professor criado com sucesso!', 'link' => $teacherUrl]);
     }
 
-    public function update(PersonRequest $request, Teacher $teacher)
+    public function update(TeacherRequest $request, Teacher $teacher)
     {
         $teacher->update($request->validated());
 
-        return back()->with('message', 'Professor atualizado com sucesso!');
+        return to_route('admin.teachers.show', $teacher)
+            ->withMessage('Professor atualizado com sucesso!');
     }
 }

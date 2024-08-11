@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Models\AcademicYear;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,32 +14,45 @@ class GroupRequest extends FormRequest
 
     public function rules(): array
     {
-        $rules = [
-            'classroom' => 'nullable|string|max:255',
-            'shift' => 'nullable|string|max:255',
-        ];
-
-        if ($this->isMethod('POST')) {
-            $activeAcademicYearId = AcademicYear::IsActive()->id;
-
-            $rules['name'] = [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('groups')->where(function ($query) use ($activeAcademicYearId) {
-                    return $query->where('academic_year_id', $activeAcademicYearId);
-                })
-            ];
-        }
-
-        return $rules;
+        return match ($this->method()) {
+            'POST'   => $this->store(),
+            'PUT'    => $this->update(),
+            'DELETE' => $this->destroy(),
+            default  => [],
+        };
     }
 
-    public function messages(): array
+    private function store(): array
     {
         return [
-            'name.required' => 'O nome da turma é obrigatório.',
-            'name.unique' => 'A turma informada já existe.',
+            ...$this->update(),
+            'name' => [
+                'required',
+                'string',
+                'max:10',
+                Rule::unique('groups')->where('school_year_id', $this->input('school_year_id')),
+            ],
+            'school_year_id' => 'required|integer|exists:school_years,id',
+        ];
+    }
+
+    private function update(): array
+    {
+        return [
+           'classroom' => 'nullable|string|max:100',
+           'shift'     => 'nullable|string|max:10',
+        ];
+    }
+
+    private function destroy(): array
+    {
+        return [];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nome da turma',
         ];
     }
 }

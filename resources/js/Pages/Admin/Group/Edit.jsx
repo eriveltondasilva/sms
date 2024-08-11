@@ -14,7 +14,7 @@ export default function PageGroupEdit({ group = {}, flash = {} }) {
   const formOptions = {
     method: 'PUT',
     route: 'admin.groups.update',
-    params: { group: group.id },
+    params: { group },
   }
   const { handleSubmit, isLoading, errors } = useFormHandler(formOptions)
 

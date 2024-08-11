@@ -7,11 +7,11 @@ import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
 
-import AcademicYearFormData from './Partials/AcademicYearFormData'
+import SchoolYearFormData from './Partials/SchoolYearFormData'
 import { breadcrumbs, titles } from './data'
 
-export default function PageAcademicYearCreate({ flash }) {
-  const formOptions = { method: 'POST', route: 'admin.academic-years.store' }
+export default function PageSchoolYearCreate({ flash }) {
+  const formOptions = { method: 'POST', route: 'admin.school-years.store' }
   const { handleSubmit, errors, isLoading } = useFormHandler(formOptions)
 
   return (
@@ -31,7 +31,7 @@ export default function PageAcademicYearCreate({ flash }) {
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>
-        <AcademicYearFormData errors={errors} />
+        <SchoolYearFormData errors={errors} />
 
         <Form.Footer>
           <Form.ButtonSubmit disabled={isLoading} />
@@ -41,7 +41,7 @@ export default function PageAcademicYearCreate({ flash }) {
   )
 }
 
-PageAcademicYearCreate.layout = (page) => (
+PageSchoolYearCreate.layout = (page) => (
   <AuthLayout
     title={titles.create}
     breadcrumb={breadcrumbs.create}

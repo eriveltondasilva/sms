@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\AcademicYear;
+use App\Models\SchoolYear;
 
 // use Illuminate\Http\Request;
 
@@ -13,13 +13,13 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $academicYear = AcademicYear::isActive();
-        $activeYear = $academicYear->year;
+        $schoolYear = SchoolYear::isActive();
+        $activeYear = $schoolYear->year;
 
         $teacherProfile = Auth::user()->profile;
 
         $groups = $teacherProfile->groups()
-            ->where('academic_year_id', $academicYear->id)
+            ->where('school_year_id', $schoolYear->id)
             ->withCount('students')
             ->toBase()
             ->get();

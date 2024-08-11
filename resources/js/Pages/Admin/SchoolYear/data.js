@@ -9,7 +9,7 @@ export const titles = {
 // prettier-ignore
 const baseBreadcrumb = [
   { title: 'Painel', route: 'admin.dashboard' },
-  { title: titles.index, route: 'admin.academic-years.index' },
+  { title: titles.index, route: 'admin.school-years.index' },
 ]
 
 // prettier-ignore

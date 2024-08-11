@@ -22,7 +22,6 @@ return new class () extends Migration {
             $table->string('address_state')->nullable()->comment('Estado do professor');
             $table->string('address_zip_code')->nullable()->comment('CEP do professor');
             //
-            $table->boolean('is_active')->default(true)->comment('Indica se o professor está ativo');
             $table->timestamps();
         });
     }

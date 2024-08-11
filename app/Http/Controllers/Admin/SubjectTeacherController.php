@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 
-use App\Models\{AcademicYear, Subject, Teacher};
+use App\Models\{SchoolYear, Subject, Teacher};
 
 class SubjectTeacherController extends Controller
 {
@@ -41,9 +41,9 @@ class SubjectTeacherController extends Controller
     //# ACTION
     public function store(Subject $subject, Teacher $teacher)
     {
-        $academicYearId = AcademicYear::isActive()->id;
+        $schoolYearId = SchoolYear::isActive()->id;
 
-        $subject->teachers()->attach($teacher, ['academic_year_id' => $academicYearId]);
+        $subject->teachers()->attach($teacher, ['school_year_id' => $schoolYearId]);
         $subject->load('teachers');
 
         $message = sprintf('Professor(a) %s adicionado(a) à disciplina de %s.', $teacher->name, $subject->name);

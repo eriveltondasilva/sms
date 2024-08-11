@@ -10,7 +10,7 @@ import { breadcrumbs, titles } from './data'
 //
 export default function PageSubjectIndex({ subjects, auth }) {
   const hasSubjects = subjects.length > 0
-  const title = `${titles.index} - Ano Letivo: ${auth.activeYear}`
+  const title = `${titles.index} - Ano Letivo: ${auth.activeYear.year}`
 
   return (
     <>

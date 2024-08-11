@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
-    AcademicYearController,
+    SchoolYearController,
     CalendarController,
     DashboardController,
     GroupController,
@@ -24,16 +24,16 @@ Route::middleware(['auth', 'role:admin'])
     //* CALENDAR
     Route::get('/calendario', CalendarController::class)->name('calendar');
 
-    //* ACADEMIC YEAR ROUTES
-    Route::controller(AcademicYearController::class)
-    ->prefix('/anos-letivos')->name('academic-years.')->group(function () {
+    //* SCHOOL YEAR ROUTES
+    Route::controller(SchoolYearController::class)
+    ->prefix('/anos-letivos')->name('school-years.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{academicYear}/editar', 'edit')->name('edit');
+        Route::get('/{schoolYear}/editar', 'edit')->name('edit');
         //* actions
         Route::post('/', 'store')->name('store');
-        Route::put('/{academicYear}', 'update')->name('update');
-        Route::put('/{academicYear}/atualizar-status', 'updateStatus')->name('update-status');
+        Route::put('/{schoolYear}', 'update')->name('update');
+        Route::put('/{schoolYear}/atualizar-status', 'updateStatus')->name('update-status');
     });
 
     //* GROUP ROUTES

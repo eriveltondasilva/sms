@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\AcademicYear;
+use App\Models\SchoolYear;
 
 class GroupController extends Controller
 {
@@ -14,13 +14,13 @@ class GroupController extends Controller
     {
         $groupId = $request->query('search', '');
 
-        $academicYear = AcademicYear::isActive();
-        $activeYear = $academicYear->year;
+        $schoolYear = SchoolYear::isActive();
+        $activeYear = $schoolYear->year;
 
         $teacherProfile = Auth::user()->profile;
 
         $teacherGroups = $teacherProfile->groups()
-            ->where('academic_year_id', $academicYear->id)
+            ->where('school_year_id', $schoolYear->id)
             ->select('groups.id', 'groups.name')
             ->get();
 

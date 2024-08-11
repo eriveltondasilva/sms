@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->date('start_date')->nullable()->comment('Data de início do trimestre');
             $table->date('end_date')->nullable()->comment('Data de término do trimestre');
             //
-            $table->unsignedBigInteger('academic_year_id')->comment('ID do ano acadêmico');
+            $table->unsignedBigInteger('school_year_id')->comment('ID do ano acadêmico');
             //
             $table->timestamps();
         });

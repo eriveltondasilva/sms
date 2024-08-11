@@ -19,7 +19,7 @@ import { breadcrumbs, titles } from './data'
 export default function PageGroupIndex({ data }) {
   const { activeYear, teacherGroups, selectedGroup } = data || {}
 
-  const title = `${titles.index} - ${activeYear}`
+  const title = `${titles.index} - ${activeYear.year}`
   const hasGroup = selectedGroup?.students?.length > 0
 
   const formOptions = { route: 'teacher.groups.index' }
@@ -70,7 +70,7 @@ function StudentTable({ selectedGroup, students = [] }) {
     <>
       <h3 className='mb-3 text-lg'>
         # Turma selecionada: {selectedGroup?.name} (
-        {selectedGroup?.academic_year_id})
+        {selectedGroup?.school_year_id})
       </h3>
 
       <Table>

@@ -2,28 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\IsActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
-
-// ====================================
 
 class Teacher extends Model
 {
     use HasFactory;
 
-    protected $table = 'teachers';
-
     protected $fillable = [
         'name',
-        'gender',
-        'cpf',
-        'rg',
-        'birthday',
         'email',
+        'rg',
+        'cpf',
+        'gender',
         'phone',
-        'is_active',
+        'birthday',
         // Address
         'address_street',
         'address_city',
@@ -32,18 +26,12 @@ class Teacher extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'birthday' => 'datetime:Y-m-d',
+        'birthday' => 'datetime:d-m-Y',
     ];
 
     // ------------------------------
     // ### Scope ###
     // ------------------------------
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new IsActiveScope());
-    }
 
     // ------------------------------
     // ### Relationships ###

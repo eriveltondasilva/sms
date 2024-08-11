@@ -17,14 +17,14 @@ class Group extends Model
         'name',
         'classroom',
         'shift',
-        'academic_year_id',
+        'school_year_id',
     ];
 
     // ------------------------------
     // ### Scopes ###
     // ------------------------------
 
-    // public function scopeActiveAcademicYear($query)
+    // public function scopeActiveSchoolYear($query)
     // {
     //     return;
     // }
@@ -33,9 +33,9 @@ class Group extends Model
     // ### Relationships ###
     // ------------------------------
 
-    public function academicYear(): BelongsTo
+    public function schoolYear(): BelongsTo
     {
-        return $this->belongsTo(AcademicYear::class);
+        return $this->belongsTo(SchoolYear::class);
     }
 
     public function students(): BelongsToMany

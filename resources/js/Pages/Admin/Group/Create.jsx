@@ -2,11 +2,11 @@ import { Check } from 'lucide-react'
 
 import { Alert } from '@/Components/Alert'
 import { Form } from '@/Components/Form'
-
-import { useFormHandler } from '@/Hooks/useFormHandler'
+import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
-import { PageHeader } from '@/Components/PageHeader'
+import { useFormHandler } from '@/Hooks/useFormHandler'
+
 import GroupFormData from './Partials/GroupFormData'
 import { breadcrumbs, titles } from './data'
 
@@ -21,7 +21,7 @@ export default function PageGroupCreate({ flash }) {
           color='success'
           icon={Check}
           onDismiss>
-          {flash.message}
+          <div>{flash.message}</div>
           <Alert.Link href={flash.link}>Clique aqui para vê-la.</Alert.Link>
         </Alert>
       )}

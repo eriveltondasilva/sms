@@ -82,7 +82,7 @@ export function AuthLayout({
             onCollapseSidebar={handleCollapse}
             onOpenSidebar={() => setIsOpen(true)}
           />
-          <Header.Right activeYear={activeYear}>
+          <Header.Right activeYear={activeYear.year}>
             <Header.Dropdown user={user} />
           </Header.Right>
         </Header>

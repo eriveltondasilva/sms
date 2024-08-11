@@ -13,7 +13,7 @@ return new class () extends Migration {
             $table->string('classroom')->nullable()->comment('Sala de aula');
             $table->string('shift')->nullable()->comment('Turno');
             //
-            $table->unsignedBigInteger('academic_year_id')->comment('ID do ano escolar');
+            $table->unsignedBigInteger('school_year_id')->comment('ID do ano escolar');
             //
             $table->timestamps();
         });

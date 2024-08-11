@@ -22,7 +22,7 @@ const AdminSidebarItems = [
   [
     { title: 'Turmas', icon: UsersRound, route: 'admin.groups.index' },
     { title: 'Disciplinas', icon: LibraryBig, route: 'admin.subjects.index' },
-    { title: 'Anos Letivos', icon: Calendar, route: 'admin.academic-years.index' },
+    { title: 'Anos Letivos', icon: Calendar, route: 'admin.school-years.index' },
   ],
 ]
 

@@ -9,7 +9,7 @@ import GroupNotFound from './Partials/GroupNotFound'
 import { breadcrumbs, titles } from './data'
 
 export default function PageGroupIndex({ groups = [], auth = {} }) {
-  const title = `${titles.index} - ${auth.activeYear}`
+  const title = `${titles.index} - ${auth.activeYear.year}`
   const hasGroups = groups.length > 0
 
   return (

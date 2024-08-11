@@ -18,7 +18,7 @@ class Quarter extends Model
         'name',
         'start_date',
         'end_date',
-        'academic_year_id',
+        'school_year_id',
     ];
 
     protected $casts = [
@@ -30,9 +30,9 @@ class Quarter extends Model
     // ### Relationships ###
     // ------------------------------
 
-    public function academicYear(): BelongsTo
+    public function schoolYear(): BelongsTo
     {
-        return $this->belongsTo(AcademicYear::class);
+        return $this->belongsTo(SchoolYear::class);
     }
 
     public function grades(): HasMany

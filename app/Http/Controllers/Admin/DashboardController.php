@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{AcademicYear, Student, Teacher};
+use App\Models\{SchoolYear, Student, Teacher};
 
 class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $academicYear  = AcademicYear::isActive();
-        $groupsCount   = $academicYear->groups()->count();
+        $schoolYear  = SchoolYear::isActive();
+        $groupsCount   = $schoolYear->groups()->count();
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
-        $activeYear    = $academicYear->year;
+        $activeYear    = $schoolYear->year;
 
         $data = compact('activeYear', 'groupsCount', 'studentsCount', 'teachersCount');
 

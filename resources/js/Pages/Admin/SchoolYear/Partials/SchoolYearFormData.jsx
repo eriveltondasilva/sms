@@ -1,7 +1,7 @@
 import { Input } from '@/Components/Input'
 
 //
-export default function AcademicYearFormData({ data = {}, errors = {} }) {
+export default function SchoolYearFormData({ data = {}, errors = {} }) {
   const isCreateRoute = route().current('*.create')
 
   return (
@@ -14,8 +14,8 @@ export default function AcademicYearFormData({ data = {}, errors = {} }) {
         defaultValue={data.year}
         error={errors.year}
         readOnly={!isCreateRoute}
-        maxLength='4'
-        minLength='4'
+        min='1900'
+        max='2100'
         autoFocus
         required
       />

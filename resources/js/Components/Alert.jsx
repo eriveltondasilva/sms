@@ -11,6 +11,7 @@ function AlertRoot({ onDismiss, children, ...props }) {
     <>
       {isShowed && (
         <FlowbiteAlert
+          className='mb-4'
           onDismiss={onDismiss && (() => setIsShowed(false))}
           {...props}>
           {children}

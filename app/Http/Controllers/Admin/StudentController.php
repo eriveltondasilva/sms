@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\PersonRequest;
+use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 
 class StudentController extends Controller
@@ -42,18 +42,20 @@ class StudentController extends Controller
     }
 
     // # ACTIONS
-    public function store(PersonRequest $request)
+    public function store(StudentRequest $request)
     {
         $student = Student::create($request->validated());
         $studentUrl = route('admin.students.show', $student->id);
 
-        return back()->with(['message' => 'Cadastro do aluno criado com sucesso!', 'link' => $studentUrl]);
+        return back()
+            ->with(['message' => 'Cadastro do aluno criado com sucesso!', 'link' => $studentUrl]);
     }
 
-    public function update(PersonRequest $request, Student $student)
+    public function update(StudentRequest $request, Student $student)
     {
         $student->update($request->validated());
 
-        return back()->with('message', 'Aluno atualizado com sucesso!');
+        return to_route('admin.students.show', $student)
+            ->withMessage('Aluno atualizado com sucesso!');
     }
 }

@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use App\Models\AcademicYear;
+
+use App\Models\SchoolYear;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +38,7 @@ class HandleInertiaRequests extends Middleware
 
         $userData   = $user->only(['id', 'username', 'email', 'avatar_url']);
         $role       = $user->getRoleNames()[0];
-        $activeYear = AcademicYear::IsActive()->year;
+        $activeYear = SchoolYear::isActive();
 
         return [
             'activeYear' => $activeYear,
