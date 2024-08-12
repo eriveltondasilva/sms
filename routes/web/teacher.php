@@ -10,24 +10,19 @@ use App\Http\Controllers\Teacher\{
 
 // ### TEACHER ROUTES ###
 Route::middleware(['auth', 'role:teacher'])
-->prefix('/professor')->name('teacher.')->group(function () {
+->prefix('/teacher')->name('teacher.')->group(function () {
     //* DASHBOARD ROUTES
-    Route::get('/painel', DashboardController::class)->name('dashboard');
+    Route::get('/panel', [DashboardController::class, 'index'])->name('dashboard');
 
     //* CALENDAR ROUTES
-    Route::get('/calendario', CalendarController::class)->name('calendar');
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
 
     //* GROUP ROUTES
-    Route::controller(GroupController::class)
-    ->prefix('/turmas')->name('groups.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
+    Route::resource('groups', GroupController::class)->only(['index']);
+
 
     // * GRADE ROUTES
-    Route::controller(GradeController::class)
-    ->prefix('/notas')->name('grades.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
+    Route::resource('grades', GradeController::class)->only(['index']);
 
     //* TEACHER ROUTES
 

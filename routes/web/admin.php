@@ -13,109 +13,81 @@ use App\Http\Controllers\Admin\{
     SubjectTeacherController,
     TeacherController,
     TeacherUserController,
+    UserController,
 };
 
 // ### ADMIN ROUTES ###
 Route::middleware(['auth', 'role:admin'])
 ->prefix('/admin')->name('admin.')->group(function () {
     //* DASHBOARD ROUTES
-    Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/panel', [DashboardController::class, 'index'])->name('dashboard');
+
 
     //* CALENDAR
-    Route::get('/calendário', [CalendarController::class, 'index'])->name('calendar');
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
+
 
     //* SCHOOL YEAR ROUTES
-    Route::controller(SchoolYearController::class)
-    ->prefix('/anos-letivos')->name('school-years.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{schoolYear}/editar', 'edit')->name('edit');
-        //* actions
-        Route::post('/', 'store')->name('store');
-        Route::put('/{schoolYear}', 'update')->name('update');
-        Route::put('/{schoolYear}/atualizar-status', 'updateStatus')->name('update-status');
-    });
+    Route::put('/school-years/{schoolYear}/update-status', [SchoolYearController::class, 'updateStatus'])
+        ->name('school-years.update-status');
+
+    Route::resource('school-years', SchoolYearController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ])->parameters(['school-years' => 'schoolYear']);
+
 
     //* GROUP ROUTES
-    Route::controller(GroupController::class)
-    ->prefix('/turmas')->name('groups.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{group}/editar', 'edit')->name('edit');
-        //* actions
-        Route::post('/', 'store')->name('store');
-        Route::put('/{group}', 'update')->name('update');
-    });
+    Route::resource('groups', GroupController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
+
 
     //* GROUP/STUDENT ROUTES
-    Route::controller(GroupStudentController::class)
-    ->prefix('/turmas/{group}/alunos')->name('groups.students.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/adicionar', 'create')->name('create');
-        //* actions
-        Route::post('/{student}', 'store')->name('store');
-        Route::delete('/{student}', 'destroy')->name('destroy');
-    });
+    Route::resource('groups.students', GroupStudentController::class)->only([
+       'index', 'create', 'store', 'destroy'
+    ]);
+
 
     //* GROUP/TEACHER ROUTES
-    Route::controller(GroupTeacherController::class)
-    ->prefix('/turmas/{group}/professores')->name('groups.teachers.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/adicionar', 'create')->name('create');
-        //* actions
-        Route::post('/{teacher}', 'store')->name('store');
-        Route::delete('/{teacher}', 'destroy')->name('destroy');
-    });
+    Route::resource('groups.teachers', GroupTeacherController::class)->only([
+        'index', 'create', 'store', 'destroy'
+    ]);
+
 
     //* STUDENT ROUTES
-    Route::controller(StudentController::class)
-    ->prefix('/alunos')->name('students.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{student}', 'show')->name('show');
-        Route::get('/{student}/editar', 'edit')->name('edit');
-        //* actions
-        Route::post('/', 'store')->name('store');
-        Route::put('/{student}', 'update')->name('update');
-    });
+    Route::resource('students', StudentController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
+
 
     //* SUBJECT ROUTES
-    Route::controller(SubjectController::class)
-    ->prefix('/disciplinas')->name('subjects.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
+    Route::resource('subjects', SubjectController::class)->only([
+        'index', 
+    ]);
+
 
     //* SUBJECT/TEACHER ROUTES
-    Route::controller(SubjectTeacherController::class)
-    ->prefix('/disciplinas/{subject}/professores')->name('subjects.teachers.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/adicionar', 'create')->name('create');
-        //* actions
-        Route::post('/{teacher}', 'store')->name('store');
-        Route::delete('/{teacher}', 'destroy')->name('destroy');
-    });
+    Route::resource('subjects.teachers', SubjectTeacherController::class)->only([
+        'index', 'create', 'store', 'destroy'
+    ]);
+
 
     //* TEACHER ROUTES
-    Route::controller(TeacherController::class)
-    ->prefix('/professores')->name('teachers.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/cadastrar', 'create')->name('create');
-        Route::get('/{teacher}', 'show')->name('show');
-        Route::get('/{teacher}/editar', 'edit')->name('edit');
-        //* actions
-        Route::post('/', 'store')->name('store');
-        Route::put('/{teacher}', 'update')->name('update');
-    });
+    Route::resource('teachers', TeacherController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
+
 
     //* TEACHER/USER ROUTES
-    Route::controller(TeacherUserController::class)
-    ->prefix('/professores/{teacher}/usuários')->name('teachers.users.')->group(function () {
-        Route::get('/adicionar', 'create')->name('create');
-        Route::get('/{user}', 'show')->name('show');
-        Route::get('/{user}/editar', 'edit')->name('edit');
-        //* actions
-        Route::post('/', 'store')->name('store');
-        Route::put('/{user}', 'update')->name('update');
-        Route::delete('/{user}', 'destroy')->name('destroy');
-    });
+    Route::resource('teachers.users', TeacherUserController::class)->only([
+        'create', 'edit', 'store', 'update'
+    ]);
+
+
+    //* USER ROUTES
+    Route::resource('users', UserController::class)->only([
+        'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
+    ]);
+
+    ds()->routes();
 });

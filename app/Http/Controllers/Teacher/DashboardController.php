@@ -11,7 +11,7 @@ use App\Models\SchoolYear;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $schoolYear = SchoolYear::isActive();
         $activeYear = $schoolYear->year;

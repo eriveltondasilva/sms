@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
 use App\Enums\RoleEnum;
+use App\Http\Requests\TeacherUserRequest;
 use App\Models\{Teacher, User};
 
 class TeacherUserController extends Controller
@@ -33,15 +31,9 @@ class TeacherUserController extends Controller
     }
 
     // # ACTIONS
-    public function store(Request $request, Teacher $teacher)
+    public function store(TeacherUserRequest $request, Teacher $teacher)
     {
-        $validatedData = $request->validate([
-            'username' => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users,email',
-            'password' => ['required', 'confirmed', Password::defaults()],
-        ]);
-
-        $user = $teacher->user()->create($validatedData);
+        $user = $teacher->user()->create($request->validated());
         $user->assignRole(RoleEnum::TEACHER);
         $message = 'Usuário criado com sucesso';
 
@@ -49,32 +41,12 @@ class TeacherUserController extends Controller
             ->withFlash(compact('message'));
     }
 
-    public function update(Request $request, Teacher $teacher, User $user)
+    public function update(TeacherUserRequest $request, Teacher $teacher, User $user)
     {
-        $rules = [
-            'username' => 'required|string|max:255',
-            'email'    => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user)
-            ]
-        ];
-
-        if ($request->filled('password')) {
-            $rules['password'] = ['required', 'confirmed', Password::defaults()];
-        }
-
-        $user->update($request->validate($rules));
+        $user->update($request->validated());
         $message = 'Usuário atualizado com sucesso';
 
         return back()
             ->withFlash(compact('message'));
-    }
-
-    public function destroy(User $user, Teacher $teacher)
-    {
-        //
     }
 }

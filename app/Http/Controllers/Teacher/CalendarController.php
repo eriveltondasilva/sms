@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class CalendarController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         return inertia('Teacher/Calendar');
     }

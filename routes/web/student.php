@@ -5,12 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 // ### STUDENT ROUTES ###
 Route::middleware(['auth', 'role:student'])
-->prefix('/aluno')->name('student.')->group(function () {
+->prefix('/student')->name('student.')->group(function () {
     //* DASHBOARD ROUTES
-    Route::get('/painel', DashboardController::class)->name('dashboard');
+    Route::get('/painel', [DashboardController::class, 'index'])->name('dashboard');
 
     //* CALENDAR ROUTES
-    Route::get('/calendario', function () {
-        return inertia('Calendar');
-    })->name('calendar');
+    Route::get('/calendar', fn () => inertia('Calendar'))->name('calendar');
 });

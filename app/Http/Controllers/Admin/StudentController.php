@@ -48,7 +48,8 @@ class StudentController extends Controller
         $link = route('admin.students.show', $student->id);
         $message = 'Cadastro do aluno criado com sucesso!';
 
-        return back()->withFlash(compact('message', 'link'));
+        return back()
+            ->withFlash(compact('message', 'link'));
     }
 
     public function update(StudentRequest $request, Student $student)
