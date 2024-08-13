@@ -18,24 +18,18 @@ class SchoolYear extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
+        'is_active'  => 'boolean',
         'start_date' => 'datetime:Y-m-d',
-        'end_date' => 'datetime:Y-m-d',
+        'end_date'   => 'datetime:Y-m-d',
     ];
 
-    // ------------------------------
-    // ### Scopes ###
-    // ------------------------------
-
+    //# SCOPES
     public function scopeIsActive($query)
     {
         return $query->where('is_active', true)->firstOrFail();
     }
 
-    // ------------------------------
-    // ### Relationships ###
-    // ------------------------------
-
+    //# RELATIONSHIPS
     public function quarters(): HasMany
     {
         return $this->hasMany(Quarter::class);

@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
-// ====================================
-
 class Quarter extends Model
 {
     use HasFactory;
-
-    protected $table = 'quarters';
 
     protected $fillable = [
         'name',
@@ -23,13 +19,10 @@ class Quarter extends Model
 
     protected $casts = [
         'start_date' => 'datetime:Y-m-d',
-        'end_date' => 'datetime:Y-m-d',
+        'end_date'   => 'datetime:Y-m-d',
     ];
 
-    // ------------------------------
-    // ### Relationships ###
-    // ------------------------------
-
+    //# RELATIONSHIPS
     public function schoolYear(): BelongsTo
     {
         return $this->belongsTo(SchoolYear::class);

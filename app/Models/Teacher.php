@@ -31,14 +31,7 @@ class Teacher extends Model
         'birthday' => 'datetime:Y-m-d',
     ];
 
-    // ------------------------------
-    // ### Scope ###
-    // ------------------------------
-
-    // ------------------------------
-    // ### Relationships ###
-    // ------------------------------
-
+    //# RELATIONSHIPS
     public function user(): MorphOne
     {
         return $this->morphOne(User::class, 'profile');

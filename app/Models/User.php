@@ -32,11 +32,11 @@ class User extends Authenticatable
 
     protected $casts = [
         'is_active'         => 'boolean',
-        'password'          => 'hashed',
         'email_verified_at' => 'datetime',
+        'password'          => 'hashed',
     ];
 
-
+    //# MUTATORS/ACCESSORS
     public function updatedWithinDay(): bool
     {
         return $this->updated_at->isAfter(now()->subDay());
@@ -61,7 +61,7 @@ class User extends Authenticatable
         return $query->where('is_active', false);
     }
 
-    // # RELATIONS
+    //# RELATIONSHIPS
     public function profile(): MorphTo
     {
         return $this->morphTo();
