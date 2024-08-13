@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 
 use App\Models\{Group, Teacher};
 
@@ -26,9 +25,7 @@ class GroupTeacherController extends Controller
     public function create(Group $group)
     {
         $teachers = Teacher::select('id', 'name', 'email')
-            ->whereDoesntHave('groups', function (Builder $query) use ($group) {
-                $query->where('group_id', $group->id);
-            })
+            ->whereDoesntHave('groups', fn ($query) => $query->where('group_id', $group->id))
             ->orderBy('name')
             ->toBase()
             ->get();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\StudentRequest;
@@ -16,7 +15,7 @@ class StudentController extends Controller
         $searchTerm = $request->query('search', '');
 
         $students = Student::select('id', 'name', 'gender')
-            ->when($searchTerm, function (Builder $query) use ($searchTerm) {
+            ->when($searchTerm, function ($query) use ($searchTerm) {
                 $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderByDesc('id')
@@ -45,7 +44,7 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $student = Student::create($request->validated());
-        $link = route('admin.students.show', $student->id);
+        $link = route('admin.students.show', $student);
         $message = 'Cadastro do aluno criado com sucesso!';
 
         return back()

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\TeacherRequest;
@@ -16,7 +15,7 @@ class TeacherController extends Controller
         $searchTerm = $request->query('search', '');
 
         $teachers = Teacher::select('id', 'name', 'email')
-            ->when($searchTerm, function (Builder $query) use ($searchTerm) {
+            ->when($searchTerm, function ($query) use ($searchTerm) {
                 $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderByDesc('id')
@@ -45,7 +44,7 @@ class TeacherController extends Controller
     public function store(TeacherRequest $request)
     {
         $teacher = Teacher::create($request->validated());
-        $link    = route('admin.teachers.show', $teacher->id);
+        $link    = route('admin.teachers.show', $teacher);
         $message = 'Cadastro do professor criado com sucesso!';
 
         return back()

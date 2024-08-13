@@ -11,8 +11,7 @@ class SchoolYearController extends Controller
 {
     public function index()
     {
-        $schoolYears = SchoolYear::query()
-            ->latest('year')
+        $schoolYears = SchoolYear::latest('year')
             ->take(8)
             ->withCount('groups')
             ->toBase()
@@ -28,8 +27,6 @@ class SchoolYearController extends Controller
 
     public function edit(SchoolYear $schoolYear)
     {
-        $schoolYear->load('quarters');
-
         return inertia('Admin/SchoolYear/Edit', compact('schoolYear'));
     }
 
@@ -51,7 +48,7 @@ class SchoolYearController extends Controller
         $schoolYear = SchoolYear::create($request->validated());
         $schoolYear->groups()->createMany($quarters);
 
-        $link = route('admin.school-years.edit', $schoolYear->id);
+        $link    = route('admin.school-years.edit', $schoolYear);
         $message = sprintf('Ano letivo de %d criado com sucesso!', $schoolYear->year);
 
         return back()

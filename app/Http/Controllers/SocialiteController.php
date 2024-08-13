@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 
-// use Illuminate\Http\Request;
+use App\Models\User;
 
 class SocialiteController extends Controller
 {
@@ -18,12 +17,11 @@ class SocialiteController extends Controller
     public function callback()
     {
         $providerUser = Socialite::driver('google')->user();
+        $user = User::where('email', $providerUser->getEmail())->firstOrFail();
 
-        $user = User::where('email', $providerUser->getEmail())->firstOr(function () {
-            return 'Usuário inexistente no sistema';
-        });
+        $shouldUpdateUser = ! $user->updatedWithinDay() || ! $user->provider_id;
 
-        if (! $user->updatedWithinDay() || ! $user->provider_id) {
+        if ($shouldUpdateUser) {
             $user->update([
                 'username'    => $providerUser->getNickname(),
                 'avatar_url'  => $providerUser->getAvatar(),

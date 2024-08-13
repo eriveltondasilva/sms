@@ -9,11 +9,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $schoolYear  = SchoolYear::isActive();
+        $schoolYear    = SchoolYear::isActive();
+        $activeYear    = $schoolYear->year;
         $groupsCount   = $schoolYear->groups()->count();
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
-        $activeYear    = $schoolYear->year;
 
         $data = compact('activeYear', 'groupsCount', 'studentsCount', 'teachersCount');
 

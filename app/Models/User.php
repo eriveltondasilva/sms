@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -21,7 +20,6 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
-        'username',
         'is_active',
         'avatar_url',
         'provider_id',
@@ -32,38 +30,36 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
+    protected $casts = [
+        'is_active'         => 'boolean',
+        'password'          => 'hashed',
+        'email_verified_at' => 'datetime',
+    ];
+
+
+    public function updatedWithinDay(): bool
     {
-        return [
-            'is_active'         => 'boolean',
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-        ];
+        return $this->updated_at->isAfter(now()->subDay());
     }
 
+    //# ATTRIBUTES
     public function role(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->getRoleNames()->first(),
+            get: fn () => $this->getRoleNames()->first(),
         );
     }
 
     //# SCOPES
-    public function scopeIsActive(Build $query)
+    public function scopeIsActive(Builder $query)
     {
-        return $query->where('is_active', 1);
+        return $query->where('is_active', true);
     }
 
     public function scopeIsNotActive(Builder $query)
     {
-        return $query->where('is_active', 0);
+        return $query->where('is_active', false);
     }
-
-    public function scopeUpdatedWithinDay(Builder $query)
-    {
-        return $query->where('updated_at', '>=', now()->subDay())->exists();
-    }
-
 
     // # RELATIONS
     public function profile(): MorphTo

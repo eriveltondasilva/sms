@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
-
 use App\Models\{SchoolYear, Subject, Teacher};
 
 class SubjectTeacherController extends Controller
@@ -26,9 +24,7 @@ class SubjectTeacherController extends Controller
     public function create(Subject $subject)
     {
         $teachers = Teacher::select('id', 'name', 'cpf')
-            ->whereDoesntHave('subjects', function (Builder $query) use ($subject) {
-                $query->where('subject_id', $subject->id);
-            })
+            ->whereDoesntHave('subjects', fn ($query) => $query->where('subject_id', $subject->id))
             ->orderBy('name')
             ->toBase()
             ->get();

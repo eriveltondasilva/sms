@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 
 use App\Http\Requests\GroupRequest;
 use App\Models\Group;
@@ -13,10 +12,8 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::query()
-            ->whereHas('schoolYear', function (Builder $query) {
-                $query->where('is_active', true);
-            })
-            ->withCount('students', 'teachers')
+            ->whereHas('schoolYear', fn ($query) => $query->where('is_active', true))
+            ->withCount(['students', 'teachers'])
             ->toBase()
             ->get();
 
@@ -36,8 +33,8 @@ class GroupController extends Controller
     // # ACTIONS
     public function store(GroupRequest $request)
     {
-        $group = Group::create($request->validated());
-        $link  = route('admin.groups.edit', $group->id);
+        $group   = Group::create($request->validated());
+        $link    = route('admin.groups.edit', $group);
         $message = sprintf('Turma do %s criada com sucesso!', $group->name);
 
         return back()
@@ -53,11 +50,12 @@ class GroupController extends Controller
             ->withFlash(compact('message'));
     }
 
-    // public function destroy(Group $group)
-    // {
-    //     $group->delete();
-    //     $message = sprintf('Turma do %s excluída com sucesso!', $group->name);
+    public function destroy(Group $group)
+    {
+        $group->delete();
+        $message = sprintf('Turma do %s excluída com sucesso!', $group->name);
 
-    //     return back()->with('message', $message);
-    // }
+        return back()
+            ->withFlash(compact('message'));
+    }
 }

@@ -24,11 +24,6 @@ class Group extends Model
     // ### Scopes ###
     // ------------------------------
 
-    // public function scopeActiveSchoolYear($query)
-    // {
-    //     return;
-    // }
-
     // ------------------------------
     // ### Relationships ###
     // ------------------------------

@@ -62,7 +62,7 @@ Route::middleware(['auth', 'role:admin'])
 
     //* SUBJECT ROUTES
     Route::resource('subjects', SubjectController::class)->only([
-        'index', 
+        'index',
     ]);
 
 
@@ -89,5 +89,5 @@ Route::middleware(['auth', 'role:admin'])
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
 
-    ds()->routes();
+    // ds()->routes();
 });

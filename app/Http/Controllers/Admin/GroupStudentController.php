@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 use App\Models\{SchoolYear, Group, Student};
@@ -30,10 +29,10 @@ class GroupStudentController extends Controller
         $activeYear = SchoolYear::isActive();
 
         $students = Student::select('id', 'name', 'gender')
-            ->whereDoesntHave('groups', function (Builder $query) use ($activeYear) {
+            ->whereDoesntHave('groups', function ($query) use ($activeYear) {
                 $query->where('school_year_id', $activeYear->id);
             })
-            ->when($searchTerm, function (Builder $query) use ($searchTerm) {
+            ->when($searchTerm, function ($query) use ($searchTerm) {
                 $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
             })
             ->orderBy('name')
@@ -59,7 +58,7 @@ class GroupStudentController extends Controller
     public function destroy(Group $group, Student $student)
     {
         $group->students()->detach($student);
-        $group->
+        $group->load('students');
         $message = sprintf('Aluno(a) %s removido(a) da turma do %s.', $student->name, $group->name);
 
         return back()
