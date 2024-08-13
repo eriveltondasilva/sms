@@ -17,15 +17,14 @@ class GroupRequest extends FormRequest
         return match ($this->method()) {
             'POST'   => $this->store(),
             'PUT'    => $this->update(),
-            'DELETE' => $this->destroy(),
+            'DELETE' => [],
             default  => [],
         };
     }
 
     private function store(): array
     {
-        return [
-            ...$this->update(),
+        return array_merge($this->update(), [
             'name' => [
                 'required',
                 'string',
@@ -33,7 +32,7 @@ class GroupRequest extends FormRequest
                 Rule::unique('groups')->where('school_year_id', $this->input('school_year_id')),
             ],
             'school_year_id' => 'required|integer|exists:school_years,id',
-        ];
+        ]);
     }
 
     private function update(): array
@@ -44,18 +43,13 @@ class GroupRequest extends FormRequest
         ];
     }
 
-    private function destroy(): array
-    {
-        return [];
-    }
-
     public function attributes(): array
     {
         return [
-            'name' => 'nome da turma',
+            'name'           => 'nome da turma',
+            'classroom'      => 'sala de aula',
+            'shift'          => 'turno',
             'school_year_id' => 'ano letivo',
-            'classroom' => 'sala de aula',
-            'shift' => 'turno',
         ];
     }
 }

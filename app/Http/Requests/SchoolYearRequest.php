@@ -23,17 +23,16 @@ class SchoolYearRequest extends FormRequest
 
     private function store(): array
     {
-        $currentYear = date('Y');
+        $currentYear = now()->year;
 
-        return [
+        return array_merge($this->update(), [
             'year' => [
                 'required',
                 'integer',
                 'between:' . $currentYear . ',' . ($currentYear + 1),
                 Rule::unique('school_years'),
             ],
-            ...$this->update(),
-        ];
+        ]);
     }
 
     private function update(): array
@@ -47,9 +46,9 @@ class SchoolYearRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'year' => 'ano letivo',
+            'year'       => 'ano letivo',
             'start_date' => 'início do ano letivo',
-            'end_date' => 'fim do ano letivo',
+            'end_date'   => 'fim do ano letivo',
         ];
     }
 }
