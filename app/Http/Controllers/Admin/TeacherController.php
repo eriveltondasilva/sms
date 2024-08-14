@@ -12,11 +12,14 @@ class TeacherController extends Controller
 {
     public function index(Request $request)
     {
-        $searchTerm = $request->query('search', '');
+        $search = $request->query('search');
 
-        $teachers = Teacher::select('id', 'name', 'email')
-            ->when($searchTerm, function ($query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
+        $teachers = Teacher::select(['id', 'name', 'email'])
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('id', $search)
+                        ->orWhereLike('name', $search . '%');
+                });
             })
             ->orderByDesc('id')
             ->toBase()

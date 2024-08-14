@@ -12,13 +12,22 @@ class StudentController extends Controller
 {
     public function index(Request $request)
     {
-        $searchTerm = $request->query('search', '');
+        $search = $request->query('search');
+        $gender = $request->query('gender');
 
-        $students = Student::select('id', 'name', 'gender')
-            ->when($searchTerm, function ($query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
+        $students = Student::select(['id', 'name', 'gender'])
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('id', $search)
+                        ->orWhereLike('name', $search . '%');
+                });
             })
-            ->orderByDesc('id')
+            ->when($gender, fn ($query) => $query->where('gender', $gender))
+            ->when($search, function ($query) {
+                $query->orderBy('name', 'asc');
+            }, function ($query) {
+                $query->orderBy('id', 'desc');
+            })
             ->toBase()
             ->paginate(20);
 
