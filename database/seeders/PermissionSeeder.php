@@ -5,13 +5,13 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-use App\Enums\PermissionEnum;
+use App\Enums\PermissionsEnum;
 
 class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach (PermissionEnum::cases() as $permission) {
+        foreach (PermissionsEnum::cases() as $permission) {
             Permission::create([
                 'name'         => $permission->value,
                 'display_name' => $permission->label()

@@ -9,15 +9,11 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         $gender = fake()->randomElement(['M', 'F']);
-
-        $title     = $gender === 'M' ? fake()->titleMale() : fake()->titleFemale();
-        $firstName = $gender === 'M' ? fake()->firstNameMale() : fake()->firstNameFemale();
-        $fullName  = $title . ' ' . $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
-        $email     = strtolower($firstName) . '@' . fake()->safeEmailDomain();
+        $name   = $gender === 'M' ? fake()->name('male') : fake()->name('female');
 
         return [
-            'name'      => $fullName,
-            'email'     => $email,
+            'name'      => $name,
+            'email'     => fake()->unique()->safeEmail(),
             'cpf'       => fake()->unique()->cpf(),
             'rg'        => fake()->unique()->rg(),
             'gender'    => $gender,

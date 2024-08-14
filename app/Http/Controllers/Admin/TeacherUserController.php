@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Enums\RoleEnum;
+use App\Enums\RolesEnum;
 use App\Http\Requests\TeacherUserRequest;
 use App\Models\{Teacher, User};
 
@@ -34,7 +34,7 @@ class TeacherUserController extends Controller
     public function store(TeacherUserRequest $request, Teacher $teacher)
     {
         $user = $teacher->user()->create($request->validated());
-        $user->assignRole(RoleEnum::TEACHER);
+        $user->assignRole(RolesEnum::TEACHER);
         $message = 'Usuário criado com sucesso';
 
         return to_route('admin.teachers.show', $teacher)

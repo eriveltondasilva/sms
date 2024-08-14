@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use App\Enums\RoleEnum;
+use App\Enums\RolesEnum;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -15,27 +15,27 @@ class UserSeeder extends Seeder
             [
                 'username' => 'erivelton',
                 'email'    => 'eriveltondasilva13@gmail.com',
-                'role'     => RoleEnum::ADMIN,
+                'role'     => RolesEnum::ADMIN,
             ],
             [
                 'username' => 'admin',
                 'email'    => 'admin@example.com',
-                'role'     => RoleEnum::ADMIN,
+                'role'     => RolesEnum::ADMIN,
             ],
             [
                 'username' => 'teacher',
                 'email'    => 'teacher@example.com',
-                'role'     => RoleEnum::TEACHER,
+                'role'     => RolesEnum::TEACHER,
             ],
             [
                 'username' => 'student',
                 'email'    => 'student@example.com',
-                'role'     => RoleEnum::STUDENT,
+                'role'     => RolesEnum::STUDENT,
             ],
             [
                 'username' => 'user',
                 'email'    => 'user@example.com',
-                'role'     => RoleEnum::USER,
+                'role'     => RolesEnum::USER,
             ],
         ];
 
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         }
 
         User::factory()->count(10)->create()->each(function ($user) {
-            $user->assignRole(RoleEnum::DEFAULT);
+            $user->assignRole(RolesEnum::DEFAULT);
         });
     }
 }

@@ -13,11 +13,9 @@ class StudentFactory extends Factory
         $firstName = $gender === 'M' ? fake()->firstNameMale() : fake()->firstNameFemale();
         $fullName  = $firstName . ' ' . fake()->lastName() . ' ' . fake()->lastName();
 
-        $email = strtolower($firstName) . '@' . fake()->safeEmailDomain();
-
         return [
             'name'            => $fullName,
-            'email'           => $email,
+            'email'           => fake()->unique()->safeEmail(),
             'cpf'             => fake()->unique()->cpf(),
             'rg'              => fake()->unique()->rg(),
             'gender'          => $gender,

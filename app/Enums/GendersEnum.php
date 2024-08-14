@@ -2,14 +2,17 @@
 
 namespace App\Enums;
 
-enum GenderEnum: string
+use App\Trait\EnumHelperTrait;
+
+enum GendersEnum: string
 {
-    case MALE   = 'M';
+    use EnumHelperTrait;
+
     case FEMALE = 'F';
+    case MALE   = 'M';
 
     public const DEFAULT = self::MALE;
 
-    /* Returns the label corresponding to the value of the object. */
     public function label(): string
     {
         return match ($this) {
