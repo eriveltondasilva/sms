@@ -6,6 +6,11 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  resolve: {
+    alias: {
+      '@/images': '/resources/images'
+    }
+  },
   plugins: [
     laravel({
       input: 'resources/js/app.jsx',

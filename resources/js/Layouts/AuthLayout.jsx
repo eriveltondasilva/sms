@@ -12,7 +12,7 @@ import { useSidebarCollapsed } from '@/Hooks/useSidebarCollapsed'
 
 import SidebarItems from './data'
 
-import schoolImg from '../../images/school.png'
+import schoolImg from '@/images/school.png'
 
 export function AuthLayout({
   title = '',
