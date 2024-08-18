@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { Table as FlowbiteTable } from 'flowbite-react'
+import { twJoin } from 'tailwind-merge'
 
 function TableRoot({ children }) {
   return (
@@ -26,7 +27,10 @@ function TableRow({ children }) {
 function TableLink({ children, ...props }) {
   return (
     <Link
-      className='font-semibold text-blue-600 underline hover:no-underline dark:text-blue-500'
+      className={twJoin(
+        'font-medium underline hover:font-extrabold hover:no-underline',
+        'text-blue-600 dark:text-blue-500'
+      )}
       {...props}>
       {children}
     </Link>

@@ -16,12 +16,9 @@ import { formatId } from '@/Utils/formatId'
 import { breadcrumbs, titles } from './data'
 import TeacherNotFound from './Partials/TeacherNotFound'
 
-export default function PageTeacherIndex({ teachers = [] }) {
+export default function PageTeacherIndex({ teachers = [], totalTeachers = 0 }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
-
-  const hasTeachers = teachers.data.length > 0
-  const hasPagination = teachers.total > teachers.data.length
 
   const formOptions = { route: 'admin.teachers.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
@@ -65,18 +62,23 @@ export default function PageTeacherIndex({ teachers = [] }) {
       </SearchFilter>
 
       {/* Teacher NotFound */}
-      {!hasTeachers && <TeacherNotFound />}
+      <TeacherNotFound totalTeachers={totalTeachers} />
 
       {/* Teacher Table */}
-      {hasTeachers && <TeacherTable teachers={teachers.data} />}
+      <TeacherTable teachers={teachers.data} />
 
       {/* Pagination */}
-      {hasPagination && <TeacherPagination teachers={teachers} />}
+      <TeacherPagination
+        teachers={teachers}
+        totalTeachers={totalTeachers}
+      />
     </>
   )
 }
 
-function TeacherTable({ teachers = [] }) {
+function TeacherTable({ teachers }) {
+  if (teachers.length === 0) return null
+
   return (
     <Table>
       <Table.Header>
@@ -112,19 +114,19 @@ function TeacherTable({ teachers = [] }) {
   )
 }
 
-function TeacherPagination({ teachers = {} }) {
-  const { total, from, to, next_page_url, prev_page_url } = teachers
+function TeacherPagination({ teachers, totalTeachers }) {
+  if (totalTeachers <= teachers.data.length) return null
 
   return (
     <Pagination>
       <Pagination.Left
-        to={to}
-        from={from}
-        total={total}
+        to={teachers.to}
+        from={teachers.from}
+        total={totalTeachers}
       />
       <Pagination.Right>
-        <Pagination.Previous href={prev_page_url} />
-        <Pagination.Next href={next_page_url} />
+        <Pagination.Previous href={teachers.prev_page_url} />
+        <Pagination.Next href={teachers.next_page_url} />
       </Pagination.Right>
     </Pagination>
   )

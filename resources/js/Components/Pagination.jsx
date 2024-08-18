@@ -1,12 +1,20 @@
 import { Link } from '@inertiajs/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { twJoin } from 'tailwind-merge'
 
 //
 function PaginationRoot({ children }) {
   return (
-    <div className='relative overflow-hidden rounded-b-lg bg-white shadow-md dark:bg-gray-800'>
+    <div
+      className={twJoin(
+        'relative overflow-hidden rounded-b-lg shadow-md',
+        'bg-white dark:bg-gray-800'
+      )}>
       <nav
-        className='flex flex-col items-start justify-between space-y-3 p-4 md:flex-row md:items-center md:space-y-0'
+        className={twJoin(
+          'flex flex-col items-start justify-between',
+          'space-y-3 p-4 md:flex-row md:items-center md:space-y-0'
+        )}
         aria-label='Table navigation'>
         {children}
       </nav>
@@ -15,17 +23,16 @@ function PaginationRoot({ children }) {
 }
 
 function PaginationLeft({ from = 0, to = 0, total = 0 }) {
+  const className = 'font-semibold text-gray-900 dark:text-white'
+
   return (
-    <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
-      Exibindo{' '}
-      <span className='font-semibold text-gray-900 dark:text-white'>
-        {from}-{to}{' '}
+    <div className='text-sm font-normal text-gray-500 dark:text-gray-400'>
+      Exibindo&nbsp;
+      <span className={className}>
+        {from} - {to}&nbsp;
       </span>
-      de{' '}
-      <span className='font-semibold text-gray-900 dark:text-white'>
-        {total}
-      </span>
-    </span>
+      de <span className={className}>{total}</span>
+    </div>
   )
 }
 
@@ -37,40 +44,68 @@ function PaginationPrevious({ href = '' }) {
   return (
     <li>
       <Link
+        as='button'
+        type='button'
         href={href}
-        className='ml-0 flex h-full items-center justify-center rounded-l-lg border border-gray-300 bg-white px-3 py-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-        disabled={href !== ''}>
-        <span className='sr-only'>Previous</span>
+        className={twJoin(
+          'flex h-full items-center justify-center',
+          'ml-0 rounded-l-lg border px-3 py-1.5',
+          'border-gray-300 bg-white text-gray-500',
+          'hover:bg-gray-100 hover:text-gray-700',
+          'dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400',
+          'dark:hover:bg-gray-700 dark:hover:text-white',
+          !href && 'cursor-not-allowed opacity-25'
+        )}
+        disabled={!href}>
+        <span className='sr-only'>Anterior</span>
         <ChevronLeft className='size-5' />
       </Link>
     </li>
   )
 }
+
 function PaginationNext({ href = '' }) {
   return (
     <li>
       <Link
+        as='button'
+        type='button'
         href={href}
-        className='flex h-full items-center justify-center rounded-r-lg border border-gray-300 bg-white px-3 py-1.5 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-        disabled={href === ''}>
-        <span className='sr-only'>Next</span>
+        className={twJoin(
+          'flex h-full items-center justify-center',
+          'rounded-r-lg border px-3 py-1.5 leading-tight',
+          'border-gray-300 bg-white text-gray-500',
+          'hover:bg-gray-100 hover:text-gray-700',
+          'dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400',
+          'dark:hover:bg-gray-700 dark:hover:text-white',
+          !href && 'cursor-not-allowed opacity-25'
+        )}
+        disabled={!href}>
+        <span className='sr-only'>Próximo</span>
         <ChevronRight className='size-5' />
       </Link>
     </li>
   )
 }
 
-function PaginationItem({ href = '' }) {
-  return (
-    <li>
-      <a
-        href={href}
-        className='flex items-center justify-center border border-gray-300 bg-white px-3 py-2 text-sm leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'>
-        1
-      </a>
-    </li>
-  )
-}
+// function PaginationItem({ href = '' }) {
+//   return (
+//     <li>
+//       <Link
+//         href={href}
+//         className={twJoin(
+//           'flex items-center justify-center',
+//           'border px-3 py-2 text-sm leading-tight',
+//           'border-gray-300 bg-white text-gray-500',
+//           'hover:bg-gray-100 hover:text-gray-700',
+//           'dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400',
+//           'dark:hover:bg-gray-700 dark:hover:text-white'
+//         )}>
+//         1
+//       </Link>
+//     </li>
+//   )
+// }
 
 //
 export const Pagination = Object.assign(PaginationRoot, {

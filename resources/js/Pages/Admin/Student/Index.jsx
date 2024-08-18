@@ -17,12 +17,12 @@ import { getGenderName } from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 import StudentNotFound from './Partials/StudentNotFound'
 
-export default function PageStudentIndex({ students = [] }) {
+export default function PageStudentIndex({ students = [], totalStudents = 0 }) {
   const paramsSearch = route().params.search || ''
   const [search, setSearch] = useState(paramsSearch)
 
-  const hasStudents = students.data.length > 0
-  const hasPagination = students.total > students.data.length
+  const hasStudents = totalStudents > 0
+  const hasPagination = totalStudents > students.data.length
 
   const formOptions = { route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
@@ -68,18 +68,23 @@ export default function PageStudentIndex({ students = [] }) {
       </SearchFilter>
 
       {/* Student Not Found */}
-      {!hasStudents && <StudentNotFound />}
+      <StudentNotFound totalStudents={totalStudents} />
 
       {/* Student Table */}
-      {hasStudents && <StudentTable students={students.data} />}
+      <StudentTable students={students.data} />
 
       {/* Student Pagination */}
-      {hasPagination && <StudentPagination students={students} />}
+      <StudentPagination
+        students={students}
+        totalStudents={totalStudents}
+      />
     </>
   )
 }
 
-function StudentTable({ students = [] }) {
+function StudentTable({ students }) {
+  if (students.length === 0) return null
+
   return (
     <Table>
       <Table.Header>
@@ -115,19 +120,19 @@ function StudentTable({ students = [] }) {
   )
 }
 
-function StudentPagination({ students = {} }) {
-  const { total, from, to, next_page_url, prev_page_url } = students
+function StudentPagination({ students, totalStudents }) {
+  if (totalStudents <= students.data.length) return null
 
   return (
     <Pagination>
       <Pagination.Left
-        to={to}
-        from={from}
-        total={total}
+        to={students.to}
+        from={students.from}
+        total={totalStudents}
       />
       <Pagination.Right>
-        <Pagination.Previous href={prev_page_url} />
-        <Pagination.Next href={next_page_url} />
+        <Pagination.Previous href={students.prev_page_url} />
+        <Pagination.Next href={students.next_page_url} />
       </Pagination.Right>
     </Pagination>
   )

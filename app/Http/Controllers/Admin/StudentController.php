@@ -14,24 +14,27 @@ class StudentController extends Controller
     {
         $search = $request->query('search');
         $gender = $request->query('gender');
+        $perPage = $request->query('per-page', 10);
 
-        $students = Student::select(['id', 'name', 'gender'])
+        $studentsQuery = Student::query()
+            ->select(['id', 'name', 'gender'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('id', $search)
-                        ->orWhereLike('name', $search . '%');
+                        ->orWhereLike('name', "{$search}%");
                 });
             })
-            ->when($gender, fn ($query) => $query->where('gender', $gender))
-            ->when($search, function ($query) {
-                $query->orderBy('name', 'asc');
-            }, function ($query) {
-                $query->orderBy('id', 'desc');
-            })
-            ->toBase()
-            ->paginate(20);
+            ->when($gender, fn ($query) => $query->where('gender', $gender));
 
-        return inertia('Admin/Student/Index', compact('students'));
+        $totalStudents = $studentsQuery->count();
+
+        $students = $studentsQuery
+            ->orderBy($search ? 'name' : 'id', $search ? 'asc' : 'desc')
+            ->toBase()
+            ->simplePaginate($perPage);
+
+
+        return inertia('Admin/Student/Index', compact('students', 'totalStudents'));
     }
 
     public function create()

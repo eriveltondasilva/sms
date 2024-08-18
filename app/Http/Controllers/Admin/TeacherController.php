@@ -13,19 +13,25 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
+        $perPage = $request->query('per-page', 10);
 
-        $teachers = Teacher::select(['id', 'name', 'email'])
+        $teachersQuery = Teacher::query()
+            ->select(['id', 'name', 'email'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->where('id', $search)
-                        ->orWhereLike('name', $search . '%');
+                        ->orWhereLike('name', "{$search}%");
                 });
-            })
-            ->orderByDesc('id')
-            ->toBase()
-            ->paginate(10);
+            });
 
-        return inertia('Admin/Teacher/Index', compact('teachers'));
+        $totalTeachers = $teachersQuery->count();
+
+        $teachers = $teachersQuery
+            ->orderByDesc($search ? 'name' : 'id', $search ? 'asc' : 'desc')
+            ->toBase()
+            ->simplePaginate($perPage);
+
+        return inertia('Admin/Teacher/Index', compact('teachers', 'totalTeachers'));
     }
 
     public function create()
