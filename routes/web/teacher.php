@@ -8,7 +8,7 @@ use App\Http\Controllers\Teacher\{
     GroupController,
 };
 
-// ### TEACHER ROUTES ###
+//# TEACHER ROUTES
 Route::middleware(['auth', 'role:teacher'])
 ->prefix('/teacher')->name('teacher.')->group(function () {
     //* DASHBOARD ROUTES

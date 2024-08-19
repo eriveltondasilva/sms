@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\{
     UserController,
 };
 
-// ### ADMIN ROUTES ###
+//# ADMIN ROUTES
 Route::middleware(['auth', 'role:admin'])
 ->prefix('/admin')->name('admin.')->group(function () {
     //* DASHBOARD ROUTES

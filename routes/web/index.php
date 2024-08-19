@@ -8,7 +8,7 @@ use App\Http\Controllers\{
     WelcomeController
 };
 
-// ### WEB ROUTES ###
+//# WEB ROUTES
 Route::get('/', WelcomeController::class)->name('welcome');
 
 // TODO: rota para teste, remover depois
@@ -31,7 +31,7 @@ Route::controller(SocialiteController::class)
     Route::get('/callback', 'callback')->name('callback');
 });
 
-// ### EXTRA ROUTES ###
+//# EXTRA ROUTES
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/student.php';
