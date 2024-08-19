@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Input } from '@/Components/Input'
 import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
-import { SearchFilter } from '@/Components/SearchFilter'
+import { SearchBar } from '@/Components/SearchBar'
 import { Table } from '@/Components/Table'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
@@ -17,15 +17,23 @@ import { getGenderName } from '@/Utils/getGenderName'
 import { breadcrumbs, titles } from './data'
 import StudentNotFound from './Partials/StudentNotFound'
 
-export default function PageStudentIndex({ students = [], totalStudents = 0 }) {
-  const paramsSearch = route().params.search || ''
-  const [search, setSearch] = useState(paramsSearch)
+export default function PageStudentIndex({ students, totalStudents }) {
+  const paramsSearch = route().params.search
+  const paramsGender = route().params.gender
+  const paramsPerPage = route().params.perPage
 
-  const hasStudents = totalStudents > 0
-  const hasPagination = totalStudents > students.data.length
+  const [search, setSearch] = useState(paramsSearch)
 
   const formOptions = { route: 'admin.students.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
+
+  const genderSelectValues = [
+    { id: '', name: 'M/F' },
+    { id: 'M', name: 'Masculino' },
+    { id: 'F', name: 'Feminino' },
+  ]
+
+  const perPageSelectValues = [10, 20, 50]
 
   return (
     <>
@@ -38,23 +46,39 @@ export default function PageStudentIndex({ students = [], totalStudents = 0 }) {
         {/* TODO: implementar PDF */}
       </PageHeader>
 
-      {/* Student SearchFilter */}
-      <SearchFilter onSubmit={handleSubmit}>
-        <SearchFilter.Left>
+      <SearchBar onSubmit={handleSubmit}>
+        <SearchBar.Left>
           <Input.Text
             id='search'
             type='search'
-            className='mb-0'
             placeholder='Nome ou ID do aluno...'
             defaultValue={search}
             onChange={(e) => setSearch(e.target.value)}
+            autoComplete='off'
+            autoFocus
           />
+
+          <Input.Select
+            id='gender'
+            defaultValue={paramsGender}
+            values={genderSelectValues}
+          />
+
+          <Input.Select
+            id='perPage'
+            defaultValue={paramsPerPage}
+            values={perPageSelectValues}
+          />
+        </SearchBar.Left>
+
+        <SearchBar.Right>
           <Button.Group>
             <Button
               type='submit'
               color='blue'
-              disabled={isLoading || !search}>
-              <Search className='mr-2 size-5' />
+              disabled={isLoading}>
+              <Search className='mr-1 size-5' />
+              Pesquisar
             </Button>
             <Button
               as={Link}
@@ -64,16 +88,13 @@ export default function PageStudentIndex({ students = [], totalStudents = 0 }) {
               <Undo2 className='size-5' />
             </Button>
           </Button.Group>
-        </SearchFilter.Left>
-      </SearchFilter>
+        </SearchBar.Right>
+      </SearchBar>
 
-      {/* Student Not Found */}
       <StudentNotFound totalStudents={totalStudents} />
 
-      {/* Student Table */}
       <StudentTable students={students.data} />
 
-      {/* Student Pagination */}
       <StudentPagination
         students={students}
         totalStudents={totalStudents}

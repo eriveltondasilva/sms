@@ -13,8 +13,8 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
-        $gender = $request->query('gender');
-        $perPage = $request->query('per-page', 10);
+        $gender = $request->query('gender', '');
+        $perPage = $request->query('perPage', 10);
 
         $studentsQuery = Student::query()
             ->select(['id', 'name', 'gender'])

@@ -6,7 +6,7 @@ import { twJoin } from 'tailwind-merge'
 import { Input } from '@/Components/Input'
 import { NotFound } from '@/Components/NotFound'
 import { PageHeader } from '@/Components/PageHeader'
-import { SearchFilter } from '@/Components/SearchFilter'
+import { SearchBar } from '@/Components/SearchBar'
 import { Table } from '@/Components/Table'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
@@ -31,11 +31,10 @@ export default function PageGroupIndex({ data }) {
         <PageHeader.Title title={title} />
       </PageHeader>
 
-      <SearchFilter onSubmit={handleSearch}>
-        <SearchFilter.Left>
+      <SearchBar onSubmit={handleSearch}>
+        <SearchBar.Left>
           <Input.Select
             id='search'
-            className='mb-0'
             defaultValue={selectedGroup?.id}
             values={['', ...teacherGroups]}
           />
@@ -45,8 +44,8 @@ export default function PageGroupIndex({ data }) {
             disabled={isLoading}>
             <Search className='size-5' />
           </Button>
-        </SearchFilter.Left>
-      </SearchFilter>
+        </SearchBar.Left>
+      </SearchBar>
 
       <br />
 

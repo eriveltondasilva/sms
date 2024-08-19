@@ -7,7 +7,7 @@ import { Alert } from '@/Components/Alert'
 import { Input } from '@/Components/Input'
 import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
-import { SearchFilter } from '@/Components/SearchFilter'
+import { SearchBar } from '@/Components/SearchBar'
 import { Table } from '@/Components/Table'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
@@ -52,12 +52,11 @@ export default function PageGroupStudentCreate({ data, flash }) {
       </PageHeader>
 
       {/* Barra de pesquisa */}
-      <SearchFilter onSubmit={handleSearchStudent}>
-        <SearchFilter.Left>
+      <SearchBar onSubmit={handleSearchStudent}>
+        <SearchBar.Left>
           <Input.Text
             id='search'
             type='search'
-            className='mb-0'
             defaultValue={searchId}
             placeholder='Pesquisar aluno...'
             autoFocus
@@ -68,8 +67,8 @@ export default function PageGroupStudentCreate({ data, flash }) {
             disabled={isLoading}>
             <Search className='size-5' />
           </Button>
-        </SearchFilter.Left>
-      </SearchFilter>
+        </SearchBar.Left>
+      </SearchBar>
 
       {/* Verificar se o aluno não foi encontrado */}
       {!hasStudents && <StudentNotFound />}

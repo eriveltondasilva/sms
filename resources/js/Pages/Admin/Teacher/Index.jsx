@@ -1,12 +1,12 @@
 import { Link } from '@inertiajs/react'
 import { Button } from 'flowbite-react'
-import { Search, Undo2 } from 'lucide-react'
+import { Plus, Search, Undo2 } from 'lucide-react'
 import { useState } from 'react'
 
 import { Input } from '@/Components/Input'
 import { PageHeader } from '@/Components/PageHeader'
 import { Pagination } from '@/Components/Pagination'
-import { SearchFilter } from '@/Components/SearchFilter'
+import { SearchBar } from '@/Components/SearchBar'
 import { Table } from '@/Components/Table'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
@@ -16,9 +16,11 @@ import { formatId } from '@/Utils/formatId'
 import { breadcrumbs, titles } from './data'
 import TeacherNotFound from './Partials/TeacherNotFound'
 
-export default function PageTeacherIndex({ teachers = [], totalTeachers = 0 }) {
-  const paramsSearch = route().params.search || ''
-  const [search, setSearch] = useState(paramsSearch)
+export default function PageTeacherIndex({ teachers, totalTeachers }) {
+  const { search: paramsSearch } = route().params
+  const [search, setSearch] = useState(paramsSearch || '')
+
+  console.log(route().params.search || '')
 
   const formOptions = { route: 'admin.teachers.index' }
   const { handleSubmit, isLoading } = useFormHandler(formOptions)
@@ -28,27 +30,30 @@ export default function PageTeacherIndex({ teachers = [], totalTeachers = 0 }) {
       <PageHeader>
         <PageHeader.Title title={titles.index} />
         <PageHeader.Button href={route('admin.teachers.create')}>
+          <Plus className='mr-1 size-5' />
           Novo Professor
         </PageHeader.Button>
         {/* TODO: implementar PDF */}
       </PageHeader>
 
-      <SearchFilter onSubmit={handleSubmit}>
-        <SearchFilter.Left>
+      <SearchBar onSubmit={handleSubmit}>
+        <SearchBar.Left>
           <Input.Text
             id='search'
             type='search'
-            className='mb-0'
             placeholder='Nome ou ID do professor...'
             defaultValue={search}
             onChange={(e) => setSearch(e.target.value)}
+            autoComplete='off'
+            autoFocus
           />
           <Button.Group>
             <Button
               type='submit'
               color='blue'
-              disabled={isLoading || !search}>
-              <Search className='mr-2 size-5' />
+              disabled={isLoading}>
+              <Search className='mr-1 size-5' />
+              Pesquisar
             </Button>
             <Button
               as={Link}
@@ -58,16 +63,13 @@ export default function PageTeacherIndex({ teachers = [], totalTeachers = 0 }) {
               <Undo2 className='size-5' />
             </Button>
           </Button.Group>
-        </SearchFilter.Left>
-      </SearchFilter>
+        </SearchBar.Left>
+      </SearchBar>
 
-      {/* Teacher NotFound */}
       <TeacherNotFound totalTeachers={totalTeachers} />
 
-      {/* Teacher Table */}
       <TeacherTable teachers={teachers.data} />
 
-      {/* Pagination */}
       <TeacherPagination
         teachers={teachers}
         totalTeachers={totalTeachers}

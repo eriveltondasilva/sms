@@ -13,7 +13,7 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
-        $perPage = $request->query('per-page', 10);
+        $perPage = $request->query('perPage', 10);
 
         $teachersQuery = Teacher::query()
             ->select(['id', 'name', 'email'])

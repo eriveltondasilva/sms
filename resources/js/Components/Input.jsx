@@ -3,7 +3,10 @@ import { twMerge } from 'tailwind-merge'
 
 const inputClassName = 'mb-6 space-y-2'
 
-//
+function InputError({ message = '' }) {
+  return <p className='text-sm text-red-600 dark:text-red-400'>{message}</p>
+}
+
 function InputHidden({ id, ...props }) {
   return (
     <input
@@ -17,14 +20,14 @@ function InputHidden({ id, ...props }) {
 
 function InputText({
   id = '',
-  label = '',
-  error = '',
   className = '',
+  error = '',
+  label = '',
   type = 'text',
   ...props
 }) {
   return (
-    <section className={twMerge(inputClassName, className)}>
+    <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
         <Label
           htmlFor={id}
@@ -46,13 +49,13 @@ function InputText({
 
 function InputTextarea({
   id = '',
-  label = '',
-  error = '',
   className = '',
+  error = '',
+  label = '',
   ...props
 }) {
   return (
-    <section className={twMerge(inputClassName, className)}>
+    <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
         <Label
           htmlFor={id}
@@ -73,14 +76,14 @@ function InputTextarea({
 
 function InputSelect({
   id = '',
-  label = '',
-  error = '',
-  values = [],
   className = '',
+  error = '',
+  label = '',
+  values = [],
   ...props
 }) {
   return (
-    <section className={twMerge(inputClassName, className)}>
+    <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
         <Label
           htmlFor={id}
@@ -94,7 +97,7 @@ function InputSelect({
         {...props}>
         {values.map((value, index) => (
           <option
-            key={index}
+            key={'input-select-' + index}
             value={value.id ?? value}>
             {value.name ?? value}
           </option>
@@ -120,7 +123,7 @@ function InputRadio({
 
       {values.map((item, index) => (
         <div
-          key={index}
+          key={'input-radio-' + index}
           className='flex items-center gap-2'>
           <Radio
             id={item.id}
@@ -141,16 +144,11 @@ function InputRadio({
   )
 }
 
-function InputError({ message = '' }) {
-  return <p className='text-sm text-red-600 dark:text-red-400'>{message}</p>
-}
-
-//
 export const Input = Object.assign(InputText, {
   Hidden: InputHidden,
+  Error: InputError,
   Text: InputText,
   Textarea: InputTextarea,
   Select: InputSelect,
-  Error: InputError,
   Radio: InputRadio,
 })

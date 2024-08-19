@@ -7,27 +7,27 @@ import { AuthLayout } from '@/Layouts/AuthLayout'
 import SubjectNotFound from './Partials/SubjectNotFound'
 import { breadcrumbs, titles } from './data'
 
-//
 export default function PageSubjectIndex({ subjects, auth }) {
   const hasSubjects = subjects.length > 0
-  const title = `${titles.index} - Ano Letivo: ${auth.activeYear.year}`
+  const title = `${titles.index} - ${auth.activeYear.year}`
 
+  console.log(subjects)
   return (
     <>
       <PageHeader>
         <PageHeader.Title title={title} />
       </PageHeader>
 
-      {/* Exibe mensagem se não houver grupos */}
       {!hasSubjects && <SubjectNotFound />}
 
-      {/* Exibe os cards das turmas */}
-      {hasSubjects && <CardSubject subjects={subjects} />}
+      <CardSubject subjects={subjects} />
     </>
   )
 }
 
 function CardSubject({ subjects = [] }) {
+  if (subjects.length === 0) return null
+
   return (
     <section className='grid max-w-6xl grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {subjects.map((subject) => (
@@ -35,16 +35,25 @@ function CardSubject({ subjects = [] }) {
           key={subject.id}
           className='max-w-sm'>
           <header className=''>
-            <h5
-              className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'
-              title={subject.name}>
-              {subject.abbr}
-            </h5>
+            <dl>
+              <dt
+                className='text-2xl font-bold tracking-tight text-gray-900 dark:text-white'
+                title={subject.name}>
+                {subject.abbr}
+              </dt>
+              <dd
+                className='text-gray-700 dark:text-gray-400'
+                title={subject.name}>
+                {subject.name}
+              </dd>
+            </dl>
           </header>
 
-          <p className='my-3 font-normal text-gray-700 dark:text-gray-400'>
-            Professores: {subject.teachers_count || 'sem prof.'}
-          </p>
+          <ul>
+            <li className='my-3 font-normal text-gray-700 dark:text-gray-400'>
+              Professores: {subject.teachers_count || 'sem prof.'}
+            </li>
+          </ul>
 
           <footer>
             <Button
@@ -62,7 +71,6 @@ function CardSubject({ subjects = [] }) {
   )
 }
 
-// -----------------------------------------------
 PageSubjectIndex.layout = (page) => (
   <AuthLayout
     title={titles.index}
