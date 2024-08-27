@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
+use Illuminate\Database\Eloquent\{Builder, Model};
+use Illuminate\Database\Eloquent\Relations\{ BelongsToMany, MorphOne };
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use App\Traits\Scopes\FilterBySearchTrait;
 
 class Student extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use FilterBySearchTrait;
 
     protected $fillable = [
         'name',
@@ -35,6 +38,14 @@ class Student extends Model
     protected $casts = [
         'birthday' => 'datetime:Y-m-d',
     ];
+
+    protected $perPage = 20;
+
+    //# SCOPES
+    public function scopeFilterByGender(Builder $query, string $gender): void
+    {
+        $query->when($gender, fn ($query) => $query->where('gender', $gender));
+    }
 
     //# RELATIONSHIPS
     public function user(): MorphOne

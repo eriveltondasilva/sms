@@ -17,9 +17,7 @@ class GroupTeacherController extends Controller
             ->toBase()
             ->get();
 
-        $data = compact('group', 'teachers');
-
-        return inertia('Admin/GroupTeacher/Index', compact('data'));
+        return inertia('Admin/GroupTeacher/Index', compact('group', 'teachers'));
     }
 
     public function create(Group $group)
@@ -30,9 +28,7 @@ class GroupTeacherController extends Controller
             ->toBase()
             ->get();
 
-        $data = compact('group', 'teachers');
-
-        return inertia('Admin/GroupTeacher/Create', compact('data'));
+        return inertia('Admin/GroupTeacher/Create', compact('group', 'teachers'));
     }
 
     // # Actions

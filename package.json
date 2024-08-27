@@ -11,9 +11,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "prettier:check": "prettier ./resources/js/**/*.{js,jsx} --check",
-    "prettier:write": "prettier ./resources/js/**/*.{js,jsx} --write --cache",
+    "build": "tsc && vite build",
+    "prettier": "prettier ./resources/ts/**/*.{ts,tsx} --write",
+    "prettier:check": "prettier ./resources/ts/**/*.{ts,tsx} --check",
     "prepare": "husky"
   },
   "devDependencies": {

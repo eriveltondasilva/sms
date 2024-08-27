@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\Scopes\FilterBySearchTrait;
+
 class Teacher extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use FilterBySearchTrait;
 
     protected $fillable = [
         'name',
@@ -30,6 +33,8 @@ class Teacher extends Model
     protected $casts = [
         'birthday' => 'datetime:Y-m-d',
     ];
+
+    protected $perPage = 10;
 
     //# RELATIONSHIPS
     public function user(): MorphOne

@@ -10,31 +10,37 @@ use App\Models\Student;
 
 class StudentController extends Controller
 {
+    private const DEFAULT_PER_PAGE = 10;
+
+    private function validateRequest(Request $request): void
+    {
+        $request->validate([
+            'search'  => 'nullable|string|max:100',
+            'gender'  => 'nullable|string|in:M,F',
+            'perPage' => 'nullable|integer|min:1',
+        ]);
+    }
+
     public function index(Request $request)
     {
-        $search = $request->query('search');
+        // $this->validateRequest($request);
+
+        $search = $request->query('search', '');
         $gender = $request->query('gender', '');
-        $perPage = $request->query('perPage', 10);
+        $perPage = $request->query('perPage', self::DEFAULT_PER_PAGE);
 
-        $studentsQuery = Student::query()
+        $students = Student::query()
             ->select(['id', 'name', 'gender'])
-            ->when($search, function ($query) use ($search) {
-                $query->where(function ($query) use ($search) {
-                    $query->where('id', $search)
-                        ->orWhereLike('name', "{$search}%");
-                });
-            })
-            ->when($gender, fn ($query) => $query->where('gender', $gender));
+            ->filterBySearch($search)
+            ->filterByGender($gender)
+            ->orderBy(
+                $search ? 'name' : 'id',
+                $search ? 'asc' : 'desc'
+            );
 
-        $totalStudents = $studentsQuery->count();
+        $studentPagination = $students->paginate($perPage);
 
-        $students = $studentsQuery
-            ->orderBy($search ? 'name' : 'id', $search ? 'asc' : 'desc')
-            ->toBase()
-            ->simplePaginate($perPage);
-
-
-        return inertia('Admin/Student/Index', compact('students', 'totalStudents'));
+        return inertia('Admin/Student/Index', compact('studentPagination'));
     }
 
     public function create()

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "isolatedModules": true,
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "noImplicitAny": true,
+    "paths": {
+      "@/*": ["./resources/ts/*"],
+      "@/images/*": ["./resources/images/*"],
+      "ziggy-js": ["./vendor/tightenco/ziggy"]
+    }
+  },
+  "include": [
+    "resources/ts/**/*.ts",
+    "resources/ts/**/*.tsx",
+    "resources/ts/**/*.d.ts"
+  ]
+}

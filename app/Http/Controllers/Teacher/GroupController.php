@@ -14,13 +14,11 @@ class GroupController extends Controller
     {
         $groupId = $request->query('search', '');
 
-        $schoolYear = SchoolYear::isActive();
-        $activeYear = $schoolYear->year;
-
+        $activeYear = SchoolYear::isActive();
         $teacherProfile = Auth::user()->profile;
 
         $teacherGroups = $teacherProfile->groups()
-            ->where('school_year_id', $schoolYear->id)
+            ->where('school_year_id', $activeYear->id)
             ->select('groups.id', 'groups.name')
             ->get();
 
@@ -29,8 +27,6 @@ class GroupController extends Controller
             $query->orderBy('name')->select('students.id', 'students.name', 'students.gender');
         }]);
 
-        $data = compact('activeYear', 'selectedGroup', 'teacherGroups');
-
-        return inertia('Teacher/Group/Index', compact('data'));
+        return inertia('Teacher/Group/Index', compact('activeYear', 'selectedGroup', 'teacherGroups'));
     }
 }

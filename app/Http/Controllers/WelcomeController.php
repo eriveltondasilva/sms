@@ -11,8 +11,6 @@ class WelcomeController extends Controller
         $laravelVersion = Application::VERSION;
         $phpVersion     = PHP_VERSION;
 
-        $data = compact('laravelVersion', 'phpVersion');
-
-        return inertia('Welcome', compact('data'));
+        return inertia('Welcome', compact('laravelVersion', 'phpVersion'));
     }
 }

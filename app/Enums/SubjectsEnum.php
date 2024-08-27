@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-use App\Trait\EnumHelperTrait;
+use App\Traits\EnumHelperTrait;
 
 enum SubjectsEnum: string
 {

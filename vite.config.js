@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite'
-import laravel from 'laravel-vite-plugin'
 import react from '@vitejs/plugin-react'
+import laravel from 'laravel-vite-plugin'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
@@ -8,12 +8,13 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@/images': '/resources/images'
-    }
+      '@/images': '/resources/images',
+      '@': '/resources/ts',
+    },
   },
   plugins: [
     laravel({
-      input: 'resources/js/app.jsx',
+      input: 'resources/ts/app.tsx',
       refresh: true,
     }),
     react(),

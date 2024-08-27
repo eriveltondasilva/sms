@@ -27,8 +27,6 @@ class DashboardController extends Controller
         $groupsCount   = $groups->count();
         $studentsCount = $groups->sum('students_count');
 
-        $data = compact('activeYear', 'groupsCount', 'studentsCount');
-
-        return inertia('Teacher/Dashboard', compact('data'));
+        return inertia('Teacher/Dashboard', compact('activeYear', 'groupsCount', 'studentsCount'));
     }
 }

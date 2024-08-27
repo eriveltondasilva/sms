@@ -13,35 +13,31 @@ class GroupStudentController extends Controller
     {
         $students = $group
             ->students()
-            ->select('students.id', 'students.name', 'students.gender')
+            ->select(['students.id', 'students.name', 'students.gender'])
             ->orderBy('students.name')
             ->toBase()
             ->get();
 
-        $data = compact('group', 'students');
-
-        return inertia('Admin/GroupStudent/Index', compact('data'));
+        return inertia('Admin/GroupStudent/Index', compact('group', 'students'));
     }
 
     public function create(Request $request, Group $group)
     {
-        $searchTerm = $request->query('search', '');
-        $activeYear = SchoolYear::isActive();
+        $search = $request->query('search', '');
+        $activeYearId = SchoolYear::isActive()->id;
 
-        $students = Student::select('id', 'name', 'gender')
-            ->whereDoesntHave('groups', function ($query) use ($activeYear) {
-                $query->where('school_year_id', $activeYear->id);
+        $students = Student::query()
+            ->select(['id', 'name', 'gender'])
+            ->whereDoesntHave('groups', function ($query) use ($activeYearId) {
+                $query->where('school_year_id', $activeYearId);
             })
-            ->when($searchTerm, function ($query) use ($searchTerm) {
-                $query->where('id', $searchTerm)->orWhereLike('name', "%{$searchTerm}%");
-            })
+            ->filterBySearch($search)
             ->orderBy('name')
-            ->toBase()
-            ->paginate(20);
+            ->toBase();
 
-        $data = compact('group', 'students');
+        $studentPagination = $students->paginate();
 
-        return inertia('Admin/GroupStudent/Create', compact('data'));
+        return inertia('Admin/GroupStudent/Create', compact('group', 'studentPagination'));
     }
 
     //# Actions
