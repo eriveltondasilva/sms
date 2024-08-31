@@ -3,11 +3,13 @@ import { useState, useCallback } from 'react'
 
 import type { Method, VisitOptions } from '@/Types'
 
-export type UseActionHandlerProps = {
+type UseActionHandlerProps = {
   route: string
   method?: Method
   options?: VisitOptions
 }
+
+type Params = Record<string, any>
 
 export function useActionHandler({
   route: url = '',
@@ -17,17 +19,17 @@ export function useActionHandler({
   const [isLoading, setIsLoading] = useState(false)
 
   const handleAction = useCallback(
-    (params: Record<string, any> = {}) => {
-      try {
-        setIsLoading(true)
+    (params: Params = {}) => {
+      setIsLoading(true)
 
+      try {
         router.visit(route(url, params), {
           method,
           onFinish: () => setIsLoading(false),
           ...options,
         })
-      } catch (error: any) {
-        console.error('Erro ao executar ação:', error.message)
+      } catch (error) {
+        console.error('Erro ao executar ação:', (error as Error).message)
       }
     },
     [url, method, options],

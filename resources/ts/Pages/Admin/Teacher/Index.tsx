@@ -13,7 +13,7 @@ import type { TeacherIndexProps } from './types'
 
 export default function TeacherIndex({ teacherPagination }: TeacherIndexProps) {
   const hasTeachers = teacherPagination.data.length > 0
-  const hasPagination = teacherPagination.total <= teacherPagination.data.length
+  const hasPagination = teacherPagination.total > teacherPagination.data.length
 
   return (
     <AuthLayout

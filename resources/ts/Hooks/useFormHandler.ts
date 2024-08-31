@@ -2,10 +2,12 @@ import type { Method, VisitOptions } from '@/Types'
 import { router, usePage } from '@inertiajs/react'
 import { useCallback, useState } from 'react'
 
+type Params = Record<string, any>
+
 type UseFormHandlerProps = {
   route: string
   method?: Method
-  params?: Record<string, any>
+  params?: Params
   options?: VisitOptions
 }
 
@@ -22,20 +24,25 @@ export function useFormHandler({
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
 
+      const formData = new FormData(e.currentTarget)
+      const data = Object.fromEntries(
+        Array.from(formData.entries()).filter(
+          ([, value]) => typeof value === 'string' && value.trim() !== '',
+        ),
+      )
+
+      setIsLoading(true)
+
       try {
-        const formData = new FormData(e.currentTarget)
-        const data = Object.fromEntries(formData.entries())
-
-        setIsLoading(true)
-
         router.visit(route(url, params), {
           data,
           method,
           onFinish: () => setIsLoading(false),
           ...options,
         })
-      } catch (error: any) {
-        console.error('Erro ao enviar formulário:\n', error.message)
+      } catch (error) {
+        console.error('Erro ao enviar formulário:\n', (error as Error).message)
+        setIsLoading(false)
       }
     },
     [url, method, params, options],

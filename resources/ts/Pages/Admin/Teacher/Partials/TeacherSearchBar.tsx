@@ -28,6 +28,8 @@ export function TeacherSearchBar() {
           autoComplete='off'
           autoFocus
         />
+      </SearchBar.Left>
+      <SearchBar.Right>
         <Button.Group>
           <Button
             type='submit'
@@ -46,7 +48,7 @@ export function TeacherSearchBar() {
             <Undo2 className='size-5' />
           </Button>
         </Button.Group>
-      </SearchBar.Left>
+      </SearchBar.Right>
     </SearchBar>
   )
 }

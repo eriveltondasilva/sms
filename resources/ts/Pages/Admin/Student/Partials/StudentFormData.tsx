@@ -28,11 +28,11 @@ export default function StudentFormData({
 
       {/* NOME DO ALUNO */}
       <Input.Text
-        // id='name'
+        id='name'
         type='text'
         label='Nome completo'
         placeholder='Insira o nome do aluno...'
-        error={errors.name}
+        error={errors?.name}
         defaultValue={data?.name}
         readOnly={readOnly}
         autoFocus
@@ -45,7 +45,7 @@ export default function StudentFormData({
         type='email'
         label='Email'
         placeholder='Insira o email do aluno...'
-        error={errors.email}
+        error={errors?.email}
         defaultValue={data?.email}
         readOnly={readOnly}
       />
@@ -56,7 +56,7 @@ export default function StudentFormData({
         type='tel'
         label='Telefone celular'
         placeholder='Insira o telefone do aluno...'
-        error={errors.phone}
+        error={errors?.phone}
         defaultValue={data?.phone}
         readOnly={readOnly}
       />
@@ -66,7 +66,7 @@ export default function StudentFormData({
         id='gender'
         label='Gênero do Aluno'
         values={genderRadioValues}
-        error={errors.gender}
+        error={errors?.gender}
         initialCheckedValue={data?.gender || 'M'}
         readOnly={readOnly}
       />
@@ -77,7 +77,7 @@ export default function StudentFormData({
         type='text'
         label='CPF'
         placeholder='Insira o cpf do aluno...'
-        error={errors.cpf}
+        error={errors?.cpf}
         defaultValue={data?.cpf}
         readOnly={readOnly}
       />
@@ -88,7 +88,7 @@ export default function StudentFormData({
         type='text'
         label='RG'
         placeholder='Insira o rg do aluno...'
-        error={errors.rg}
+        error={errors?.rg}
         defaultValue={data?.rg}
         readOnly={readOnly}
       />
@@ -98,7 +98,7 @@ export default function StudentFormData({
         id='birthday'
         type='date'
         label='Data de nascimento'
-        error={errors.birthday}
+        error={errors?.birthday}
         defaultValue={data?.birthday}
         readOnly={readOnly}
       />
@@ -109,7 +109,7 @@ export default function StudentFormData({
         type='text'
         label='Local de nascimento'
         placeholder='Insira o local de nascimento do aluno...'
-        error={errors.birthplace}
+        error={errors?.birthplace}
         defaultValue={data?.birthplace}
         readOnly={readOnly}
       />
@@ -120,7 +120,7 @@ export default function StudentFormData({
         type='text'
         label='Benefício'
         placeholder='Insira os benefícios do governo do aluno...'
-        error={errors.gov_benefits}
+        error={errors?.gov_benefits}
         defaultValue={data?.gov_benefits}
         readOnly={readOnly}
       />
@@ -131,7 +131,7 @@ export default function StudentFormData({
         type='text'
         label='Problemas de saúde'
         placeholder='Insira os problemas de saúde do aluno...'
-        error={errors.health_problems}
+        error={errors?.health_problems}
         defaultValue={data?.health_problems}
         readOnly={readOnly}
       />
@@ -141,8 +141,8 @@ export default function StudentFormData({
         id='note'
         label='Observações'
         placeholder='Insira as observações...'
-        rows={4}
-        error={errors.note}
+        rows={5}
+        error={errors?.note}
         defaultValue={data?.note}
         readOnly={readOnly}
       />

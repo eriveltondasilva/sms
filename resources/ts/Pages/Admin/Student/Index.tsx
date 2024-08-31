@@ -3,8 +3,8 @@ import { Plus } from 'lucide-react'
 import { NotFound } from '@/Components/NotFound'
 import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
+import { Pagination } from '@/Pages/Partials/Pagination'
 
-import { StudentPagination } from './Partials/StudentPagination'
 import { StudentSearchBar } from './Partials/StudentSearchBar'
 import { StudentTable } from './Partials/StudentTable'
 
@@ -13,7 +13,7 @@ import type { StudentIndexProps } from './types'
 
 export default function StudentIndex({ studentPagination }: StudentIndexProps) {
   const hasStudents = studentPagination.data.length > 0
-  const hasPagination = studentPagination.total <= studentPagination.data.length
+  const hasPagination = studentPagination.total > studentPagination.data.length
 
   return (
     <AuthLayout
@@ -35,7 +35,7 @@ export default function StudentIndex({ studentPagination }: StudentIndexProps) {
 
       {hasStudents && <StudentTable students={studentPagination.data} />}
 
-      {hasPagination && <StudentPagination pagination={studentPagination} />}
+      {hasPagination && <Pagination pagination={studentPagination} />}
     </AuthLayout>
   )
 }

@@ -1,4 +1,4 @@
-import { type ButtonProps, Button, Spinner } from 'flowbite-react'
+import { type ButtonProps, Button } from 'flowbite-react'
 import { type LucideIcon, Save, Trash2 } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
@@ -28,6 +28,7 @@ function FormFooter({ children }: { children: React.ReactNode }) {
 
 type FormButtonProps = {
   icon?: LucideIcon
+  children: string
 } & ButtonProps
 
 function FormButton({
@@ -37,12 +38,13 @@ function FormButton({
   disabled = false,
   children,
   ...props
-}: React.PropsWithChildren<FormButtonProps>) {
-  const ButtonIcon = disabled ? Spinner : Icon
+}: FormButtonProps) {
   return (
     <Button
       type={type}
       color={color}
+      disabled={disabled}
+      className='uppercase'
       fullSized
       {...props}
     >
@@ -54,44 +56,32 @@ function FormButton({
 
 function FormButtonSubmit({ disabled }: { disabled: boolean }) {
   const isCreate = route().current('*.create')
-  const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
-  const BtnIcon =
-    disabled ?
-      <Spinner
-        size='sm'
-        className='mr-2 size-5'
-      />
-    : <Save className='mr-1 size-5' />
+  const submitText = isCreate ? 'Cadastrar' : 'Atualizar'
 
   return (
-    <Button
-      type='submit'
+    <FormButton
+      icon={Save}
       disabled={disabled}
-      color='blue'
-      className='uppercase'
-      fullSized
+      type='submit'
     >
-      {BtnIcon}
-      {submitButtonText}
-    </Button>
+      {submitText}
+    </FormButton>
   )
 }
 
 function FormButtonReset({ disabled }: { disabled: boolean }) {
   const isCreate = route().current('*.create')
-  const resetButtonText = isCreate ? 'Limpar' : 'Redefinir'
+  const resetText = isCreate ? 'Limpar' : 'Redefinir'
 
   return (
-    <Button
+    <FormButton
       type='reset'
       disabled={disabled}
-      color='light'
-      className='uppercase'
-      fullSized
+      color='failure'
+      icon={Trash2}
     >
-      <Trash2 className='mr-2 size-5' />
-      {resetButtonText}
-    </Button>
+      {resetText}
+    </FormButton>
   )
 }
 

@@ -67,6 +67,10 @@ type Pagination = {
   total: number
 }
 
+export type PaginationProps = {
+  pagination: Pagination
+}
+
 export type StudentPagination = {
   data: Student[]
 } & Pagination

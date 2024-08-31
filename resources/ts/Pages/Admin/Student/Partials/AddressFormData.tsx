@@ -18,7 +18,7 @@ export default function StudentFormData({
         type='text'
         label='Endereço'
         placeholder='Insira o endereço do aluno...'
-        error={errors.address_street}
+        error={errors?.address_street}
         defaultValue={data?.address_street}
         readOnly={readOnly}
       />
@@ -29,7 +29,7 @@ export default function StudentFormData({
         type='text'
         label='Cidade'
         placeholder='Insira a cidade do aluno...'
-        error={errors.address_city}
+        error={errors?.address_city}
         defaultValue={data?.address_city}
         readOnly={readOnly}
       />
@@ -40,7 +40,7 @@ export default function StudentFormData({
         type='text'
         label='Estado'
         placeholder='Insira o estado do aluno...'
-        error={errors.address_state}
+        error={errors?.address_state}
         defaultValue={data?.address_state}
         readOnly={readOnly}
       />
@@ -51,7 +51,7 @@ export default function StudentFormData({
         type='text'
         label='CEP'
         placeholder='Insira o cep do aluno...'
-        error={errors.address_zip_code}
+        error={errors?.address_zip_code}
         defaultValue={data?.address_zip_code}
         readOnly={readOnly}
       />
