@@ -9,20 +9,16 @@ import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
 
-import type { PageProps, SchoolYear } from '@/Types'
-
 import SchoolYearFormData from './Partials/SchoolYearFormData'
 import SchoolYearModel from './Partials/SchoolYearModel'
+
 import { breadcrumbs, titles } from './data'
+import type { SchoolYearEditProps } from './types'
 
-type PageSchoolYearEditProps = {
-  schoolYear: SchoolYear
-}
-
-export default function PageSchoolYearEdit({
+export default function SchoolYearEdit({
   schoolYear,
   flash,
-}: PageProps<PageSchoolYearEditProps>) {
+}: SchoolYearEditProps) {
   const [showModel, setShowModel] = useState(false)
 
   const { handleSubmit, errors, isLoading } = useFormHandler({
@@ -32,9 +28,16 @@ export default function PageSchoolYearEdit({
   })
 
   return (
-    <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
+    <AuthLayout
+      title={titles.edit}
+      breadcrumb={breadcrumbs.edit}
+    >
       {!!flash.message && (
-        <Alert color='success' icon={Check} onDismiss>
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
           {flash.message}
         </Alert>
       )}
@@ -58,7 +61,10 @@ export default function PageSchoolYearEdit({
         </div>
 
         {/* Academic year form data */}
-        <SchoolYearFormData data={schoolYear} errors={errors} />
+        <SchoolYearFormData
+          data={schoolYear}
+          errors={errors}
+        />
 
         {/* Form footer */}
         <Form.Footer>

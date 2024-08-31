@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react'
+import { InertiaLinkProps, Link } from '@inertiajs/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
@@ -91,28 +91,33 @@ function PaginationNext({ href = '' }) {
   )
 }
 
-// function PaginationItem({ href = '' }) {
-//   return (
-//     <li>
-//       <Link
-//         href={href}
-//         className={twJoin(
-//           'flex items-center justify-center',
-//           'border px-3 py-2 text-sm leading-tight',
-//           'border-gray-300 bg-white text-gray-500',
-//           'hover:bg-gray-100 hover:text-gray-700',
-//           'dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400',
-//           'dark:hover:bg-gray-700 dark:hover:text-white'
-//         )}>
-//         1
-//       </Link>
-//     </li>
-//   )
-// }
+function PaginationItem({
+  children,
+  ...props
+}: { children: React.ReactNode } & InertiaLinkProps) {
+  return (
+    <li>
+      <Link
+        className={twJoin(
+          'flex items-center justify-center',
+          'border px-3 py-2 text-sm leading-tight',
+          'border-gray-300 bg-white text-gray-500',
+          'hover:bg-gray-100 hover:text-gray-700',
+          'dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400',
+          'dark:hover:bg-gray-700 dark:hover:text-white',
+        )}
+        {...props}
+      >
+        {children}
+      </Link>
+    </li>
+  )
+}
 
 export const Pagination = Object.assign(PaginationRoot, {
   Left: PaginationLeft,
   Right: PaginationRight,
+  Item: PaginationItem,
   Previous: PaginationPrevious,
   Next: PaginationNext,
 })

@@ -15,10 +15,16 @@ export function HeaderLeft({
 }: HeaderLeftProps) {
   return (
     <Navbar.Brand>
-      <button className='mr-2 hidden p-2 md:block' onClick={onCollapseSidebar}>
+      <button
+        className='mr-2 hidden p-2 md:block'
+        onClick={onCollapseSidebar}
+      >
         <Menu />
       </button>
-      <button className='mr-2 p-2 md:hidden' onClick={onOpenSidebar}>
+      <button
+        className='mr-2 p-2 md:hidden'
+        onClick={onOpenSidebar}
+      >
         <Menu />
       </button>
       <div

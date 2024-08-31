@@ -3,13 +3,7 @@ import { Button } from 'flowbite-react'
 import { AlertCircle, X } from 'lucide-react'
 
 import { useActionHandler } from '@/Hooks/useActionHandler'
-import type { SchoolYear } from '@/Types'
-
-type SchoolYearModelProps = {
-  show: boolean
-  schoolYear: SchoolYear
-  onClose: (show: boolean) => void
-}
+import type { SchoolYearModelProps } from '../types'
 
 export default function SchoolYearModel({
   show = false,
@@ -29,7 +23,12 @@ export default function SchoolYearModel({
   }
 
   return (
-    <Modal size='md' show={show} onClose={handleClose} popup>
+    <Modal
+      size='md'
+      show={show}
+      onClose={handleClose}
+      popup
+    >
       <Modal.Popup>
         <Modal.PopupIcon />
         <Modal.PopupText>

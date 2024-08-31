@@ -1,17 +1,11 @@
 import { Input } from '@/Components/Input'
-import type { Teacher } from '@/Types'
-
-type AddressFormDataProps = {
-  data?: Teacher
-  errors?: any
-  readOnly?: boolean
-}
+import type { FormDataProps } from '../types'
 
 export default function AddressFormData({
   data,
   errors,
   readOnly = false,
-}: AddressFormDataProps) {
+}: FormDataProps) {
   return (
     <section className='mb-4'>
       {/* # SUBTÍTULO */}

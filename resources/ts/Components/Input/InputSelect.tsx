@@ -14,9 +14,18 @@ export function InputSelect({
 }: InputSelectProps) {
   return (
     <section className={twMerge(label && 'mb-6 space-y-2', className)}>
-      {label && <Label htmlFor={id} value={label} />}
+      {label && (
+        <Label
+          htmlFor={id}
+          value={label}
+        />
+      )}
 
-      <Select id={id} name={id} {...props}>
+      <Select
+        id={id}
+        name={id}
+        {...props}
+      >
         {values.map((value, index) => (
           <option
             key={'input-select-' + index}

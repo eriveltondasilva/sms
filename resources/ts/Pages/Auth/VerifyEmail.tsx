@@ -53,5 +53,8 @@ export default function PageVerifyEmail({ status }: { status: string }) {
 }
 
 PageVerifyEmail.layout = (page: any) => (
-  <GuestLayout title={titles.verifyEmail} children={page} />
+  <GuestLayout
+    title={titles.verifyEmail}
+    children={page}
+  />
 )

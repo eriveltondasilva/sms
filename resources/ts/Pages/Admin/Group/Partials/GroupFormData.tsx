@@ -1,12 +1,9 @@
 import { usePage } from '@inertiajs/react'
 
 import { Input } from '@/Components/Input'
-import type { Group, PageProps } from '@/Types'
+import type { PageProps } from '@/Types'
 
-type GroupFormDataProps = {
-  data?: Group
-  errors: any
-}
+import type { GroupFormDataProps } from '../types'
 
 export default function GroupFormData({ data, errors }: GroupFormDataProps) {
   const { activeYear } = usePage<PageProps>().props.auth
@@ -16,7 +13,10 @@ export default function GroupFormData({ data, errors }: GroupFormDataProps) {
 
   return (
     <section>
-      <Input.Hidden id='school_year_id' value={String(activeYear.id)} />
+      <Input.Hidden
+        id='school_year_id'
+        value={String(activeYear.id)}
+      />
 
       <Input.Text
         id='school_year_display'

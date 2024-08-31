@@ -13,9 +13,18 @@ export function InputTextarea({
 }: InputTextareaProps) {
   return (
     <section className={twMerge(label && 'mb-6 space-y-2', className)}>
-      {label && <Label htmlFor={id} value={label} />}
+      {label && (
+        <Label
+          htmlFor={id}
+          value={label}
+        />
+      )}
 
-      <Textarea id={id} name={id} {...props} />
+      <Textarea
+        id={id}
+        name={id}
+        {...props}
+      />
 
       {error && <InputError message={error} />}
     </section>

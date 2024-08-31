@@ -1,6 +1,7 @@
 {
   "arrowParens": "always",
   "bracketSpacing": true,
+  "singleAttributePerLine": true,
   "quoteProps": "as-needed",
   "experimentalTernaries": true,
   "jsxSingleQuote": true,

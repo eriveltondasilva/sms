@@ -6,22 +6,30 @@ import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import type { PageProps } from '@/Types'
 
 import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
-import { breadcrumbs, titles } from './data'
 
-export default function PageTeacherCreate({ flash }: PageProps) {
+import { breadcrumbs, titles } from './data'
+import type { TeacherCreate } from './types'
+
+export default function TeacherCreate({ flash }: TeacherCreate) {
   const { handleSubmit, isLoading, errors } = useFormHandler({
     method: 'post',
     route: 'admin.teachers.store',
   })
 
   return (
-    <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
+    <AuthLayout
+      title={titles.create}
+      breadcrumb={breadcrumbs.create}
+    >
       {!!flash.message && (
-        <Alert color='success' icon={Check} onDismiss>
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
           {flash.message}
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-lo.
@@ -35,7 +43,6 @@ export default function PageTeacherCreate({ flash }: PageProps) {
 
       <Form onSubmit={handleSubmit}>
         <TeacherFormData errors={errors} />
-
         <AddressFormData errors={errors} />
 
         <Form.Footer>

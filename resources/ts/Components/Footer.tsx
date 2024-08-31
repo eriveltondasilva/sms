@@ -9,7 +9,10 @@ const socialLinks = [
 
 function FooterRoot({ children }: React.PropsWithChildren) {
   return (
-    <FlowbiteFooter className='shadow-md' container>
+    <FlowbiteFooter
+      className='shadow-md'
+      container
+    >
       {children}
     </FlowbiteFooter>
   )

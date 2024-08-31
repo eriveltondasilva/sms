@@ -9,7 +9,10 @@ export function HeaderRight({
       <span className='text-sm font-medium text-gray-600 dark:text-gray-400'>
         Ano Letivo:
       </span>
-      <Badge color='failure' size='sm'>
+      <Badge
+        color='failure'
+        size='sm'
+      >
         {activeYear}
       </Badge>
 

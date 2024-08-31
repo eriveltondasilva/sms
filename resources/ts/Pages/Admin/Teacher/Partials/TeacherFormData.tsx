@@ -1,17 +1,11 @@
 import { Input } from '@/Components/Input'
-import type { Teacher } from '@/Types'
-
-type TeacherFormDataProps = {
-  data?: Teacher
-  errors?: any
-  readOnly?: boolean
-}
+import type { FormDataProps } from '../types'
 
 export default function TeacherFormData({
   data,
   errors,
   readOnly = false,
-}: TeacherFormDataProps) {
+}: FormDataProps) {
   const genderRadioValues = [
     { id: 'gender-male', label: 'Masculino', name: 'M' },
     { id: 'gender-female', label: 'Feminino', name: 'F' },

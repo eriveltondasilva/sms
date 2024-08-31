@@ -1,12 +1,6 @@
 import { Input } from '@/Components/Input'
-import type { Student } from '@/Types'
 import { formatId } from '@/Utils/formatId'
-
-type StudentFormDataProps = {
-  data?: Student
-  errors?: any
-  readOnly?: boolean
-}
+import type { StudentFormDataProps } from '../types'
 
 export default function StudentFormData({
   data,

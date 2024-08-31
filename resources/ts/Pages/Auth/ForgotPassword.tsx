@@ -42,7 +42,10 @@ export default function PageForgotPassword({ status }: { status: string }) {
         />
 
         <footer className='mt-4 flex items-center justify-end'>
-          <Button type='submit' disabled={processing}>
+          <Button
+            type='submit'
+            disabled={processing}
+          >
             Link de redefinição de senha de e-mail
           </Button>
         </footer>

@@ -1,10 +1,11 @@
 import { twJoin } from 'tailwind-merge'
 
-type Props = {
+type SearchBarRootProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  children: React.ReactNode
 }
 
-function SearchBarRoot({ onSubmit, children }: React.PropsWithChildren<Props>) {
+function SearchBarRoot({ onSubmit, children }: SearchBarRootProps) {
   return (
     <form
       onSubmit={onSubmit}
@@ -18,7 +19,7 @@ function SearchBarRoot({ onSubmit, children }: React.PropsWithChildren<Props>) {
   )
 }
 
-function SearchBarLeft({ children }: React.PropsWithChildren) {
+function SearchBarLeft({ children }: { children: React.ReactNode }) {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
       {children}
@@ -26,7 +27,7 @@ function SearchBarLeft({ children }: React.PropsWithChildren) {
   )
 }
 
-function SearchBarRight({ children }: React.PropsWithChildren) {
+function SearchBarRight({ children }: { children: React.ReactNode }) {
   return (
     <div className='flex w-full items-center space-x-3 md:w-auto'>
       {children}

@@ -31,7 +31,11 @@ function PageHeaderButton({
 }: React.PropsWithChildren<ButtonProps>) {
   return (
     <div className='flex'>
-      <Button as={Link} color='blue' {...props}>
+      <Button
+        as={Link}
+        color='blue'
+        {...props}
+      >
         {children}
       </Button>
     </div>

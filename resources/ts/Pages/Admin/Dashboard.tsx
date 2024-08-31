@@ -8,42 +8,32 @@ import {
 
 import { Alert } from '@/Components/Alert'
 import { AuthLayout } from '@/Layouts/AuthLayout'
-
-import type { SchoolYear, PageProps, Stats } from '@/Types'
+import type { Stats } from '@/Types'
 
 import { breadcrumbs, titles } from './data'
+import type { DashboardProps } from './types'
 
-type DashboardProps = {
-  studentsCount: number
-  teachersCount: number
-  groupsCount: number
-  activeYear: SchoolYear
-}
-
-export default function Dashboard({
-  flash,
-  ...data
-}: PageProps<DashboardProps>) {
+export default function Dashboard({ flash, ...props }: DashboardProps) {
   const stats: Stats[] = [
     {
       title: 'Alunos',
       icon: UsersRound,
-      value: data.studentsCount,
+      value: props.studentsCount,
     },
     {
       title: 'Professores',
       icon: Users,
-      value: data.teachersCount,
+      value: props.teachersCount,
     },
     {
       title: 'Turmas',
       icon: BookCopy,
-      value: data.groupsCount,
+      value: props.groupsCount,
     },
     {
       title: 'Ano Letivo',
       icon: Calendar,
-      value: data.activeYear.year,
+      value: props.activeYear.year,
     },
   ]
 

@@ -1,10 +1,5 @@
 import { Input } from '@/Components/Input'
-import { SchoolYear } from '@/Types'
-
-type SchoolYearFormDataProps = {
-  data?: SchoolYear
-  errors: any
-}
+import { SchoolYearFormDataProps } from '../types'
 
 export default function SchoolYearFormData({
   data,
@@ -14,6 +9,7 @@ export default function SchoolYearFormData({
 
   return (
     <section>
+      {/* ANO LETIVO */}
       <Input.Text
         id='year'
         type='number'
@@ -28,6 +24,7 @@ export default function SchoolYearFormData({
         required
       />
 
+      {/* INÍCIO DO ANO LETIVO */}
       <Input.Text
         id='start_date'
         type='date'
@@ -36,6 +33,7 @@ export default function SchoolYearFormData({
         error={errors.start_date}
       />
 
+      {/* FIM DO ANO LETIVO */}
       <Input.Text
         id='end_date'
         type='date'

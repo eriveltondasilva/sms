@@ -5,26 +5,25 @@ import { Form } from '@/Components/Form'
 import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
-import type { PageProps, Teacher } from '@/Types'
-
 import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
 
 import { breadcrumbs, titles } from './data'
+import type { TeacherShowProps } from './types'
 
-type PageTeacherShowProps = {
-  teacher: Teacher
-}
-
-export default function PageTeacherShow({
-  teacher,
-  flash,
-}: PageProps<PageTeacherShowProps>) {
+export default function TeacherShow({ teacher, flash }: TeacherShowProps) {
   return (
-    <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
-      {!!flash.message && (
-        <Alert color='success' icon={Check} onDismiss>
-          {flash.message}
+    <AuthLayout
+      title={titles.show}
+      breadcrumb={breadcrumbs.show}
+    >
+      {flash?.message && (
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
+          {flash?.message}
         </Alert>
       )}
 
@@ -37,9 +36,14 @@ export default function PageTeacherShow({
       </PageHeader>
 
       <Form>
-        <TeacherFormData data={teacher} readOnly />
-
-        <AddressFormData data={teacher} readOnly />
+        <TeacherFormData
+          data={teacher}
+          readOnly
+        />
+        <AddressFormData
+          data={teacher}
+          readOnly
+        />
       </Form>
     </AuthLayout>
   )

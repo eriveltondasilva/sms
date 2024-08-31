@@ -88,7 +88,10 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
 
         {/* footer */}
         <footer className='mt-6 flex flex-col gap-2'>
-          <Button type='submit' disabled={processing}>
+          <Button
+            type='submit'
+            disabled={processing}
+          >
             Entrar com Email
           </Button>
 
@@ -110,5 +113,8 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
 }
 
 PageLogin.layout = (page: any) => (
-  <GuestLayout title={titles.login} children={page} />
+  <GuestLayout
+    title={titles.login}
+    children={page}
+  />
 )

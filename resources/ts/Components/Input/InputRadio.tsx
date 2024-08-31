@@ -16,7 +16,10 @@ export function InputRadio({
       {label && <Label value={label} />}
 
       {values.map((value, index) => (
-        <div key={'input-radio-' + index} className='flex items-center gap-2'>
+        <div
+          key={'input-radio-' + index}
+          className='flex items-center gap-2'
+        >
           <Radio
             id={value.id}
             name={id}
@@ -24,7 +27,10 @@ export function InputRadio({
             defaultChecked={value.name === initialCheckedValue}
             disabled={readOnly}
           />
-          <Label htmlFor={value.id} value={value.label} />
+          <Label
+            htmlFor={value.id}
+            value={value.label}
+          />
         </div>
       ))}
 

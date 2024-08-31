@@ -4,19 +4,23 @@ import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import type { PageProps } from '@/Types'
 
 import StudentFormData from './Partials/StudentFormData'
-import { breadcrumbs, titles } from './data'
 
-export default function PageStudentCreate({ flash }: PageProps) {
+import { breadcrumbs, titles } from './data'
+import type { StudentCreateProps } from './types'
+
+export default function StudentCreate({ flash }: StudentCreateProps) {
   const { handleSubmit, isLoading, errors } = useFormHandler({
     method: 'post',
     route: 'admin.students.store',
   })
 
   return (
-    <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
+    <AuthLayout
+      title={titles.create}
+      breadcrumb={breadcrumbs.create}
+    >
       {!!flash.message && (
         <Alert>
           <div>{flash.message}</div>

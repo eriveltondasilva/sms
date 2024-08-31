@@ -89,7 +89,10 @@ export default function PageRegister() {
         </Link>
 
         <footer className='ms-4'>
-          <Button type='submit' disabled={processing}>
+          <Button
+            type='submit'
+            disabled={processing}
+          >
             Registrar
           </Button>
         </footer>
@@ -99,5 +102,8 @@ export default function PageRegister() {
 }
 
 PageRegister.layout = (page: any) => (
-  <GuestLayout title={titles.register} children={page} />
+  <GuestLayout
+    title={titles.register}
+    children={page}
+  />
 )

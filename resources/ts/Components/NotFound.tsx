@@ -8,7 +8,10 @@ type Props = {
 
 export function NotFound({ icon, children }: Props) {
   return (
-    <Alert icon={icon || AlertOctagon} color='failure'>
+    <Alert
+      icon={icon || AlertOctagon}
+      color='failure'
+    >
       {children}
     </Alert>
   )

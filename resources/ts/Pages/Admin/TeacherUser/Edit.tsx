@@ -6,21 +6,16 @@ import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import type { PageProps, Teacher, User } from '@/Types'
 
 import UserFormData from './Partials/UserFormData'
 import { breadcrumbs, titles } from './data'
+import type { TeacherUserEditProps } from './types'
 
-type PageTeacherUserEditProps = {
-  teacher: Teacher
-  user: User
-}
-
-export default function PageTeacherUserEdit({
+export default function TeacherUserEdit({
   teacher,
   user,
   flash,
-}: PageProps<PageTeacherUserEditProps>) {
+}: TeacherUserEditProps) {
   const { handleSubmit, isLoading, errors } = useFormHandler({
     method: 'put',
     route: 'admin.teachers.users.update',
@@ -30,9 +25,16 @@ export default function PageTeacherUserEdit({
   const title = `${titles.edit} - ${teacher.name}`
 
   return (
-    <AuthLayout title={titles.edit} breadcrumb={breadcrumbs.edit}>
+    <AuthLayout
+      title={titles.edit}
+      breadcrumb={breadcrumbs.edit}
+    >
       {!!flash.message && (
-        <Alert color='success' icon={Check} onDismiss>
+        <Alert
+          color='success'
+          icon={Check}
+          onDismiss
+        >
           {flash.message}
         </Alert>
       )}
@@ -42,7 +44,10 @@ export default function PageTeacherUserEdit({
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>
-        <UserFormData data={user} errors={errors} />
+        <UserFormData
+          data={user}
+          errors={errors}
+        />
 
         <Form.Footer>
           <Form.ButtonReset disabled={isLoading} />

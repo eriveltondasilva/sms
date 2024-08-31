@@ -37,7 +37,10 @@ export default function PageGroupIndex({
   const groupOptions = ['', ...teacherGroups]
 
   return (
-    <AuthLayout title={titles.index} breadcrumb={breadcrumbs.index}>
+    <AuthLayout
+      title={titles.index}
+      breadcrumb={breadcrumbs.index}
+    >
       <PageHeader>
         <PageHeader.Title title={title} />
       </PageHeader>
@@ -49,7 +52,11 @@ export default function PageGroupIndex({
             defaultValue={selectedGroup.id}
             values={groupOptions}
           />
-          <Button type='submit' color='blue' disabled={isLoading}>
+          <Button
+            type='submit'
+            color='blue'
+            disabled={isLoading}
+          >
             <Search className='size-5' />
           </Button>
         </SearchBar.Left>

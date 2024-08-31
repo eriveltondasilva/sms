@@ -2,7 +2,7 @@ import { type InertiaLinkProps, Link } from '@inertiajs/react'
 import { Table as FlowbiteTable } from 'flowbite-react'
 import { twJoin } from 'tailwind-merge'
 
-function TableRoot({ children }: React.PropsWithChildren) {
+function TableRoot({ children }: { children: React.ReactNode }) {
   return (
     <div className='overflow-x-auto shadow-md'>
       <FlowbiteTable>{children}</FlowbiteTable>
@@ -10,13 +10,13 @@ function TableRoot({ children }: React.PropsWithChildren) {
   )
 }
 
-function TableBody({ children }: React.PropsWithChildren) {
+function TableBody({ children }: { children: React.ReactNode }) {
   return (
     <FlowbiteTable.Body className='divide-y'>{children}</FlowbiteTable.Body>
   )
 }
 
-function TableRow({ children }: React.PropsWithChildren) {
+function TableRow({ children }: { children: React.ReactNode }) {
   return (
     <FlowbiteTable.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
       {children}
@@ -27,7 +27,7 @@ function TableRow({ children }: React.PropsWithChildren) {
 function TableLink({
   children,
   ...props
-}: React.PropsWithChildren<InertiaLinkProps>) {
+}: { children: string } & InertiaLinkProps) {
   return (
     <Link
       className={twJoin(

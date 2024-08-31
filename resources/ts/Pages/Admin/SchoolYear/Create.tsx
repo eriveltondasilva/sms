@@ -6,21 +6,29 @@ import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
 import { useFormHandler } from '@/Hooks/useFormHandler'
-import type { PageProps } from '@/Types'
 
 import SchoolYearFormData from './Partials/SchoolYearFormData'
-import { breadcrumbs, titles } from './data'
 
-export default function PageSchoolYearCreate({ flash }: PageProps) {
+import { breadcrumbs, titles } from './data'
+import { SchoolYearCreateProps } from './types'
+
+export default function SchoolYearCreate({ flash }: SchoolYearCreateProps) {
   const { handleSubmit, errors, isLoading } = useFormHandler({
     method: 'post',
     route: 'admin.school-years.store',
   })
 
   return (
-    <AuthLayout title={titles.create} breadcrumb={breadcrumbs.create}>
+    <AuthLayout
+      title={titles.create}
+      breadcrumb={breadcrumbs.create}
+    >
       {!!flash.message && (
-        <Alert icon={Check} color='success' onDismiss>
+        <Alert
+          icon={Check}
+          color='success'
+          onDismiss
+        >
           <div>{flash.message}</div>
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-lo.

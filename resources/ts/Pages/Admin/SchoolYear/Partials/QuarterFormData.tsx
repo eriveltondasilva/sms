@@ -1,10 +1,5 @@
 import { Input } from '@/Components/Input'
-import { SchoolYear } from '@/Types'
-
-type SchoolYearFormDataProps = {
-  data?: SchoolYear
-  errors: any
-}
+import type { SchoolYearFormDataProps } from '../types'
 
 export default function QuarterFormData({
   data,
@@ -12,6 +7,7 @@ export default function QuarterFormData({
 }: SchoolYearFormDataProps) {
   return (
     <section>
+      {/* INÍCIO DO BIMESTRE */}
       <Input.Text
         id='quarter[start_date]'
         type='date'
@@ -20,6 +16,7 @@ export default function QuarterFormData({
         error={errors.start_date}
       />
 
+      {/* FIM DO BIMESTRE */}
       <Input.Text
         id='quarter[end_date]'
         type='date'

@@ -1,12 +1,7 @@
 import { Input } from '@/Components/Input'
-import type { User } from '@/Types'
+import type { FormDataProps } from '../types'
 
-type UserFormDataProps = {
-  data?: User
-  errors?: any
-}
-
-export default function UserFormData({ data, errors }: UserFormDataProps) {
+export default function UserFormData({ data, errors }: FormDataProps) {
   const isCreationRoute = route().current('*.create')
 
   return (

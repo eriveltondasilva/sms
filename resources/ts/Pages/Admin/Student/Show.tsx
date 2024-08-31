@@ -5,23 +5,22 @@ import { Form } from '@/Components/Form'
 import { PageHeader } from '@/Components/PageHeader'
 import { AuthLayout } from '@/Layouts/AuthLayout'
 
-import type { PageProps, Student } from '@/Types'
-
 import StudentFormData from './Partials/StudentFormData'
+
 import { breadcrumbs, titles } from './data'
+import type { StudentShowProps } from './types'
 
-type PageStudentShowProps = {
-  student: Student
-}
-
-export default function PageStudentShow({
-  student,
-  flash,
-}: PageProps<PageStudentShowProps>) {
+export default function StudentShow({ student, flash }: StudentShowProps) {
   return (
-    <AuthLayout title={titles.show} breadcrumb={breadcrumbs.show}>
+    <AuthLayout
+      title={titles.show}
+      breadcrumb={breadcrumbs.show}
+    >
       {!!flash.message && (
-        <Alert color='success' onDismiss>
+        <Alert
+          color='success'
+          onDismiss
+        >
           {flash.message}
         </Alert>
       )}
@@ -35,7 +34,10 @@ export default function PageStudentShow({
       </PageHeader>
 
       <Form>
-        <StudentFormData data={student} readOnly />
+        <StudentFormData
+          data={student}
+          readOnly
+        />
       </Form>
     </AuthLayout>
   )

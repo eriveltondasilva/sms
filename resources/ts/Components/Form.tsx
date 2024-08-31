@@ -40,7 +40,12 @@ function FormButton({
 }: React.PropsWithChildren<FormButtonProps>) {
   const ButtonIcon = disabled ? Spinner : Icon
   return (
-    <Button type={type} color={color} fullSized {...props}>
+    <Button
+      type={type}
+      color={color}
+      fullSized
+      {...props}
+    >
       {Icon && <Icon className='mr-2 size-5' />}
       {children}
     </Button>
@@ -52,7 +57,10 @@ function FormButtonSubmit({ disabled }: { disabled: boolean }) {
   const submitButtonText = isCreate ? 'Cadastrar' : 'Atualizar'
   const BtnIcon =
     disabled ?
-      <Spinner size='sm' className='mr-2 size-5' />
+      <Spinner
+        size='sm'
+        className='mr-2 size-5'
+      />
     : <Save className='mr-1 size-5' />
 
   return (

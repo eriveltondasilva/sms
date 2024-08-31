@@ -42,14 +42,23 @@ export default function DeleteUserForm({ className = '' }) {
       {/* header */}
       <DeleteUserFormHeader />
 
-      <Button color='failure' onClick={confirmUserDeletion}>
+      <Button
+        color='failure'
+        onClick={confirmUserDeletion}
+      >
         <Trash2 className='mr-2 size-5' />
         Deletar Conta
       </Button>
 
       {/* model */}
-      <Modal show={confirmingUserDeletion} onClose={closeModal}>
-        <form onSubmit={deleteUser} className='p-6'>
+      <Modal
+        show={confirmingUserDeletion}
+        onClose={closeModal}
+      >
+        <form
+          onSubmit={deleteUser}
+          className='p-6'
+        >
           <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
             Você tem certeza que deseja deletar sua conta?
           </h2>
@@ -76,12 +85,20 @@ export default function DeleteUserForm({ className = '' }) {
           </div>
 
           <div className='mt-6 flex justify-end'>
-            <Button outline color='blue' onClick={closeModal}>
+            <Button
+              outline
+              color='blue'
+              onClick={closeModal}
+            >
               Cancelar
             </Button>
 
             <div className='ms-3'>
-              <Button type='submit' color='failure' disabled={processing}>
+              <Button
+                type='submit'
+                color='failure'
+                disabled={processing}
+              >
                 Deletar Conta
               </Button>
             </div>

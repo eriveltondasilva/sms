@@ -32,7 +32,10 @@ export default function UpdateProfileInformation({
     <section className={className}>
       <Header />
 
-      <form onSubmit={handleSubmit} className='mt-6 space-y-6'>
+      <form
+        onSubmit={handleSubmit}
+        className='mt-6 space-y-6'
+      >
         <div>
           <Input.Text
             id='username'
@@ -116,7 +119,11 @@ function Footer({
     <footer className='flex items-center gap-4'>
       {/* Botão de salvar */}
 
-      <Button type='submit' color='blue' disabled={processing}>
+      <Button
+        type='submit'
+        color='blue'
+        disabled={processing}
+      >
         <Save className='mr-2 size-5' />
         Salvar
       </Button>

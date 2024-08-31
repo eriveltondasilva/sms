@@ -45,17 +45,31 @@ export function AuthLayout({
         collapsed={isCollapsed}
         className='hidden md:block'
       >
-        <Sidebar.Logo img={schoolImg} imgAlt='Escola Viver' href=''>
+        <Sidebar.Logo
+          img={schoolImg}
+          imgAlt='Escola Viver'
+          href=''
+        >
           Escola Viver
         </Sidebar.Logo>
         <Sidebar.Menu items={sidebarItems} />
       </Sidebar>
 
       {/* # MOBILE SIDEBAR */}
-      <Drawer open={isOpen} onClose={() => setIsOpen(false)}>
+      <Drawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
         <Drawer.Items>
-          <Sidebar id='sidebar-mobile' aria-label='Barra Lateral No Celular'>
-            <Sidebar.Logo img={schoolImg} imgAlt='Escola Viver' href=''>
+          <Sidebar
+            id='sidebar-mobile'
+            aria-label='Barra Lateral No Celular'
+          >
+            <Sidebar.Logo
+              img={schoolImg}
+              imgAlt='Escola Viver'
+              href=''
+            >
               Escola Viver
             </Sidebar.Logo>
             <Sidebar.Menu
@@ -90,7 +104,10 @@ export function AuthLayout({
         {breadcrumb.length > 0 && (
           <Breadcrumb>
             {breadcrumb.map((item, index) => (
-              <Breadcrumb.Item key={index} item={item} />
+              <Breadcrumb.Item
+                key={index}
+                item={item}
+              />
             ))}
           </Breadcrumb>
         )}
