@@ -39,8 +39,17 @@ export default function DeleteUserForm({ className = '' }) {
 
   return (
     <section className={twJoin('space-y-6', className)}>
-      {/* header */}
-      <DeleteUserFormHeader />
+      <header>
+        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+          Deletar Conta
+        </h2>
+
+        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+          Depois que sua conta for excluída, todos os seus recursos e dados
+          serão excluído permanentemente. Antes de excluir sua conta, baixe
+          qualquer dados ou informações que você deseja reter.
+        </p>
+      </header>
 
       <Button
         color='failure'
@@ -106,21 +115,5 @@ export default function DeleteUserForm({ className = '' }) {
         </form>
       </Modal>
     </section>
-  )
-}
-
-function DeleteUserFormHeader() {
-  return (
-    <header>
-      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Deletar Conta
-      </h2>
-
-      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-        Depois que sua conta for excluída, todos os seus recursos e dados serão
-        excluído permanentemente. Antes de excluir sua conta, baixe qualquer
-        dados ou informações que você deseja reter.
-      </p>
-    </header>
   )
 }

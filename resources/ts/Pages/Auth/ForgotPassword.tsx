@@ -17,7 +17,7 @@ export default function PageForgotPassword({ status }: { status: string }) {
   }
 
   return (
-    <>
+    <GuestLayout title={titles.forgotPassword}>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Esqueceu sua senha? Sem problemas. Basta nos informar seu endereço de
         e-mail e enviaremos por e-mail um link de redefinição de senha que
@@ -50,10 +50,6 @@ export default function PageForgotPassword({ status }: { status: string }) {
           </Button>
         </footer>
       </form>
-    </>
+    </GuestLayout>
   )
 }
-
-PageForgotPassword.layout = (page: any) => (
-  <GuestLayout title={titles.forgotPassword}>{page}</GuestLayout>
-)

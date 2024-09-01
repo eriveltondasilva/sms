@@ -6,15 +6,17 @@ import { Save } from 'lucide-react'
 import { Input } from '@/Components/Input'
 import { PageProps } from '@/Types'
 
+type UpdateProfileInformationProps = {
+  mustVerifyEmail: boolean
+  status: string
+  className?: string
+}
+
 export default function UpdateProfileInformation({
   mustVerifyEmail,
   status,
   className = '',
-}: {
-  mustVerifyEmail: boolean
-  status: string
-  className?: string
-}) {
+}: UpdateProfileInformationProps) {
   const { user } = usePage<PageProps>().props.auth
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
@@ -30,7 +32,15 @@ export default function UpdateProfileInformation({
 
   return (
     <section className={className}>
-      <Header />
+      <header>
+        <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
+          Informação do Perfil
+        </h2>
+
+        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+          Atualize sua informação do perfil e endereço de email.
+        </p>
+      </header>
 
       <form
         onSubmit={handleSubmit}
@@ -85,58 +95,27 @@ export default function UpdateProfileInformation({
           </div>
         )}
 
-        <Footer
-          processing={processing}
-          recentlySuccessful={recentlySuccessful}
-        />
+        <footer className='flex items-center gap-4'>
+          <Button
+            type='submit'
+            color='blue'
+            disabled={processing}
+          >
+            <Save className='mr-2 size-5' />
+            Salvar
+          </Button>
+
+          <Transition
+            show={recentlySuccessful}
+            enter='transition ease-in-out'
+            enterFrom='opacity-0'
+            leave='transition ease-in-out'
+            leaveTo='opacity-0'
+          >
+            <p className='text-sm text-gray-600 dark:text-gray-400'>Salvo.</p>
+          </Transition>
+        </footer>
       </form>
     </section>
-  )
-}
-
-function Header() {
-  return (
-    <header>
-      <h2 className='text-lg font-medium text-gray-900 dark:text-gray-100'>
-        Informação do Perfil
-      </h2>
-
-      <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-        Atualize sua informação do perfil e endereço de email.
-      </p>
-    </header>
-  )
-}
-
-function Footer({
-  processing,
-  recentlySuccessful,
-}: {
-  processing: boolean
-  recentlySuccessful: boolean
-}) {
-  return (
-    <footer className='flex items-center gap-4'>
-      {/* Botão de salvar */}
-
-      <Button
-        type='submit'
-        color='blue'
-        disabled={processing}
-      >
-        <Save className='mr-2 size-5' />
-        Salvar
-      </Button>
-
-      <Transition
-        show={recentlySuccessful}
-        enter='transition ease-in-out'
-        enterFrom='opacity-0'
-        leave='transition ease-in-out'
-        leaveTo='opacity-0'
-      >
-        <p className='text-sm text-gray-600 dark:text-gray-400'>Salvo.</p>
-      </Transition>
-    </footer>
   )
 }

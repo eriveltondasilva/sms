@@ -35,55 +35,50 @@ export default function PageResetPassword({
   }
 
   return (
-    <form onSubmit={submit}>
-      <Input.Text
-        id='email'
-        type='email'
-        label='E-mail'
-        value={data.email}
-        error={errors.email}
-        onChange={(e) => setData('email', e.target.value)}
-        autoFocus
-        required
-      />
+    <GuestLayout title={titles.resetPassword}>
+      <form onSubmit={submit}>
+        <Input.Text
+          id='email'
+          type='email'
+          label='E-mail'
+          value={data.email}
+          error={errors.email}
+          onChange={(e) => setData('email', e.target.value)}
+          autoFocus
+          required
+        />
 
-      <Input.Text
-        id='password'
-        type='password'
-        label='Senha'
-        className='mt-4'
-        value={data.password}
-        error={errors.password}
-        onChange={(e) => setData('password', e.target.value)}
-        required
-      />
+        <Input.Text
+          id='password'
+          type='password'
+          label='Senha'
+          className='mt-4'
+          value={data.password}
+          error={errors.password}
+          onChange={(e) => setData('password', e.target.value)}
+          required
+        />
 
-      <Input.Text
-        id='password_confirmation'
-        type='password'
-        label='Confirmar senha'
-        className='mt-4'
-        value={data.password_confirmation}
-        error={errors.password_confirmation}
-        onChange={(e) => setData('password_confirmation', e.target.value)}
-        required
-      />
+        <Input.Text
+          id='password_confirmation'
+          type='password'
+          label='Confirmar senha'
+          className='mt-4'
+          value={data.password_confirmation}
+          error={errors.password_confirmation}
+          onChange={(e) => setData('password_confirmation', e.target.value)}
+          required
+        />
 
-      <footer className='mt-4 flex items-center justify-end'>
-        <Button
-          type='submit'
-          disabled={processing}
-        >
-          Reconfigurar sua senha
-        </Button>
-      </footer>
-    </form>
+        <footer className='mt-4 flex items-center justify-end'>
+          <Button
+            type='submit'
+            disabled={processing}
+          >
+            Reconfigurar sua senha
+          </Button>
+        </footer>
+      </form>
+    </GuestLayout>
   )
 }
-
-PageResetPassword.layout = (page: any) => (
-  <GuestLayout
-    title={titles.resetPassword}
-    children={page}
-  />
-)

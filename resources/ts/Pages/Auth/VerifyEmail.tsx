@@ -15,7 +15,7 @@ export default function PageVerifyEmail({ status }: { status: string }) {
   }
 
   return (
-    <>
+    <GuestLayout title={titles.verifyEmail}>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Obrigado por inscrever-se! Antes de começar, você poderia verificar seu
         endereço de e-mail clicando no link que acabamos de enviar para você? Se
@@ -48,13 +48,6 @@ export default function PageVerifyEmail({ status }: { status: string }) {
           </Link>
         </div>
       </form>
-    </>
+    </GuestLayout>
   )
 }
-
-PageVerifyEmail.layout = (page: any) => (
-  <GuestLayout
-    title={titles.verifyEmail}
-    children={page}
-  />
-)

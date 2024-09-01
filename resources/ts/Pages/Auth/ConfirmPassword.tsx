@@ -18,31 +18,30 @@ export default function PageConfirmPassword() {
     }
   }, [])
 
-  const submit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     post(route('password.confirm'))
   }
 
   return (
-    <>
+    <GuestLayout title={titles.confirmPassword}>
       <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
         Esta é uma área segura do aplicativo. Por favor, confirme sua senha
         antes de continuar.
       </div>
 
-      <form onSubmit={submit}>
-        <div className='mt-4'>
-          <Input.Text
-            id='password'
-            type='password'
-            label='Password'
-            value={data.password}
-            error={errors.password}
-            onChange={(e) => setData('password', e.target.value)}
-            autoFocus
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit}>
+        <Input.Text
+          id='password'
+          type='password'
+          label='Senha'
+          className='mt-4'
+          value={data.password}
+          error={errors.password}
+          onChange={(e) => setData('password', e.target.value)}
+          autoFocus
+          required
+        />
 
         <footer className='mt-4 flex items-center justify-end'>
           <Button
@@ -53,10 +52,6 @@ export default function PageConfirmPassword() {
           </Button>
         </footer>
       </form>
-    </>
+    </GuestLayout>
   )
 }
-
-PageConfirmPassword.layout = (page: any) => (
-  <GuestLayout title={titles.confirmPassword}>{page}</GuestLayout>
-)

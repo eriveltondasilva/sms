@@ -9,7 +9,10 @@ import { GuestLayout } from '@/Layouts/GuestLayout'
 
 import { titles } from './data'
 
-type PageLogin = { status: string; canResetPassword: boolean }
+type PageLogin = {
+  status: string
+  canResetPassword: boolean
+}
 
 export default function PageLogin({ status, canResetPassword }: PageLogin) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,7 +33,7 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
   }
 
   return (
-    <>
+    <GuestLayout title={titles.login}>
       {status && (
         <div className='mb-4 text-sm font-medium text-green-600'>{status}</div>
       )}
@@ -60,6 +63,7 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
           value={data.password}
           error={errors.password}
           onChange={(e) => setData('password', e.target.value)}
+          autoComplete='off'
           required
         />
 
@@ -96,7 +100,7 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
           </Button>
 
           {/* TODO: implementar login com Google */}
-          {/* <HorizontalLine text='OU' /> */}
+          {/* <HR /> */}
 
           {/* <Button
             as='a'
@@ -108,13 +112,6 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
           </Button> */}
         </footer>
       </form>
-    </>
+    </GuestLayout>
   )
 }
-
-PageLogin.layout = (page: any) => (
-  <GuestLayout
-    title={titles.login}
-    children={page}
-  />
-)

@@ -37,21 +37,21 @@ export default function SchoolYearModel({
         <Modal.PopupFooter>
           <Button
             type='button'
-            color='failure'
-            onClick={handleConfirm}
-            disabled={isLoading}
-          >
-            <AlertCircle className='mr-2 size-5' />
-            Confirmar
-          </Button>
-          <Button
-            type='button'
             color='gray'
             onClick={handleClose}
             disabled={isLoading}
           >
             <X className='mr-2 size-5' />
             Cancelar
+          </Button>
+          <Button
+            type='button'
+            color='failure'
+            onClick={handleConfirm}
+            disabled={isLoading}
+          >
+            <AlertCircle className='mr-2 size-5' />
+            Confirmar
           </Button>
         </Modal.PopupFooter>
       </Modal.Popup>
