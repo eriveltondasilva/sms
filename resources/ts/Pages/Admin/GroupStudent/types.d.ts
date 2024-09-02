@@ -1,9 +1,16 @@
-import type { Group, PageProps, Student, StudentPagination } from '@/Types'
+import type { Group, PageProps, PaginatedData, Student } from '@/Types'
+
+export type GroupStudentCreateProps = PageProps<{
+  group: Group
+  studentPagination: PaginatedData<Student>
+}>
 
 export type GroupStudentIndexProps = PageProps<{
   group: Group
   students: Student[]
 }>
+
+//
 
 export type GroupStudentTableProps = {
   group: Group
@@ -12,11 +19,6 @@ export type GroupStudentTableProps = {
   onClick: (params: Record<string, any>) => void
 }
 
-export type GroupStudentCreateProps = PageProps<{
-  group: Group
-  studentPagination: StudentPagination
-}>
-
 export type GroupStudentPaginationProps = {
-  pagination: StudentPagination
+  pagination: PaginatedData<any>
 }

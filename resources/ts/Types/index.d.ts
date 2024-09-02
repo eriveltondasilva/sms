@@ -1,8 +1,12 @@
-import { type LucideIcon } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-export * from './group'
-export * from './page-props'
-export * from './visit-options'
+export type { PageProps } from './page-props'
+export type { PaginatedData } from './pagination'
+export type { VisitOptions } from './visit-options'
+
+export type Role = 'superadmin' | 'admin' | 'teacher' | 'student' | 'user'
+
+export type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
 export type Stats = {
   title: string
@@ -20,6 +24,16 @@ type Address = {
   address_city: string
   address_state: string
   address_zip_code: string
+}
+
+export type User = {
+  id: number
+  username: string
+  email: string
+  email_verified_at: string | null
+  is_active: boolean
+  avatar_url: string | null
+  role: Role
 }
 
 export type Student = {
@@ -48,37 +62,6 @@ export type Teacher = {
   phone: string
 } & Address
 
-type Pagination = {
-  current_page: number
-  first_page_url: string
-  from: number
-  last_page_url: string
-  last_page: number
-  links: {
-    active: boolean
-    label: string
-    url?: string
-  }
-  next_page_url?: string
-  path: string
-  per_page: number
-  prev_page_url?: string
-  to: number
-  total: number
-}
-
-export type PaginationProps = {
-  pagination: Pagination
-}
-
-export type StudentPagination = {
-  data: Student[]
-} & Pagination
-
-export type TeacherPagination = {
-  data: Teacher[]
-} & Pagination
-
 export type SchoolYear = {
   id: number
   year: number
@@ -91,4 +74,14 @@ export type Subject = {
   id: number
   name: string
   abbr: string
+}
+
+export type Group = {
+  id: number
+  name: string
+  classroom: string
+  shift: string
+  school_year_id: number
+  students_count?: number
+  teachers_count?: number
 }

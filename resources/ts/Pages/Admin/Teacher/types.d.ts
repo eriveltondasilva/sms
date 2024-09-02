@@ -1,18 +1,20 @@
-import type { PageProps, Teacher, TeacherPagination } from '@/Types'
+import type { PageProps, Teacher, PaginatedData } from '@/Types'
 
-export type TeacherShowProps = PageProps<{
-  teacher: Teacher
-}>
-
-export type TeacherIndexProps = {
-  teacherPagination: TeacherPagination
-}
+export type TeacherCreateProps = PageProps
 
 export type TeacherEditProps = {
   teacher: Teacher
 }
 
-export type TeacherCreate = PageProps
+export type TeacherIndexProps = {
+  teacherPagination: PaginatedData<Teacher>
+}
+
+export type TeacherShowProps = PageProps<{
+  teacher: Teacher
+}>
+
+//
 
 export type FormDataProps = {
   data?: Teacher
@@ -25,5 +27,5 @@ export type TeacherTableProps = {
 }
 
 export type TeacherPaginationProps = {
-  pagination: TeacherPagination
+  pagination: PaginatedData<Teacher>
 }

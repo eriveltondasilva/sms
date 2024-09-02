@@ -8,6 +8,8 @@ export type SubjectIndexProps = PageProps<{
   subjects: SubjectWithCount[]
 }>
 
+//
+
 export type CardSubjectProps = {
   subjects: SubjectWithCount[]
 }

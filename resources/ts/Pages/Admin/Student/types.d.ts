@@ -1,25 +1,27 @@
-import type { PageProps, Student, StudentPagination } from '@/Types'
+import type { PageProps, PaginatedData, Student } from '@/Types'
 
-export type StudentShowProps = PageProps<{
-  student: Student
-}>
-
-export type StudentIndexProps = {
-  studentPagination: StudentPagination
-}
+export type StudentCreateProps = PageProps
 
 export type StudentEditProps = {
   student: Student
 }
 
-export type StudentCreateProps = PageProps
+export type StudentIndexProps = {
+  studentPagination: PaginatedData<Student>
+}
+
+export type StudentShowProps = PageProps<{
+  student: Student
+}>
+
+//
 
 export type StudentTableProps = {
   students: Student[]
 }
 
 export type StudentPaginationProps = {
-  pagination: StudentPagination
+  pagination: PaginatedData<Student>
 }
 
 export type StudentFormDataProps = {

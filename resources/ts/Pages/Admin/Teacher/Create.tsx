@@ -11,9 +11,9 @@ import AddressFormData from './Partials/AddressFormData'
 import TeacherFormData from './Partials/TeacherFormData'
 
 import { breadcrumbs, titles } from './data'
-import type { TeacherCreate } from './types'
+import type { TeacherCreateProps } from './types'
 
-export default function TeacherCreate({ flash }: TeacherCreate) {
+export default function TeacherCreate({ flash }: TeacherCreateProps) {
   const { handleSubmit, isLoading, errors } = useFormHandler({
     method: 'post',
     route: 'admin.teachers.store',

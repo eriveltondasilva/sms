@@ -4,15 +4,17 @@ type SchoolYearWithCount = SchoolYear & {
   groups_count: number
 }
 
-export type SchoolYearIndexProps = {
-  schoolYears: SchoolYearWithCount[]
-}
-
 export type SchoolYearCreateProps = PageProps
 
 export type SchoolYearEditProps = PageProps<{
   schoolYear: SchoolYear
 }>
+
+export type SchoolYearIndexProps = {
+  schoolYears: SchoolYearWithCount[]
+}
+
+//
 
 export type SchoolYearCardProps = {
   schoolYears: SchoolYearWithCount[]
