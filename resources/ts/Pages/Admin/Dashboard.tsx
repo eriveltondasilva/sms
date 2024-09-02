@@ -13,27 +13,27 @@ import type { Stats } from '@/Types'
 import { breadcrumbs, titles } from './data'
 import type { DashboardProps } from './types'
 
-export default function Dashboard({ flash, ...props }: DashboardProps) {
+export default function Dashboard({ auth, flash, ...props }: DashboardProps) {
   const stats: Stats[] = [
     {
       title: 'Alunos',
       icon: UsersRound,
-      value: props.studentsCount,
+      value: props.studentsCount ?? 0,
     },
     {
       title: 'Professores',
       icon: Users,
-      value: props.teachersCount,
+      value: props.teachersCount ?? 0,
     },
     {
       title: 'Turmas',
       icon: BookCopy,
-      value: props.groupsCount,
+      value: props.groupsCount ?? 0,
     },
     {
       title: 'Ano Letivo',
       icon: Calendar,
-      value: props.activeYear.year,
+      value: auth?.activeYear?.year ?? 0,
     },
   ]
 

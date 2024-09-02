@@ -1,14 +1,15 @@
 import type { SchoolYear, User } from '@/Types'
 
 type Flash = {
-  message?: string
+  message: string
   link?: string
+}
+type Auth = {
+  user: User
+  activeYear: SchoolYear
 }
 
 export type PageProps<T = {}> = T & {
-  auth: {
-    user: User
-    activeYear: SchoolYear
-  }
-  flash: Flash
+  auth: Auth | null
+  flash: Flash | null
 }

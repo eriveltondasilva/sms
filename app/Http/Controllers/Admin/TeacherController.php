@@ -13,14 +13,14 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
-        $perPage = $request->query('perPage', 10);
+        $perPage = $request->query('perPage');
 
         $teachers = Teacher::query()
             ->select(['id', 'name', 'email'])
             ->filterBySearch($search)
             ->orderBy($search ? 'name' : 'id', $search ? 'asc' : 'desc');
 
-        $teacherPagination = $teachers->paginate($perPage);
+        $teacherPagination = $teachers->paginate($perPage)->withQueryString();
 
         return inertia('Admin/Teacher/Index', compact('teacherPagination'));
     }

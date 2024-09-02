@@ -30,7 +30,6 @@ export type User = {
   id: number
   username: string
   email: string
-  email_verified_at: string | null
   is_active: boolean
   avatar_url: string | null
   role: Role
@@ -68,6 +67,8 @@ export type SchoolYear = {
   start_date: string
   end_date: string
   is_active: boolean
+  created_at: string | null
+  updated_at: string | null
 }
 
 export type Subject = {

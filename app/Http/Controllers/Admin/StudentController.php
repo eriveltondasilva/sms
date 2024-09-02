@@ -10,24 +10,11 @@ use App\Models\Student;
 
 class StudentController extends Controller
 {
-    private const DEFAULT_PER_PAGE = 10;
-
-    private function validateRequest(Request $request): void
-    {
-        $request->validate([
-            'search'  => 'nullable|string|max:100',
-            'gender'  => 'nullable|string|in:M,F',
-            'perPage' => 'nullable|integer|min:1',
-        ]);
-    }
-
     public function index(Request $request)
     {
-        // $this->validateRequest($request);
-
-        $search = $request->query('search', '');
-        $gender = $request->query('gender', '');
-        $perPage = $request->query('perPage', self::DEFAULT_PER_PAGE);
+        $search = $request->query('search');
+        $gender = $request->query('gender');
+        $perPage = $request->query('perPage');
 
         $students = Student::query()
             ->select(['id', 'name', 'gender'])
@@ -38,7 +25,7 @@ class StudentController extends Controller
                 $search ? 'asc' : 'desc'
             );
 
-        $studentPagination = $students->paginate($perPage);
+        $studentPagination = $students->paginate($perPage)->withQueryString();
 
         return inertia('Admin/Student/Index', compact('studentPagination'));
     }

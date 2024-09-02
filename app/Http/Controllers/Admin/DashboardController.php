@@ -9,12 +9,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $activeYear = SchoolYear::isActive();
-        
-        $groupsCount   = $activeYear->groups()->count();
+        $groupsCount   = SchoolYear::isActive()->groups()->count();
         $studentsCount = Student::count();
         $teachersCount = Teacher::count();
 
-        return inertia('Admin/Dashboard', compact('activeYear', 'groupsCount', 'studentsCount', 'teachersCount'));
+        return inertia('Admin/Dashboard', compact('groupsCount', 'studentsCount', 'teachersCount'));
     }
 }

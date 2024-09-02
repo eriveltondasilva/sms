@@ -15,7 +15,7 @@ Route::get('/', WelcomeController::class)->name('welcome');
 Route::get('/teste', fn () => 'Hello, World!')->name('test');
 
 Route::get('/painel', DashboardController::class)
-->middleware(['auth', 'verified'])->name('dashboard');
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->controller(ProfileController::class)
 ->prefix('/profile')->name('profile.')->group(function () {

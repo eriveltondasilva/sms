@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 use App\Models\SchoolYear;
@@ -11,7 +12,7 @@ class HandleInertiaRequests extends Middleware
 {
     protected $rootView = 'app';
 
-    public function version(Request $request): string|null
+    public function version(Request $request): string | null
     {
         return parent::version($request);
     }
@@ -25,25 +26,24 @@ class HandleInertiaRequests extends Middleware
         ];
     }
 
-    private function getAuthUserData(Request $request): array
+    private function getAuthUserData(Request $request): array | null
     {
-        $userData = $request->user();
-
-        if (!$userData) {
-            return [
-                'activeYear' => null,
-                'user'       => null,
-            ];
+        if (!auth()->check()) {
+            return null;
         }
 
-        $user       = $userData->only(['id', 'username', 'email', 'avatar_url', 'role']);
-        $activeYear = SchoolYear::select('id', 'year')->isActive();
+        $userData = $request->user();
+
+        $user = Cache::remember("user_data_{$userData->id}", 60 * 10, function () use ($userData) {
+            return $userData->only(['id', 'username', 'email', 'avatar_url', 'role']);
+        });
+        $activeYear = SchoolYear::select(['id', 'year'])->isActive();
 
         return compact('user', 'activeYear');
     }
 
-    private function getFlashData(Request $request)
+    private function getFlashData(Request $request): array | null
     {
-        return $request->session()->get('flash') ?? [];
+        return $request->session()->get('flash');
     }
 }

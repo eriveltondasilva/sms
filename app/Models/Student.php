@@ -39,10 +39,10 @@ class Student extends Model
         'birthday' => 'datetime:Y-m-d',
     ];
 
-    protected $perPage = 20;
+    protected $perPage = 15;
 
     //# SCOPES
-    public function scopeFilterByGender(Builder $query, string $gender): void
+    public function scopeFilterByGender(Builder $query, ?string $gender): void
     {
         $query->when($gender, fn ($query) => $query->where('gender', $gender));
     }

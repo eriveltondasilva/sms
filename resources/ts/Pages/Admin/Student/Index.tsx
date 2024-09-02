@@ -14,6 +14,7 @@ import type { StudentIndexProps } from './types'
 export default function StudentIndex({ studentPagination }: StudentIndexProps) {
   const hasStudents = studentPagination.data.length > 0
   const hasPagination = studentPagination.total > studentPagination.data.length
+  console.log('props:', studentPagination)
 
   return (
     <AuthLayout

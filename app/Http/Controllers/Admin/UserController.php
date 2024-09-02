@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::toBase()->get()->ds();
+        $users = User::toBase()->get();
 
         return inertia('Admin/User/Index', compact('users'));
     }

@@ -6,6 +6,8 @@ export default function CalendarPage() {
     <AuthLayout
       title={titles.calendar}
       breadcrumb={breadcrumbs.calendar}
-    ></AuthLayout>
+    >
+      Calendário de eventos
+    </AuthLayout>
   )
 }
