@@ -12,7 +12,9 @@ export function TeacherTable({ teachers }: TeacherTableProps) {
         <Table.HeaderCell className='hidden sm:table-cell'>
           Email
         </Table.HeaderCell>
-        <Table.HeaderCell className='flex justify-end'>Ação</Table.HeaderCell>
+        <Table.HeaderCell className='flex justify-center'>
+          Ação
+        </Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>
@@ -27,7 +29,7 @@ export function TeacherTable({ teachers }: TeacherTableProps) {
             <Table.RowCell className='hidden sm:table-cell'>
               {teacher.email}
             </Table.RowCell>
-            <Table.RowCell className='flex justify-end'>
+            <Table.RowCell className='flex justify-center'>
               <Table.Link href={route('admin.teachers.show', { teacher })}>
                 ver
               </Table.Link>

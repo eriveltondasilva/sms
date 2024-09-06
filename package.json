@@ -41,7 +41,7 @@
   "dependencies": {
     "dayjs": "^1.11.12",
     "flowbite-react": "^0.10.1",
-    "lucide-react": "^0.428.0",
+    "lucide-react": "^0.438.0",
     "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.3.0"
   }
