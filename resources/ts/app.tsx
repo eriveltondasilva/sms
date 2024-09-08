@@ -1,6 +1,6 @@
-import 'flowbite'
 import '../sass/global.scss'
 import './bootstrap'
+import './dayjs'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

@@ -4,6 +4,7 @@ type Flash = {
   message: string
   link?: string
 }
+
 type Auth = {
   user: User
   activeYear: SchoolYear

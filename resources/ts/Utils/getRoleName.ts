@@ -1,11 +1,13 @@
-import { Role } from '@/Types'
+import type { Role } from '@/Types'
 
-export function getRoleName(role: Role) {
-  return {
-    superadmin: 'Super Administrador',
-    admin: 'Administrador(a)',
-    teacher: 'Professor(a)',
-    student: 'Aluno(a)',
-    user: 'Usuário',
-  }[role || 'user']
+const roleMap = {
+  superadmin: 'Super Administrador',
+  admin: 'Administrador(a)',
+  teacher: 'Professor(a)',
+  student: 'Aluno(a)',
+  user: 'Usuário',
+} as const
+
+export function getRoleName(role: Role): string {
+  return roleMap[role || 'invalid']
 }
