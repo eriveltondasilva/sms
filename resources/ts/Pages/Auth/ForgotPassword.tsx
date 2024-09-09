@@ -35,7 +35,7 @@ export default function PageForgotPassword({ status }: { status: string }) {
           id='email'
           type='email'
           value={data.email}
-          error={errors.email}
+          error={errors?.email}
           onChange={(e) => setData('email', e.target.value)}
           autoFocus
           required

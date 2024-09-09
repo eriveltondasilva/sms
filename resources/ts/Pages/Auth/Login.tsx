@@ -47,7 +47,7 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
           placeholder='name@exemplo.com'
           icon={Mail}
           value={data.email}
-          error={errors.email}
+          error={errors?.email}
           onChange={(e) => setData('email', e.target.value)}
           autoFocus
           required
@@ -61,7 +61,7 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
           className='mt-4'
           icon={Lock}
           value={data.password}
-          error={errors.password}
+          error={errors?.password}
           onChange={(e) => setData('password', e.target.value)}
           autoComplete='off'
           required

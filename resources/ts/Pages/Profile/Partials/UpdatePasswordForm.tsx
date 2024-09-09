@@ -44,7 +44,7 @@ export default function UpdatePasswordForm({ className = '' }) {
           label='Senha atual'
           className='mt-1 block w-full'
           value={data.current_password}
-          error={errors.current_password}
+          error={errors?.current_password}
           onChange={(e) => setData('current_password', e.target.value)}
         />
 
@@ -54,7 +54,7 @@ export default function UpdatePasswordForm({ className = '' }) {
           label='Nova senha'
           className='mt-1 block w-full'
           value={data.password}
-          error={errors.password}
+          error={errors?.password}
           onChange={(e) => setData('password', e.target.value)}
         />
 
@@ -64,7 +64,7 @@ export default function UpdatePasswordForm({ className = '' }) {
           type='password'
           className='mt-1 block w-full'
           value={data.password_confirmation}
-          error={errors.password_confirmation}
+          error={errors?.password_confirmation}
           onChange={(e) => setData('password_confirmation', e.target.value)}
         />
 

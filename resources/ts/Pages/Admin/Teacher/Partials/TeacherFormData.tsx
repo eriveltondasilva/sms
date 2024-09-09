@@ -26,7 +26,7 @@ export default function TeacherFormData({
         placeholder='Insira o nome do professor...'
         defaultValue={data?.name}
         readOnly={readOnly}
-        error={errors.name}
+        error={errors?.name}
         autoFocus
         required
       />
@@ -37,7 +37,7 @@ export default function TeacherFormData({
         type='email'
         label='Email'
         placeholder='Insira o email do professor...'
-        error={errors.email}
+        error={errors?.email}
         defaultValue={data?.email}
         readOnly={readOnly}
       />
@@ -48,7 +48,7 @@ export default function TeacherFormData({
         type='tel'
         label='Telefone celular'
         placeholder='Insira o telefone do professor...'
-        error={errors.phone}
+        error={errors?.phone}
         defaultValue={data?.phone}
         readOnly={readOnly}
       />
@@ -58,7 +58,7 @@ export default function TeacherFormData({
         id='gender'
         label='Gênero do Professor'
         values={genderRadioValues}
-        error={errors.gender}
+        error={errors?.gender}
         initialCheckedValue={data?.gender || 'M'}
         readOnly={readOnly}
       />
@@ -69,7 +69,7 @@ export default function TeacherFormData({
         type='text'
         label='CPF'
         placeholder='Insira o cpf do professor...'
-        error={errors.cpf}
+        error={errors?.cpf}
         defaultValue={data?.cpf}
         readOnly={readOnly}
       />
@@ -80,7 +80,7 @@ export default function TeacherFormData({
         type='text'
         label='RG'
         placeholder='Insira o rg do professor...'
-        error={errors.rg}
+        error={errors?.rg}
         defaultValue={data?.rg}
         readOnly={readOnly}
       />
@@ -90,7 +90,7 @@ export default function TeacherFormData({
         id='birthday'
         type='date'
         label='Data de nascimento'
-        error={errors.birthday}
+        error={errors?.birthday}
         defaultValue={data?.birthday}
         readOnly={readOnly}
       />

@@ -87,7 +87,7 @@ export default function DeleteUserForm({ className = '' }) {
               placeholder='sua senha...'
               icon={Lock}
               value={data.password}
-              error={errors.password}
+              error={errors?.password}
               onChange={(e) => setData('password', e.target.value)}
               autoFocus
             />

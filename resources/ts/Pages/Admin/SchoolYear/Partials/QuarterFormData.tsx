@@ -13,7 +13,7 @@ export default function QuarterFormData({
         type='date'
         label='Início do bimestre'
         defaultValue={data?.start_date}
-        error={errors.start_date}
+        error={errors?.start_date}
       />
 
       {/* FIM DO BIMESTRE */}
@@ -22,7 +22,7 @@ export default function QuarterFormData({
         type='date'
         label='Fim do bimestre'
         defaultValue={data?.end_date}
-        error={errors.end_date}
+        error={errors?.end_date}
       />
     </section>
   )

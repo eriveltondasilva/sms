@@ -16,7 +16,7 @@ export default function SchoolYearFormData({
         label='Ano Letivo'
         placeholder='Insira o ano letivo...'
         defaultValue={data?.year}
-        error={errors.year}
+        error={errors?.year}
         readOnly={!isCreateRoute}
         min='1900'
         max='2100'
@@ -30,7 +30,7 @@ export default function SchoolYearFormData({
         type='date'
         label='Início do ano letivo'
         defaultValue={data?.start_date}
-        error={errors.start_date}
+        error={errors?.start_date}
       />
 
       {/* FIM DO ANO LETIVO */}
@@ -39,7 +39,7 @@ export default function SchoolYearFormData({
         type='date'
         label='Fim do ano letivo'
         defaultValue={data?.end_date}
-        error={errors.end_date}
+        error={errors?.end_date}
       />
     </section>
   )

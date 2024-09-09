@@ -42,7 +42,7 @@ export default function PageResetPassword({
           type='email'
           label='E-mail'
           value={data.email}
-          error={errors.email}
+          error={errors?.email}
           onChange={(e) => setData('email', e.target.value)}
           autoFocus
           required
@@ -54,7 +54,7 @@ export default function PageResetPassword({
           label='Senha'
           className='mt-4'
           value={data.password}
-          error={errors.password}
+          error={errors?.password}
           onChange={(e) => setData('password', e.target.value)}
           required
         />
@@ -65,7 +65,7 @@ export default function PageResetPassword({
           label='Confirmar senha'
           className='mt-4'
           value={data.password_confirmation}
-          error={errors.password_confirmation}
+          error={errors?.password_confirmation}
           onChange={(e) => setData('password_confirmation', e.target.value)}
           required
         />

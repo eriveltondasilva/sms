@@ -35,7 +35,7 @@
 //           label='Nome de usuário'
 //           placeholder='Nome de Usuário'
 //           value={data.username}
-//           error={errors.username}
+//           error={errors?.username}
 //           onChange={(e) => setData('username', e.target.value)}
 //           autoComplete='off'
 //           autoFocus
@@ -49,7 +49,7 @@
 //           className='mt-4'
 //           placeholder='email@example.com'
 //           value={data.email}
-//           error={errors.email}
+//           error={errors?.email}
 //           onChange={(e) => setData('email', e.target.value)}
 //           autoComplete='off'
 //           required
@@ -62,7 +62,7 @@
 //           placeholder='••••••••'
 //           className='mt-4'
 //           value={data.password}
-//           error={errors.password}
+//           error={errors?.password}
 //           onChange={(e) => setData('password', e.target.value)}
 //           autoComplete='off'
 //           required
@@ -75,7 +75,7 @@
 //           placeholder='••••••••'
 //           className='mt-4'
 //           value={data.password_confirmation}
-//           error={errors.password_confirmation}
+//           error={errors?.password_confirmation}
 //           onChange={(e) => setData('password_confirmation', e.target.value)}
 //           autoComplete='off'
 //           required

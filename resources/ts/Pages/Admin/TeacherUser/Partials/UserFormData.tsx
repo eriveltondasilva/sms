@@ -12,7 +12,7 @@ export default function UserFormData({ data, errors }: FormDataProps) {
         type='text'
         label='Nome de usuário'
         placeholder='Insira o nome de usuário...'
-        error={errors.username}
+        error={errors?.username}
         defaultValue={data?.username || ''}
         required
       />
@@ -23,7 +23,7 @@ export default function UserFormData({ data, errors }: FormDataProps) {
         type='text'
         label='Seu email'
         placeholder='Insira o email de usuário...'
-        error={errors.email}
+        error={errors?.email}
         defaultValue={data?.email || ' '}
         required
       />
@@ -34,7 +34,7 @@ export default function UserFormData({ data, errors }: FormDataProps) {
         type='text'
         label='Senha'
         placeholder=''
-        error={errors.password}
+        error={errors?.password}
         defaultValue={data?.password}
         required={isCreationRoute}
       />
@@ -45,7 +45,7 @@ export default function UserFormData({ data, errors }: FormDataProps) {
         type='text'
         label='Confirme senha'
         placeholder=''
-        error={errors.password_confirmation}
+        error={errors?.password_confirmation}
         required={isCreationRoute}
       />
     </section>

@@ -37,7 +37,7 @@ export default function PageConfirmPassword() {
           label='Senha'
           className='mt-4'
           value={data.password}
-          error={errors.password}
+          error={errors?.password}
           onChange={(e) => setData('password', e.target.value)}
           autoFocus
           required

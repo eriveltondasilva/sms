@@ -53,7 +53,7 @@ export default function UpdateProfileInformation({
             label='Nome de usuário'
             className='mt-1 block w-full'
             value={data.username}
-            error={errors.username}
+            error={errors?.username}
             onChange={(e) => setData('username', e.target.value)}
             autoFocus
             required
@@ -67,7 +67,7 @@ export default function UpdateProfileInformation({
             label='Seu email'
             className='mt-1 block w-full'
             value={data.email}
-            error={errors.email}
+            error={errors?.email}
             onChange={(e) => setData('email', e.target.value)}
             required
           />
