@@ -29,7 +29,7 @@ export default function GroupIndex({ groups, auth }: GroupIndexProps) {
       {!hasGroups && (
         <NotFound>
           Nenhuma turma encontrada para o&nbsp;
-          <strong>Ano Letivo {auth.activeYear.year}</strong>.
+          <strong>Ano Letivo {auth?.activeYear.year}</strong>.
         </NotFound>
       )}
 

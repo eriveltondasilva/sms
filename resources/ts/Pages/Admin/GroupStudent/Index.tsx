@@ -35,13 +35,13 @@ export default function GroupStudentIndex({
       title={titles.index}
       breadcrumb={breadcrumbs.index}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='failure'
           icon={Check}
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
         </Alert>
       )}
 

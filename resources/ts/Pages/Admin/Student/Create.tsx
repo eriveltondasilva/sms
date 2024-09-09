@@ -21,9 +21,9 @@ export default function StudentCreate({ flash }: StudentCreateProps) {
       title={titles.create}
       breadcrumb={breadcrumbs.create}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert>
-          <div>{flash.message}</div>
+          <div>{flash?.message}</div>
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-lo.
           </Alert.Link>

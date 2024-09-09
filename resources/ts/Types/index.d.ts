@@ -8,6 +8,8 @@ export type Role = 'superadmin' | 'admin' | 'teacher' | 'student' | 'user'
 
 export type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
 
+type Gender = 'M' | 'F'
+
 export type Stats = {
   title: string
   value: number
@@ -30,6 +32,7 @@ export type User = {
   id: number
   username: string
   email: string
+  password: string
   is_active: boolean
   avatar_url: string | null
   role: Role
@@ -38,7 +41,7 @@ export type User = {
 export type Student = {
   id: number
   name: string
-  gender: string
+  gender: Gender
   email: string
   rg: string
   cpf: string
@@ -53,7 +56,7 @@ export type Student = {
 export type Teacher = {
   id: number
   name: string
-  gender: string
+  gender: Gender
   email: string
   rg: string
   cpf: string

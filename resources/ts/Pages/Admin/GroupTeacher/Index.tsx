@@ -35,12 +35,12 @@ export default function GroupTeacherIndex({
       title={titles.index}
       breadcrumb={breadcrumbs.index}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='failure'
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
         </Alert>
       )}
 

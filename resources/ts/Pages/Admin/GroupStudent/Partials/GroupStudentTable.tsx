@@ -20,10 +20,10 @@ export function GroupStudentTable({
     <Table>
       <Table.Header>
         <Table.HeaderCell className='w-0'>##</Table.HeaderCell>
-        <Table.HeaderCell>Nome</Table.HeaderCell>
-        <Table.HeaderCell>Matrícula</Table.HeaderCell>
-        <Table.HeaderCell>Gênero</Table.HeaderCell>
-        <Table.HeaderCell></Table.HeaderCell>
+        <Table.HeaderCell>nome</Table.HeaderCell>
+        <Table.HeaderCell>matrícula</Table.HeaderCell>
+        <Table.HeaderCell>gênero</Table.HeaderCell>
+        <Table.HeaderCell>ações</Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>

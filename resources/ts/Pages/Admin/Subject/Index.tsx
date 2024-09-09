@@ -9,7 +9,7 @@ import type { SubjectIndexProps } from './types'
 
 export default function SubjectIndex({ subjects, auth }: SubjectIndexProps) {
   const hasSubjects = subjects.length > 0
-  const title = `${titles.index} - ${auth.activeYear.year}`
+  const title = `${titles.index} - ${auth?.activeYear.year}`
 
   return (
     <AuthLayout
@@ -23,7 +23,7 @@ export default function SubjectIndex({ subjects, auth }: SubjectIndexProps) {
       {!hasSubjects && (
         <NotFound>
           Não existem disciplinas criadas para o&nbsp;
-          <strong>Ano Letivo {auth.activeYear.year}</strong>.
+          <strong>Ano Letivo {auth?.activeYear.year}</strong>.
         </NotFound>
       )}
 

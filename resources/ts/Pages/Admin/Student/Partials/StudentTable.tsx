@@ -10,11 +10,13 @@ export function StudentTable({ students }: StudentTableProps) {
     <Table>
       <Table.Header>
         <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
-        <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>nome</Table.HeaderCell>
         <Table.HeaderCell className='hidden sm:table-cell'>
-          Gênero
+          gênero
         </Table.HeaderCell>
-        <Table.HeaderCell className='flex justify-end'>Ação</Table.HeaderCell>
+        <Table.HeaderCell className='flex justify-center'>
+          ações
+        </Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>

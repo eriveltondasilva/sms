@@ -19,9 +19,9 @@ export function TableTeacher({
     <Table>
       <Table.Header>
         <Table.HeaderCell className='w-0'>##</Table.HeaderCell>
-        <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>nome</Table.HeaderCell>
         <Table.HeaderCell>CPF</Table.HeaderCell>
-        <Table.HeaderCell></Table.HeaderCell>
+        <Table.HeaderCell>ações</Table.HeaderCell>
       </Table.Header>
 
       <Table.Body>

@@ -23,13 +23,13 @@ export default function SchoolYearCreate({ flash }: SchoolYearCreateProps) {
       title={titles.create}
       breadcrumb={breadcrumbs.create}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           icon={Check}
           color='success'
           onDismiss
         >
-          <div>{flash.message}</div>
+          <div>{flash?.message}</div>
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-lo.
           </Alert.Link>

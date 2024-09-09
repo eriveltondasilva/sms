@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Builder, Model};
 use Illuminate\Database\Eloquent\Relations\{ BelongsToMany, MorphOne };
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+//
 use App\Traits\Scopes\FilterBySearchTrait;
+use App\Enums\PaginationEnum;
 
 class Student extends Model
 {
@@ -39,7 +40,7 @@ class Student extends Model
         'birthday' => 'datetime:Y-m-d',
     ];
 
-    protected $perPage = 15;
+    protected $perPage = PaginationEnum::DEFAULT->value;
 
     //# SCOPES
     public function scopeFilterByGender(Builder $query, ?string $gender): void

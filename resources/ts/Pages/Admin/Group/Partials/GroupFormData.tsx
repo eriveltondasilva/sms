@@ -6,7 +6,7 @@ import type { PageProps } from '@/Types'
 import type { GroupFormDataProps } from '../types'
 
 export default function GroupFormData({ data, errors }: GroupFormDataProps) {
-  const { activeYear } = usePage<PageProps>().props.auth
+  const activeYear = usePage<PageProps>().props.auth?.activeYear
 
   const nameSelectValues = ['6° Ano', '7° Ano', '8° Ano', '9° Ano']
   const shiftSelectValues = ['Matutino', 'Vespertino']
@@ -15,7 +15,7 @@ export default function GroupFormData({ data, errors }: GroupFormDataProps) {
     <section>
       <Input.Hidden
         id='school_year_id'
-        value={String(activeYear.id)}
+        value={String(activeYear?.id)}
       />
 
       <Input.Text
@@ -23,7 +23,7 @@ export default function GroupFormData({ data, errors }: GroupFormDataProps) {
         type='text'
         label='Ano Letivo'
         error={errors.school_year_id}
-        defaultValue={activeYear.year}
+        defaultValue={activeYear?.year}
         disabled
       />
 

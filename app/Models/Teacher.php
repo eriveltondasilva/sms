@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphOne};
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+//
 use App\Traits\Scopes\FilterBySearchTrait;
+use App\Enums\PaginationEnum;
 
 class Teacher extends Model
 {
@@ -34,7 +35,7 @@ class Teacher extends Model
         'birthday' => 'datetime:Y-m-d',
     ];
 
-    protected $perPage = 10;
+    protected $perPage = PaginationEnum::DEFAULT->value;
 
     //# RELATIONSHIPS
     public function user(): MorphOne

@@ -24,13 +24,13 @@ export default function TeacherCreate({ flash }: TeacherCreateProps) {
       title={titles.create}
       breadcrumb={breadcrumbs.create}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='success'
           icon={Check}
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-lo.
           </Alert.Link>

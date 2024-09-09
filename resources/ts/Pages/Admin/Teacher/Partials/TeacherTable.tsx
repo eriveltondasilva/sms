@@ -8,12 +8,12 @@ export function TeacherTable({ teachers }: TeacherTableProps) {
     <Table>
       <Table.Header>
         <Table.HeaderCell className='w-0 text-center'>##</Table.HeaderCell>
-        <Table.HeaderCell>Nome</Table.HeaderCell>
+        <Table.HeaderCell>nome</Table.HeaderCell>
         <Table.HeaderCell className='hidden sm:table-cell'>
-          Email
+          email
         </Table.HeaderCell>
         <Table.HeaderCell className='flex justify-center'>
-          Ação
+          ações
         </Table.HeaderCell>
       </Table.Header>
 

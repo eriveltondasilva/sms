@@ -14,7 +14,6 @@ class StudentController extends Controller
     {
         $search = $request->query('search');
         $gender = $request->query('gender');
-        $perPage = $request->query('perPage');
 
         $students = Student::query()
             ->select(['id', 'name', 'gender'])
@@ -25,7 +24,7 @@ class StudentController extends Controller
                 $search ? 'asc' : 'desc'
             );
 
-        $studentPagination = $students->paginate($perPage)->withQueryString();
+        $studentPagination = $students->paginate()->withQueryString();
 
         return inertia('Admin/Student/Index', compact('studentPagination'));
     }

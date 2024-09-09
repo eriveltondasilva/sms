@@ -28,12 +28,12 @@ export default function SubjectTeacherCreate({
       title={titles.create}
       breadcrumb={breadcrumbs.create}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='success'
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
         </Alert>
       )}
 

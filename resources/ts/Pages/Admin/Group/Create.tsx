@@ -23,13 +23,13 @@ export default function GroupCreate({ flash }: GroupCreateProps) {
       title={titles.create}
       breadcrumb={breadcrumbs.create}
     >
-      {flash.message && (
+      {flash?.message && (
         <Alert
           color='success'
           icon={Check}
           onDismiss
         >
-          <div>{flash.message}</div>
+          <div>{flash?.message}</div>
           <Alert.Link href={flash.link || ''}>
             Clique aqui para vê-la.
           </Alert.Link>

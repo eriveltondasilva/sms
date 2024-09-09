@@ -16,12 +16,12 @@ export default function StudentShow({ student, flash }: StudentShowProps) {
       title={titles.show}
       breadcrumb={breadcrumbs.show}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='success'
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
         </Alert>
       )}
 

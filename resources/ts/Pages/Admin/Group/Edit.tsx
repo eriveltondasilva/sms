@@ -24,13 +24,13 @@ export default function GroupEdit({ group, flash }: GroupEditProps) {
       title={titles.edit}
       breadcrumb={breadcrumbs.edit}
     >
-      {!!flash.message && (
+      {flash?.message && (
         <Alert
           color='success'
           icon={Check}
           onDismiss
         >
-          {flash.message}
+          {flash?.message}
         </Alert>
       )}
 
