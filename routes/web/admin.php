@@ -89,5 +89,4 @@ Route::middleware(['auth', 'role:admin'])
         'index', 'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
 
-    // ds()->routes();
 });

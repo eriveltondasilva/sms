@@ -1,22 +1,28 @@
 {
   "name": "sms",
-  "description": "School Management System",
-  "author": {
-    "name": "Erivelton Silva",
-    "email": "eriveltondasilva13@gmail.com"
-  },
-  "engine": "node >= 18",
   "version": "1.0.0",
+  "description": "School Management System",
+  "author": "Erivelton Silva <eriveltondasilva13@gmail.com>",
+  "homepage": "https://github.com/eriveltondasilva13/sms#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eriveltondasilva13/sms.git"
+  },
   "license": "MIT",
   "private": true,
   "type": "module",
-  
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "prettier": "prettier ./resources/ts/**/*.{ts,tsx} --write",
-    "prettier:check": "prettier ./resources/ts/**/*.{ts,tsx} --check",
-    "prepare": "husky"
+    "prebuild": "npm run lint && npm run format",
+    "format": "prettier --write ./resources/ts/**/*.{ts,tsx}",
+    "lint": "eslint ./resources/ts/**/*.{ts,tsx}",
+    "prepare": "husky",
+    "test": ""
   },
   "devDependencies": {
     "@headlessui/react": "^2.1.2",
