@@ -10,7 +10,7 @@ type Auth = {
   activeYear: SchoolYear
 }
 
-export type PageProps<T = {}> = T & {
+export type PageProps<T = object> = T & {
   auth: Auth | null
   flash: Flash | null
 }

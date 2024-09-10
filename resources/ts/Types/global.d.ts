@@ -5,5 +5,7 @@ declare global {
   interface Window {
     axios: AxiosInstance
   }
+
+  // eslint-disable-next-line no-var
   var route: typeof ziggyRoute
 }

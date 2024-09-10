@@ -1,5 +1,5 @@
 import type { PageProps } from '@/Types'
-import { Head, Link, usePage } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 
 type WelcomeProps = {
   laravelVersion: string
@@ -218,8 +218,8 @@ export default function Welcome({
                   </h2>
 
                   <p className='mt-4 text-sm leading-relaxed text-gray-500 dark:text-gray-400'>
-                    Laravel's robust library of first-party tools and libraries,
-                    such as{' '}
+                    Laravel&apos;s robust library of first-party tools and
+                    libraries, such as{' '}
                     <a
                       href='https://forge.laravel.com'
                       className='underline hover:text-gray-700 focus:rounded-sm focus:outline focus:outline-2 focus:outline-red-500 dark:hover:text-white'

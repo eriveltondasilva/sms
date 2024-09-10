@@ -16,13 +16,7 @@ import { formatId } from '@/Utils/formatId'
 
 import { breadcrumbs, titles } from './data'
 
-type PageGroupIndexProps = {
-  activeYear: SchoolYear
-  teacherGroups: any
-  selectedGroup: any
-}
-
-export default function PageGroupIndex({
+export default function GroupIndex({
   activeYear,
   teacherGroups,
   selectedGroup,
