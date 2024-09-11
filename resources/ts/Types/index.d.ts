@@ -35,6 +35,7 @@ export type User = {
   password: string
   is_active: boolean
   avatar_url: string | null
+  email_verified_at: string | null
   role: Role
 }
 

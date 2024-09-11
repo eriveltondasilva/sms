@@ -22,7 +22,7 @@ export default function StudentIndex({ studentPagination }: StudentIndexProps) {
       breadcrumb={breadcrumbs.index}
     >
       <PageHeader>
-        <PageHeader.Title title={titles.index} />
+        <PageHeader.Title text={titles.index} />
         <PageHeader.Button href={route('admin.students.create')}>
           <Plus className='mr-1 size-5' />
           Novo Aluno

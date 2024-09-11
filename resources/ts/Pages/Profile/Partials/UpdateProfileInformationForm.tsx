@@ -5,24 +5,19 @@ import { Save } from 'lucide-react'
 
 import { Input } from '@/Components/Input'
 import { PageProps } from '@/Types'
-
-type UpdateProfileInformationProps = {
-  mustVerifyEmail: boolean
-  status: string
-  className?: string
-}
+import type { UpdateProfileInformationProps } from './types'
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
   status,
-  className = '',
+  className,
 }: UpdateProfileInformationProps) {
-  const { user } = usePage<PageProps>().props.auth
+  const user = usePage<PageProps>().props.auth?.user
 
   const { data, setData, patch, errors, processing, recentlySuccessful } =
     useForm({
-      username: user.username,
-      email: user.email,
+      username: user?.username,
+      email: user?.email,
     })
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -73,7 +68,7 @@ export default function UpdateProfileInformation({
           />
         </div>
 
-        {mustVerifyEmail && user.email_verified_at === null && (
+        {mustVerifyEmail && user?.email_verified_at === null && (
           <div>
             <p className='mt-2 text-sm text-gray-800 dark:text-gray-200'>
               Seu email ainda não foi verificado.

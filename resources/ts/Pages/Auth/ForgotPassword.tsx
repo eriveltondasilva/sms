@@ -5,8 +5,9 @@ import { Input } from '@/Components/Input'
 import { GuestLayout } from '@/Layouts/GuestLayout'
 
 import { titles } from './data'
+import type { ForgotPasswordProps } from './types'
 
-export default function PageForgotPassword({ status }: { status: string }) {
+export default function ForgotPassword({ status }: ForgotPasswordProps) {
   const { data, setData, post, processing, errors } = useForm({
     email: '',
   })

@@ -1,9 +1,8 @@
 import { twJoin } from 'tailwind-merge'
 
-export function Checkbox({ className = '', ...props }) {
+export function Checkbox({ className, ...props }: { className?: string }) {
   return (
     <input
-      {...props}
       type='checkbox'
       className={twJoin(
         'rounded shadow-sm',
@@ -13,6 +12,7 @@ export function Checkbox({ className = '', ...props }) {
         'dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800',
         className,
       )}
+      {...props}
     />
   )
 }

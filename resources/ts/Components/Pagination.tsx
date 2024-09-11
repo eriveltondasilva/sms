@@ -2,7 +2,7 @@ import { InertiaLinkProps, Link } from '@inertiajs/react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-function PaginationRoot({ children }: React.PropsWithChildren) {
+function PaginationRoot({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={twJoin(
@@ -23,7 +23,15 @@ function PaginationRoot({ children }: React.PropsWithChildren) {
   )
 }
 
-function PaginationLeft({ from = 0, to = 0, total = 0 }) {
+function PaginationLeft({
+  from = 0,
+  to = 0,
+  total = 0,
+}: {
+  from: number
+  to: number
+  total: number
+}) {
   const className = 'font-semibold text-gray-900 dark:text-white'
 
   return (
@@ -37,11 +45,11 @@ function PaginationLeft({ from = 0, to = 0, total = 0 }) {
   )
 }
 
-function PaginationRight({ children }: React.PropsWithChildren) {
+function PaginationRight({ children }: { children: React.ReactNode }) {
   return <ul className='inline-flex items-stretch -space-x-px'>{children}</ul>
 }
 
-function PaginationPrevious({ href = '' }) {
+function PaginationPrevious({ href = '' }: { href?: string }) {
   return (
     <li>
       <Link
@@ -66,7 +74,7 @@ function PaginationPrevious({ href = '' }) {
   )
 }
 
-function PaginationNext({ href = '' }) {
+function PaginationNext({ href = '' }: { href?: string }) {
   return (
     <li>
       <Link

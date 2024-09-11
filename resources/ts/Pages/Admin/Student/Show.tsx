@@ -26,7 +26,7 @@ export default function StudentShow({ student, flash }: StudentShowProps) {
       )}
 
       <PageHeader>
-        <PageHeader.Title title={titles.show} />
+        <PageHeader.Title text={titles.show} />
         <PageHeader.Button href={route('admin.students.edit', { student })}>
           <PencilLine className='mr-1 size-5' />
           Editar

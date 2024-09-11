@@ -46,7 +46,7 @@ export default function GroupStudentIndex({
       )}
 
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
         <PageHeader.Button
           href={route('admin.groups.students.create', { group })}
         >

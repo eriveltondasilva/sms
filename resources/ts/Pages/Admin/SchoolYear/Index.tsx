@@ -18,7 +18,7 @@ export default function SchoolYearIndex({ schoolYears }: SchoolYearIndexProps) {
       breadcrumb={breadcrumbs.index}
     >
       <PageHeader>
-        <PageHeader.Title title={titles.index} />
+        <PageHeader.Title text={titles.index} />
         <PageHeader.Button href={route('admin.school-years.create')}>
           <Plus className='mr-1 size-5' />
           Novo Ano Letivo

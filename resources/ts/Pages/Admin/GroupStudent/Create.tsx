@@ -50,7 +50,7 @@ export default function GroupStudentCreate({
       )}
 
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
       </PageHeader>
 
       <GroupStudentSearchBar group={group} />

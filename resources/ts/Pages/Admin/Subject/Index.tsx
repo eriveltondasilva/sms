@@ -17,7 +17,7 @@ export default function SubjectIndex({ subjects, auth }: SubjectIndexProps) {
       breadcrumb={breadcrumbs.index}
     >
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
       </PageHeader>
 
       {!hasSubjects && (

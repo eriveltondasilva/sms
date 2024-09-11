@@ -5,7 +5,11 @@ import { Save } from 'lucide-react'
 
 import { Input } from '@/Components/Input'
 
-export default function UpdatePasswordForm({ className = '' }) {
+import type { UpdatePasswordFormProps } from './types'
+
+export default function UpdatePasswordForm({
+  className,
+}: UpdatePasswordFormProps) {
   const { data, setData, errors, put, reset, processing, recentlySuccessful } =
     useForm({
       current_password: '',

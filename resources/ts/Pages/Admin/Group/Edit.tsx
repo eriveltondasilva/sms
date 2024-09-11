@@ -35,7 +35,7 @@ export default function GroupEdit({ group, flash }: GroupEditProps) {
       )}
 
       <PageHeader>
-        <PageHeader.Title title={titles.edit} />
+        <PageHeader.Title text={titles.edit} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

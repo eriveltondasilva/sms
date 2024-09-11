@@ -37,7 +37,7 @@ export default function SchoolYearCreate({ flash }: SchoolYearCreateProps) {
       )}
 
       <PageHeader>
-        <PageHeader.Title title={titles.create} />
+        <PageHeader.Title text={titles.create} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

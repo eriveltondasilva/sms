@@ -22,7 +22,7 @@ export default function StudentEdit({ student }: StudentEditProps) {
       breadcrumb={breadcrumbs.edit}
     >
       <PageHeader>
-        <PageHeader.Title title={titles.edit} />
+        <PageHeader.Title text={titles.edit} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

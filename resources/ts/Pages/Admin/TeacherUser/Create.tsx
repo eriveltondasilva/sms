@@ -23,7 +23,7 @@ export default function TeacherUserCreate({ teacher }: TeacherUserCreateProps) {
       breadcrumb={breadcrumbs.create}
     >
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

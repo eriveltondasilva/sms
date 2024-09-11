@@ -6,16 +6,9 @@ import { Input } from '@/Components/Input'
 import { GuestLayout } from '@/Layouts/GuestLayout'
 
 import { titles } from './data'
+import type { ResetPasswordProps } from './types'
 
-type PageResetPasswordProps = {
-  token: string
-  email: string
-}
-
-export default function PageResetPassword({
-  token,
-  email,
-}: PageResetPasswordProps) {
+export default function ResetPassword({ token, email }: ResetPasswordProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     token: token,
     email: email,

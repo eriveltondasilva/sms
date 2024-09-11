@@ -40,7 +40,7 @@ export default function TeacherUserEdit({
       )}
 
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

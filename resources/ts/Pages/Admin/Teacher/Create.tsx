@@ -38,7 +38,7 @@ export default function TeacherCreate({ flash }: TeacherCreateProps) {
       )}
 
       <PageHeader>
-        <PageHeader.Title title={titles.create} />
+        <PageHeader.Title text={titles.create} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

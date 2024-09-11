@@ -1,3 +1,3 @@
-export function InputError({ message = '' }) {
+export function InputError({ message }: { message: string }) {
   return <p className='text-sm text-red-600 dark:text-red-400'>{message}</p>
 }

@@ -7,7 +7,9 @@ import { twJoin } from 'tailwind-merge'
 import { Input } from '@/Components/Input'
 import { Modal } from '@/Components/Modal'
 
-export default function DeleteUserForm({ className = '' }) {
+import type { DeleteUserFormProps } from './types'
+
+export default function DeleteUserForm({ className }: DeleteUserFormProps) {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false)
 
   const {

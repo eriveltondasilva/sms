@@ -8,13 +8,9 @@ import { Input } from '@/Components/Input'
 import { GuestLayout } from '@/Layouts/GuestLayout'
 
 import { titles } from './data'
+import type { LoginProps } from './types'
 
-type PageLogin = {
-  status: string
-  canResetPassword: boolean
-}
-
-export default function PageLogin({ status, canResetPassword }: PageLogin) {
+export default function Login({ status, canResetPassword }: LoginProps) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: '',
     password: '',
@@ -73,7 +69,9 @@ export default function PageLogin({ status, canResetPassword }: PageLogin) {
             <Checkbox
               name='remember'
               defaultChecked={data.remember}
-              onChange={(e: any) => setData('remember', e.target.value)}
+              onChange={(e: { target: { value: boolean } }) =>
+                setData('remember', e.target.value)
+              }
             />
             <span className='ms-2 text-sm text-gray-600 dark:text-gray-400'>
               Lembre-me

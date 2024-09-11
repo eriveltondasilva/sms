@@ -43,7 +43,7 @@ export default function SchoolYearEdit({
       )}
 
       <PageHeader>
-        <PageHeader.Title title={titles.edit} />
+        <PageHeader.Title text={titles.edit} />
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>

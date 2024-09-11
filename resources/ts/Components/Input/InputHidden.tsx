@@ -1,4 +1,4 @@
-export function InputHidden({ id = '', value = '' }) {
+export function InputHidden({ id, value }: { id: string; value: string }) {
   return (
     <input
       type='hidden'

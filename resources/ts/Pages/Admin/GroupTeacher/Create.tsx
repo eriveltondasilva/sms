@@ -38,7 +38,7 @@ export default function GroupTeacherCreate({
       )}
 
       <PageHeader>
-        <PageHeader.Title title={title} />
+        <PageHeader.Title text={title} />
       </PageHeader>
 
       {!hasTeachers && (

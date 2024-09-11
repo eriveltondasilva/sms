@@ -5,8 +5,9 @@ import { Button } from '@/Components/Button'
 import { GuestLayout } from '@/Layouts/GuestLayout'
 
 import { titles } from './data'
+import type { VerifyEmailProps } from './types'
 
-export default function PageVerifyEmail({ status }: { status: string }) {
+export default function VerifyEmail({ status }: VerifyEmailProps) {
   const { post, processing } = useForm({})
 
   const submit = (e: React.SyntheticEvent) => {

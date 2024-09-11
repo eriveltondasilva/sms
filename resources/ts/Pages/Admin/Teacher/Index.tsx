@@ -21,7 +21,7 @@ export default function TeacherIndex({ teacherPagination }: TeacherIndexProps) {
       breadcrumb={breadcrumbs.index}
     >
       <PageHeader>
-        <PageHeader.Title title={titles.index} />
+        <PageHeader.Title text={titles.index} />
         <PageHeader.Button href={route('admin.teachers.create')}>
           <Plus className='mr-1 size-5' />
           Novo Professor
