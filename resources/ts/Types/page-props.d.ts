@@ -10,7 +10,8 @@ type Auth = {
   activeYear: SchoolYear
 }
 
-export type PageProps<T = object> = T & {
-  auth: Auth | null
-  flash: Flash | null
-}
+export type PageProps<T extends Record<string, any> = Record<string, any>> =
+  T & {
+    auth: Auth | null
+    flash: Flash | null
+  }

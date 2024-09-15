@@ -1,5 +1,5 @@
 import { router } from '@inertiajs/react'
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import type { Method, VisitOptions } from '@/Types'
 
@@ -9,8 +9,6 @@ type UseActionHandlerProps = {
   options?: VisitOptions
 }
 
-type Params = Record<string, any>
-
 export function useActionHandler({
   route: url = '',
   method = 'get',
@@ -19,7 +17,7 @@ export function useActionHandler({
   const [isLoading, setIsLoading] = useState(false)
 
   const handleAction = useCallback(
-    (params: Params = {}) => {
+    (params: Record<string, any> = {}) => {
       setIsLoading(true)
 
       try {

@@ -1,13 +1,12 @@
-import type { Method, VisitOptions } from '@/Types'
 import { router, usePage } from '@inertiajs/react'
 import { useCallback, useState } from 'react'
 
-type Params = Record<string, any>
+import type { Method, VisitOptions } from '@/Types'
 
 type UseFormHandlerProps = {
   route: string
   method?: Method
-  params?: Params
+  params?: Record<string, any>
   options?: VisitOptions
 }
 
@@ -25,11 +24,12 @@ export function useFormHandler({
       e.preventDefault()
 
       const formData = new FormData(e.currentTarget)
-      const data = Object.fromEntries(
-        Array.from(formData.entries()).filter(
-          ([, value]) => typeof value === 'string' && value.trim() !== '',
-        ),
+      const formArray = [...formData.entries()]
+      const filteredArray = formArray.filter(
+        ([, value]) => (value as string).trim() !== '',
       )
+
+      const data = Object.fromEntries(filteredArray)
 
       setIsLoading(true)
 
