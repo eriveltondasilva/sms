@@ -1,11 +1,9 @@
 import { Head } from '@inertiajs/react'
-import React from 'react'
 import { twJoin } from 'tailwind-merge'
 
-export function GuestLayout({
-  title = '',
-  children,
-}: React.PropsWithChildren<{ title: string }>) {
+import type { GuestLayoutProps } from './types'
+
+export function GuestLayout({ title = '', children }: GuestLayoutProps) {
   return (
     <>
       <Head title={title} />

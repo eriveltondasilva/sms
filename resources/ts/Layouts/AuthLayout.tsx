@@ -3,30 +3,20 @@ import { Drawer } from 'flowbite-react'
 import { useState } from 'react'
 import { twJoin } from 'tailwind-merge'
 
-import { Breadcrumb } from '@/Components/Breadcrumb'
-import { Footer } from '@/Components/Footer'
-import { Header } from '@/Components/Header'
-import { Sidebar } from '@/Components/Sidebar'
-import { StatCard } from '@/Components/StatCard'
-
+import { Breadcrumb, Footer, Header, Sidebar, StatCard } from '@/Components'
 import { useSidebarCollapsed } from '@/Hooks/useSidebarCollapsed'
-import type { BreadcrumbItem, PageProps, Stats } from '@/Types'
-import schoolImg from '@/images/school.png'
+import type { PageProps } from '@/Types'
 
+import schoolImg from '../../images/school.png'
 import SidebarItems from './data'
-
-type AuthLayoutProps = {
-  title: string
-  breadcrumb: BreadcrumbItem[]
-  stats?: Stats[]
-}
+import type { AuthLayoutProps } from './types'
 
 export function AuthLayout({
   title = '',
   breadcrumb = [],
   stats = [],
   children,
-}: React.PropsWithChildren<AuthLayoutProps>) {
+}: AuthLayoutProps) {
   const { user, activeYear } = usePage<PageProps>().props.auth
   const { isCollapsed, handleCollapse } = useSidebarCollapsed()
 

@@ -1,7 +1,9 @@
 import { Navbar } from 'flowbite-react'
 import { twJoin } from 'tailwind-merge'
 
-export function HeaderRoot({ children }: { children: React.ReactNode }) {
+import type { HeaderRootProps } from './types'
+
+export function HeaderRoot({ children }: HeaderRootProps) {
   return (
     <Navbar
       fluid

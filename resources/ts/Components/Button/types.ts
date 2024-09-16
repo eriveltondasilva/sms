@@ -6,6 +6,6 @@ export type ButtonProps = {
   full?: boolean
   disabled?: boolean
   as?: 'button' | 'a'
-  type?: 'submit' | 'reset'
-  props?: React.ButtonHTMLAttributes<HTMLButtonElement>
+  children: React.ReactNode
+  props: React.ButtonHTMLAttributes<HTMLButtonElement>
 }

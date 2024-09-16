@@ -1,15 +1,19 @@
-import { InputError } from './InputError'
-import { InputHidden } from './InputHidden'
-import { InputRadio } from './InputRadio'
-import { InputSelect } from './InputSelect'
-import { InputText } from './InputText'
-import { InputTextarea } from './InputTextarea'
+import { Checkbox } from './Checkbox'
+import { Error } from './Error'
+import { File } from './File'
+import { Hidden } from './Hidden'
+import { Radio } from './Radio'
+import { Select } from './Select'
+import { Text } from './Text'
+import { Textarea } from './Textarea'
 
-export const Input = Object.assign(InputText, {
-  Hidden: InputHidden,
-  Error: InputError,
-  Text: InputText,
-  Textarea: InputTextarea,
-  Select: InputSelect,
-  Radio: InputRadio,
+export const Input = Object.assign(Text, {
+  Checkbox,
+  File,
+  Error,
+  Hidden,
+  Radio,
+  Select,
+  Text,
+  Textarea,
 })

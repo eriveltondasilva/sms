@@ -1,16 +1,16 @@
-import { Label, Textarea } from 'flowbite-react'
+import { Textarea as FlowbiteTextarea, Label } from 'flowbite-react'
 import { twMerge } from 'tailwind-merge'
 
-import { InputError } from './InputError'
-import { type InputTextareaProps } from './types'
+import { Error } from './Error'
+import type { TextareaProps } from './types'
 
-export function InputTextarea({
+export function Textarea({
   id,
   className = '',
   error = '',
   label = '',
   ...props
-}: InputTextareaProps) {
+}: TextareaProps) {
   return (
     <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
@@ -20,13 +20,13 @@ export function InputTextarea({
         />
       )}
 
-      <Textarea
+      <FlowbiteTextarea
         id={id}
         name={id}
         {...props}
       />
 
-      {error && <InputError message={error} />}
+      {error && <Error text={error} />}
     </section>
   )
 }

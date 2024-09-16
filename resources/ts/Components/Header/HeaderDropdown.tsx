@@ -2,12 +2,10 @@ import { Link } from '@inertiajs/react'
 import { Avatar, Dropdown } from 'flowbite-react'
 import { LogOut, UserRoundCog } from 'lucide-react'
 
-import { type User } from '@/Types'
-
 import { useActionHandler } from '@/Hooks/useActionHandler'
 import { getRoleName } from '@/Utils/getRoleName'
 
-type HeaderDropdownProps = { user: User }
+import type { HeaderDropdownProps } from './types'
 
 export function HeaderDropdown({ user }: HeaderDropdownProps) {
   const image_url =

@@ -1,12 +1,12 @@
 import { Alert } from 'flowbite-react'
 import { AlertOctagon, type LucideIcon } from 'lucide-react'
 
-type Props = {
+type NotFoundProps = {
   icon?: LucideIcon
   children: React.ReactNode
 }
 
-export function NotFound({ icon, children }: Props) {
+export function NotFound({ icon, children }: NotFoundProps) {
   return (
     <Alert
       icon={icon || AlertOctagon}

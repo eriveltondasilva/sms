@@ -1,9 +1,8 @@
 import { Link, useForm } from '@inertiajs/react'
+import { Button } from 'flowbite-react'
 import { Lock, Mail } from 'lucide-react'
 import { useEffect } from 'react'
 
-import { Button } from '@/Components/Button/index'
-import { Checkbox } from '@/Components/Checkbox'
 import { Input } from '@/Components/Input'
 import { GuestLayout } from '@/Layouts/GuestLayout'
 
@@ -17,16 +16,20 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     remember: false,
   })
 
+  const handleRemember = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData('remember', e.target.checked)
+  }
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    post(route('login'))
+  }
+
   useEffect(() => {
     return () => {
       reset('password')
     }
   }, [])
-
-  const submit = (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    post(route('login'))
-  }
 
   return (
     <GuestLayout title={titles.login}>
@@ -34,7 +37,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
         <div className='mb-4 text-sm font-medium text-green-600'>{status}</div>
       )}
 
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit}>
         <Input.Text
           id='email'
           type='email'
@@ -65,18 +68,12 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
         {/* # Lembre-me e Esqueci minha senha */}
         <section className='mt-6 flex justify-between'>
-          <label className='flex items-center'>
-            <Checkbox
-              name='remember'
-              defaultChecked={data.remember}
-              onChange={(e: { target: { value: boolean } }) =>
-                setData('remember', e.target.value)
-              }
-            />
-            <span className='ms-2 text-sm text-gray-600 dark:text-gray-400'>
-              Lembre-me
-            </span>
-          </label>
+          <Input.Checkbox
+            id='remember'
+            label='Lembre-me'
+            defaultChecked={data.remember}
+            onChange={handleRemember}
+          />
 
           {canResetPassword && (
             <Link
@@ -88,24 +85,24 @@ export default function Login({ status, canResetPassword }: LoginProps) {
           )}
         </section>
 
-        {/* footer */}
         <footer className='mt-6 flex flex-col gap-2'>
           <Button
+            className='uppercase tracking-wider'
             type='submit'
+            color='blue'
             disabled={processing}
           >
-            Entrar com Email
+            Entrar
           </Button>
 
           {/* TODO: implementar login com Google */}
           {/* <HR /> */}
 
           {/* <Button
-            as='a'
-            href={route('socialite.redirect', 'google')}
-            variant='secondary'
-            disabled={processing}>
-            <SignInGoogle />
+            as={'a'}
+            className='uppercase tracking-wider'
+            href={route('socialite.redirect')}
+          >
             Entrar com Google
           </Button> */}
         </footer>

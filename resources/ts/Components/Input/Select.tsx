@@ -1,17 +1,17 @@
-import { Label, Select } from 'flowbite-react'
+import { Select as FlowbiteSelect, Label } from 'flowbite-react'
 import { twMerge } from 'tailwind-merge'
 
-import { InputError } from './InputError'
-import { type InputSelectProps } from './types'
+import { Error } from './Error'
+import type { SelectProps } from './types'
 
-export function InputSelect({
+export function Select({
   id = '',
   className = '',
   error = '',
   label = '',
   values = [],
   ...props
-}: InputSelectProps) {
+}: SelectProps) {
   return (
     <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
@@ -21,7 +21,7 @@ export function InputSelect({
         />
       )}
 
-      <Select
+      <FlowbiteSelect
         id={id}
         name={id}
         {...props}
@@ -34,9 +34,9 @@ export function InputSelect({
             {typeof value === 'string' ? value : value.name}
           </option>
         ))}
-      </Select>
+      </FlowbiteSelect>
 
-      {error && <InputError message={error} />}
+      {error && <Error text={error} />}
     </section>
   )
 }

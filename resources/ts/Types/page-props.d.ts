@@ -12,6 +12,6 @@ type Auth = {
 
 export type PageProps<T extends Record<string, any> = Record<string, any>> =
   T & {
-    auth: Auth | null
+    auth: Auth
     flash: Flash | null
   }

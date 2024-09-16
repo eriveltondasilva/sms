@@ -6,8 +6,9 @@ import {
   UsersRound,
 } from 'lucide-react'
 
-import { Alert } from '@/Components/Alert'
+import { Alert } from '@/Components'
 import { AuthLayout } from '@/Layouts/AuthLayout'
+
 import type { Stats } from '@/Types'
 
 import { breadcrumbs, titles } from './data'

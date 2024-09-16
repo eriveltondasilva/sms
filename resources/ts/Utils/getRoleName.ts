@@ -9,5 +9,5 @@ const roleMap = {
 } as const
 
 export function getRoleName(role: Role): string {
-  return roleMap[role || 'invalid']
+  return roleMap[role] || 'invalid role'
 }

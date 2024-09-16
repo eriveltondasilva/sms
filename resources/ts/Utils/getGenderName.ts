@@ -4,5 +4,5 @@ const mapGender = {
 } as const
 
 export function getGenderName(gender: 'M' | 'F'): string {
-  return mapGender[gender] || 'Inválido'
+  return mapGender[gender] || 'invalid gender'
 }

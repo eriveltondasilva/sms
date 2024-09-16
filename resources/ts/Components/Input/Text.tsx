@@ -1,17 +1,17 @@
 import { Label, TextInput } from 'flowbite-react'
 import { twMerge } from 'tailwind-merge'
 
-import { InputError } from './InputError'
-import { type InputTextProps } from './types'
+import { Error } from './Error'
+import type { TextProps } from './types'
 
-export function InputText({
+export function Text({
   id = '',
   className = '',
   error = '',
   label = '',
   type = 'text',
   ...props
-}: InputTextProps) {
+}: TextProps) {
   return (
     <section className={twMerge(label && 'mb-6 space-y-2', className)}>
       {label && (
@@ -28,7 +28,7 @@ export function InputText({
         {...props}
       />
 
-      {error && <InputError message={error} />}
+      {error && <Error text={error} />}
     </section>
   )
 }

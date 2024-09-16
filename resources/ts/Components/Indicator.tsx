@@ -8,11 +8,11 @@ const colorsMap = {
   success: 'bg-green-500',
 } as const
 
-export function Indicator({
-  type = 'secondary',
-}: {
+type IndicatorProps = {
   type?: keyof typeof colorsMap
-}) {
+}
+
+export function Indicator({ type = 'secondary' }: IndicatorProps) {
   const color = colorsMap[type]
 
   return (

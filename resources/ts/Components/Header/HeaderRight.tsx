@@ -1,12 +1,17 @@
 import { Badge, DarkThemeToggle } from 'flowbite-react'
+import { twJoin } from 'tailwind-merge'
 
-export function HeaderRight({
-  activeYear,
-  children,
-}: React.PropsWithChildren<{ activeYear: number }>) {
+import type { HeaderRightProps } from './types'
+
+export function HeaderRight({ activeYear, children }: HeaderRightProps) {
   return (
     <div className='flex items-center space-x-2'>
-      <span className='text-sm font-medium text-gray-600 dark:text-gray-400'>
+      <span
+        className={twJoin(
+          'text-sm font-medium',
+          'text-gray-600 dark:text-gray-400',
+        )}
+      >
         Ano Letivo:
       </span>
       <Badge

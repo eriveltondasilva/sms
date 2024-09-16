@@ -1,7 +1,7 @@
 import { twJoin } from 'tailwind-merge'
 import { COLOR_VARIANTS, DEFAULT_VARIANTS, SIZE_VARIANTS } from './styles'
 
-import { ButtonProps } from './types'
+import type { ButtonProps } from './types'
 
 export function Button({
   as: Component = 'button',
@@ -11,7 +11,7 @@ export function Button({
   disabled = false,
   children,
   ...props
-}: React.PropsWithChildren<ButtonProps>) {
+}: ButtonProps) {
   return (
     <Component
       disabled={disabled}

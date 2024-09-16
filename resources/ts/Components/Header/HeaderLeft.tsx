@@ -2,11 +2,7 @@ import { Navbar } from 'flowbite-react'
 import { Menu } from 'lucide-react'
 import { twJoin } from 'tailwind-merge'
 
-type HeaderLeftProps = {
-  onCollapseSidebar: () => void
-  onOpenSidebar: () => void
-  username?: string
-}
+import type { HeaderLeftProps } from './types'
 
 export function HeaderLeft({
   onCollapseSidebar,

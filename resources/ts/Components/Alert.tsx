@@ -3,14 +3,17 @@ import { type AlertProps, Alert as FlowbiteAlert } from 'flowbite-react'
 import { useCallback, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-type AlertRootProps = { onDismiss?: boolean } & AlertProps
+type AlertRootProps = {
+  onDismiss?: boolean
+  children: React.ReactNode
+} & AlertProps
 
 function AlertRoot({
   className,
   onDismiss,
   children,
   ...props
-}: React.PropsWithChildren<AlertRootProps>) {
+}: AlertRootProps) {
   const [isShown, setIsShown] = useState(true)
 
   const handleDismiss = useCallback(() => {
