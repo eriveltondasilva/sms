@@ -1,5 +1,5 @@
 import { Input } from '@/Components/Input'
-import type { FormDataProps } from '../types'
+import type { FormDataProps } from './types'
 
 export default function TeacherFormData({
   data,

@@ -5,45 +5,53 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
-
 use App\Models\SchoolYear;
 
 class HandleInertiaRequests extends Middleware
 {
     protected $rootView = 'app';
 
-    public function version(Request $request): string | null
+    public function version(Request $request): ?string
     {
         return parent::version($request);
     }
 
     public function share(Request $request): array
     {
-        return [
-            ...parent::share($request),
-            'auth'  => fn () => $this->getAuthUserData($request),
-            'flash' => fn () => $this->getFlashData($request),
-        ];
+        return array_merge(parent::share($request), [
+            'auth'     => fn () => $this->getAuthUserData($request),
+            'flash'    => fn () => $this->getFlashData($request),
+            'oldInput' => fn () => $this->getOldInput($request),
+        ]);
     }
 
-    private function getAuthUserData(Request $request): array | null
+    private function getAuthUserData(Request $request): ?array
     {
-        if (!auth()->check()) {
+        if (! $request->user()) {
             return null;
         }
 
-        $userData = $request->user();
+        $currentUser = $request->user();
+        $cacheTime = now()->addMinutes(10);
 
-        $user = Cache::remember("user_data_{$userData->id}", 60 * 10, function () use ($userData) {
-            return $userData->only(['id', 'username', 'email', 'avatar_url', 'role']);
+        $user = Cache::remember("user_data_{$currentUser->id}", $cacheTime, function () use ($currentUser) {
+            return $currentUser->only(['id', 'username', 'email', 'avatar_url', 'role']);
         });
-        $activeYear = SchoolYear::select(['id', 'year'])->isActive();
+
+        $activeYear = Cache::remember('active_school_year', $cacheTime, function () {
+            return SchoolYear::select(['id', 'year'])->isActive();
+        });
 
         return compact('user', 'activeYear');
     }
 
-    private function getFlashData(Request $request): array | null
+    private function getFlashData(Request $request): ?array
     {
-        return $request->session()->get('flash');
+        return $request->session()->get('flash', []);
+    }
+
+    private function getOldInput(Request $request): ?array
+    {
+        return $request->session()->get('_old_input', []);
     }
 }

@@ -13,7 +13,7 @@ import TeacherFormData from './Partials/TeacherFormData'
 import { breadcrumbs, titles } from './data'
 import type { TeacherCreateProps } from './types'
 
-export default function TeacherCreate({ flash }: TeacherCreateProps) {
+export default function TeacherCreate({ flash, oldInput }: TeacherCreateProps) {
   const { handleSubmit, isLoading, errors } = useFormHandler({
     method: 'post',
     route: 'admin.teachers.store',
@@ -42,8 +42,14 @@ export default function TeacherCreate({ flash }: TeacherCreateProps) {
       </PageHeader>
 
       <Form onSubmit={handleSubmit}>
-        <TeacherFormData errors={errors} />
-        <AddressFormData errors={errors} />
+        <TeacherFormData
+          data={oldInput}
+          errors={errors}
+        />
+        <AddressFormData
+          data={oldInput}
+          errors={errors}
+        />
 
         <Form.Footer>
           <Form.ButtonReset disabled={isLoading} />

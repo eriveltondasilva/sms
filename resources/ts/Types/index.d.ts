@@ -4,11 +4,11 @@ export type { PageProps } from './page-props'
 export type { PaginatedData } from './pagination'
 export type { VisitOptions } from './visit-options'
 
+type Gender = 'M' | 'F'
+
 export type Role = 'superadmin' | 'admin' | 'teacher' | 'student' | 'user'
 
 export type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
-
-type Gender = 'M' | 'F'
 
 export type Stats = {
   title: string

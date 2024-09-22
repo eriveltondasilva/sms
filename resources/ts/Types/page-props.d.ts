@@ -1,17 +1,19 @@
 import type { SchoolYear, User } from '@/Types'
 
-type Flash = {
+type Flash = Partial<{
   message: string
-  link?: string
-}
+  link: string
+  status: 'success' | 'error'
+}>
 
-type Auth = {
+type Auth = Readonly<{
   user: User
   activeYear: SchoolYear
-}
+}>
 
-export type PageProps<T extends Record<string, any> = Record<string, any>> =
-  T & {
-    auth: Auth
-    flash: Flash | null
-  }
+export type PageProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = T & {
+  auth: Auth
+  flash: Flash
+}

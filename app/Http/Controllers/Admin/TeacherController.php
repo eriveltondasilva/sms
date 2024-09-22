@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
 
@@ -21,7 +20,9 @@ class TeacherController extends Controller
 
         $teacherPagination = $teachers->paginate()->withQueryString();
 
-        return inertia('Admin/Teacher/Index', compact('teacherPagination'));
+        $data = compact('teacherPagination');
+
+        return inertia('Admin/Teacher/Index', $data);
     }
 
     public function create()
@@ -46,15 +47,18 @@ class TeacherController extends Controller
         $link    = route('admin.teachers.show', $teacher);
         $message = 'Cadastro do professor criado com sucesso!';
 
-        return back()
-            ->withFlash(compact('message', 'link'));
+        $data = compact('message', 'link');
+
+        return back()->withFlash($data);
     }
 
     public function update(TeacherRequest $request, Teacher $teacher)
     {
         $teacher->update($request->validated());
+        $message = 'Professor atualizado com sucesso!';
 
-        return to_route('admin.teachers.show', $teacher)
-            ->withMessage('Professor atualizado com sucesso!');
+        $data = compact('message');
+
+        return back()->withFlash($data);
     }
 }

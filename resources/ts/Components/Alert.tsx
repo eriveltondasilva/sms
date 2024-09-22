@@ -38,12 +38,15 @@ function AlertLink({
   ...props
 }: React.PropsWithChildren<InertiaLinkProps>) {
   return (
-    <Link
-      className='font-medium text-blue-600 underline hover:no-underline dark:text-blue-500'
-      {...props}
-    >
-      {children}
-    </Link>
+    <>
+      <br />
+      <Link
+        className='font-medium text-blue-600 underline hover:no-underline dark:text-blue-500'
+        {...props}
+      >
+        {children}
+      </Link>
+    </>
   )
 }
 

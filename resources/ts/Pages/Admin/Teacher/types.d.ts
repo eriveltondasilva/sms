@@ -1,6 +1,8 @@
 import type { PageProps, PaginatedData, Teacher } from '@/Types'
 
-export type TeacherCreateProps = PageProps
+export type TeacherCreateProps = PageProps<{
+  oldInput: Teacher
+}>
 
 export type TeacherEditProps = {
   teacher: Teacher

@@ -1,7 +1,6 @@
 import { Label, TextInput } from 'flowbite-react'
 import { twMerge } from 'tailwind-merge'
 
-import { Error } from './Error'
 import type { TextProps } from './types'
 
 export function Text({
@@ -10,6 +9,7 @@ export function Text({
   error = '',
   label = '',
   type = 'text',
+  helperText = '',
   ...props
 }: TextProps) {
   return (
@@ -25,10 +25,10 @@ export function Text({
         type={type}
         id={id}
         name={id}
+        color={error ? 'failure' : 'gray'}
+        helperText={error || helperText}
         {...props}
       />
-
-      {error && <Error text={error} />}
     </section>
   )
 }
