@@ -37,6 +37,9 @@ class TeacherController extends Controller
 
     public function edit(Teacher $teacher)
     {
+        $teacher->load('user');
+
+        dd($teacher->toArray());
         return inertia('Admin/Teacher/Edit', compact('teacher'));
     }
 

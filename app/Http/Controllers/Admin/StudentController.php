@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 
@@ -26,7 +25,9 @@ class StudentController extends Controller
 
         $studentPagination = $students->paginate()->withQueryString();
 
-        return inertia('Admin/Student/Index', compact('studentPagination'));
+        $data = compact('studentPagination');
+
+        return inertia('Admin/Student/Index', $data);
     }
 
     public function create()
@@ -51,8 +52,9 @@ class StudentController extends Controller
         $link = route('admin.students.show', $student);
         $message = 'Cadastro do aluno criado com sucesso!';
 
-        return back()
-            ->withFlash(compact('message', 'link'));
+        $data = compact('message', 'link');
+
+        return back()->withFlash($data);
     }
 
     public function update(StudentRequest $request, Student $student)
@@ -60,7 +62,8 @@ class StudentController extends Controller
         $student->update($request->validated());
         $message = 'Aluno atualizado com sucesso!';
 
-        return to_route('admin.students.show', $student)
-            ->withFlash(compact('message'));
+        $data = compact('message');
+
+        return back()->withFlash($data);
     }
 }
