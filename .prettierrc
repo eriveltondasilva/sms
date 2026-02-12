@@ -1,17 +1,14 @@
 {
-    "semi": true,
-    "singleQuote": true,
+    "$schema": "https://www.schemastore.org/prettierrc.json",
+    "semi": false,
+    "singleQuote": false,
+    "jsxSingleQuote": true,
+    "experimentalTernaries": true,
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
     "printWidth": 80,
-    "plugins": [
-        "prettier-plugin-tailwindcss"
-    ],
-    "tailwindFunctions": [
-        "clsx",
-        "cn",
-        "cva"
-    ],
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "tailwindFunctions": ["clsx", "cn", "cva", "twMerge", "twJoin"],
     "tailwindStylesheet": "resources/css/app.css",
     "tabWidth": 4,
     "overrides": [
