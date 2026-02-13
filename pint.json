@@ -28,8 +28,8 @@
 
         "ordered_imports": true,
         "no_unused_imports": true,
-        "single_import_per_statement": false,
-        "group_import": true,
+        "single_import_per_statement": true,
+        "group_import": false,
         "global_namespace_import": {
             "import_classes": true,
             "import_constants": true,
@@ -45,10 +45,7 @@
         "no_empty_comment": true,
 
         "align_multiline_comment": true,
-        "single_line_comment_spacing": false,
-        "single_line_comment_style": {
-            "comment_types": ["asterisk"]
-        },
+        "single_line_comment_spacing": true,
 
         "binary_operator_spaces": {
             "default": "single_space",
