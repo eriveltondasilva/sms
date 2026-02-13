@@ -13,8 +13,8 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import type { NavItem } from '@/types';
+import { dashboard } from '@/wayfinder/routes';
 import AppLogo from './app-logo';
-import { dashboard } from '@/routes';
 
 const mainNavItems: NavItem[] = [
     {

@@ -6,10 +6,10 @@ import { Separator } from '@/components/ui/separator';
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { cn, toUrl } from '@/lib/utils';
 import type { NavItem } from '@/types';
-import { edit as editAppearance } from '@/routes/appearance';
-import { edit } from '@/routes/profile';
-import { show } from '@/routes/two-factor';
-import { edit as editPassword } from '@/routes/user-password';
+import { edit as editAppearance } from '@/wayfinder/routes/appearance';
+import { edit } from '@/wayfinder/routes/profile';
+import { show } from '@/wayfinder/routes/two-factor';
+import { edit as editPassword } from '@/wayfinder/routes/user-password';
 
 const sidebarNavItems: NavItem[] = [
     {
