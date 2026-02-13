@@ -10,13 +10,10 @@
         "url": "git+https://github.com/eriveltondasilva13/school-management-system.git"
     },
     "license": "MIT",
-    "engines": {
-        "node": ">=24"
-    },
     "scripts": {
-        "build": "vite build",
-        "build:ssr": "vite build && vite build --ssr",
-        "dev": "vite",
+        "build": "bunx --bun vite build",
+        "build:ssr": "bunx --bun vite build && bunx --bun vite build --ssr",
+        "dev": "bunx --bun vite",
         "fmt": "prettier --write resources/",
         "fmt:check": "prettier --check resources/",
         "lint": "eslint . --fix",
