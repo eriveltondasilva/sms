@@ -1,28 +1,30 @@
-import { Form, Head } from '@inertiajs/react';
-import { ShieldBan, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
-import Heading from '@/components/heading';
-import TwoFactorRecoveryCodes from '@/components/two-factor-recovery-codes';
-import TwoFactorSetupModal from '@/components/two-factor-setup-modal';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
-import AppLayout from '@/layouts/app-layout';
-import SettingsLayout from '@/layouts/settings/layout';
-import type { BreadcrumbItem } from '@/types';
-import { disable, enable, show } from '@/wayfinder/routes/two-factor';
+import { Form, Head } from '@inertiajs/react'
+import { ShieldBan, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
+
+import Heading from '@/components/heading'
+import TwoFactorRecoveryCodes from '@/components/two-factor-recovery-codes'
+import TwoFactorSetupModal from '@/components/two-factor-setup-modal'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth'
+import AppLayout from '@/layouts/app-layout'
+import SettingsLayout from '@/layouts/settings/layout'
+import { disable, enable, show } from '@/wayfinder/routes/two-factor'
+
+import type { BreadcrumbItem } from '@/types'
 
 type Props = {
-    requiresConfirmation?: boolean;
-    twoFactorEnabled?: boolean;
-};
+    requiresConfirmation?: boolean
+    twoFactorEnabled?: boolean
+}
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Two-Factor Authentication',
         href: show.url(),
     },
-];
+]
 
 export default function TwoFactor({
     requiresConfirmation = false,
@@ -37,26 +39,26 @@ export default function TwoFactor({
         recoveryCodesList,
         fetchRecoveryCodes,
         errors,
-    } = useTwoFactorAuth();
-    const [showSetupModal, setShowSetupModal] = useState<boolean>(false);
+    } = useTwoFactorAuth()
+    const [showSetupModal, setShowSetupModal] = useState<boolean>(false)
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Two-Factor Authentication" />
+            <Head title='Two-Factor Authentication' />
 
-            <h1 className="sr-only">Two-Factor Authentication Settings</h1>
+            <h1 className='sr-only'>Two-Factor Authentication Settings</h1>
 
             <SettingsLayout>
-                <div className="space-y-6">
+                <div className='space-y-6'>
                     <Heading
-                        variant="small"
-                        title="Two-Factor Authentication"
-                        description="Manage your two-factor authentication settings"
+                        variant='small'
+                        title='Two-Factor Authentication'
+                        description='Manage your two-factor authentication settings'
                     />
-                    {twoFactorEnabled ? (
-                        <div className="flex flex-col items-start justify-start space-y-4">
-                            <Badge variant="default">Enabled</Badge>
-                            <p className="text-muted-foreground">
+                    {twoFactorEnabled ?
+                        <div className='flex flex-col items-start justify-start space-y-4'>
+                            <Badge variant='default'>Enabled</Badge>
+                            <p className='text-muted-foreground'>
                                 With two-factor authentication enabled, you will
                                 be prompted for a secure, random pin during
                                 login, which you can retrieve from the
@@ -69,12 +71,12 @@ export default function TwoFactor({
                                 errors={errors}
                             />
 
-                            <div className="relative inline">
+                            <div className='relative inline'>
                                 <Form {...disable.form()}>
                                     {({ processing }) => (
                                         <Button
-                                            variant="destructive"
-                                            type="submit"
+                                            variant='destructive'
+                                            type='submit'
                                             disabled={processing}
                                         >
                                             <ShieldBan /> Disable 2FA
@@ -83,10 +85,9 @@ export default function TwoFactor({
                                 </Form>
                             </div>
                         </div>
-                    ) : (
-                        <div className="flex flex-col items-start justify-start space-y-4">
-                            <Badge variant="destructive">Disabled</Badge>
-                            <p className="text-muted-foreground">
+                    :   <div className='flex flex-col items-start justify-start space-y-4'>
+                            <Badge variant='destructive'>Disabled</Badge>
+                            <p className='text-muted-foreground'>
                                 When you enable two-factor authentication, you
                                 will be prompted for a secure pin during login.
                                 This pin can be retrieved from a TOTP-supported
@@ -94,15 +95,14 @@ export default function TwoFactor({
                             </p>
 
                             <div>
-                                {hasSetupData ? (
+                                {hasSetupData ?
                                     <Button
                                         onClick={() => setShowSetupModal(true)}
                                     >
                                         <ShieldCheck />
                                         Continue Setup
                                     </Button>
-                                ) : (
-                                    <Form
+                                :   <Form
                                         {...enable.form()}
                                         onSuccess={() =>
                                             setShowSetupModal(true)
@@ -110,7 +110,7 @@ export default function TwoFactor({
                                     >
                                         {({ processing }) => (
                                             <Button
-                                                type="submit"
+                                                type='submit'
                                                 disabled={processing}
                                             >
                                                 <ShieldCheck />
@@ -118,10 +118,10 @@ export default function TwoFactor({
                                             </Button>
                                         )}
                                     </Form>
-                                )}
+                                }
                             </div>
                         </div>
-                    )}
+                    }
 
                     <TwoFactorSetupModal
                         isOpen={showSetupModal}
@@ -137,5 +137,5 @@ export default function TwoFactor({
                 </div>
             </SettingsLayout>
         </AppLayout>
-    );
+    )
 }

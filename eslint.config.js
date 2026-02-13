@@ -10,7 +10,7 @@ import typescript from 'typescript-eslint';
 export default [
     js.configs.recommended,
     reactHooks.configs.flat.recommended,
-    ...typescript.configs.recommended,
+    ...typescript.configs.strict,
     {
         ...react.configs.flat.recommended,
         ...react.configs.flat['jsx-runtime'], // Required for React 17+
@@ -42,7 +42,14 @@ export default [
             'import/order': [
                 'error',
                 {
-                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                    groups: [
+                        'builtin',
+                        'external',
+                        'internal',
+                        ['parent', 'sibling', 'index'],
+                        'type',
+                    ],
+                    'newlines-between': 'always',
                     alphabetize: {
                         order: 'asc',
                         caseInsensitive: true,
@@ -65,7 +72,15 @@ export default [
         },
     },
     {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'vite.config.ts'],
+        ignores: [
+            'vendor',
+            'node_modules',
+            'public',
+            'bootstrap/ssr',
+            'tailwind.config.js',
+            'vite.config.ts',
+            'resources/js/wayfinder/**',
+        ],
     },
     prettier, // Turn off all rules that might conflict with Prettier
 ];
