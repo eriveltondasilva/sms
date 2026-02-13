@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -91,9 +93,9 @@ return [
          * @var array
          */
         'allowed_protocols' => [
-            'data://' => ['rules' => []],
-            'file://' => ['rules' => []],
-            'http://' => ['rules' => []],
+            'data://'  => ['rules' => []],
+            'file://'  => ['rules' => []],
+            'http://'  => ['rules' => []],
             'https://' => ['rules' => []],
         ],
 

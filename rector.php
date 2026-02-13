@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
-use RectorLaravel\Set\{LaravelSetList, LaravelSetProvider};
+use RectorLaravel\Set\LaravelSetList;
+use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withSetProviders(LaravelSetProvider::class)

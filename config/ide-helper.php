@@ -1,5 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use Illuminate\Http\Client\Factory;
+use Illuminate\Http\Client\PendingRequest;
+
 return [
 
     /*
@@ -93,7 +98,7 @@ return [
     |
     */
 
-    'write_model_relation_count_properties' => true,
+    'write_model_relation_count_properties'  => true,
     'write_model_relation_exists_properties' => false,
 
     /*
@@ -184,7 +189,7 @@ return [
 
     'extra' => [
         'Eloquent' => ['Illuminate\Database\Eloquent\Builder', 'Illuminate\Database\Query\Builder'],
-        'Session' => ['Illuminate\Session\Store'],
+        'Session'  => ['Illuminate\Session\Store'],
     ],
 
     'magic' => [],
@@ -287,7 +292,7 @@ return [
     |
     */
     'macro_default_return_types' => [
-        Illuminate\Http\Client\Factory::class => Illuminate\Http\Client\PendingRequest::class,
+        Factory::class => PendingRequest::class,
     ],
 
     /*
