@@ -10,7 +10,7 @@ return [
             'form_variant' => env('WAYFINDER_GENERATE_FORM_VARIANT', true),
             'ignore'       => [
                 // Patterns to ignore for URLs (e.g. 'nova-api/*')
-                'urls' => [],
+                'urls' => ['_debugbar/*'],
                 // Patterns to ignore for route names (e.g. 'nova.*')
                 'names' => ['nova.*'],
             ],
