@@ -44,6 +44,7 @@ return new class() extends Migration
             $table->string('guard_name');
             $table->string('description')->nullable();
             $table->string('label')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
             if ($teams || config('permission.testing')) {
                 $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name']);
