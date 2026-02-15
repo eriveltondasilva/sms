@@ -38,7 +38,7 @@ return new class() extends Migration
             $table->index(['week_start_date', 'week_end_date']);
             $table->index('created_by');
 
-            $table->unique(['classroom_id', 'subject_id', 'week_start_date'], 'unique_class_and_subject_and_week_start_date');
+            $table->unique(['classroom_id', 'subject_id', 'week_start_date'], 'unique_lesson_plan_per_classroom');
         });
     }
 

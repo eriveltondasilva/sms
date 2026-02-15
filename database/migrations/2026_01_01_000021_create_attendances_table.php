@@ -24,7 +24,6 @@ return new class() extends Migration
             $table->timestamps();
 
             $table->index(['enrollment_id', 'status']);
-            $table->index('enrollment_id');
             $table->index('recorded_by');
 
             $table->unique(['lesson_record_id', 'enrollment_id'], 'unique_lesson_record_and_enrollment');

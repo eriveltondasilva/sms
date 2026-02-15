@@ -22,7 +22,7 @@ return new class() extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
-            $table->decimal('min_passing_score', 5, 2)->default(6.00);
+            $table->decimal('min_passing_score', 5, 2)->default(0.00);
 
             $table->string('status', 20)->default(AcademicPeriodStatus::DEFAULT);
 

@@ -21,7 +21,7 @@ return new class() extends Migration
             $table->unsignedSmallInteger('classes_attended')->default(0);
 
             $table->decimal('attendance_percentage', 5, 2)->nullable();
-            $table->decimal('period_average', 6, 2)->nullable();
+            $table->decimal('period_average', 5, 2)->nullable();
 
             $table->boolean('needs_recovery')->default(false);
 

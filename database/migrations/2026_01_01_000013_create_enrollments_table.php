@@ -23,7 +23,7 @@ return new class() extends Migration
             $table->string('final_result', 50)->nullable();
 
             $table->decimal('attendance_percentage', 5, 2)->nullable();
-            $table->decimal('final_score', 6, 2)->nullable();
+            $table->decimal('final_score', 5, 2)->nullable();
 
             $table->date('enrolled_at')->nullable();
             $table->date('finalized_at')->nullable();

@@ -18,7 +18,7 @@ return new class() extends Migration
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
-            $table->decimal('score', 6, 2)->nullable();
+            $table->decimal('score', 5, 2)->nullable();
 
             $table->timestamps();
 

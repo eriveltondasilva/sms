@@ -97,7 +97,11 @@
         "rector:check": "rector process --ansi --dry-run",
         "pint": "pint --parallel",
         "pint:check": "pint --parallel --test",
-        "phpstan": "phpstan analyse --memory-limit=2G --ansi"
+        "phpstan": "phpstan analyse --memory-limit=2G --ansi",
+        "fix": [
+            "@rector",
+            "@pint"
+        ]
     },
     "extra": {
         "laravel": {

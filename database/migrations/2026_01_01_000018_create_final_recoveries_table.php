@@ -17,9 +17,9 @@ return new class() extends Migration
             $table->foreignId('teaching_assignment_id')->constrained()->cascadeOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
-            $table->decimal('year_total_score', 6, 2)->nullable();
-            $table->decimal('final_exam_score', 6, 2)->nullable();
-            $table->decimal('final_score', 6, 2)->nullable();
+            $table->decimal('year_total_score', 5, 2)->nullable();
+            $table->decimal('final_exam_score', 5, 2)->nullable();
+            $table->decimal('final_score', 5, 2)->nullable();
 
             $table->timestamps();
 

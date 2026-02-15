@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use OwenIt\Auditing\Models\Audit;
-use OwenIt\Auditing\Resolvers\UserResolver;
-use OwenIt\Auditing\Resolvers\IpAddressResolver;
-use OwenIt\Auditing\Resolvers\UserAgentResolver;
-use OwenIt\Auditing\Resolvers\UrlResolver;
 use App\AuditResolvers\SchoolIdResolver;
+use OwenIt\Auditing\Models\Audit;
+use OwenIt\Auditing\Resolvers\IpAddressResolver;
+use OwenIt\Auditing\Resolvers\UrlResolver;
+use OwenIt\Auditing\Resolvers\UserAgentResolver;
+use OwenIt\Auditing\Resolvers\UserResolver;
 
 return [
 

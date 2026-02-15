@@ -16,7 +16,7 @@ return new class() extends Migration
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
 
-            $table->decimal('final_score', 6, 2)->nullable();
+            $table->decimal('final_score', 5, 2)->nullable();
             $table->string('final_status', 50);
 
             $table->text('observations')->nullable();

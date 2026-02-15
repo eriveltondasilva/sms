@@ -19,7 +19,7 @@ return new class() extends Migration
             $table->unsignedSmallInteger('workload_hours')->nullable();
             $table->string('result', 50)->nullable(); // approved | failed
 
-            $table->decimal('final_score', 6, 2)->nullable();
+            $table->decimal('final_score', 5, 2)->nullable();
             $table->decimal('attendance_percentage', 5, 2)->nullable();
 
             $table->timestamps();

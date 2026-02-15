@@ -19,8 +19,8 @@ return new class() extends Migration
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
-            $table->decimal('original_score', 6, 2)->nullable();
-            $table->decimal('recovery_score', 6, 2);
+            $table->decimal('original_score', 5, 2)->nullable();
+            $table->decimal('recovery_score', 5, 2);
 
             $table->timestamps();
 
