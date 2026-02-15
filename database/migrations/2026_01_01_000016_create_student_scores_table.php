@@ -13,8 +13,8 @@ return new class() extends Migration
         Schema::create('student_scores', function (Blueprint $table): void {
             $table->id();
 
-            $table->foreignId('assessment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('enrollment_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('assessment_id')->constrained()->restrictOnDelete();
+            $table->foreignId('enrollment_id')->constrained()->restrictOnDelete();
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 

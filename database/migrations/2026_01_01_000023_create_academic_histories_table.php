@@ -13,8 +13,8 @@ return new class() extends Migration
         Schema::create('academic_histories', function (Blueprint $table): void {
             $table->id();
 
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('student_id')->constrained()->restrictOnDelete();
+            $table->foreignId('school_year_id')->constrained()->restrictOnDelete();
 
             $table->decimal('final_score', 5, 2)->nullable();
             $table->string('final_status', 50);

@@ -36,8 +36,6 @@ return new class() extends Migration
             $table->index(['school_year_id', 'classroom_id', 'status']);
             $table->index(['student_id', 'school_year_id']);
             $table->index(['school_year_id', 'status']);
-
-            $table->unique(['student_id', 'classroom_id'], 'unique_student_and_class');
         });
 
         DB::statement(sprintf(

@@ -14,7 +14,7 @@ return new class() extends Migration
             $table->id();
 
             $table->foreignId('academic_history_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subject_id')->constrained()->restrictOnDelete();
 
             $table->unsignedSmallInteger('workload_hours')->nullable();
             $table->string('result', 50)->nullable(); // approved | failed

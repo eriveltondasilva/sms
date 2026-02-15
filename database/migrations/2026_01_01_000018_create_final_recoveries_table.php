@@ -13,8 +13,9 @@ return new class() extends Migration
         Schema::create('final_recoveries', function (Blueprint $table): void {
             $table->id();
 
-            $table->foreignId('enrollment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('teaching_assignment_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('enrollment_id')->constrained()->restrictOnDelete();
+            $table->foreignId('teaching_assignment_id')->constrained()->restrictOnDelete();
+
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
             $table->decimal('year_total_score', 5, 2)->nullable();

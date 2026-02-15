@@ -24,7 +24,7 @@ return new class() extends Migration
 
             $table->decimal('min_passing_score', 5, 2)->default(0.00);
 
-            $table->string('status', 20)->default(AcademicPeriodStatus::DEFAULT);
+            $table->string('status', 50)->default(AcademicPeriodStatus::DEFAULT);
 
             $table->timestamps();
 

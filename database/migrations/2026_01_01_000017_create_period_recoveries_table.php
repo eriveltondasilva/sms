@@ -13,9 +13,9 @@ return new class() extends Migration
         Schema::create('period_recoveries', function (Blueprint $table): void {
             $table->id();
 
-            $table->foreignId('enrollment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('teaching_assignment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('academic_period_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('enrollment_id')->constrained()->restrictOnDelete();
+            $table->foreignId('teaching_assignment_id')->constrained()->restrictOnDelete();
+            $table->foreignId('academic_period_id')->constrained()->restrictOnDelete();
 
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 

@@ -14,7 +14,7 @@ return new class() extends Migration
             $table->id();
 
             $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('offered_grade_level_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('offered_grade_level_id')->constrained()->cascadeOnDelete();
             $table->foreignId('main_teacher_id')->nullable()->constrained('teachers')->nullOnDelete();
 
             $table->string('name', 50);

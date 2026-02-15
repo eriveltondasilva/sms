@@ -17,6 +17,7 @@ return new class() extends Migration
             $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
             $table->foreignId('classroom_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('subject_id')->nullable()->constrained()->nullOnDelete();
+
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('title');
@@ -25,6 +26,7 @@ return new class() extends Migration
 
             $table->date('start_date');
             $table->date('end_date')->nullable();
+
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
 

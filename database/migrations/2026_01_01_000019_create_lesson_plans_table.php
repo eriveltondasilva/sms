@@ -16,6 +16,7 @@ return new class() extends Migration
 
             $table->foreignId('classroom_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
+
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
 
@@ -27,9 +28,9 @@ return new class() extends Migration
             $table->text('methodology')->nullable();
             $table->text('resources')->nullable();
             $table->text('notes')->nullable();
+            $table->json('bncc_codes')->nullable();
 
             $table->string('status', 50)->default(LessonPlanStatus::DEFAULT);
-            $table->json('bncc_codes')->nullable();
 
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();

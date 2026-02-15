@@ -28,7 +28,7 @@ return new class() extends Migration
             $table->string('birth_place')->nullable();
 
             $table->string('rg', 20)->nullable();
-            $table->string('cpf', 11)->unique();
+            $table->string('cpf', 11);
 
             $table->string('phone', 15)->nullable();
             $table->string('email')->nullable();

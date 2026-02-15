@@ -14,8 +14,9 @@ return new class() extends Migration
         Schema::create('attendances', function (Blueprint $table): void {
             $table->id();
 
-            $table->foreignId('lesson_record_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('enrollment_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('lesson_record_id')->constrained()->restrictOnDelete();
+            $table->foreignId('enrollment_id')->constrained()->restrictOnDelete();
+
             $table->foreignId('recorded_by')->nullable()->constrained('users')->nullOnDelete();
 
             $table->string('status', 50)->default(AttendanceStatus::DEFAULT);
