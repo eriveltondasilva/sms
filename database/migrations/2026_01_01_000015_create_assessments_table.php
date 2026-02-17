@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\AssessmentCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,11 +22,11 @@ return new class() extends Migration
 
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('category', 50)->default(AssessmentCategory::DEFAULT);
 
             $table->decimal('max_score', 5, 2)->default(0.00);
             $table->decimal('weight', 5, 2)->default(1.00);
 
-            $table->string('recovery_type', 50)->nullable();
             $table->date('date')->nullable();
 
             $table->timestamps();

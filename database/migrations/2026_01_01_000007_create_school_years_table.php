@@ -20,9 +20,6 @@ return new class() extends Migration
             $table->year('year');
             $table->string('status', 50)->default(SchoolYearStatus::DEFAULT);
 
-            $table->decimal('min_passing_score', 5, 2)->default(24.00);
-            $table->decimal('min_attendance_percentage', 5, 2)->default(75.00);
-
             $table->unsignedSmallInteger('total_school_days')->default(200);
             $table->unsignedSmallInteger('total_school_hours')->default(800);
 

@@ -14,7 +14,6 @@ return new class() extends Migration
             $table->id();
 
             $table->foreignId('school_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('academic_period_id')->nullable()->constrained()->nullOnDelete();
 
             $table->string('name');
             $table->string('description')->nullable();
@@ -27,7 +26,6 @@ return new class() extends Migration
             $table->timestamps();
 
             $table->index(['school_id', 'is_active']);
-            $table->index(['school_id', 'academic_period_id']);
         });
     }
 
