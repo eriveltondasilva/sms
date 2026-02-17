@@ -24,7 +24,7 @@ return new class() extends Migration
             $table->index(['grade_level_id', 'is_active']);
             $table->index(['school_id', 'is_active']);
 
-            $table->unique(['school_id', 'grade_level_id'], 'unique_grade_level_per_school');
+            $table->unique(['school_id', 'grade_level_id'], 'unq_ogl_per_school');
         });
     }
 

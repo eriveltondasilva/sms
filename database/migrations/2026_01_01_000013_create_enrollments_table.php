@@ -22,9 +22,6 @@ return new class() extends Migration
             $table->string('status', 50)->default(EnrollmentStatus::DEFAULT);
             $table->string('final_result', 50)->nullable();
 
-            $table->decimal('attendance_percentage', 5, 2)->nullable();
-            $table->decimal('final_score', 5, 2)->nullable();
-
             $table->date('enrolled_at')->nullable();
             $table->date('finalized_at')->nullable();
 
@@ -39,7 +36,7 @@ return new class() extends Migration
         });
 
         DB::statement(sprintf(
-            "CREATE UNIQUE INDEX unique_active_student_per_year
+            "CREATE UNIQUE INDEX unq_active_enrollment
             ON enrollments (student_id, school_year_id)
             WHERE status = '%s'",
             EnrollmentStatus::DEFAULT
@@ -48,6 +45,7 @@ return new class() extends Migration
 
     public function down(): void
     {
+        DB::statement('DROP INDEX IF EXISTS unq_active_enrollment');
         Schema::dropIfExists('enrollments');
     }
 };

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\RecoveryType;
+use App\Enums\AssessmentCategory;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,22 +27,23 @@ final class Assessment extends Model
 
         'name',
         'description',
+        'category',
 
         'max_score',
         'weight',
 
-        'recovery_type',
         'date',
     ];
 
     protected $casts = [
-        'date'          => 'date:Y-m-d',
-        'max_score'     => 'decimal:2',
-        'weight'        => 'decimal:2',
-        'recovery_type' => RecoveryType::class,
+        'date'     => 'date:Y-m-d',
+        'max_score' => 'decimal:2',
+        'weight'    => 'decimal:2',
+        'category'  => AssessmentCategory::class,
     ];
 
     // * Relationships
+
     /** @return BelongsTo<TeachingAssignment, $this> */
     public function teachingAssignment(): BelongsTo
     {
@@ -74,6 +75,7 @@ final class Assessment extends Model
     }
 
     // * Scopes
+
     #[Scope]
     protected function forPeriod(Builder $query, int $periodId): void
     {
@@ -87,19 +89,8 @@ final class Assessment extends Model
     }
 
     #[Scope]
-    protected function recent(Builder $query): void
+    protected function forCategory(Builder $query, AssessmentCategory $category): void
     {
-        $query->latest('date');
-    }
-
-    // * Business methods
-    public function isRecovery(): bool
-    {
-        return $this->recovery_type !== null;
-    }
-
-    public function hasScores(): bool
-    {
-        return $this->studentScores()->exists();
+        $query->where('category', $category);
     }
 }

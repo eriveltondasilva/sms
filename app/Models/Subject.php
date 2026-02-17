@@ -62,10 +62,4 @@ final class Subject extends Model
     {
         return $this->hasMany(SchoolEvent::class);
     }
-
-    /** @return HasMany<AcademicHistorySubject, $this> */
-    public function academicHistorySubjects(): HasMany
-    {
-        return $this->hasMany(AcademicHistorySubject::class);
-    }
 }

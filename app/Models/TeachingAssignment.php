@@ -45,10 +45,11 @@ final class TeachingAssignment extends Model
     ];
 
     // * Relationships
+
     /** @return BelongsTo<Classroom, $this> */
     public function classroom(): BelongsTo
     {
-        return $this->belongsTo(Classroom::class, 'classroom_id');
+        return $this->belongsTo(Classroom::class);
     }
 
     /** @return BelongsTo<Subject, $this> */
@@ -75,22 +76,22 @@ final class TeachingAssignment extends Model
         return $this->hasMany(LessonRecord::class);
     }
 
-    /** @return HasMany<PeriodRecovery, $this> */
-    public function periodRecoveries(): HasMany
+    /** @return HasMany<PeriodGrade, $this> */
+    public function periodGrades(): HasMany
     {
-        return $this->hasMany(PeriodRecovery::class);
+        return $this->hasMany(PeriodGrade::class);
     }
 
-    /** @return HasMany<FinalRecovery, $this> */
-    public function finalRecoveries(): HasMany
+    /** @return HasMany<PeriodAttendance, $this> */
+    public function periodAttendances(): HasMany
     {
-        return $this->hasMany(FinalRecovery::class);
+        return $this->hasMany(PeriodAttendance::class);
     }
 
-    /** @return HasMany<EnrollmentSubjectSummary, $this>*/
-    public function enrollmentSubjectSummaries(): HasMany
+    /** @return HasMany<AnnualSubjectResult, $this> */
+    public function annualSubjectResults(): HasMany
     {
-        return $this->hasMany(EnrollmentSubjectSummary::class);
+        return $this->hasMany(AnnualSubjectResult::class);
     }
 
     /** @return HasManyThrough<Attendance, LessonRecord, $this> */
@@ -105,6 +106,7 @@ final class TeachingAssignment extends Model
     }
 
     // * Scopes
+
     #[Scope]
     protected function forTeacher(Builder $query, int $teacherId): void
     {

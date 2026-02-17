@@ -18,7 +18,7 @@ return new class() extends Migration
             $table->string('name');
             $table->string('description')->nullable();
 
-            $table->decimal('max_score', 5, 2)->default(0.00);
+            $table->decimal('max_score', 5, 2)->default(10.00);
             $table->decimal('weight', 5, 2)->default(1.00);
 
             $table->boolean('is_active')->default(true);

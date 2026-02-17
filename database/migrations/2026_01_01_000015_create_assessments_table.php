@@ -24,7 +24,7 @@ return new class() extends Migration
             $table->string('description')->nullable();
             $table->string('category', 50)->default(AssessmentCategory::DEFAULT);
 
-            $table->decimal('max_score', 5, 2)->default(0.00);
+            $table->decimal('max_score', 5, 2)->default(10.00);
             $table->decimal('weight', 5, 2)->default(1.00);
 
             $table->date('date')->nullable();

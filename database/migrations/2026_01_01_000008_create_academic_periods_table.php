@@ -22,8 +22,6 @@ return new class() extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
-            $table->decimal('min_passing_score', 5, 2)->default(0.00);
-
             $table->string('status', 50)->default(AcademicPeriodStatus::DEFAULT);
 
             $table->timestamps();
@@ -31,7 +29,7 @@ return new class() extends Migration
             $table->index(['school_year_id', 'start_date', 'end_date']);
             $table->index(['school_year_id', 'status']);
 
-            $table->unique(['school_year_id', 'order'], 'unique_order_per_school_year');
+            $table->unique(['school_year_id', 'order'], 'unq_period_order_per_sy');
         });
     }
 

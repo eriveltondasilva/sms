@@ -40,17 +40,12 @@ final class AcademicPeriod extends Model
         'status'            => AcademicPeriodStatus::class,
     ];
 
-    // region Relationships
+    // * Relationships
+
     /** @return BelongsTo<SchoolYear, $this> */
     public function schoolYear(): BelongsTo
     {
         return $this->belongsTo(SchoolYear::class);
-    }
-
-    /** @return HasMany<AssessmentType, $this> */
-    public function assessmentTypes(): HasMany
-    {
-        return $this->hasMany(AssessmentType::class);
     }
 
     /** @return HasMany<Assessment, $this> */
@@ -59,20 +54,20 @@ final class AcademicPeriod extends Model
         return $this->hasMany(Assessment::class);
     }
 
-    /** @return HasMany<PeriodRecovery, $this> */
-    public function periodRecoveries(): HasMany
+    /** @return HasMany<PeriodGrade, $this> */
+    public function periodGrades(): HasMany
     {
-        return $this->hasMany(PeriodRecovery::class);
+        return $this->hasMany(PeriodGrade::class);
     }
 
-    /** @return HasMany<EnrollmentSubjectSummary, $this> */
-    public function enrollmentSubjectSummaries(): HasMany
+    /** @return HasMany<PeriodAttendance, $this> */
+    public function periodAttendances(): HasMany
     {
-        return $this->hasMany(EnrollmentSubjectSummary::class);
+        return $this->hasMany(PeriodAttendance::class);
     }
-    // endregion
 
     // * Scopes
+
     #[Scope]
     protected function open(Builder $query): void
     {

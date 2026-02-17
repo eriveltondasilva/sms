@@ -29,7 +29,6 @@ return new class() extends Migration
             $table->timestamps();
 
             $table->index(['student_id', 'is_primary']);
-            $table->index('student_id');
             $table->index('cpf');
 
             $table->unique(['student_id', 'cpf'], 'student_guardian_unique');

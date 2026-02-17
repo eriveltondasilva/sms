@@ -4,36 +4,51 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\PeriodGradeStatus;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-final class PeriodRecovery extends Model
+final class PeriodGrade extends Model
 {
     use HasFactory;
 
-    protected $table = 'period_recoveries';
+    protected $table = 'period_grades';
 
     protected $fillable = [
         'enrollment_id',
         'teaching_assignment_id',
         'academic_period_id',
 
-        'created_by',
+        'calculated_grade',
+        'recovery_grade',
+        'final_grade',
 
-        'original_score',
-        'recovery_score',
+        'status',
+
+        'is_locked',
+        'locked_at',
+
+        'calculation_snapshot',
     ];
 
     protected $casts = [
-        'original_score' => 'decimal:2',
-        'recovery_score' => 'decimal:2',
+        'calculated_grade' => 'decimal:2',
+        'recovery_grade'   => 'decimal:2',
+        'final_grade'      => 'decimal:2',
+
+        'status' => PeriodGradeStatus::class,
+
+        'is_locked' => 'boolean',
+        'locked_at' => 'datetime',
+
+        'calculation_snapshot' => 'array',
     ];
 
     // * Relationships
+
     /** @return BelongsTo<Enrollment, $this> */
     public function enrollment(): BelongsTo
     {
@@ -52,36 +67,23 @@ final class PeriodRecovery extends Model
         return $this->belongsTo(AcademicPeriod::class);
     }
 
-    /** @return BelongsTo<User, $this> */
-    public function createdBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
     // * Scopes
-    #[Scope]
-    protected function forEnrollment(Builder $query, int $enrollmentId): void
-    {
-        $query->where('enrollment_id', $enrollmentId);
-    }
 
     #[Scope]
-    protected function forPeriod(Builder $query, int $periodId): void
+    protected function forStatus(Builder $query, PeriodGradeStatus $status): void
     {
-        $query->where('academic_period_id', $periodId);
+        $query->where('status', $status);
     }
 
-    // * Business methods
-
-    protected function finalScore(): Attribute
+    #[Scope]
+    protected function locked(Builder $query): void
     {
-        return Attribute::get(
-            fn (): float => max($this->original_score ?? 0, $this->recovery_score)
-        );
+        $query->where('is_locked', true);
     }
 
-    public function hasImproved(): bool
+    #[Scope]
+    protected function unlocked(Builder $query): void
     {
-        return $this->recovery_score > ($this->original_score ?? 0);
+        $query->where('is_locked', false);
     }
 }

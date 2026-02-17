@@ -28,11 +28,11 @@ return new class() extends Migration
             $table->index(['school_id', 'year']);
             $table->index(['school_id', 'status']);
 
-            $table->unique(['school_id', 'year'], 'unique_year_per_school');
+            $table->unique(['school_id', 'year'], 'unq_sy_year_per_school');
         });
 
         DB::statement(sprintf("
-            CREATE UNIQUE INDEX unique_in_progress_school_year 
+            CREATE UNIQUE INDEX unq_sy_in_progress 
             ON school_years (school_id) 
             WHERE status = '%s'
         ", SchoolYearStatus::IN_PROGRESS->value));
@@ -40,6 +40,7 @@ return new class() extends Migration
 
     public function down(): void
     {
+        DB::statement('DROP INDEX IF EXISTS unq_sy_in_progress');
         Schema::dropIfExists('school_years');
     }
 };

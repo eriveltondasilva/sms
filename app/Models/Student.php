@@ -95,12 +95,6 @@ final class Student extends Model
         return $this->enrollments()->where('status', EnrollmentStatus::ACTIVE);
     }
 
-    /** @return HasMany<AcademicHistory, $this> */
-    public function academicHistories(): HasMany
-    {
-        return $this->hasMany(AcademicHistory::class);
-    }
-
     // * Scopes
     #[Scope]
     protected function active(Builder $query): void
@@ -111,17 +105,17 @@ final class Student extends Model
     // * Accessors
     protected function age(): Attribute
     {
-        return Attribute::get(fn () => $this->birth_date?->age);
+        return Attribute::get(fn() => $this->birth_date?->age);
     }
 
     protected function displayName(): Attribute
     {
-        return Attribute::get(fn () => $this->social_name ?? $this->full_name);
+        return Attribute::get(fn() => $this->social_name ?? $this->full_name);
     }
 
     protected function cpf(): Attribute
     {
-        return Attribute::set(fn ($value): ?string => preg_replace('/\D/', '', (string) $value));
+        return Attribute::set(fn($value): ?string => preg_replace('/\D/', '', (string) $value));
     }
 
     // * Business methods

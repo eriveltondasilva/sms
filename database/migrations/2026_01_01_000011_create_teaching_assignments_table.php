@@ -30,7 +30,7 @@ return new class() extends Migration
             $table->index(['classroom_id', 'subject_id', 'is_active']);
             $table->index('teacher_id');
 
-            $table->unique(['classroom_id', 'subject_id'], 'unique_class_and_subject');
+            $table->unique(['classroom_id', 'subject_id'], 'unq_ta_classroom_subject');
         });
     }
 
