@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\OnlyNumbers;
 use App\Enums\EnrollmentStatus;
 use App\Enums\Gender;
 use App\Enums\StudentStatus;
@@ -14,8 +15,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Support\Str;
 
@@ -56,6 +57,8 @@ final class Student extends Model
 
         'gender' => Gender::class,
         'status' => StudentStatus::class,
+        'cpf'    => OnlyNumbers::class,
+        'rg'     => OnlyNumbers::class,
     ];
 
     // * Relationships
@@ -71,16 +74,17 @@ final class Student extends Model
         return $this->morphOne(User::class, 'profile');
     }
 
-    /** @return HasMany<Guardian, $this> */
-    public function guardians(): HasMany
+    /** @return BelongsToMany<Guardian, $this> */
+    public function guardians(): BelongsToMany
     {
-        return $this->hasMany(Guardian::class);
+        return $this->belongsToMany(Guardian::class, 'student_guardian')
+            ->withPivot('relationship', 'is_primary')
+            ->withTimestamps();
     }
 
-    /** @return HasOne<Guardian, $this> */
-    public function primaryGuardian(): HasOne
+    public function primaryGuardian()
     {
-        return $this->hasOne(Guardian::class)->where('is_primary', true);
+        return $this->guardians()->wherePivot('is_primary', true)->first();
     }
 
     /** @return HasMany<Enrollment, $this> */
@@ -105,17 +109,12 @@ final class Student extends Model
     // * Accessors
     protected function age(): Attribute
     {
-        return Attribute::get(fn() => $this->birth_date?->age);
+        return Attribute::get(fn () => $this->birth_date?->age);
     }
 
     protected function displayName(): Attribute
     {
-        return Attribute::get(fn() => $this->social_name ?? $this->full_name);
-    }
-
-    protected function cpf(): Attribute
-    {
-        return Attribute::set(fn($value): ?string => preg_replace('/\D/', '', (string) $value));
+        return Attribute::get(fn () => $this->social_name ?? $this->full_name);
     }
 
     // * Business methods

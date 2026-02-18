@@ -34,8 +34,8 @@ final class SchoolYearConfig extends Model
     ];
 
     protected $casts = [
-        'period_formula_type'  => PeriodFormulaType::class,
-        'annual_formula_type'  => AnnualFormulaType::class,
+        'period_formula_type' => PeriodFormulaType::class,
+        'annual_formula_type' => AnnualFormulaType::class,
 
         'period_recovery_method' => RecoveryMethod::class,
         'annual_recovery_method' => RecoveryMethod::class,

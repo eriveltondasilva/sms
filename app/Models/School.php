@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\OnlyNumbers;
 use App\Models\Scopes\HasActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +38,7 @@ final class School extends Model
     protected $casts = [
         'social_medias' => 'array',
         'is_active'     => 'boolean',
+        'cnpj'          => OnlyNumbers::class,
     ];
 
     // * Relationships

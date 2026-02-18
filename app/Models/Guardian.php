@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\OnlyNumbers;
+use App\Models\Traits\BelongsToSchool;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class Guardian extends Model
 {
+    use BelongsToSchool;
     use HasFactory;
 
     protected $table = 'guardians';
 
     protected $fillable = [
-        'student_id',
-
         'name',
         'relationship',
 
@@ -34,13 +35,22 @@ final class Guardian extends Model
 
     protected $casts = [
         'is_primary' => 'boolean',
+        'cpf'        => OnlyNumbers::class,
     ];
 
     // * Relationships
-    /** @return BelongsTo<Student, $this> */
-    public function student(): BelongsTo
+    /** @return BelongsToMany<Student, $this> */
+    public function students(): BelongsToMany
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsToMany(Student::class, 'student_guardian')
+            ->withPivot('relationship', 'is_primary')
+            ->withTimestamps();
+    }
+
+    /** @return BelongsTo<School, $this> */
+    public function school(): BelongsTo
+    {
+        return $this->belongsTo(School::class);
     }
 
     // * Scopes
@@ -48,16 +58,5 @@ final class Guardian extends Model
     protected function forStudent(Builder $query, int $studentId): void
     {
         $query->where('student_id', $studentId);
-    }
-
-    #[Scope]
-    protected function primary(Builder $query): void
-    {
-        $query->where('is_primary', true);
-    }
-
-    protected function cpf(): Attribute
-    {
-        return Attribute::set(fn ($value): ?string => preg_replace('/\D/', '', (string) $value));
     }
 }

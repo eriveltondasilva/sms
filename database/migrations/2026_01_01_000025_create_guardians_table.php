@@ -12,26 +12,19 @@ return new class() extends Migration
     {
         Schema::create('guardians', function (Blueprint $table): void {
             $table->id();
-
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('school_id')->constrained()->cascadeOnDelete();
 
             $table->string('name');
             $table->string('relationship', 50);
-
             $table->string('phone', 15);
             $table->string('email')->nullable();
             $table->string('cpf', 11)->nullable();
-
             $table->text('address')->nullable();
-
-            $table->boolean('is_primary')->default(false);
 
             $table->timestamps();
 
-            $table->index(['student_id', 'is_primary']);
             $table->index('cpf');
-
-            $table->unique(['student_id', 'cpf'], 'student_guardian_unique');
+            $table->unique(['school_id', 'cpf'], 'school_guardian_unique');
         });
     }
 

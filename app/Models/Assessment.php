@@ -36,7 +36,7 @@ final class Assessment extends Model
     ];
 
     protected $casts = [
-        'date'     => 'date:Y-m-d',
+        'date'      => 'date:Y-m-d',
         'max_score' => 'decimal:2',
         'weight'    => 'decimal:2',
         'category'  => AssessmentCategory::class,

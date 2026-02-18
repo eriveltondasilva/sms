@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Casts\OnlyNumbers;
 use App\Enums\Gender;
 use App\Models\Scopes\HasActiveScope;
 use App\Models\Traits\BelongsToSchool;
@@ -41,6 +42,8 @@ final class Teacher extends Model
 
     protected $casts = [
         'gender' => Gender::class,
+        'cpf'    => OnlyNumbers::class,
+        'rg'     => OnlyNumbers::class,
 
         'birth_date' => 'date:Y-m-d',
         'hire_date'  => 'date:Y-m-d',
