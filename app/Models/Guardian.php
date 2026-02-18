@@ -22,20 +22,14 @@ final class Guardian extends Model
 
     protected $fillable = [
         'name',
-        'relationship',
-
         'phone',
         'email',
         'cpf',
-
         'address',
-
-        'is_primary',
     ];
 
     protected $casts = [
-        'is_primary' => 'boolean',
-        'cpf'        => OnlyNumbers::class,
+        'cpf' => OnlyNumbers::class,
     ];
 
     // * Relationships
@@ -53,10 +47,9 @@ final class Guardian extends Model
         return $this->belongsTo(School::class);
     }
 
-    // * Scopes
     #[Scope]
     protected function forStudent(Builder $query, int $studentId): void
     {
-        $query->where('student_id', $studentId);
+        $query->whereHas('students', fn (Builder $q) => $q->where('students.id', $studentId));
     }
 }

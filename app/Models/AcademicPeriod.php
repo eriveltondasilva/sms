@@ -23,21 +23,16 @@ final class AcademicPeriod extends Model
     protected $fillable = [
         'name',
         'order',
-
         'start_date',
         'end_date',
-
-        'min_passing_score',
-
         'status',
     ];
 
     protected $casts = [
-        'order'             => 'integer',
-        'start_date'        => 'date:Y-m-d',
-        'end_date'          => 'date:Y-m-d',
-        'min_passing_score' => 'decimal:2',
-        'status'            => AcademicPeriodStatus::class,
+        'order'      => 'integer',
+        'start_date' => 'date:Y-m-d',
+        'end_date'   => 'date:Y-m-d',
+        'status'     => AcademicPeriodStatus::class,
     ];
 
     // * Relationships

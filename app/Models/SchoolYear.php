@@ -24,15 +24,14 @@ final class SchoolYear extends Model
     protected $fillable = [
         'year',
         'status',
-
         'total_school_days',
         'total_school_hours',
     ];
 
     protected $casts = [
-        'year'   => 'integer',
         'status' => SchoolYearStatus::class,
 
+        'year'               => 'integer',
         'total_school_days'  => 'integer',
         'total_school_hours' => 'integer',
     ];
@@ -102,10 +101,12 @@ final class SchoolYear extends Model
     }
 
     // * Business methods
-
     public function canBeClosed(): bool
     {
+        $periods = $this->academicPeriods();
+
         return $this->status === SchoolYearStatus::IN_PROGRESS
-            && $this->academicPeriods()->closed()->count() === 0;
+            && $periods->count() > 0
+            && $periods->count() === $periods->closed()->count();
     }
 }

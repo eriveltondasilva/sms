@@ -7,19 +7,19 @@ namespace App\Models;
 use App\Enums\AnnualFormulaType;
 use App\Enums\PeriodFormulaType;
 use App\Enums\RecoveryMethod;
+use App\Models\Traits\BelongsToSchoolYear;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class SchoolYearConfig extends Model
 {
+    use BelongsToSchoolYear;
     use HasFactory;
 
     protected $table = 'school_year_configs';
 
     protected $fillable = [
-        'school_year_id',
-
         'period_formula_type',
         'annual_formula_type',
 

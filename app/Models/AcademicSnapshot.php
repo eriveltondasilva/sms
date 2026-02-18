@@ -17,6 +17,8 @@ final class AcademicSnapshot extends Model
     use BelongsToSchoolYear;
     use HasFactory;
 
+    protected $table = 'academic_snapshots';
+
     protected $fillable = [
         'enrollment_id',
         'student_name',

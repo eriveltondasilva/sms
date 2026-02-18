@@ -18,6 +18,7 @@ return new class() extends Migration
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('classroom_id')->constrained()->cascadeOnDelete();
             $table->foreignId('school_year_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('previous_enrollment_id')->nullable()->constrained('enrollments')->cascadeOnDelete();
 
             $table->string('status', 50)->default(EnrollmentStatus::DEFAULT);
             $table->string('final_result', 50)->nullable();

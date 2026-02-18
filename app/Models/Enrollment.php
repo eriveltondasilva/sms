@@ -24,27 +24,20 @@ final class Enrollment extends Model
     protected $fillable = [
         'student_id',
         'classroom_id',
-
+        'previous_enrollment_id',
         'status',
         'final_result',
-
-        'attendance_percentage',
-        'final_score',
-
         'enrolled_at',
         'finalized_at',
-
         'transfer_reason',
         'dropout_reason',
     ];
 
     protected $casts = [
-        'status'                => EnrollmentStatus::class,
-        'final_result'          => FinalResult::class,
-        'attendance_percentage' => 'decimal:2',
-        'final_score'           => 'decimal:2',
-        'enrolled_at'           => 'date:Y-m-d',
-        'finalized_at'          => 'date:Y-m-d',
+        'status'       => EnrollmentStatus::class,
+        'final_result' => FinalResult::class,
+        'enrolled_at'  => 'date:Y-m-d',
+        'finalized_at' => 'date:Y-m-d',
     ];
 
     // * Relationships

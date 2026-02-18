@@ -8,7 +8,6 @@ use App\Casts\OnlyNumbers;
 use App\Enums\Gender;
 use App\Models\Scopes\HasActiveScope;
 use App\Models\Traits\BelongsToSchool;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -82,10 +81,5 @@ final class Teacher extends Model
     public function classSchedules(): HasMany
     {
         return $this->hasMany(ClassSchedule::class);
-    }
-
-    protected function cpf(): Attribute
-    {
-        return Attribute::set(fn ($value): ?string => preg_replace('/\D/', '', (string) $value));
     }
 }

@@ -15,7 +15,6 @@ return new class() extends Migration
             $table->foreignId('school_id')->constrained()->cascadeOnDelete();
 
             $table->string('name');
-            $table->string('relationship', 50);
             $table->string('phone', 15);
             $table->string('email')->nullable();
             $table->string('cpf', 11)->nullable();
