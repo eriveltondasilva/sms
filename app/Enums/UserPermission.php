@@ -129,4 +129,14 @@ enum UserPermission: string
     case ADMIN_USERS_MANAGE = 'admin.users.manage';
     case ADMIN_ROLES_MANAGE = 'admin.roles.manage';
     case ADMIN_PERMISSIONS_MANAGE = 'admin.permissions.manage';
+
+    public static function sidebar(): array
+    {
+        return [
+            self::ADMIN_SCHOOLS_MANAGE,
+            self::ADMIN_USERS_MANAGE,
+            self::ADMIN_ROLES_MANAGE,
+            self::ADMIN_PERMISSIONS_MANAGE,
+        ];
+    }
 }

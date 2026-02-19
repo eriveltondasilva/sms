@@ -1,12 +1,10 @@
-import type { Auth } from '@/types/auth'
+import type { Inertia, App } from '@/wayfinder/types'
 
 declare module '@inertiajs/core' {
     export interface InertiaConfig {
-        sharedPageProps: {
-            name: string
-            auth: Auth
-            sidebarOpen: boolean
-            [key: string]: unknown
+        sharedPageProps: Inertia.SharedData
+        flashDataType: {
+            toast?: { type: App.Enums.FlashType; message: string }
         }
     }
 }

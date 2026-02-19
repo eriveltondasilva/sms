@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-use App\Models\{School, SchoolYear};
-use App\Support\{SchoolContext, SchoolYearContext};
+use App\Models\School;
+use App\Models\SchoolYear;
+use App\Support\SchoolContext;
+use App\Support\SchoolYearContext;
 
 // --- School ---
 

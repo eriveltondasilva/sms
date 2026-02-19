@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Support;
 
 use App\Enums\SessionKey;
-use App\Models\{School, User};
+use App\Models\School;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
