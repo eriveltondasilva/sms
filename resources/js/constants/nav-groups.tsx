@@ -38,6 +38,7 @@ export const NAV_GROUPS: NavGroup[] = [
                 title: 'Notícias',
                 href: '#',
                 icon: NewspaperIcon,
+                permission: UserPermission.ACADEMIC_HISTORIES_GENERATE,
             },
         ],
     },

@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react'
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react'
+import { BookOpen, Folder } from 'lucide-react'
 
 import { NavFooter } from '@/components/nav-footer'
 import { NavMain } from '@/components/nav-main'
@@ -18,14 +18,6 @@ import { dashboard } from '@/wayfinder/routes'
 import AppLogo from './app-logo'
 
 import type { NavItem } from '@/types'
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-]
 
 const footerNavItems: NavItem[] = [
     {
@@ -56,7 +48,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain />
             </SidebarContent>
 
             <SidebarFooter>
