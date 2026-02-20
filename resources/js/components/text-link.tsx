@@ -4,15 +4,11 @@ import { cn } from '@/lib/utils'
 
 import type { ComponentProps } from 'react'
 
-
-
-type Props = ComponentProps<typeof Link>
-
 export default function TextLink({
     className = '',
     children,
     ...props
-}: Props) {
+}: ComponentProps<typeof Link>) {
     return (
         <Link
             className={cn(

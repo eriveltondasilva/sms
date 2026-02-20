@@ -1,5 +1,11 @@
 import { Link, usePage } from '@inertiajs/react'
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react'
+import {
+    BookOpenIcon,
+    FolderIcon,
+    LayoutGridIcon,
+    MenuIcon,
+    SearchIcon,
+} from 'lucide-react'
 
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -39,7 +45,7 @@ import AppLogoIcon from './app-logo-icon'
 
 import type { BreadcrumbItem, NavItem } from '@/types'
 
-type Props = {
+interface AppHeaderProps {
     breadcrumbs?: BreadcrumbItem[]
 }
 
@@ -47,7 +53,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
-        icon: LayoutGrid,
+        icon: LayoutGridIcon,
     },
 ]
 
@@ -55,23 +61,24 @@ const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        icon: FolderIcon,
     },
     {
         title: 'Documentation',
         href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        icon: BookOpenIcon,
     },
 ]
 
 const activeItemStyles =
     'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
 
-export function AppHeader({ breadcrumbs = [] }: Props) {
+export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const page = usePage()
     const { auth } = page.props
     const getInitials = useInitials()
     const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl()
+
     return (
         <>
             <div className='border-b border-sidebar-border/80'>
@@ -85,7 +92,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                     size='icon'
                                     className='mr-2 h-[34px] w-[34px]'
                                 >
-                                    <Menu className='h-5 w-5' />
+                                    <MenuIcon className='h-5 w-5' />
                                 </Button>
                             </SheetTrigger>
                             <SheetContent
@@ -186,7 +193,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 size='icon'
                                 className='group h-9 w-9 cursor-pointer'
                             >
-                                <Search className='size-5! opacity-80 group-hover:opacity-100' />
+                                <SearchIcon className='size-5! opacity-80 group-hover:opacity-100' />
                             </Button>
                             <div className='ml-1 hidden gap-1 lg:flex'>
                                 {rightNavItems.map((item) => (
@@ -226,11 +233,13 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 >
                                     <Avatar className='size-8 overflow-hidden rounded-full'>
                                         <AvatarImage
-                                            src={auth.user.avatar}
-                                            alt={auth.user.name}
+                                            src={auth?.user?.avatar || ''}
+                                            alt={auth?.user?.name || ''}
                                         />
                                         <AvatarFallback className='rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white'>
-                                            {getInitials(auth.user.name)}
+                                            {getInitials(
+                                                auth?.user?.name || '',
+                                            )}
                                         </AvatarFallback>
                                     </Avatar>
                                 </Button>

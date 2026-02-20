@@ -1,5 +1,5 @@
 import { Link, router } from '@inertiajs/react'
-import { LogOut, Settings } from 'lucide-react'
+import { LogOutIcon, SettingsIcon } from 'lucide-react'
 
 import {
     DropdownMenuGroup,
@@ -10,15 +10,15 @@ import {
 import { UserInfo } from '@/components/user-info'
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation'
 import { logout } from '@/wayfinder/routes'
-import { edit } from '@/wayfinder/routes/profile'
+import { edit as editProfile } from '@/wayfinder/routes/profile'
 
-import type { User } from '@/types'
+import type { Inertia } from '@/wayfinder/types'
 
-type Props = {
-    user: User
+type UserMenuContentProps = {
+    user: Inertia.SharedData['auth']['user']
 }
 
-export function UserMenuContent({ user }: Props) {
+export function UserMenuContent({ user }: UserMenuContentProps) {
     const cleanup = useMobileNavigation()
 
     const handleLogout = () => {
@@ -38,11 +38,11 @@ export function UserMenuContent({ user }: Props) {
                 <DropdownMenuItem asChild>
                     <Link
                         className='block w-full cursor-pointer'
-                        href={edit()}
+                        href={editProfile()}
                         prefetch
                         onClick={cleanup}
                     >
-                        <Settings className='mr-2' />
+                        <SettingsIcon className='mr-2' />
                         Settings
                     </Link>
                 </DropdownMenuItem>
@@ -56,7 +56,7 @@ export function UserMenuContent({ user }: Props) {
                     onClick={handleLogout}
                     data-test='logout-button'
                 >
-                    <LogOut className='mr-2' />
+                    <LogOutIcon className='mr-2' />
                     Log out
                 </Link>
             </DropdownMenuItem>

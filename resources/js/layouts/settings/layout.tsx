@@ -1,7 +1,5 @@
 import { Link } from '@inertiajs/react'
 
-
-
 import Heading from '@/components/heading'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'

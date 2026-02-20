@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react'
-import { ChevronsUpDown } from 'lucide-react'
+import { ChevronsUpDownIcon } from 'lucide-react'
 
 import {
     DropdownMenu,
@@ -32,7 +32,7 @@ export function NavUser() {
                             data-test='sidebar-menu-button'
                         >
                             <UserInfo user={auth.user} />
-                            <ChevronsUpDown className='ml-auto size-4' />
+                            <ChevronsUpDownIcon className='ml-auto size-4' />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent

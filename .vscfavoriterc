@@ -1,0 +1,15 @@
+{
+  "resources": [
+    {
+      "filePath": "resources\\js",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\js\\pages",
+      "group": "Default"
+    }
+  ],
+  "groups": [
+    "Default"
+  ]
+}

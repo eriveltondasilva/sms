@@ -1,5 +1,10 @@
 import { Form } from '@inertiajs/react'
-import { Eye, EyeOff, LockKeyhole, RefreshCw } from 'lucide-react'
+import {
+    EyeIcon,
+    EyeOffIcon,
+    LockKeyholeIcon,
+    RefreshCwIcon,
+} from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -52,13 +57,13 @@ export default function TwoFactorRecoveryCodes({
         }
     }, [recoveryCodesList.length, fetchRecoveryCodes])
 
-    const RecoveryCodeIconComponent = codesAreVisible ? EyeOff : Eye
+    const RecoveryCodeIconComponent = codesAreVisible ? EyeOffIcon : EyeIcon
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle className='flex gap-3'>
-                    <LockKeyhole className='size-4' aria-hidden='true' />
+                    <LockKeyholeIcon className='size-4' aria-hidden='true' />
                     2FA Recovery Codes
                 </CardTitle>
                 <CardDescription>
@@ -94,7 +99,7 @@ export default function TwoFactorRecoveryCodes({
                                     disabled={processing}
                                     aria-describedby='regenerate-warning'
                                 >
-                                    <RefreshCw /> Regenerate Codes
+                                    <RefreshCwIcon /> Regenerate Codes
                                 </Button>
                             )}
                         </Form>
