@@ -1,7 +1,9 @@
 import { usePage } from '@inertiajs/react'
+
 import { NAV_GROUPS } from '@/constants/nav-groups'
-import type { NavGroup } from '@/types'
 import { UserRole } from '@/wayfinder/App/Enums/UserRole'
+
+import type { NavGroup } from '@/types'
 
 export function useFilteredNav() {
     const { auth } = usePage().props

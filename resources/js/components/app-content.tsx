@@ -1,6 +1,6 @@
-import type { ComponentProps } from 'react'
-
 import { SidebarInset } from '@/components/ui/sidebar'
+
+import type { ComponentProps } from 'react'
 
 interface AppContentProps extends ComponentProps<'main'> {
     variant?: 'header' | 'sidebar'

@@ -6,9 +6,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Enums\{UserPermission, UserRole};
+use App\Enums\UserPermission;
+use App\Enums\UserRole;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\{Permission, Role};
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 final class RolesAndPermissionsSeeder extends Seeder
@@ -19,9 +21,9 @@ final class RolesAndPermissionsSeeder extends Seeder
 
         foreach (UserRole::cases() as $role) {
             Role::create([
-                'name' => $role->value,
+                'name'  => $role->value,
                 'label' => $role->label(),
-                'color' => $role->color()
+                'color' => $role->color(),
             ]);
         }
 
@@ -29,7 +31,7 @@ final class RolesAndPermissionsSeeder extends Seeder
             Permission::create(['name' => $permission->value]);
         }
 
-        $role = Role::query()->whereFirst('name', UserRole::ADMIN);
+        Role::query()->whereFirst('name', UserRole::ADMIN);
         // $role->givePermissionTo([
         //     UserPermission::STUDENTS_VIEW,
         //     UserPermission::SUBJECTS_VIEW,

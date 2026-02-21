@@ -15,6 +15,11 @@ import { send } from '@/wayfinder/routes/verification'
 
 import type { BreadcrumbItem } from '@/types'
 
+interface ProfileProps {
+    mustVerifyEmail: boolean
+    status?: string
+}
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Profile settings',
@@ -22,13 +27,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ]
 
-export default function Profile({
-    mustVerifyEmail,
-    status,
-}: {
-    mustVerifyEmail: boolean
-    status?: string
-}) {
+export default function Profile({ mustVerifyEmail, status }: ProfileProps) {
     const { auth } = usePage().props
 
     return (
@@ -60,7 +59,9 @@ export default function Profile({
                                     <Input
                                         id='name'
                                         className='mt-1 block w-full'
-                                        defaultValue={auth.user.name}
+                                        defaultValue={
+                                            auth.user?.name || undefined
+                                        }
                                         name='name'
                                         required
                                         autoComplete='name'
@@ -80,7 +81,9 @@ export default function Profile({
                                         id='email'
                                         type='email'
                                         className='mt-1 block w-full'
-                                        defaultValue={auth.user.email}
+                                        defaultValue={
+                                            auth.user?.email || undefined
+                                        }
                                         name='email'
                                         required
                                         autoComplete='username'
@@ -94,7 +97,7 @@ export default function Profile({
                                 </div>
 
                                 {mustVerifyEmail &&
-                                    auth.user.email_verified_at === null && (
+                                    auth.user?.email_verified_at === null && (
                                         <div>
                                             <p className='-mt-4 text-sm text-muted-foreground'>
                                                 Your email address is

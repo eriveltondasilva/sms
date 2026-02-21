@@ -2,11 +2,11 @@ import { Head, Link, usePage } from '@inertiajs/react'
 
 import { dashboard, login, register } from '@/wayfinder/routes'
 
-export default function Welcome({
-    canRegister = true,
-}: {
+interface WelcomeProps {
     canRegister?: boolean
-}) {
+}
+
+export default function Welcome({ canRegister = true }: WelcomeProps) {
     const { auth } = usePage().props
 
     return (

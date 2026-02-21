@@ -10,17 +10,13 @@ import {
 } from '@/components/ui/card'
 import { home } from '@/wayfinder/routes'
 
-import type { PropsWithChildren } from 'react'
+import type { AuthLayoutProps } from '@/types'
 
 export default function AuthCardLayout({
-    children,
     title,
     description,
-}: PropsWithChildren<{
-    name?: string
-    title?: string
-    description?: string
-}>) {
+    children,
+}: AuthLayoutProps) {
     return (
         <div className='flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10'>
             <div className='flex w-full max-w-md flex-col gap-6'>

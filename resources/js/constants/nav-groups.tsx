@@ -20,9 +20,9 @@ import {
     UsersIcon,
 } from 'lucide-react'
 
-import type { NavGroup } from '@/types'
-
 import { UserPermission } from '@/wayfinder/App/Enums/UserPermission'
+
+import type { NavGroup } from '@/types'
 
 export const NAV_GROUPS: NavGroup[] = [
     {
@@ -38,7 +38,6 @@ export const NAV_GROUPS: NavGroup[] = [
                 title: 'Notícias',
                 href: '#',
                 icon: NewspaperIcon,
-                permission: UserPermission.ACADEMIC_HISTORIES_GENERATE,
             },
         ],
     },

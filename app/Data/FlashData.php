@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data;
 
-use Inertia\Inertia;
 use App\Enums\FlashType;
+use Inertia\Inertia;
 
 final readonly class FlashData
 {
@@ -35,7 +37,7 @@ final readonly class FlashData
     public function send(): void
     {
         Inertia::flash('toast', [
-            'type' => $this->type,
+            'type'    => $this->type,
             'message' => $this->message,
         ]);
     }

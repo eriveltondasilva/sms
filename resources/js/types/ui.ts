@@ -1,14 +1,11 @@
 import type { BreadcrumbItem } from './navigation'
-import type { ReactNode } from 'react'
+import type { PropsWithChildren } from 'react'
 
-export type AppLayoutProps = {
-    children: ReactNode
+export interface AppLayoutProps extends PropsWithChildren {
     breadcrumbs?: BreadcrumbItem[]
 }
 
-export type AuthLayoutProps = {
-    children?: ReactNode
-    name?: string
+export interface AuthLayoutProps extends PropsWithChildren {
     title?: string
     description?: string
 }

@@ -1,10 +1,10 @@
+import type { App } from '@/wayfinder/types'
 import type { InertiaLinkProps } from '@inertiajs/react'
 import type { LucideIcon } from 'lucide-react'
-import type { App } from '@/wayfinder/types'
 
 export type BreadcrumbItem = {
     title: string
-    href: string
+    href: NonNullable<InertiaLinkProps['href']>
 }
 
 export type NavItem = {

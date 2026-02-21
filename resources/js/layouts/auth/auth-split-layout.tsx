@@ -6,9 +6,9 @@ import { home } from '@/wayfinder/routes'
 import type { AuthLayoutProps } from '@/types'
 
 export default function AuthSplitLayout({
-    children,
     title,
     description,
+    children,
 }: AuthLayoutProps) {
     const { name } = usePage().props
 
