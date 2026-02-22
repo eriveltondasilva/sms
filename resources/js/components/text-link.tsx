@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 import type { ComponentProps } from 'react'
 
 export default function TextLink({
-    className = '',
+    className,
     children,
     ...props
 }: ComponentProps<typeof Link>) {

@@ -1,4 +1,3 @@
-// scripts/patch-wayfinder.ts
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 
 const filePath = 'resources/js/wayfinder/types.d.ts'
