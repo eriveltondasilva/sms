@@ -30,12 +30,5 @@ final class RolesAndPermissionsSeeder extends Seeder
         foreach (UserPermission::cases() as $permission) {
             Permission::create(['name' => $permission->value]);
         }
-
-        Role::query()->whereFirst('name', UserRole::ADMIN);
-        // $role->givePermissionTo([
-        //     UserPermission::STUDENTS_VIEW,
-        //     UserPermission::SUBJECTS_VIEW,
-        //     UserPermission::ATTENDANCES_VIEW
-        // ]);
     }
 }
