@@ -34,10 +34,10 @@ final class ClassroomSeeder extends Seeder
         foreach ($classrooms as $data) {
             $gradeLevel = GradeLevel::query()->where('code', $data['grade_code'])->firstOrFail();
 
-            $offeredGradeLevel = OfferedGradeLevel::query()->firstOrFail([
-                'school_id'      => $school->id,
-                'grade_level_id' => $gradeLevel->id,
-            ]);
+            $offeredGradeLevel = OfferedGradeLevel::query()
+                ->where('school_id', $school->id)
+                ->where('grade_level_id', $gradeLevel->id)
+                ->firstOrFail();
 
             Classroom::query()->firstOrCreate(
                 [
