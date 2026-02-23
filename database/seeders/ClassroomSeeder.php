@@ -24,11 +24,6 @@ final class ClassroomSeeder extends Seeder
         /** @var SchoolYear $schoolYear */
         $schoolYear = Context::get('school_year');
 
-        Teacher::query()
-            ->where('school_id', $school->id)
-            ->where('is_active', true)
-            ->get();
-
         $classrooms = [
             ['grade_code' => 'EF06', 'name' => '6º A', 'shift' => ClassroomShift::MORNING,   'room' => 'Sala 01'],
             ['grade_code' => 'EF07', 'name' => '7º A', 'shift' => ClassroomShift::MORNING,   'room' => 'Sala 02'],
@@ -53,7 +48,6 @@ final class ClassroomSeeder extends Seeder
                 [
                     'school_year_id'         => $schoolYear->id,
                     'offered_grade_level_id' => $offeredGradeLevel->id,
-                    'main_teacher_id'        => null,
                     'name'                   => $data['name'],
                     'room'                   => $data['room'],
                     'shift'                  => $data['shift'],

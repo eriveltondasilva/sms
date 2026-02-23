@@ -20,7 +20,7 @@ final class RolesAndPermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         foreach (UserRole::cases() as $role) {
-            Role::create([
+            Role::query()->create([
                 'name'  => $role->value,
                 'label' => $role->label(),
                 'color' => $role->color(),
@@ -28,7 +28,7 @@ final class RolesAndPermissionsSeeder extends Seeder
         }
 
         foreach (UserPermission::cases() as $permission) {
-            Permission::create(['name' => $permission->value]);
+            Permission::query()->create(['name' => $permission->value]);
         }
     }
 }

@@ -22,25 +22,25 @@ use App\Models\SchoolYear;
 use App\Models\StudentScore;
 use App\Models\TeachingAssignment;
 use App\Models\User;
-use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Context;
 
 final class SampleAcademicDataSeeder extends Seeder
 {
     public function run(): void
     {
-        $school = School::query()->where('cnpj', '12345678000195')->firstOrFail();
+        /** @var School $school */
+        $school = Context::get('school');
 
-        $schoolYear = SchoolYear::query()
-            ->where('school_id', $school->id)
-            ->where('year', now()->year)
-            ->firstOrFail();
+        /** @var SchoolYear $schoolYear */
+        $schoolYear = Context::get('school_year');
 
         // Usa um usuário admin para registrar as atividades
         $recorder = User::query()
             ->where('school_id', $school->id)
-            ->whereHas('roles', fn (Builder $q) => $q->whereIn('name', ['admin', 'teacher']))
+            ->whereHas('roles', fn(Builder $q) => $q->whereIn('name', ['admin', 'teacher']))
             ->first();
 
         $closedPeriods = AcademicPeriod::query()
@@ -56,7 +56,7 @@ final class SampleAcademicDataSeeder extends Seeder
 
         $assignments = TeachingAssignment::query()
             ->where('is_active', true)
-            ->whereHas('classroom', fn (Builder $q) => $q->where('school_year_id', $schoolYear->id))
+            ->whereHas('classroom', fn(Builder $q) => $q->where('school_year_id', $schoolYear->id))
             ->with(['classroom.enrollments'])
             ->get();
 
