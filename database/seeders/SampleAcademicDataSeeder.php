@@ -9,6 +9,7 @@ use App\Enums\AssessmentCategory;
 use App\Enums\AttendanceStatus;
 use App\Enums\PeriodAttendanceStatus;
 use App\Enums\PeriodGradeStatus;
+use App\Enums\UserRole;
 use App\Models\AcademicPeriod;
 use App\Models\Assessment;
 use App\Models\AssessmentType;
@@ -40,7 +41,7 @@ final class SampleAcademicDataSeeder extends Seeder
         // Usa um usuário admin para registrar as atividades
         $recorder = User::query()
             ->where('school_id', $school->id)
-            ->whereHas('roles', fn(Builder $q) => $q->whereIn('name', ['admin', 'teacher']))
+            ->whereHas('roles', fn (Builder $q) => $q->whereIn('name', [UserRole::ADMIN, UserRole::TEACHER]))
             ->first();
 
         $closedPeriods = AcademicPeriod::query()
@@ -56,7 +57,7 @@ final class SampleAcademicDataSeeder extends Seeder
 
         $assignments = TeachingAssignment::query()
             ->where('is_active', true)
-            ->whereHas('classroom', fn(Builder $q) => $q->where('school_year_id', $schoolYear->id))
+            ->whereHas('classroom', fn (Builder $q) => $q->where('school_year_id', $schoolYear->id))
             ->with(['classroom.enrollments'])
             ->get();
 

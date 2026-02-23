@@ -10,7 +10,6 @@ use App\Models\GradeLevel;
 use App\Models\OfferedGradeLevel;
 use App\Models\School;
 use App\Models\SchoolYear;
-use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Context;
 
@@ -25,19 +24,28 @@ final class ClassroomSeeder extends Seeder
         $schoolYear = Context::get('school_year');
 
         $classrooms = [
-            ['grade_code' => 'EF06', 'name' => '6º A', 'shift' => ClassroomShift::MORNING,   'room' => 'Sala 01'],
-            ['grade_code' => 'EF07', 'name' => '7º A', 'shift' => ClassroomShift::MORNING,   'room' => 'Sala 02'],
-            ['grade_code' => 'EF08', 'name' => '8º A', 'shift' => ClassroomShift::AFTERNOON, 'room' => 'Sala 03'],
-            ['grade_code' => 'EF09', 'name' => '9º A', 'shift' => ClassroomShift::AFTERNOON, 'room' => 'Sala 04'],
+            ['grade_code' => 'EF06', 'name' => '6º A',   'room' => 'Sala 01'],
+            ['grade_code' => 'EF07', 'name' => '7º A',   'room' => 'Sala 02'],
+            ['grade_code' => 'EF08', 'name' => '8º A', 'room' => 'Sala 03'],
+            ['grade_code' => 'EF09', 'name' => '9º A', 'room' => 'Sala 04'],
         ];
 
-        foreach ($classrooms as $data) {
-            $gradeLevel = GradeLevel::query()->where('code', $data['grade_code'])->firstOrFail();
+        $codes = array_column($classrooms, 'grade_code');
 
-            $offeredGradeLevel = OfferedGradeLevel::query()
-                ->where('school_id', $school->id)
-                ->where('grade_level_id', $gradeLevel->id)
-                ->firstOrFail();
+        $gradeLevels = GradeLevel::query()
+            ->whereIn('code', $codes)
+            ->get()
+            ->keyBy('code');
+
+        $offeredGradeLevels = OfferedGradeLevel::query()
+            ->where('school_id', $school->id)
+            ->whereIn('grade_level_id', $gradeLevels->pluck('id'))
+            ->get()
+            ->keyBy('grade_level_id');
+
+        foreach ($classrooms as $data) {
+            $gradeLevel = $gradeLevels->get($data['grade_code']);
+            $offeredGradeLevel = $offeredGradeLevels->get($gradeLevel->id);
 
             Classroom::query()->firstOrCreate(
                 [
@@ -50,7 +58,7 @@ final class ClassroomSeeder extends Seeder
                     'offered_grade_level_id' => $offeredGradeLevel->id,
                     'name'                   => $data['name'],
                     'room'                   => $data['room'],
-                    'shift'                  => $data['shift'],
+                    'shift'                  => ClassroomShift::AFTERNOON,
                     'student_max'            => 35,
                     'is_active'              => true,
                 ]

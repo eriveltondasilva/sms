@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\EnrollmentStatus;
+use App\Enums\StudentStatus;
 use App\Models\Classroom;
 use App\Models\Enrollment;
 use App\Models\School;
@@ -30,7 +31,7 @@ final class EnrollmentSeeder extends Seeder
 
         $students = Student::query()
             ->where('school_id', $school->id)
-            ->where('status', 'active')
+            ->where('status', StudentStatus::ACTIVE)
             ->get();
 
         $enrolledAt = "{$schoolYear->year}-02-03";

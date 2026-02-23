@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Context;
 
 final class DatabaseSeeder extends Seeder
 {
@@ -56,18 +59,17 @@ final class DatabaseSeeder extends Seeder
         $this->command->info('');
         $this->command->info('✅ Todas as seeds foram executadas com sucesso!');
         $this->command->info('');
+
+        /** @var Collection<int, User> $users */
+        $users = Context::get('users');
+
         $this->command->table(
             ['Credencial', 'Email', 'Senha'],
-            [
-                ['Super Admin',  'superadmin@escola.dev',          'password'],
-                ['Admin',        'admin@escola.dev',               'password'],
-                ['Coordenador',  'coordenador@escola.dev',         'password'],
-                ['Professor(a)', 'ana.ferreira@escola.dev',        'password'],
-                ['Professor(a)', 'carlos.souza@escola.dev',        'password'],
-                ['Professor(a)', 'mariana.lima@escola.dev',        'password'],
-                ['Professor(a)', 'roberto.neto@escola.dev',        'password'],
-                ['Professor(a)', 'fernanda.oliveira@escola.dev',   'password'],
-            ]
+            collect($users)->map(fn (User $user): array => [
+                $user->getRoleNames()->first(),
+                $user->email,
+                'password',
+            ])->all(),
         );
     }
 }

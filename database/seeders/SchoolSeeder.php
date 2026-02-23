@@ -39,7 +39,7 @@ final class SchoolSeeder extends Seeder
         $this->command->info("  ✔ Escola criada: {$school->short_name}");
 
         // Cria super admin (sem escola)
-        $this->createUser(
+        $superAdmin = $this->createUser(
             schoolId: null,
             name: 'Super Admin',
             email: 'superadmin@example.com',
@@ -47,7 +47,7 @@ final class SchoolSeeder extends Seeder
         );
 
         // Cria admin vinculado à escola
-        $this->createUser(
+        $admin = $this->createUser(
             schoolId: $school->id,
             name: 'Administrador',
             email: 'admin@example.com',
@@ -55,12 +55,14 @@ final class SchoolSeeder extends Seeder
         );
 
         // Cria coordenador pedagógico
-        $this->createUser(
+        $coordinator = $this->createUser(
             schoolId: $school->id,
             name: 'Coordenador Pedagógico',
             email: 'coordenador@example.com',
             role: UserRole::COORDINATOR,
         );
+
+        Context::push('users', $superAdmin, $admin, $coordinator);
 
         $this->command->info('  ✔ Usuários base criados (super_admin, admin, coordenador)');
 

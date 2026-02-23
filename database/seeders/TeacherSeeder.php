@@ -26,7 +26,7 @@ final class TeacherSeeder extends Seeder
                 'gender'        => Gender::FEMALE,
                 'cpf'           => '11111111101',
                 'qualification' => 'Licenciatura em Letras',
-                'email'         => 'ana.ferreira@escola.dev',
+                'email'         => 'ana.ferreira@example.com',
                 'hire_date'     => '2018-03-01',
             ],
             [
@@ -34,7 +34,7 @@ final class TeacherSeeder extends Seeder
                 'gender'        => Gender::MALE,
                 'cpf'           => '22222222202',
                 'qualification' => 'Licenciatura em Matemática',
-                'email'         => 'carlos.souza@escola.dev',
+                'email'         => 'carlos.souza@example.com',
                 'hire_date'     => '2015-07-01',
             ],
             [
@@ -42,7 +42,7 @@ final class TeacherSeeder extends Seeder
                 'gender'        => Gender::FEMALE,
                 'cpf'           => '33333333303',
                 'qualification' => 'Licenciatura em Ciências Biológicas',
-                'email'         => 'mariana.lima@escola.dev',
+                'email'         => 'mariana.lima@example.com',
                 'hire_date'     => '2020-02-01',
             ],
             [
@@ -50,7 +50,7 @@ final class TeacherSeeder extends Seeder
                 'gender'        => Gender::MALE,
                 'cpf'           => '44444444404',
                 'qualification' => 'Licenciatura em História',
-                'email'         => 'roberto.neto@escola.dev',
+                'email'         => 'roberto.neto@example.com',
                 'hire_date'     => '2019-08-01',
             ],
             [
@@ -58,7 +58,7 @@ final class TeacherSeeder extends Seeder
                 'gender'        => Gender::FEMALE,
                 'cpf'           => '55555555505',
                 'qualification' => 'Licenciatura em Física',
-                'email'         => 'fernanda.oliveira@escola.dev',
+                'email'         => 'fernanda.oliveira@example.com',
                 'hire_date'     => '2021-03-01',
             ],
         ];
@@ -88,6 +88,8 @@ final class TeacherSeeder extends Seeder
                 ]);
 
                 $user->assignRole(UserRole::TEACHER);
+
+                Context::push('users', $user);
             }
         }
 
