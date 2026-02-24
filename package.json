@@ -19,7 +19,8 @@
         "lint": "eslint . --fix",
         "wayfinder:patch": "bun scripts/patch-wayfinder.ts",
         "types": "bun run wayfinder:patch && tsc --noEmit",
-        "fix": "bun run types && bun run fmt && bun run lint"
+        "fix": "bun run types && bun run fmt && bun run lint",
+        "shadcn:list": "ls resources/js/components/ui | sed 's/.tsx//' | tr '\\n' ' '"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.3",
