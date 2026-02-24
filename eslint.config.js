@@ -1,10 +1,10 @@
-import js from '@eslint/js';
-import prettier from 'eslint-config-prettier/flat';
-import importPlugin from 'eslint-plugin-import';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import globals from 'globals';
-import typescript from 'typescript-eslint';
+import js from '@eslint/js'
+import prettier from 'eslint-config-prettier/flat'
+import importPlugin from 'eslint-plugin-import'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import globals from 'globals'
+import typescript from 'typescript-eslint'
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -79,8 +79,9 @@ export default [
             'bootstrap/ssr',
             'tailwind.config.js',
             'vite.config.ts',
+            'resources/js/components/ui/**',
             'resources/js/wayfinder/**',
         ],
     },
     prettier, // Turn off all rules that might conflict with Prettier
-];
+]

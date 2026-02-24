@@ -25,7 +25,7 @@ final class UserController extends Controller
             ->role(UserRole::SUPER_ADMIN->value)
             ->when(
                 $request->string('search')->isNotEmpty(),
-                fn($q) => $q->where(function ($q) use ($request): void {
+                fn ($q) => $q->where(function ($q) use ($request): void {
                     $term = "%{$request->string('search')}%";
                     $q->where('name', 'ilike', $term)
                         ->orWhere('email', 'ilike', $term);
@@ -51,7 +51,7 @@ final class UserController extends Controller
             'password_confirmation' => ['required'],
         ]);
 
-        $user = User::create([
+        $user = User::query()->create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),

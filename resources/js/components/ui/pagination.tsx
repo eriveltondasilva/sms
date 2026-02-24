@@ -7,6 +7,8 @@ import {
 
 import { cn } from "@/lib/utils"
 import { buttonVariants, type Button } from "@/components/ui/button"
+import { Slot } from "radix-ui"
+import { Link } from "@inertiajs/react"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -40,7 +42,7 @@ function PaginationItem({ ...props }: React.ComponentProps<"li">) {
 type PaginationLinkProps = {
   isActive?: boolean
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
-  React.ComponentProps<"a">
+  Omit<React.ComponentProps<typeof Link>, "size">
 
 function PaginationLink({
   className,
@@ -48,8 +50,9 @@ function PaginationLink({
   size = "icon",
   ...props
 }: PaginationLinkProps) {
+   
   return (
-    <a
+    <Link
       aria-current={isActive ? "page" : undefined}
       data-slot="pagination-link"
       data-active={isActive}
