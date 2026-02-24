@@ -12,33 +12,35 @@ final readonly class FlashData
     public function __construct(
         public FlashType $type,
         public string $message,
+        public ?array $meta = null,
     ) {}
 
-    public static function success(string $message): self
+    public static function success(string $message, ?array $meta = null): self
     {
-        return new self(FlashType::Success, $message);
+        return new self(FlashType::Success, $message, $meta);
     }
 
-    public static function error(string $message): self
+    public static function error(string $message, ?array $meta = null): self
     {
-        return new self(FlashType::Error, $message);
+        return new self(FlashType::Error, $message, $meta);
     }
 
-    public static function warning(string $message): self
+    public static function warning(string $message, ?array $meta = null): self
     {
-        return new self(FlashType::Warning, $message);
+        return new self(FlashType::Warning, $message, $meta);
     }
 
-    public static function info(string $message): self
+    public static function info(string $message, ?array $meta = null): self
     {
-        return new self(FlashType::Info, $message);
+        return new self(FlashType::Info, $message, $meta);
     }
 
-    public function send(): void
+    public function build(): void
     {
         Inertia::flash('toast', [
             'type'    => $this->type,
             'message' => $this->message,
+            'meta'    => $this->meta,
         ]);
     }
 }

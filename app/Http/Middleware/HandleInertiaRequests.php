@@ -69,7 +69,11 @@ final class HandleInertiaRequests extends Middleware
     }
 
     /**
-     * @return array{school: School|null, currentYear: SchoolYear|null, is_impersonated: bool}
+     * @return array{
+     *   school: School|null,
+     *   currentYear: SchoolYear|null,
+     *   is_impersonated: bool,
+     * }
      */
     private function getContext(): array
     {

@@ -29,9 +29,7 @@ final class AppServiceProvider extends ServiceProvider
         Date::use(CarbonImmutable::class);
 
         // Prohibit destructive commands in production
-        DB::prohibitDestructiveCommands(
-            app()->isProduction(),
-        );
+        DB::prohibitDestructiveCommands(app()->isProduction());
 
         // Set default password requirements
         Password::defaults(
@@ -46,11 +44,7 @@ final class AppServiceProvider extends ServiceProvider
         );
 
         // Enable strict mode and eager loading in local development
-        Model::shouldBeStrict(
-            app()->isLocal()
-        );
-        Model::automaticallyEagerLoadRelationships(
-            app()->isLocal()
-        );
+        Model::shouldBeStrict(app()->isLocal());
+        Model::automaticallyEagerLoadRelationships(app()->isLocal());
     }
 }
