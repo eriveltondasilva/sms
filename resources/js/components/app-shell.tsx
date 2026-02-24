@@ -5,17 +5,15 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import type { PropsWithChildren } from 'react'
 
 interface AppShellProps extends PropsWithChildren {
-    variant?: 'header' | 'sidebar'
+  variant?: 'header' | 'sidebar'
 }
 
 export function AppShell({ children, variant = 'header' }: AppShellProps) {
-    const isOpen = usePage().props.sidebarOpen
+  const isOpen = usePage().props.sidebarOpen
 
-    if (variant === 'header') {
-        return (
-            <div className='flex min-h-screen w-full flex-col'>{children}</div>
-        )
-    }
+  if (variant === 'header') {
+    return <div className='flex min-h-screen w-full flex-col'>{children}</div>
+  }
 
-    return <SidebarProvider defaultOpen={isOpen}>{children}</SidebarProvider>
+  return <SidebarProvider defaultOpen={isOpen}>{children}</SidebarProvider>
 }

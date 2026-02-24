@@ -3,19 +3,19 @@ import type { InertiaLinkProps } from '@inertiajs/react'
 import type { LucideIcon } from 'lucide-react'
 
 export type BreadcrumbItem = {
-    title: string
-    href: NonNullable<InertiaLinkProps['href']>
+  title: string
+  href: NonNullable<InertiaLinkProps['href']>
 }
 
 export type NavItem = {
-    title: string
-    href: NonNullable<InertiaLinkProps['href']>
-    icon?: LucideIcon | null
-    isActive?: boolean
-    permission?: App.Enums.UserPermission
+  title: string
+  href: NonNullable<InertiaLinkProps['href']>
+  icon?: LucideIcon | null
+  isActive?: boolean
+  permission?: App.Enums.UserPermission
 }
 
 export type NavGroup = {
-    label: string | null
-    items: NavItem[]
+  label: string | null
+  items: NavItem[]
 }
