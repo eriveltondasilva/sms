@@ -17,6 +17,6 @@ final class SchoolYearContextResolver
 
         return Session::has(SessionKey::SCHOOL_YEAR_ID)
             ? $query->find(Session::get(SessionKey::SCHOOL_YEAR_ID))
-            : $query->whereFirst('status', SchoolYearStatus::IN_PROGRESS);
+            : $query->where('status', SchoolYearStatus::IN_PROGRESS)->first();
     }
 }

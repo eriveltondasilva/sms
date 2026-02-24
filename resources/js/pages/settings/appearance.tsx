@@ -11,7 +11,7 @@ import type { BreadcrumbItem } from '@/types'
 const breadcrumbs: BreadcrumbItem[] = [
   {
     title: 'Appearance settings',
-    href: editAppearance().url,
+    href: editAppearance(),
   },
 ]
 
