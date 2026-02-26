@@ -27,8 +27,12 @@ final class RolesAndPermissionsSeeder extends Seeder
             ]);
         }
 
+        $this->command->info("  ✔ Roles criadas");
+
         foreach (UserPermission::cases() as $permission) {
             Permission::query()->create(['name' => $permission->value]);
         }
+
+        $this->command->info("  ✔ Permissões criadas");
     }
 }
