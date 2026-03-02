@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Admin;
 use App\Data\FlashData;
 use App\Http\Controllers\Controller;
 use App\Models\School;
-use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,18 +18,13 @@ final class SchoolController extends Controller
     public function index(Request $request): Response
     {
         $schools = School::query()
-            ->withCount(['users', 'schoolYears', 'students', 'teachers'])
             ->when(
                 $request->string('search')->isNotEmpty(),
-                fn ($q) => $q->where(function (Builder $q) use ($request): void {
-                    $term = "%{$request->string('search')}%";
-                    $q->where('full_name', 'ilike', $term)
-                        ->orWhere('short_name', 'ilike', $term)
-                        ->orWhere('cnpj', 'ilike', $term);
-                })
+                fn ($query) => $query->whereAny(['full_name', 'short_name', 'cnpj'], 'ilike', "%{$request->search}%"),
             )
-            ->when($request->status === 'active', fn ($q) => $q->active())
-            ->when($request->status === 'inactive', fn ($q) => $q->inactive())
+            ->when($request->status === 'active', fn ($query) => $query->active())
+            ->when($request->status === 'inactive', fn ($query) => $query->inactive())
+            ->withCount(['users', 'schoolYears', 'students', 'teachers'])
             ->latest()
             ->paginate(config('app.pagination.per_page'))
             ->withQueryString();
@@ -41,6 +35,27 @@ final class SchoolController extends Controller
         ]);
     }
 
+    public function show(School $school): Response
+    {
+        $school->loadCount(['users', 'schoolYears', 'students', 'teachers']);
+
+        $users = $school->users()
+            ->with('roles:id,name,label,color')
+            ->latest()
+            ->paginate(10, ['*'], 'users_page');
+
+        $schoolYears = $school->schoolYears()
+            ->orderByDesc('year')
+            ->get();
+
+        return Inertia::render('admin/schools/show', [
+            'school'      => $school,
+            'users'       => $users,
+            'schoolYears' => $schoolYears,
+        ]);
+    }
+
+    // #ACTIONS
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -56,29 +71,9 @@ final class SchoolController extends Controller
 
         School::query()->create($validated);
 
-        FlashData::success('Escola criada com sucesso.')->build();
+        FlashData::success('Escola criada com sucesso.')->send();
 
         return back();
-    }
-
-    public function show(School $school): Response
-    {
-        $school->loadCount(['users', 'schoolYears', 'students', 'teachers']);
-
-        $users = $school->users()
-            ->with('roles:id,name,label,color')
-            ->latest()
-            ->paginate(10, ['*'], 'users_page');
-
-        $schoolYears = $school->schoolYears()
-            ->orderByDesc('year')
-            ->get(['id', 'year', 'status', 'total_school_days', 'total_school_hours', 'created_at']);
-
-        return Inertia::render('admin/schools/show', [
-            'school'      => $school,
-            'users'       => $users,
-            'schoolYears' => $schoolYears,
-        ]);
     }
 
     public function update(Request $request, School $school): RedirectResponse
@@ -96,7 +91,7 @@ final class SchoolController extends Controller
 
         $school->update($validated);
 
-        FlashData::success('Escola atualizada com sucesso.')->build();
+        FlashData::success('Escola atualizada com sucesso.')->send();
 
         return back();
     }
@@ -104,14 +99,14 @@ final class SchoolController extends Controller
     public function destroy(School $school): RedirectResponse
     {
         if ($school->students()->exists()) {
-            FlashData::error('Não é possível excluir uma escola com alunos cadastrados.')->build();
+            FlashData::error('Não é possível excluir uma escola com alunos cadastrados.')->send();
 
             return back();
         }
 
         $school->delete();
 
-        FlashData::success('Escola excluída com sucesso.')->build();
+        FlashData::success('Escola excluída com sucesso.')->send();
 
         return to_route('admin.schools.index');
     }
@@ -121,7 +116,7 @@ final class SchoolController extends Controller
         $school->is_active ? $school->deactivate() : $school->activate();
 
         $label = $school->fresh()?->is_active ? 'ativada' : 'desativada';
-        FlashData::success("Escola {$label} com sucesso.")->build();
+        FlashData::success("Escola {$label} com sucesso.")->send();
 
         return back();
     }

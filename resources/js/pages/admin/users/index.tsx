@@ -11,7 +11,8 @@ import {
 import { useState } from 'react'
 
 import { DataPagination } from '@/components/data-pagination'
-import Heading from '@/components/heading'
+import { Icon } from '@/components/icon'
+import { PageHeader } from '@/components/page-header'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -57,8 +58,8 @@ import type { App } from '@/wayfinder/types'
 
 interface Props {
   users: PaginatedData<App.Models.User>
-  filters: { search?: string }
   currentUser: number
+  filters: { search?: string }
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -109,16 +110,16 @@ export default function UsersIndex({ users, filters, currentUser }: Props) {
 
       <div className='space-y-6 p-6'>
         {/* Header */}
-        <div className='flex items-start justify-between'>
-          <Heading
-            title='Super Admins'
-            description='Usuários com acesso irrestrito ao sistema'
-          />
-          <Button onClick={openCreate}>
-            <PlusIcon className='mr-2 size-4' />
-            Novo usuário
-          </Button>
-        </div>
+        <PageHeader
+          title='Super Admins'
+          description='Usuários com acesso irrestrito ao sistema'
+          actions={
+            <Button onClick={openCreate}>
+              <Icon iconNode={PlusIcon} />
+              Novo usuário
+            </Button>
+          }
+        />
 
         {/* Search */}
         <form onSubmit={handleSearch} className='flex gap-2'>

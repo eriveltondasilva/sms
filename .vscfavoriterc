@@ -7,6 +7,10 @@
     {
       "filePath": "resources\\js\\pages",
       "group": "Default"
+    },
+    {
+      "filePath": "app\\Http\\Controllers",
+      "group": "Default"
     }
   ],
   "groups": [

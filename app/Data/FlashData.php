@@ -35,7 +35,7 @@ final readonly class FlashData
         return new self(FlashType::Info, $message, $meta);
     }
 
-    public function build(): void
+    public function send(): void
     {
         Inertia::flash('toast', [
             'type'    => $this->type,

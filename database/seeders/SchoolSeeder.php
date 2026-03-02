@@ -40,7 +40,7 @@ final class SchoolSeeder extends Seeder
 
         School::factory()->count(25)->create();
 
-        $this->command->info("  ✔ Escolas adicionadas");
+        $this->command->info('  ✔ Escolas adicionadas');
 
         // Cria super admin (sem escola)
         $superAdmin = $this->createUser(

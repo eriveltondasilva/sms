@@ -3,10 +3,6 @@ import { UserIcon } from 'lucide-react'
 import { DataPagination } from '@/components/data-pagination'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { useInitials } from '@/hooks/use-initials'
-
-import type { PaginatedData } from '@/types/pagination'
-
 import {
   Table,
   TableBody,
@@ -15,6 +11,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useInitials } from '@/hooks/use-initials'
+
+import type { PaginatedData } from '@/types/pagination'
 
 interface Role {
   id: number

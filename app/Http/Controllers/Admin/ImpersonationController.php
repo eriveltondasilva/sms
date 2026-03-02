@@ -17,14 +17,14 @@ final class ImpersonationController extends Controller
     public function start(School $school): RedirectResponse
     {
         if ($school->is_active === false) {
-            FlashData::error('Não é possível visualizar uma escola inativa.')->build();
+            FlashData::error('Não é possível visualizar uma escola inativa.')->send();
 
             return back();
         }
 
         $this->impersonation->start($school);
 
-        FlashData::info("Visualizando como: {$school->short_name}")->build();
+        FlashData::info("Visualizando como: {$school->short_name}")->send();
 
         return to_route('dashboard');
     }
@@ -33,7 +33,7 @@ final class ImpersonationController extends Controller
     {
         $this->impersonation->stop();
 
-        FlashData::info('Impersonação encerrada.')->build();
+        FlashData::info('Impersonação encerrada.')->send();
 
         return to_route('admin.schools.index');
     }

@@ -8,6 +8,7 @@ use App\Data\FlashData;
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,29 +17,37 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Permission\Models\Role;
 
 final class UserController extends Controller
 {
     public function index(Request $request): Response
     {
         $users = User::query()
-            ->role(UserRole::SUPER_ADMIN->value)
+            ->with(['roles:id,name', 'school:id,full_name,short_name'])
             ->when(
-                $request->string('search')->isNotEmpty(),
-                fn ($q) => $q->where(function ($q) use ($request): void {
-                    $term = "%{$request->string('search')}%";
-                    $q->where('name', 'ilike', $term)
-                        ->orWhere('email', 'ilike', $term);
-                })
+                $request->filled('search'),
+                fn ($query) => $query->whereAny(['name', 'email'], 'ilike', "%{$request->search}%")
+            )
+            ->when(
+                $request->filled('role'),
+                fn ($query) => $query->whereHas('roles', fn (Builder $q) => $q->where('name', $request->role))
+            )
+            ->when(
+                $request->filled('is_active'),
+                fn ($query) => $query->where('is_active', $request->boolean('is_active'))
             )
             ->latest()
             ->paginate(config('app.pagination.per_page'))
             ->withQueryString();
 
-        return Inertia::render('Admin/Users/Index', [
-            'users'       => $users,
-            'filters'     => $request->only(['search']),
-            'currentUser' => Auth::id(),
+        $roles = Role::query()->all();
+        $filters = $request->only(['search', 'role', 'is_active']);
+
+        return Inertia::render('admin/users/index', [
+            'users'   => fn () => $users,
+            'roles'   => fn () => $roles,
+            'filters' => fn () => $filters,
         ]);
     }
 
@@ -59,7 +68,7 @@ final class UserController extends Controller
 
         $user->assignRole(UserRole::SUPER_ADMIN);
 
-        FlashData::success('Usuário criado com sucesso.')->build();
+        FlashData::success('Usuário criado com sucesso.')->send();
 
         return back();
     }
@@ -84,7 +93,7 @@ final class UserController extends Controller
 
         $user->update($data);
 
-        FlashData::success('Usuário atualizado com sucesso.')->build();
+        FlashData::success('Usuário atualizado com sucesso.')->send();
 
         return back();
     }
@@ -92,14 +101,14 @@ final class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         if (Auth::id() === $user->id) {
-            FlashData::error('Você não pode excluir seu próprio usuário.')->build();
+            FlashData::error('Você não pode excluir seu próprio usuário.')->send();
 
             return back();
         }
 
         $user->delete();
 
-        FlashData::success('Usuário excluído com sucesso.')->build();
+        FlashData::success('Usuário excluído com sucesso.')->send();
 
         return back();
     }

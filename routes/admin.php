@@ -13,8 +13,7 @@ Route::middleware(['auth', 'role:super_admin'])
     ->group(function (): void {
 
         // Schools
-        Route::resource('schools', SchoolController::class)
-            ->except(['create', 'edit']);
+        Route::resource('schools', SchoolController::class);
 
         Route::post('schools/{school}/toggle-active', [SchoolController::class, 'toggleActive'])
             ->name('schools.toggle-active');
