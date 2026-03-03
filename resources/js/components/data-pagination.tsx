@@ -1,79 +1,113 @@
-import { Link } from '@inertiajs/react'
-
+import { Item, ItemActions, ItemContent, ItemDescription } from './ui/item'
 import {
-  Pagination,
+  Pagination as PaginationBase,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination'
+} from './ui/pagination'
 
-interface PaginatorLink {
-  url: string | null
-  label: string
-  active: boolean
-}
+import type { PaginatedData } from '@/types'
 
-interface DataPaginationProps {
-  links: PaginatorLink[]
-  from?: number | null
-  to?: number | null
-  total?: number
-}
+export function DataPagination<T>({ data }: { data: PaginatedData<T> }) {
+  const {
+    current_page,
+    last_page,
+    links,
+    total,
+    from,
+    to,
+    prev_page_url,
+    next_page_url,
+  } = data
 
-export function DataPagination({
-  links,
-  from,
-  to,
-  total,
-}: DataPaginationProps) {
-  if (links.length <= 3) return null
+  if (last_page <= 1) return null
 
-  const prev = links.at(0)
-  const next = links.at(-1)
-  const pages = links.slice(1, -1)
+  const pages = links.filter((link) => !isNaN(Number(link.label)))
 
   return (
-    <div className='flex items-center justify-between'>
-      {from && to && total && (
-        <p className='text-sm text-muted-foreground'>
-          {from}–{to} de {total}
-        </p>
-      )}
-      <Pagination className='mx-0 w-auto'>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious
-              href={prev?.url ?? '#'}
-              aria-disabled={!prev?.url}
-              className={!prev?.url ? 'pointer-events-none opacity-50' : ''}
-              // O shadcn usa <a>, precisamos de Link do Inertia:
-            >
-              <Link href={prev?.url ?? '#'} />
-            </PaginationPrevious>
-          </PaginationItem>
+    <Item>
+      <ItemContent>
+        <ItemDescription>
+          {from && to ?
+            <>
+              {from} - {to} de <span className='font-medium'>{total}</span>{' '}
+              resultados
+            </>
+          : <>
+              Total: <span className='font-medium'>{total}</span>
+            </>
+          }
+        </ItemDescription>
+      </ItemContent>
 
-          {pages.map((page, i) =>
-            page.label === '...' ?
-              <PaginationItem key={i}>
-                <PaginationEllipsis />
-              </PaginationItem>
-            : <PaginationItem key={i}>
-                <PaginationLink isActive={page.active}>
-                  {!page.active && page.url ?
-                    <Link href={page.url}>{page.label}</Link>
-                  : page.label}
-                </PaginationLink>
-              </PaginationItem>,
-          )}
+      <ItemActions>
+        <PaginationBase>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href={prev_page_url || '#'}
+                aria-disabled={current_page === 1}
+                className={
+                  current_page === 1 ? 'pointer-events-none opacity-50' : ''
+                }
+                preserveState
+                preserveScroll
+              >
+                Anterior
+              </PaginationPrevious>
+            </PaginationItem>
 
-          <PaginationItem>
-            <PaginationNext href={next?.url ?? '#'} /* idem */ />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
-    </div>
+            {pages.map((link, i) => {
+              const pageNumber = Number(link.label)
+              const isNearCurrent = Math.abs(pageNumber - current_page) <= 1
+              const isFirstOrLast = pageNumber === 1 || pageNumber === last_page
+
+              if (!isNearCurrent && !isFirstOrLast) {
+                if (pageNumber === 2 || pageNumber === last_page - 1) {
+                  return (
+                    <PaginationItem key={i}>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  )
+                }
+                return null
+              }
+
+              return (
+                <PaginationItem key={i}>
+                  <PaginationLink
+                    href={link.url || '#'}
+                    isActive={link.active}
+                    preserveScroll
+                    preserveState
+                  >
+                    {link.label}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            })}
+
+            <PaginationItem>
+              <PaginationNext
+                href={next_page_url || '#'}
+                aria-disabled={current_page === last_page}
+                className={
+                  current_page === last_page ?
+                    'pointer-events-none opacity-50'
+                  : ''
+                }
+                preserveState
+                preserveScroll
+              >
+                Próxima
+              </PaginationNext>
+            </PaginationItem>
+          </PaginationContent>
+        </PaginationBase>
+      </ItemActions>
+    </Item>
   )
 }

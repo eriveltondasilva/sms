@@ -10,3 +10,8 @@ export interface DataTableColumn<T> {
   cellClassName?: string
   renderCell: (row: T) => React.ReactNode
 }
+
+export type PageInfo = {
+  title: string;
+  description: string;
+};

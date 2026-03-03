@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/field'
 
 interface FieldInputProps {
-  id?: string
+  name: string
   label: string
   description?: string
   error?: string
@@ -17,24 +17,23 @@ interface FieldInputProps {
 }
 
 function FieldInput({
-  id,
+  name,
   label,
   description,
   error,
   required = false,
   children,
 }: FieldInputProps) {
-  const generatedId = useId()
-  const fieldId = id ?? generatedId
+  const id = name + useId()
 
   const child =
-    isValidElement<{ id?: string; required?: boolean }>(children) ?
-      cloneElement(children, { id: fieldId, required })
+    isValidElement<{ id: string; name: string; required: boolean }>(children) ?
+      cloneElement(children, { id, name, required })
     : children
 
   return (
     <Field>
-      <FieldLabel htmlFor={fieldId}>
+      <FieldLabel htmlFor={id}>
         {label}
         {required && <span className='text-red-500'>*</span>}
       </FieldLabel>
@@ -42,12 +41,12 @@ function FieldInput({
       {child}
 
       {description && (
-        <FieldDescription id={`${fieldId}-description`}>
+        <FieldDescription id={`${id}-description`}>
           {description}
         </FieldDescription>
       )}
 
-      {error && <FieldError id={`${fieldId}-error`}>{error}</FieldError>}
+      {error && <FieldError id={`${id}-error`}>{error}</FieldError>}
     </Field>
   )
 }

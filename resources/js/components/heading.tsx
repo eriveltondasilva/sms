@@ -1,5 +1,3 @@
-import { clsx } from 'clsx/lite'
-
 interface HeadingProps {
   title: string
   description?: string
@@ -14,15 +12,15 @@ export default function Heading({
   as = 'h2',
 }: HeadingProps) {
   const Comp = as
-  const isSmall = variant === 'small'
+  const isSmall = variant == 'small'
 
   return (
-    <header className={clsx(isSmall && 'mb-8 space-y-0.5')}>
+    <header className={isSmall ? 'mb-8 space-y-0.5' : ''}>
       <Comp
         className={
           isSmall ?
-            'mb-0.5 text-base font-medium'
-          : 'text-xl font-semibold tracking-tight'
+            'mb-0.5 text-base font-medium text-balance'
+          : 'text-xl font-semibold tracking-tight text-balance sm:text-2xl'
         }
       >
         {title}

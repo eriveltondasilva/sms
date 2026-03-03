@@ -15,15 +15,19 @@ use Inertia\Response;
 
 final class SchoolController extends Controller
 {
+    // =============================
+    // # VIEWS
+    // =============================
+
     public function index(Request $request): Response
     {
         $schools = School::query()
             ->when(
                 $request->string('search')->isNotEmpty(),
-                fn ($query) => $query->whereAny(['full_name', 'short_name', 'cnpj'], 'ilike', "%{$request->search}%"),
+                fn($query) => $query->whereAny(['full_name', 'short_name', 'cnpj'], 'ilike', "%{$request->search}%"),
             )
-            ->when($request->status === 'active', fn ($query) => $query->active())
-            ->when($request->status === 'inactive', fn ($query) => $query->inactive())
+            ->when($request->status === 'active', fn($query) => $query->active())
+            ->when($request->status === 'inactive', fn($query) => $query->inactive())
             ->withCount(['users', 'schoolYears', 'students', 'teachers'])
             ->latest()
             ->paginate(config('app.pagination.per_page'))
@@ -55,7 +59,22 @@ final class SchoolController extends Controller
         ]);
     }
 
-    // #ACTIONS
+    public function create()
+    {
+        return Inertia::render('admin/schools/create');
+    }
+
+    public function edit(School $school): Response
+    {
+        return Inertia::render('admin/schools/edit', [
+            'school' => $school
+        ]);
+    }
+
+    // =============================
+    // # ACTIONS
+    // =============================
+
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
