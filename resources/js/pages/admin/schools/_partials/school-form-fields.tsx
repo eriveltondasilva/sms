@@ -96,7 +96,7 @@ export function SchoolFormFields({ data }: SchoolFormFieldsProps) {
                 placeholder='Somente números'
                 defaultValue={data?.cnpj ?? undefined}
                 aria-invalid={!!errors?.cnpj}
-                pattern='\d'
+                pattern='\d{14}'
                 maxLength={14}
                 className='font-mono'
                 autoComplete='off'

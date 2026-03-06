@@ -11,8 +11,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import { destroy as schoolDestroy } from '@/wayfinder/routes/admin/schools'
 
-import type { School } from '..'
+import type { School } from '../index'
 
 export function DeleteConfirm() {
   const [deletingSchool, setDeletingSchool] = useState<School | null>(null)

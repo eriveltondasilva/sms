@@ -123,12 +123,7 @@ export function SchoolUsersTable({ users }: SchoolUsersTableProps) {
         </Table>
       </div>
 
-      <DataPagination
-        links={users.links}
-        from={users.from}
-        to={users.to}
-        total={users.total}
-      />
+      <DataPagination data={users} />
     </div>
   )
 }
